@@ -40,13 +40,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectIndexedGetterOnInterface()
         {
-            AssertCanExpectIndexedGetter(Mocks.NewMock<IIndexed>());
+            AssertCanExpectIndexedGetter(Mocks.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void CanExpectIndexedGetterOnClass()
         {
-            AssertCanExpectIndexedGetter(Mocks.NewMock<Indexed>());
+            AssertCanExpectIndexedGetter(Mocks.NewInstanceOfRole<Indexed>());
         }
 
         private void AssertCanExpectIndexedGetter(IIndexed indexed)
@@ -61,13 +61,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectIndexedSetterOnInterface()
         {
-            AssertCanExpectIndexedSetter(Mocks.NewMock<IIndexed>());
+            AssertCanExpectIndexedSetter(Mocks.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void CanExpectIndexedSetterOnClass()
         {
-            AssertCanExpectIndexedSetter(Mocks.NewMock<Indexed>());
+            AssertCanExpectIndexedSetter(Mocks.NewInstanceOfRole<Indexed>());
         }
 
         private void AssertCanExpectIndexedSetter(IIndexed indexed)
@@ -80,13 +80,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void ErrorMessagesContainNameOfIndexedGetterNotHiddenMethodOnInterface()
         {
-            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewMock<IIndexed>());
+            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfIndexedGetterNotHiddenMethodOnClass()
         {
-            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewMock<Indexed>());
+            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewInstanceOfRole<Indexed>());
         }
 
         private void AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(IIndexed indexed)
@@ -114,13 +114,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void ErrorMessagesContainNameOfIndexedSetterNotHiddenMethodOnInterface()
         {
-            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewMock<IIndexed>());
+            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfIndexedSetterNotHiddenMethodOnClass()
         {
-            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewMock<Indexed>());
+            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewInstanceOfRole<Indexed>());
         }
 
         private void AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(IIndexed indexed)

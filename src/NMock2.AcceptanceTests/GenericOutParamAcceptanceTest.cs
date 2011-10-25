@@ -44,18 +44,18 @@ namespace NMock2.AcceptanceTests
             // InterfaceOnlyMockObjectFactory-generated mocks do not currently support this
             // - They expect out params to be explicitly set
             
-            AssertCanMockMethodWithOutParam(Mocks.NewMock<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParam(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
         }
 
         [Test, Class]
         public void CanMockMethodWithOutParamOnClass()
         {
-            AssertCanMockMethodWithOutParam(Mocks.NewMock<OutParamClass>());
+            AssertCanMockMethodWithOutParam(Mocks.NewInstanceOfRole<OutParamClass>());
         }
 
         private void AssertCanMockMethodWithOutParam(IGenericOutParamInterface someClass)
         {
-            Expect.Once.On(someClass).Method("SomeMethod").Will(Return.Value(true));
+            Expect.Once.On(someClass).Message("SomeMethod").Will(Return.Value(true));
 
             List<string> myList = new List<string>();
             someClass.SomeMethod("test", out myList);
@@ -64,20 +64,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockMethodWithOutParamWithIsAnythingOnInterface()
         {
-            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewMock<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
         }
 
         [Test, Class]
         public void CanMockMethodWithOutParamWithIsAnythingOnClass()
         {
-            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewMock<OutParamClass>());
+            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewInstanceOfRole<OutParamClass>());
         }
 
         private void AssertCanMockMethodWithOutParamWithIsAnything(IGenericOutParamInterface someClass)
         {
             List<string> myList = new List<string>();
 
-            Expect.Once.On(someClass).Method("SomeMethod").With(Is.Anything, Is.Out).Will(
+            Expect.Once.On(someClass).Message("SomeMethod").With(Is.Anything, Is.Out).Will(
                 Return.Value(false),
                 new SetNamedParameterAction("vals_out", myList)
                 );
@@ -88,20 +88,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockMethodWithOutParamWithDefinedValueOnInterface()
         {
-            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewMock<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
         }
 
         [Test, Class]
         public void CanMockMethodWithOutParamWithDefinedValueOnClass()
         {
-            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewMock<OutParamClass>());
+            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewInstanceOfRole<OutParamClass>());
         }
 
         private void AssertCanMockMethodWithOutParamWithDefinedValue(IGenericOutParamInterface someClass)
         {
             List<string> myList = new List<string>();
 
-            Expect.Once.On(someClass).Method("SomeMethod").With("test", Is.Out).Will(
+            Expect.Once.On(someClass).Message("SomeMethod").With("test", Is.Out).Will(
                 Return.Value(false),
                 new SetNamedParameterAction("vals_out", myList)
                 );

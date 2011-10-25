@@ -42,7 +42,7 @@ namespace NMock2.AcceptanceTests
         [ExpectedException(typeof(ExpectationException))]
         public void UnexpectedInvocationExceptionsAreRethrownInVerify()
         {
-            IHelloWorld mock = Mocks.NewMock<IHelloWorld>();
+            IHelloWorld mock = Mocks.NewInstanceOfRole<IHelloWorld>();
 
             try
             {
@@ -62,7 +62,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void UnexpectedInvocationExceptionIsClearedAfterBeingThrownInVerify()
         {
-            IHelloWorld mock = Mocks.NewMock<IHelloWorld>();
+            IHelloWorld mock = Mocks.NewInstanceOfRole<IHelloWorld>();
 
             try
             {
@@ -92,7 +92,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void FirstSwallowedUnexpectedInvocationExceptionIsRethrownInVerify()
         {
-            IHelloWorld mock = Mocks.NewMock<IHelloWorld>();
+            IHelloWorld mock = Mocks.NewInstanceOfRole<IHelloWorld>();
             ExpectationException firstException = null;
 
             try

@@ -60,11 +60,11 @@ namespace NMock2.AcceptanceTests
         {
             base.Setup();
 
-            myEnumerable = Mocks.NewMock<IMyEnumerable>();
+            myEnumerable = Mocks.NewInstanceOfRole<IMyEnumerable>();
 
             data = new string[] { "a", "b", "c", "d", "e" };
 
-            Stub.On(myEnumerable).Method("GetEnumerator").WithNoArguments().Will(new CallGetEnumeratorAction(data));
+            Stub.On(myEnumerable).Message("GetEnumerator").WithNoArguments().Will(new CallGetEnumeratorAction(data));
         }
 
         public class CallGetEnumeratorAction : IAction

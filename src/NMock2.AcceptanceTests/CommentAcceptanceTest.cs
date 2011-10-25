@@ -35,7 +35,7 @@ namespace NMock2.AcceptanceTests
         {
             base.Setup();
 
-            mock = Mocks.NewMock<IComment>();
+            mock = Mocks.NewInstanceOfRole<IComment>();
         }
 
         public override void Teardown()
@@ -46,13 +46,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void Method()
         {
-            Expect.Once.On(mock).Method("Method").Comment(comment);
+            Expect.Once.On(mock).Message("Method").Comment(comment);
         }
 
         [Test]
         public void MethodWithActions()
         {
-            Expect.Once.On(mock).Method("Method").Will(Throw.Exception(new Exception())).Comment(comment);
+            Expect.Once.On(mock).Message("Method").Will(Throw.Exception(new Exception())).Comment(comment);
         }
 
         [Test]

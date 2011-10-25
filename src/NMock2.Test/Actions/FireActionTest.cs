@@ -43,7 +43,7 @@ namespace NMock2.Test.Actions
         public void FiresEventOnInvocationReceiver()
         {
             Mockery mockery = new Mockery();
-            IBell receiver = (IBell) mockery.NewMock(typeof(IBell));
+            IBell receiver = (IBell) mockery.NewInstanceOfRole(typeof(IBell));
             MethodInfo methodInfo = typeof(IBell).GetMethod("Ring");
 
             Expect.Once.On(receiver).EventAdd("Listeners", new BellListener(Salivate));

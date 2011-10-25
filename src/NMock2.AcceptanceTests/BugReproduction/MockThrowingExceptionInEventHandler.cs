@@ -30,11 +30,11 @@ namespace NMock2.AcceptanceTests
         [ExpectedException(typeof(ApplicationException), ExpectedMessage = "got you!")]
         public void ExceptionsInEventHandlersAreNotWrappedInInternalExceptions()
         {
-            IEventProvider eventProvider = Mocks.NewMock<IEventProvider>();
-            IExceptionThrower exceptionThrower = Mocks.NewMock<IExceptionThrower>();
+            IEventProvider eventProvider = Mocks.NewInstanceOfRole<IEventProvider>();
+            IExceptionThrower exceptionThrower = Mocks.NewInstanceOfRole<IExceptionThrower>();
 
             Expect.Once.On(eventProvider).EventAdd("Event");
-            Expect.Once.On(exceptionThrower).Method("ThrowException").Will(Throw.Exception(new ApplicationException("got you!")));
+            Expect.Once.On(exceptionThrower).Message("ThrowException").Will(Throw.Exception(new ApplicationException("got you!")));
 
             eventProvider.Event += delegate { exceptionThrower.ThrowException(); };
 

@@ -46,7 +46,7 @@ namespace NMock2.Syntax
         /// <returns>
         /// Argument syntax defining the arguments of the method.
         /// </returns>
-        IArgumentSyntax Method(string name, params Type[] typeParams);
+        IArgumentSyntax Message(string name, params Type[] typeParams);
 
         /// <summary>
         /// Defines a method.
@@ -54,7 +54,7 @@ namespace NMock2.Syntax
         /// <param name="nameMatcher">Matcher defining the method.</param>
         /// <param name="typeParams">The generic type params to match.</param>
         /// <returns>Argument syntax defining the arguments of the method.</returns>
-        IArgumentSyntax Method(Matcher nameMatcher, params Type[] typeParams);
+        IArgumentSyntax Message(Matcher nameMatcher, params Type[] typeParams);
 
         /// <summary>
         /// Defines a method.
@@ -62,7 +62,7 @@ namespace NMock2.Syntax
         /// <param name="method">The method.</param>
         /// <param name="typeParams">The generic type params to match.</param>
         /// <returns>Argument syntax defining the arguments of the method.</returns>
-        IArgumentSyntax Method(MethodInfo method, params Type[] typeParams);
+        IArgumentSyntax Message(MethodInfo method, params Type[] typeParams);
 
         /// <summary>
         /// Defines a method.
@@ -70,7 +70,7 @@ namespace NMock2.Syntax
         /// <param name="methodMatcher">Matcher for matching the method on an invocation.</param>
         /// <param name="typeParamsMatcher">Matchers for matching type parameters.</param>
         /// <returns>Argument syntax defining the arguments of the method.</returns>
-        IArgumentSyntax Method(Matcher methodMatcher, Matcher typeParamsMatcher);
+        IArgumentSyntax Message(Matcher methodMatcher, Matcher typeParamsMatcher);
 
         /// <summary>
         /// Defines a property setter.

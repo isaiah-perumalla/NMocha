@@ -117,7 +117,7 @@ namespace NMock2
         {
             this.mockery = new Mockery();
 
-            this.dependencyProvider = this.mockery.NewMock<TMock>(MockStyle.Stub);
+            this.dependencyProvider = this.mockery.NewInstanceOfRole<TMock>(MockStyle.Stub);
         }
 
         /// <summary>

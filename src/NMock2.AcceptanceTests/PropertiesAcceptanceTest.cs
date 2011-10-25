@@ -42,13 +42,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectPropertyGetterOnInterface()
         {
-            AssertCanExpectPropertyGetter(Mocks.NewMock<IPersonRecord>());
+            AssertCanExpectPropertyGetter(Mocks.NewInstanceOfRole<IPersonRecord>());
         }
 
         [Test, Class]
         public void CanExpectPropertyGetterOnClass()
         {
-            AssertCanExpectPropertyGetter(Mocks.NewMock<PersonRecord>());
+            AssertCanExpectPropertyGetter(Mocks.NewInstanceOfRole<PersonRecord>());
         }
 
         private void AssertCanExpectPropertyGetter(IPersonRecord personRecord)
@@ -63,13 +63,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectPropertySetterOnInterface()
         {
-            AssertCanExpectPropertySetter(Mocks.NewMock<IPersonRecord>());
+            AssertCanExpectPropertySetter(Mocks.NewInstanceOfRole<IPersonRecord>());
         }
 
         [Test, Class]
         public void CanExpectPropertySetterOnClass()
         {
-            AssertCanExpectPropertySetter(Mocks.NewMock<PersonRecord>());
+            AssertCanExpectPropertySetter(Mocks.NewInstanceOfRole<PersonRecord>());
         }
 
         private void AssertCanExpectPropertySetter(IPersonRecord personRecord)

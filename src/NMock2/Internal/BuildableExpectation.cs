@@ -258,10 +258,9 @@ namespace NMock2.Internal
                     ((IAction)this.actions[i]).DescribeTo(writer);
                 }
             }
-            writer.Write(" ");
-            orderingConstraints.ForEach(constraint => constraint.DescribeTo(writer));
-            
-            
+            DescribeOrderingConstraintsOn(writer);
+
+
             writer.Write(" [called ");
             writer.Write(this.callCount);
             writer.Write(" time");
@@ -277,6 +276,12 @@ namespace NMock2.Internal
                 writer.Write(" Comment: ");
                 writer.Write(this.expectationComment);
             }
+        }
+
+        private void DescribeOrderingConstraintsOn(TextWriter writer) {
+            if(!orderingConstraints.Any()) return;
+            writer.Write(" ");
+            orderingConstraints.ForEach(constraint => constraint.DescribeTo(writer));
         }
 
         public void AddOrderingConstraint(IOrderingConstraint orderingConstraint) {

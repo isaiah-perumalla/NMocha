@@ -35,9 +35,9 @@ namespace NMock2.AcceptanceTests
             AutoResetEvent signalFromBackgroundThread = new AutoResetEvent(false);
             AutoResetEvent signalFromForegroundThread = new AutoResetEvent(false);
 
-            IHelloWorld helloWorld = Mocks.NewMock<IHelloWorld>();
+            IHelloWorld helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
 
-            Expect.Once.On(helloWorld).Method("Hello").Will(Signal.EventWaitHandle(signalFromBackgroundThread));
+            Expect.Once.On(helloWorld).Message("Hello").Will(Signal.EventWaitHandle(signalFromBackgroundThread));
 
             ThreadPool.QueueUserWorkItem(delegate
                                              {

@@ -51,7 +51,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void FireInheritedEvent()
         {
-            IDerived mock = Mocks.NewMock<IDerived>();
+            IDerived mock = Mocks.NewInstanceOfRole<IDerived>();
 
             Fire.Event("Event").On(mock).With(this, EventArgs.Empty);
         }

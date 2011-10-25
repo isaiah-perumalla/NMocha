@@ -13,9 +13,9 @@ namespace NMock2 {
         public void CanConstrainExpectationToOccurOnlyInAGivenState() {
             this.SkipVerificationForThisTest();
             var readiness = Mocks.States("readiness");
-            var helloWorld = Mocks.NewMock<IHelloWorld>();
-            Expect.Once.On(helloWorld).Method("Hello").When(readiness.Is("ready"));
-            Expect.Once.On(helloWorld).Method("Umm").Then(readiness.Is("ready"));
+            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
+            Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
 
             helloWorld.Hello();
             helloWorld.Umm();
@@ -26,9 +26,9 @@ namespace NMock2 {
         [Test]
         public void AllowsExpectationsToOccurInCorrectState() {
             var readiness = Mocks.States("readiness");
-            var helloWorld = Mocks.NewMock<IHelloWorld>();
-            Expect.Once.On(helloWorld).Method("Hello").When(readiness.Is("ready"));
-            Expect.Once.On(helloWorld).Method("Umm").Then(readiness.Is("ready"));
+            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
+            Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
           
             helloWorld.Umm();
             helloWorld.Hello();
@@ -38,8 +38,8 @@ namespace NMock2 {
         public void CanStartInASpecificState() {
             var readiness = Mocks.States("readiness");
             readiness.StartAs("ready");
-            var helloWorld = Mocks.NewMock<IHelloWorld>();
-            Stub.On(helloWorld).Method("Hello").When(readiness.Is("ready"));
+            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            Stub.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
             helloWorld.Hello();
            
         }
@@ -50,8 +50,8 @@ namespace NMock2 {
             var fruitness = Mocks.States("fruitness");
             var vegginess = Mocks.States("veginess");
             vegginess.StartAs("Carrot");
-            var helloWorld = Mocks.NewMock<IHelloWorld>();
-            Stub.On(helloWorld).Method("Hello").When(fruitness.Is("apple"));
+            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            Stub.On(helloWorld).Message("Hello").When(fruitness.Is("apple"));
             try
             {
                 helloWorld.Hello();

@@ -33,11 +33,11 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMixMatcherAndNonMatcherExpectedArguments()
         {
-            IDemanding demanding = (IDemanding)Mocks.NewMock(typeof(IDemanding));
+            IDemanding demanding = (IDemanding)Mocks.NewInstanceOfRole(typeof(IDemanding));
 
-            Expect.Once.On(demanding).Method("Take").With(1, 2, 3);
-            Expect.Once.On(demanding).Method("Take").With(Is.EqualTo(10), Is.AtLeast(11), Is.AtMost(12));
-            Expect.Once.On(demanding).Method("Take").With(20, Is.AtLeast(19), 22);
+            Expect.Once.On(demanding).Message("Take").With(1, 2, 3);
+            Expect.Once.On(demanding).Message("Take").With(Is.EqualTo(10), Is.AtLeast(11), Is.AtMost(12));
+            Expect.Once.On(demanding).Message("Take").With(20, Is.AtLeast(19), 22);
 
             demanding.Take(1, 2, 3);
             demanding.Take(10, 11, 12);
@@ -50,9 +50,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void GenericMatcher()
         {
-            IDemanding demanding = (IDemanding)Mocks.NewMock(typeof(IDemanding));
+            IDemanding demanding = (IDemanding)Mocks.NewInstanceOfRole(typeof(IDemanding));
 
-            Expect.Once.On(demanding).Method("Take").With(
+            Expect.Once.On(demanding).Message("Take").With(
                 new Matchers.GenericMatcher<int>(parameter => parameter == 10),
                 Is.Match<int>(parameter => parameter == 20),
                 Is.Anything);

@@ -35,7 +35,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void TestEmptyOrdered()
         {
-            ITest testMock = Mocks.NewMock<ITest>();
+            ITest testMock = Mocks.NewInstanceOfRole<ITest>();
 
             using (Mocks.Ordered)
             { }

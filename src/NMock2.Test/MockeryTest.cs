@@ -82,7 +82,7 @@ using System.Collections;
         [Test]
         public void CreatesMocksThatCanBeCastToMockedType()
         {
-            object mock = _mockery.NewMock(typeof(IMockedType));
+            object mock = _mockery.NewInstanceOfRole(typeof(IMockedType));
 
             Assert.IsTrue(mock is IMockedType, "should be instance of mocked type");
         }
@@ -90,14 +90,14 @@ using System.Collections;
         [Test]
         public void CanCreateMockWithoutCastingBySpecifingTypeAsGenericParameter()
         {
-            IMockedType mock = _mockery.NewMock<IMockedType>();
+            IMockedType mock = _mockery.NewInstanceOfRole<IMockedType>();
             Console.WriteLine("Generic mock create test ran");
         }
 
         [Test]
         public void CreatesMocksThatCanBeCastToIMockObject()
         {
-            object mock = _mockery.NewMock(typeof(IMockedType));
+            object mock = _mockery.NewInstanceOfRole(typeof(IMockedType));
 
             Assert.IsTrue(mock is IMockObject, "should be instance of IMock");
         }
@@ -113,7 +113,7 @@ using System.Collections;
         [Test]
         public void CreateMocksWithGenericMethod()
         {
-            object mock = _mockery.NewMock(typeof(IMockObjectWithGenericMethod));
+            object mock = _mockery.NewInstanceOfRole(typeof(IMockObjectWithGenericMethod));
         }
 
         [Test]
@@ -135,10 +135,10 @@ using System.Collections;
         [Test]
         public void GivesMocksDefaultNameIfNoNameSpecified()
         {
-            Assert.AreEqual("mockedType", _mockery.NewMock(typeof(IMockedType)).ToString());
-            Assert.AreEqual("interfaceWithoutIPrefix", _mockery.NewMock(typeof(InterfaceWithoutIPrefix)).ToString());
-            Assert.AreEqual("interfaceWithAdditionalPrefixBeforeI", _mockery.NewMock(typeof(ARSEIInterfaceWithAdditionalPrefixBeforeI)).ToString());
-            Assert.AreEqual("interface_with_upper_class_name", _mockery.NewMock(typeof(INTERFACE_WITH_UPPER_CLASS_NAME)).ToString());
+            Assert.AreEqual("mockedType", _mockery.NewInstanceOfRole(typeof(IMockedType)).ToString());
+            Assert.AreEqual("interfaceWithoutIPrefix", _mockery.NewInstanceOfRole(typeof(InterfaceWithoutIPrefix)).ToString());
+            Assert.AreEqual("interfaceWithAdditionalPrefixBeforeI", _mockery.NewInstanceOfRole(typeof(ARSEIInterfaceWithAdditionalPrefixBeforeI)).ToString());
+            Assert.AreEqual("interface_with_upper_class_name", _mockery.NewInstanceOfRole(typeof(INTERFACE_WITH_UPPER_CLASS_NAME)).ToString());
         }
 
         [Test]
@@ -328,9 +328,9 @@ using System.Collections;
         public void ShouldBeAbleToInvokeMethodOnInheritedInterface()
         {
             Mockery mockery = new Mockery();
-            IChildInterface childMock = (IChildInterface)mockery.NewMock(typeof(IChildInterface));
+            IChildInterface childMock = (IChildInterface)mockery.NewInstanceOfRole(typeof(IChildInterface));
 
-            Expect.AtLeastOnce.On(childMock).Method("DoSomething");
+            Expect.AtLeastOnce.On(childMock).Message("DoSomething");
             childMock.DoSomething();
             mockery.VerifyAllExpectationsHaveBeenMet();
 		}
@@ -361,9 +361,9 @@ using System.Collections;
         public void ClearExpectation()
         {
             Mockery testee = new Mockery();
-            ISelfDescribing mock = testee.NewMock<ISelfDescribing>();
+            ISelfDescribing mock = testee.NewInstanceOfRole<ISelfDescribing>();
 
-            Expect.Once.On(mock).Method("DescribeTo");
+            Expect.Once.On(mock).Message("DescribeTo");
 
             testee.ClearExpectation(mock);
 
@@ -381,7 +381,7 @@ using System.Collections;
 		[Test]
 		public void CreatesClassMocksThatCanBeCastToIMockObject()
 		{
-			object mock = _mockery.NewMock<SampleClass>();
+			object mock = _mockery.NewInstanceOfRole<SampleClass>();
 
 			Assert.IsTrue(mock is IMockObject, "should be instance of IMock");
 		}
@@ -389,7 +389,7 @@ using System.Collections;
 		[Test]
 		public void ClassMockReturnsDefaultNameFromMockNameProperty()
 		{
-			IMockObject mock = (IMockObject)_mockery.NewMock<SampleClass>();
+			IMockObject mock = (IMockObject)_mockery.NewInstanceOfRole<SampleClass>();
 
 			Assert.AreEqual("sampleClass", mock.MockName);
 		}
@@ -397,8 +397,8 @@ using System.Collections;
 		[Test]
 		public void CreatedClassMockComparesReferenceIdentityWithEqualsMethod()
 		{
-			object mock1 = _mockery.NewMock(typeof(SampleClass));
-			object mock2 = _mockery.NewMock(typeof(SampleClass));
+			object mock1 = _mockery.NewInstanceOfRole(typeof(SampleClass));
+			object mock2 = _mockery.NewInstanceOfRole(typeof(SampleClass));
 
 			Assert.IsTrue(mock1.Equals(mock1), "same object should be equal");
 			Assert.IsFalse(mock1.Equals(mock2), "different objects should not be equal");
@@ -407,20 +407,20 @@ using System.Collections;
 		[Test]
 		public void CanCreateClassMockWithConstructor()
 		{
-			SampleClassWithConstructorArgs mock = _mockery.NewMock<SampleClassWithConstructorArgs>(1, "A");
+			SampleClassWithConstructorArgs mock = _mockery.NewInstanceOfRole<SampleClassWithConstructorArgs>(1, "A");
 		}
 
 		[Test]
 		[ExpectedException(typeof(ArgumentException))]
 		public void MockingSealedClassThrowsArgumentException()
 		{
-			SampleSealedClass mock = _mockery.NewMock<SampleSealedClass>();
+			SampleSealedClass mock = _mockery.NewInstanceOfRole<SampleSealedClass>();
 		}
 
 		[Test]
 		public void TransparentClassMockWithoutExpectationsExposesRealMethodImplementations()
 		{
-			SampleClass mock = _mockery.NewMock<SampleClass>(MockStyle.Transparent);
+			SampleClass mock = _mockery.NewInstanceOfRole<SampleClass>(MockStyle.Transparent);
 
 			Assert.AreEqual(3, mock.Add(1, 2));
 		}
@@ -428,13 +428,13 @@ using System.Collections;
 		[Test]
 		public void CanMockGenericClass()
 		{
-			SampleGenericClass<string> mock = _mockery.NewMock<SampleGenericClass<string>>();
+			SampleGenericClass<string> mock = _mockery.NewInstanceOfRole<SampleGenericClass<string>>();
 		}
 
 		[Test]
 		public void CanMockClassWithGenericMethods()
 		{
-			SampleClassWithGenericMethods mock = _mockery.NewMock<SampleClassWithGenericMethods>();
+			SampleClassWithGenericMethods mock = _mockery.NewInstanceOfRole<SampleClassWithGenericMethods>();
 		}
 
 		#endregion

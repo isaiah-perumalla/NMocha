@@ -25,7 +25,7 @@ namespace NMock2
 
     /// <summary>
     /// Defines the initial characteristics of a new mock object.
-    /// This is normally used in conjunction with <see cref="Mockery.NewMock&lt;T&gt;(IMockDefinition)"/>
+    /// This is normally used in conjunction with <see cref="Mockery.InstanceWithRole{TMockedType}"/>
     /// </summary>
     public static class DefinedAs
     {

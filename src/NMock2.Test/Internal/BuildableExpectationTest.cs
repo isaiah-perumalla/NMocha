@@ -36,7 +36,7 @@ namespace NMock2.Internal.Test
         public void SetUp()
         {
             Mockery mockery = new Mockery();
-            this.receiver = mockery.NewMock<IMockObject>(DefinedAs.Named("receiver"));
+            this.receiver = mockery.NewInstanceOfRole<IMockObject>(DefinedAs.Named("receiver"));
             invocation = new Invocation(receiver, new MethodInfoStub("method"), new object[] { "arg" });
         }
         

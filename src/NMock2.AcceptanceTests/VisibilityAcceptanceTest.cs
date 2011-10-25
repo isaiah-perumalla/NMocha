@@ -52,32 +52,32 @@ namespace NMock2.AcceptanceTests
 		[Test, CastleOnly]
 		public void CanMockInternalInterface()
 		{
-			ISomeInternalInterface mock = Mocks.NewMock<ISomeInternalInterface>();
-			Expect.Once.On(mock).Method("DoWork");
+			ISomeInternalInterface mock = Mocks.NewInstanceOfRole<ISomeInternalInterface>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 		}
 
 		[Test, Class]
 		public void CanMockInternalClass()
 		{
-			SomeInternalClass mock = Mocks.NewMock<SomeInternalClass>();
-			Expect.Once.On(mock).Method("DoWork");
+			SomeInternalClass mock = Mocks.NewInstanceOfRole<SomeInternalClass>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 		}
 
 		[Test, Class]
 		public void CanMockClassWithInternalMembers()
 		{
-			SomeClassWithInternalMembers mock = Mocks.NewMock<SomeClassWithInternalMembers>();
-			Expect.Once.On(mock).Method("DoWork");
+			SomeClassWithInternalMembers mock = Mocks.NewInstanceOfRole<SomeClassWithInternalMembers>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 		}
 
         [Test, CastleOnly]
 		public void CanMockProtectedInternalInterface()
 		{
-			ISomeProtectedInternalInterface mock = Mocks.NewMock<ISomeProtectedInternalInterface>();
-			Expect.Once.On(mock).Method("DoWork");
+			ISomeProtectedInternalInterface mock = Mocks.NewInstanceOfRole<ISomeProtectedInternalInterface>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 
 		}
@@ -85,16 +85,16 @@ namespace NMock2.AcceptanceTests
 		[Test, Class]
 		public void CanMockProtectedInternalClass()
 		{
-			SomeProtectedInternalClass mock = Mocks.NewMock<SomeProtectedInternalClass>();
-			Expect.Once.On(mock).Method("DoWork");
+			SomeProtectedInternalClass mock = Mocks.NewInstanceOfRole<SomeProtectedInternalClass>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 		}
 
 		[Test, Class]
 		public void CanMockClassWithProtectedInternalMembers()
 		{
-			SomeClassWithProtectedInternalMembers mock = Mocks.NewMock<SomeClassWithProtectedInternalMembers>();
-			Expect.Once.On(mock).Method("DoWork");
+			SomeClassWithProtectedInternalMembers mock = Mocks.NewInstanceOfRole<SomeClassWithProtectedInternalMembers>();
+			Expect.Once.On(mock).Message("DoWork");
 			mock.DoWork();
 		}
 

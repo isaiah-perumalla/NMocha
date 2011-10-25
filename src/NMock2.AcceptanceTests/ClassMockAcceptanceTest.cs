@@ -30,20 +30,20 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnVirtualMethod()
         {
-            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewMock<SampleClassWithVirtualAndNonVirtualMethods>();
+            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
             
             // Virtual target method
-            Expect.Once.On(mock).Method("Add").With(1, 2).Will(Return.Value(10));
+            Expect.Once.On(mock).Message("Add").With(1, 2).Will(Return.Value(10));
             Assert.AreEqual(10, mock.Add(1, 2));
         }
 
         [Test, Class]
         public void CanSetExpectationOnAbstractMethod()
         {
-            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewMock<SampleClassWithVirtualAndNonVirtualMethods>();
+            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
             
             // Abstract target method
-            Expect.Once.On(mock).Method("Add").With(1.1m, 2.1m).Will(Return.Value(10));
+            Expect.Once.On(mock).Message("Add").With(1.1m, 2.1m).Will(Return.Value(10));
             Assert.AreEqual(10, mock.Add(1.1m, 2.1m));
         }
 
@@ -54,7 +54,7 @@ namespace NMock2.AcceptanceTests
 
             // The target method is non-virtual, so we expect an exception.
             // (we use 'Never' here to avoid an undesired failure in teardown).
-            Expect.Never.On(mock).Method("Subtract").With(2, 1).Will(Return.Value(10));
+            Expect.Never.On(mock).Message("Subtract").With(2, 1).Will(Return.Value(10));
         }
 
         // This is a problem, as we can't easily use args to identify overload
@@ -64,10 +64,10 @@ namespace NMock2.AcceptanceTests
         [Ignore("We can't identify overloaded non-virtual members by arguments.")]
         public void SettingExpectationOnNonVirtualOverloadOfVirtualMethodThrowsArgumentException()
         {
-            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewMock<SampleClassWithVirtualAndNonVirtualMethods>();
+            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
 
             // The target method is non-virtual, so we expect an exception.
-            Expect.Once.On(mock).Method("Add").With(1, 2, 3).Will(Return.Value(10));
+            Expect.Once.On(mock).Message("Add").With(1, 2, 3).Will(Return.Value(10));
         }
 
         [Test, Class, ExpectedException(typeof(ArgumentException), "mock object myMock has a method matching SomeMethod, but it is not virtual or abstract")]
@@ -76,7 +76,7 @@ namespace NMock2.AcceptanceTests
             SampleInterfaceImpl mock = Mocks.NewNamedMock<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
-            Expect.Never.On(mock).Method("SomeMethod");
+            Expect.Never.On(mock).Message("SomeMethod");
         }
 
         [Test, Class, ExpectedException(typeof(ArgumentException), "mock object myMock has a method matching SomeGenericMethod, but it is not virtual or abstract")]
@@ -85,7 +85,7 @@ namespace NMock2.AcceptanceTests
             SampleInterfaceImpl mock = Mocks.NewNamedMock<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
-            Expect.Never.On(mock).Method("SomeGenericMethod", typeof(int));
+            Expect.Never.On(mock).Message("SomeGenericMethod", typeof(int));
         }
 
         [Test, Class, ExpectedException(typeof(ArgumentException), "mock object myMock has a method matching SomeOtherMethod, but it is not virtual or abstract")]
@@ -94,16 +94,16 @@ namespace NMock2.AcceptanceTests
             SampleInterfaceImpl mock = Mocks.NewNamedMock<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
-            Expect.Never.On(mock).Method("SomeOtherMethod");
+            Expect.Never.On(mock).Message("SomeOtherMethod");
         }
 
         [Test, Class]
         public void CanSetExpectationOnMethodWhenAtLeastOneMatchedOverloadIsVirtualOrAbstract()
         {
-            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewMock<SampleClassWithVirtualAndNonVirtualMethods>();
+            SampleClassWithVirtualAndNonVirtualMethods mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
             
             // Three possible matches here...
-            Expect.Exactly(2).On(mock).Method("Add").Will(Return.Value(10));
+            Expect.Exactly(2).On(mock).Message("Add").Will(Return.Value(10));
             Assert.AreEqual(10, mock.Add(1, 2), "Virtual method expectation failed");
             Assert.AreEqual(10, mock.Add(1.1m, 2.1m), "Abstract method expectation failed");
             Assert.AreEqual(6, mock.Add(1, 2, 3), "Expected call to non-virtual method to go to implementation");
@@ -112,8 +112,8 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanHaveClassWithIMockObjectMembers()
         {
-            SampleClassWithIMockObjectMembers mock = Mocks.NewMock<SampleClassWithIMockObjectMembers>();
-            Expect.Once.On(mock).Method("Multiply").Will(Return.Value(133));
+            SampleClassWithIMockObjectMembers mock = Mocks.NewInstanceOfRole<SampleClassWithIMockObjectMembers>();
+            Expect.Once.On(mock).Message("Multiply").Will(Return.Value(133));
             int result = mock.Multiply(12, 12);
             //// even if 12 by 12 is 144, we mocked the method with 133:
             Assert.AreEqual(133, result, "Mock wasn't created successful.");
@@ -122,8 +122,8 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanCallNonMockedMethodOfTransparentClassMock()
         {
-            SampleClass mock = Mocks.NewMock<SampleClass>(MockStyle.Transparent);
-            Expect.Once.On(mock).Method("DoAdd").Will(Return.Value(7));
+            SampleClass mock = Mocks.NewInstanceOfRole<SampleClass>(MockStyle.Transparent);
+            Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(7));
             Assert.AreEqual(7, mock.Add(1, 2));
 
             // Call to non-mocked method "Divide"
@@ -135,9 +135,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnMethodOfTransparentClassMock()
         {
-            SampleClass mock = Mocks.NewMock<SampleClass>(MockStyle.Transparent);
+            SampleClass mock = Mocks.NewInstanceOfRole<SampleClass>(MockStyle.Transparent);
 
-            Expect.Once.On(mock).Method("DoAdd").Will(Return.Value(7));
+            Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(7));
 
             Assert.AreEqual(7, mock.Add(1, 2));
         }
@@ -145,9 +145,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnAbstractMethodOfClassMock()
         {
-            SampleAbstractClass mock = Mocks.NewMock<SampleAbstractClass>();
+            SampleAbstractClass mock = Mocks.NewInstanceOfRole<SampleAbstractClass>();
 
-            Expect.Once.On(mock).Method("Add").Will(Return.Value(7));
+            Expect.Once.On(mock).Message("Add").Will(Return.Value(7));
 
             Assert.AreEqual(7, mock.Add(1, 2));
         }
@@ -155,9 +155,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void LocalCallsWithinMockedClassCanSatisfyExpectations()
         {
-            SampleClass mock = Mocks.NewMock<SampleClass>();
+            SampleClass mock = Mocks.NewInstanceOfRole<SampleClass>();
 
-            Expect.Once.On(mock).Method("DoAdd").Will(Return.Value(7)); // Should be called from Add()
+            Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(7)); // Should be called from Add()
 
             Assert.AreEqual(7, mock.Add(1, 2));
         }
@@ -165,9 +165,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnMethodOnMockedGenericClass()
         {
-            SampleGenericClass<string> mock = Mocks.NewMock<SampleGenericClass<string>>();
+            SampleGenericClass<string> mock = Mocks.NewInstanceOfRole<SampleGenericClass<string>>();
 
-            Expect.Once.On(mock).Method("GetDefault").Will(Return.Value("ABC"));
+            Expect.Once.On(mock).Message("GetDefault").Will(Return.Value("ABC"));
 
             Assert.AreEqual("ABC", mock.GetDefault());
         }
@@ -175,9 +175,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnGenericMethodOnMockedClass()
         {
-            SampleClassWithGenericMethods mock = Mocks.NewMock<SampleClassWithGenericMethods>();
+            SampleClassWithGenericMethods mock = Mocks.NewInstanceOfRole<SampleClassWithGenericMethods>();
 
-            Expect.Once.On(mock).Method("GetStringValue").Will(Return.Value("ABC"));
+            Expect.Once.On(mock).Message("GetStringValue").Will(Return.Value("ABC"));
 
             Assert.AreEqual("ABC", mock.GetStringValue("XYZ"));
         }
@@ -185,9 +185,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnGenericMethodWithConstraintOnMockedClass()
         {
-            SampleClassWithGenericMethods mock = Mocks.NewMock<SampleClassWithGenericMethods>();
+            SampleClassWithGenericMethods mock = Mocks.NewInstanceOfRole<SampleClassWithGenericMethods>();
 
-            Expect.Once.On(mock).Method("GetCount").Will(Return.Value(3));
+            Expect.Once.On(mock).Message("GetCount").Will(Return.Value(3));
 
             Assert.AreEqual(3, mock.GetCount(new int[5]));
         }
@@ -195,9 +195,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnMethodOnSuperClassOfMockedClass()
         {
-            SampleSubClass mock = Mocks.NewMock<SampleSubClass>();
+            SampleSubClass mock = Mocks.NewInstanceOfRole<SampleSubClass>();
 
-            Expect.Once.On(mock).Method("DoAdd").Will(Return.Value(5));
+            Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(5));
 
             Assert.AreEqual(10, mock.AddThenDouble(1, 2));
         }
@@ -205,9 +205,9 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnMethodWithOutParameterOnMockedClass()
         {
-            SampleClass mock = Mocks.NewMock<SampleClass>();
+            SampleClass mock = Mocks.NewInstanceOfRole<SampleClass>();
 
-            Expect.Once.On(mock).Method("Divide").Will(Return.Value(3), Return.OutValue("remainder", 15m));
+            Expect.Once.On(mock).Message("Divide").Will(Return.Value(3), Return.OutValue("remainder", 15m));
 
             decimal remainder;
             mock.Divide(7, 2, out remainder);
@@ -218,11 +218,11 @@ namespace NMock2.AcceptanceTests
         [Test, Class]
         public void CanSetExpectationOnOverriddenObjectMembersOnClassMock()
         {
-            SampleClassWithObjectOverrides mock = Mocks.NewMock<SampleClassWithObjectOverrides>();
+            SampleClassWithObjectOverrides mock = Mocks.NewInstanceOfRole<SampleClassWithObjectOverrides>();
 
-            Expect.Once.On(mock).Method("ToString").Will(Return.Value("ABC"));
-            Expect.Once.On(mock).Method("Equals").Will(Return.Value(false));
-            Expect.Once.On(mock).Method("GetHashCode").Will(Return.Value(17));
+            Expect.Once.On(mock).Message("ToString").Will(Return.Value("ABC"));
+            Expect.Once.On(mock).Message("Equals").Will(Return.Value(false));
+            Expect.Once.On(mock).Message("GetHashCode").Will(Return.Value(17));
 
             Assert.AreEqual("ABC", mock.ToString(), "unexpected ToString() value");
             Assert.IsFalse(mock.Equals(mock), "unexpected Equals() value");

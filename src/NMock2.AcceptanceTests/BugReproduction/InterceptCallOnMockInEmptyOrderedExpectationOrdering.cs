@@ -51,14 +51,14 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void StubDeclaredExplicitly()
         {
-            IDependency dependency = this.mockery.NewMock<IDependency>();
-            IAnotherDependency anotherDependency = this.mockery.NewMock<IAnotherDependency>();
+            IDependency dependency = this.mockery.NewInstanceOfRole<IDependency>();
+            IAnotherDependency anotherDependency = this.mockery.NewInstanceOfRole<IAnotherDependency>();
 
             Stub.On(dependency).GetProperty("AnotherDependency").Will(Return.Value(anotherDependency));
 
             using (this.mockery.Ordered)
             {
-                Expect.Once.On(dependency.AnotherDependency).Method("DoSomething");
+                Expect.Once.On(dependency.AnotherDependency).Message("DoSomething");
             }
 
             dependency.AnotherDependency.DoSomething();
@@ -71,11 +71,11 @@ namespace NMock2.AcceptanceTests
         [Class]
         public void StubMockStyle()
         {
-            IDependency dependency = this.mockery.NewMock<IDependency>(MockStyle.Stub);
+            IDependency dependency = this.mockery.NewInstanceOfRole<IDependency>(MockStyle.Stub);
 
             using (this.mockery.Ordered)
             {
-                Expect.Once.On(dependency.AnotherDependency).Method("DoSomething");
+                Expect.Once.On(dependency.AnotherDependency).Message("DoSomething");
             }
 
             dependency.AnotherDependency.DoSomething();

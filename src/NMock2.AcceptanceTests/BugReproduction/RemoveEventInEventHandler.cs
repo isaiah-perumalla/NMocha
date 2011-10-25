@@ -47,7 +47,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void DeregisterEventInEventHandler()
         {
-            IAnnouncer announcer = Mocks.NewMock<IAnnouncer>();
+            IAnnouncer announcer = Mocks.NewInstanceOfRole<IAnnouncer>();
 
             Expect.Once.On(announcer).EventAdd("Event");
             Expect.Once.On(announcer).EventRemove("Event");

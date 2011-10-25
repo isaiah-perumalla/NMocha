@@ -43,9 +43,9 @@ namespace NMock2
         [Test]
         public void MockToStringOnClass()
         {
-            TestClass mock = this.mockery.NewMock<TestClass>();
+            TestClass mock = this.mockery.NewInstanceOfRole<TestClass>();
 
-            Expect.Once.On(mock).Method("ToString").Will(Return.Value("whatYouWant"));
+            Expect.Once.On(mock).Message("ToString").Will(Return.Value("whatYouWant"));
 
             string s = mock.ToString();
             Assert.AreEqual("whatYouWant", s);
@@ -54,9 +54,9 @@ namespace NMock2
         [Test]
         public void MockToStringOnInterface()
         {
-            ITestInterface mock = this.mockery.NewMock<ITestInterface>();
+            ITestInterface mock = this.mockery.NewInstanceOfRole<ITestInterface>();
 
-            Expect.Once.On(mock).Method("ToString").Will(Return.Value("whatYouWant"));
+            Expect.Once.On(mock).Message("ToString").Will(Return.Value("whatYouWant"));
 
             string s = mock.ToString();
             Assert.AreEqual("whatYouWant", s);

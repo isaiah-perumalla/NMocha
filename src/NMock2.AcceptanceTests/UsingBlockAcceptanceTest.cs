@@ -44,9 +44,9 @@ namespace NMock2.AcceptanceTests
         {           
             using(Mockery mocks = new Mockery())
             {
-                IHelloWorld helloWorld = (IHelloWorld)mocks.NewMock(typeof(IHelloWorld));
+                IHelloWorld helloWorld = (IHelloWorld)mocks.NewInstanceOfRole(typeof(IHelloWorld));
                 
-                Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
+                Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
             }
         }
 
@@ -57,10 +57,10 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(InvalidOperationException))]
         public void ReturnValueForgottenWithVerify()
         {
-            IUsingBlock usingBlock = Mocks.NewMock<IUsingBlock>();
+            IUsingBlock usingBlock = Mocks.NewInstanceOfRole<IUsingBlock>();
 
-            Expect.Once.On(usingBlock).Method("IntReturnValue"); // Developer forgot to set: .Will(Return.Value(12));
-            Expect.Once.On(usingBlock).Method("NoReturnValue");
+            Expect.Once.On(usingBlock).Message("IntReturnValue"); // Developer forgot to set: .Will(Return.Value(12));
+            Expect.Once.On(usingBlock).Message("NoReturnValue");
             usingBlock.IntReturnValue();
             usingBlock.NoReturnValue();
         }
@@ -75,10 +75,10 @@ namespace NMock2.AcceptanceTests
         {
             using (Mockery mocks = new Mockery())
             {
-                IUsingBlock usingBlock = mocks.NewMock<IUsingBlock>();
+                IUsingBlock usingBlock = mocks.NewInstanceOfRole<IUsingBlock>();
 
-                Expect.Once.On(usingBlock).Method("IntReturnValue");
-                Expect.Once.On(usingBlock).Method("NoReturnValue");
+                Expect.Once.On(usingBlock).Message("IntReturnValue");
+                Expect.Once.On(usingBlock).Message("NoReturnValue");
                 usingBlock.IntReturnValue();
                 usingBlock.NoReturnValue();
             }

@@ -102,9 +102,9 @@ namespace NMock2.Internal
         /// <param name="methodName">Name of the method.</param>
         /// <param name="typeParams">The type params.</param>
         /// <returns></returns>
-        public IArgumentSyntax Method(string methodName, params Type[] typeParams)
+        public IArgumentSyntax Message(string methodName, params Type[] typeParams)
         {
-            return this.Method(new MethodNameMatcher(methodName), typeParams);
+            return this.Message(new MethodNameMatcher(methodName), typeParams);
         }
 
         /// <summary>
@@ -115,9 +115,9 @@ namespace NMock2.Internal
         /// <returns>
         /// Argument syntax defining the arguments of the method.
         /// </returns>
-        public IArgumentSyntax Method(MethodInfo method, params Type[] typeParams)
+        public IArgumentSyntax Message(MethodInfo method, params Type[] typeParams)
         {
-            return this.Method(new DescriptionOverride(method.Name, Is.Same(method)), typeParams);
+            return this.Message(new DescriptionOverride(method.Name, Is.Same(method)), typeParams);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace NMock2.Internal
         /// <param name="methodMatcher">The method matcher.</param>
         /// <param name="typeParams">The type params.</param>
         /// <returns></returns>
-        public IArgumentSyntax Method(Matcher methodMatcher, params Type[] typeParams)
+        public IArgumentSyntax Message(Matcher methodMatcher, params Type[] typeParams)
         {
             if (typeParams != null && typeParams.Length > 0)
             {
@@ -136,12 +136,12 @@ namespace NMock2.Internal
                     typeMatchers.Add(new DescriptionOverride(type.FullName, new SameMatcher(type)));
                 }
 
-                return this.Method(
+                return this.Message(
                     methodMatcher, new GenericMethodTypeParametersMatcher(typeMatchers.ToArray()));
             }
             else
             {
-                return this.Method(methodMatcher, new AlwaysMatcher(true, string.Empty)); 
+                return this.Message(methodMatcher, new AlwaysMatcher(true, string.Empty)); 
             }
         }
 
@@ -153,7 +153,7 @@ namespace NMock2.Internal
         /// <returns>
         /// Argument syntax defining the arguments of the method.
         /// </returns>
-        public IArgumentSyntax Method(Matcher methodMatcher, Matcher typeParamsMatcher)
+        public IArgumentSyntax Message(Matcher methodMatcher, Matcher typeParamsMatcher)
         {
             this.EnsureMatchingMethodExistsOnMock(methodMatcher, "a method matching " + methodMatcher);
 

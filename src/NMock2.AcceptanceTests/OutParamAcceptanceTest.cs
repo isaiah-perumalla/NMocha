@@ -41,18 +41,18 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockInAndOutParamOnInterfaceMethod()
         {
-            AssertCanMockInAndOutParamOnMethod(Mocks.NewMock<IAdder>());
+            AssertCanMockInAndOutParamOnMethod(Mocks.NewInstanceOfRole<IAdder>());
         }
 
         [Test, Class]
         public void CanMockInAndOutParamOnClassMethod()
         {
-            AssertCanMockInAndOutParamOnMethod(Mocks.NewMock<Adder>());
+            AssertCanMockInAndOutParamOnMethod(Mocks.NewInstanceOfRole<Adder>());
         }
 
         private void AssertCanMockInAndOutParamOnMethod(IAdder adder)
         {
-            Expect.Once.On(adder).Method("Add").With(3, 5, Is.Out).Will(
+            Expect.Once.On(adder).Message("Add").With(3, 5, Is.Out).Will(
                 new SetNamedParameterAction("c", 8)
                 );
 
@@ -64,18 +64,18 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockInAndOutParamWithReturnValueOnInterfaceMethod()
         {
-            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewMock<IAdder>());
+            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewInstanceOfRole<IAdder>());
         }
 
         [Test, Class]
         public void CanMockInAndOutParamWithReturnValueOnClassMethod()
         {
-            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewMock<Adder>());
+            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewInstanceOfRole<Adder>());
         }
 
         private void AssertCanMockInAndOutParamWithReturnValueOnMethod(IAdder adder)
         {
-            Expect.Once.On(adder).Method("Add").With(4, 7).Will(Return.Value(11));
+            Expect.Once.On(adder).Message("Add").With(4, 7).Will(Return.Value(11));
 
             int c = adder.Add(4, 7);
             Assert.AreEqual(11, c, "Result was not set correctly.");
@@ -84,9 +84,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockOutParameterUsingShortcutOnReturnClass()
         {
-            IAdder adder = Mocks.NewMock<IAdder>();
+            IAdder adder = Mocks.NewInstanceOfRole<IAdder>();
 
-            Expect.Once.On(adder).Method("Add").With(3, 5, Is.Out).Will(Return.OutValue("c", 8));
+            Expect.Once.On(adder).Message("Add").With(3, 5, Is.Out).Will(Return.OutValue("c", 8));
 
             int outValue;
             adder.Add(3, 5, out outValue);

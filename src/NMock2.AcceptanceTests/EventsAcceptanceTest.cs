@@ -48,13 +48,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectEventAddOnInterface()
         {
-            AssertCanExpectEventAdd(Mocks.NewMock<IAnnouncer>());
+            AssertCanExpectEventAdd(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void CanExpectEventAddOnClass()
         {
-            AssertCanExpectEventAdd(Mocks.NewMock<Announcer>());
+            AssertCanExpectEventAdd(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertCanExpectEventAdd(IAnnouncer announcer)
@@ -67,13 +67,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectEventRemoveOnInterface()
         {
-            AssertCanExpectEventRemove(Mocks.NewMock<IAnnouncer>());
+            AssertCanExpectEventRemove(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void CanExpectEventRemoveOnClass()
         {
-            AssertCanExpectEventRemove(Mocks.NewMock<Announcer>());
+            AssertCanExpectEventRemove(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertCanExpectEventRemove(IAnnouncer announcer)
@@ -95,13 +95,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void EventsCanBeRaisedOnInterface()
         {
-            AssertEventsCanBeRaisedDuringTests(Mocks.NewMock<IAnnouncer>());
+            AssertEventsCanBeRaisedDuringTests(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void EventsCanBeRaisedOnClass()
         {
-            AssertEventsCanBeRaisedDuringTests(Mocks.NewMock<Announcer>());
+            AssertEventsCanBeRaisedDuringTests(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertEventsCanBeRaisedDuringTests(IAnnouncer announcer)
@@ -120,13 +120,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void EventHandlingByMocksRespectsAdditionAndRemovalOfListenersOnInterface()
         {
-            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewMock<IAnnouncer>());
+            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void EventHandlingByMocksRespectsAdditionAndRemovalOfListenersOnClass()
         {
-            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewMock<Announcer>());
+            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(IAnnouncer announcer)
@@ -156,14 +156,14 @@ namespace NMock2.AcceptanceTests
         [ExpectedException(typeof(ArgumentException))]
         public void InvocationOfNonexistingEventThrowArgumentExceptionOnInterface()
         {
-            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewMock<IAnnouncer>());
+            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         [ExpectedException(typeof(ArgumentException))]
         public void InvocationOfNonexistingEventThrowArgumentExceptionOnClass()
         {
-            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewMock<Announcer>());
+            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertInvocationOfNonexistingEventThrowArgumentException(IAnnouncer announcer)
@@ -174,13 +174,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void RegistrationOfNonExistingEventThrowsArgumentExceptionOnInterface()
         {
-            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewMock<IAnnouncer>());
+            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void RegistrationOfNonExistingEventThrowsArgumentExceptionOnClass()
         {
-            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewMock<Announcer>());
+            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertRegistrationOfNonExistingEventThrowsArgumentException(IAnnouncer announcer)
@@ -204,13 +204,13 @@ namespace NMock2.AcceptanceTests
         {
             // InterfaceOnlyMockObjectFactory-generated mocks do not currently support this
 
-            AssertStackTraceNotLost(Mocks.NewMock<IAnnouncer>());
+            AssertStackTraceNotLost(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void StackTraceNotLostOnClass()
         {
-            AssertStackTraceNotLost(Mocks.NewMock<Announcer>());
+            AssertStackTraceNotLost(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertStackTraceNotLost(IAnnouncer announcer)
@@ -265,13 +265,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectEventAddOnInterface()
         {
-            AssertCanExpectEventAdd(Mocks.NewMock<IAnnouncer>());
+            AssertCanExpectEventAdd(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void CanExpectEventAddOnClass()
         {
-            AssertCanExpectEventAdd(Mocks.NewMock<Announcer>());
+            AssertCanExpectEventAdd(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertCanExpectEventAdd(IAnnouncer announcer)
@@ -284,13 +284,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanExpectEventRemoveOnInterface()
         {
-            AssertCanExpectEventRemove(Mocks.NewMock<IAnnouncer>());
+            AssertCanExpectEventRemove(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void CanExpectEventRemoveOnClass()
         {
-            AssertCanExpectEventRemove(Mocks.NewMock<Announcer>());
+            AssertCanExpectEventRemove(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertCanExpectEventRemove(IAnnouncer announcer)
@@ -312,13 +312,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void EventsCanBeRaisedOnInterface()
         {
-            AssertEventsCanBeRaisedDuringTests(Mocks.NewMock<IAnnouncer>());
+            AssertEventsCanBeRaisedDuringTests(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void EventsCanBeRaisedOnClass()
         {
-            AssertEventsCanBeRaisedDuringTests(Mocks.NewMock<Announcer>());
+            AssertEventsCanBeRaisedDuringTests(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertEventsCanBeRaisedDuringTests(IAnnouncer announcer)
@@ -337,13 +337,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void EventHandlingByMocksRespectsAdditionAndRemovalOfListenersOnInterface()
         {
-            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewMock<IAnnouncer>());
+            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void EventHandlingByMocksRespectsAdditionAndRemovalOfListenersOnClass()
         {
-            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewMock<Announcer>());
+            AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertEventHandlingByMocksRespectsAdditionAndRemovalOfListeners(IAnnouncer announcer)
@@ -373,14 +373,14 @@ namespace NMock2.AcceptanceTests
         [ExpectedException(typeof(ArgumentException))]
         public void InvocationOfNonexistingEventThrowArgumentExceptionOnInterface()
         {
-            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewMock<IAnnouncer>());
+            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         [ExpectedException(typeof(ArgumentException))]
         public void InvocationOfNonexistingEventThrowArgumentExceptionOnClass()
         {
-            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewMock<Announcer>());
+            AssertInvocationOfNonexistingEventThrowArgumentException(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertInvocationOfNonexistingEventThrowArgumentException(IAnnouncer announcer)
@@ -391,13 +391,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void RegistrationOfNonExistingEventThrowsArgumentExceptionOnInterface()
         {
-            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewMock<IAnnouncer>());
+            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void RegistrationOfNonExistingEventThrowsArgumentExceptionOnClass()
         {
-            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewMock<Announcer>());
+            AssertRegistrationOfNonExistingEventThrowsArgumentException(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertRegistrationOfNonExistingEventThrowsArgumentException(IAnnouncer announcer)
@@ -421,13 +421,13 @@ namespace NMock2.AcceptanceTests
         {
             // InterfaceOnlyMockObjectFactory-generated mocks do not currently support this
 
-            AssertStackTraceNotLost(Mocks.NewMock<IAnnouncer>());
+            AssertStackTraceNotLost(Mocks.NewInstanceOfRole<IAnnouncer>());
         }
 
         [Test, Class]
         public void StackTraceNotLostOnClass()
         {
-            AssertStackTraceNotLost(Mocks.NewMock<Announcer>());
+            AssertStackTraceNotLost(Mocks.NewInstanceOfRole<Announcer>());
         }
 
         private void AssertStackTraceNotLost(IAnnouncer announcer)
@@ -465,7 +465,7 @@ namespace NMock2.AcceptanceTests
             this.fireCount = 0;
             this.anotherFireCount = 0;
 
-            IAnnouncer announcer = Mocks.NewMock<IAnnouncer>(DefinedAs.OfStyle(MockStyle.Stub));
+            IAnnouncer announcer = Mocks.NewInstanceOfRole<IAnnouncer>(DefinedAs.OfStyle(MockStyle.Stub));
             
             announcer.ListenerEvent += this.Listener;
             Fire.On(announcer).Event("ListenerEvent").With("hello");

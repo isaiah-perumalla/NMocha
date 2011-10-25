@@ -82,26 +82,26 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodOnInterface()
         {
-            AssertCanMockGenericMethod(Mocks.NewMock<ILocator>());
+            AssertCanMockGenericMethod(Mocks.NewInstanceOfRole<ILocator>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodOnClass()
         {
-            AssertCanMockGenericMethod(Mocks.NewMock<Locator>());
+            AssertCanMockGenericMethod(Mocks.NewInstanceOfRole<Locator>());
         }
 
         private void AssertCanMockGenericMethod(ILocator locatorMock)
         {
-            IServiceOne serviceOneMock = Mocks.NewMock<IServiceOne>();
-            IServiceTwo serviceTwoMock = Mocks.NewMock<IServiceTwo>();
+            IServiceOne serviceOneMock = Mocks.NewInstanceOfRole<IServiceOne>();
+            IServiceTwo serviceTwoMock = Mocks.NewInstanceOfRole<IServiceTwo>();
 
             // That works only with Expect and if the order of calls to Get match the order of the expectations:
-            Expect.Once.On(locatorMock).Method("Get").Will(Return.Value(serviceOneMock));
-            Expect.Once.On(locatorMock).Method("Get").Will(Return.Value(serviceTwoMock));
+            Expect.Once.On(locatorMock).Message("Get").Will(Return.Value(serviceOneMock));
+            Expect.Once.On(locatorMock).Message("Get").Will(Return.Value(serviceTwoMock));
 
-            Expect.Once.On(serviceOneMock).Method("ServiceOneGetsName").Will(Return.Value("ServiceOne"));
-            Expect.Once.On(serviceTwoMock).Method("ServiceTwoSaves").Will(Return.Value(true));
+            Expect.Once.On(serviceOneMock).Message("ServiceOneGetsName").Will(Return.Value("ServiceOne"));
+            Expect.Once.On(serviceTwoMock).Message("ServiceTwoSaves").Will(Return.Value(true));
 
             // real call now; only works in same order as the expectations
             IServiceOne serviceOne = locatorMock.Get<IServiceOne>();
@@ -116,13 +116,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithGenericParameterOnInterface()
         {
-            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericParameterOnClass()
         {
-            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         public void AssertCanMockGenericMethodWithGenericParameter(IGenericHelloWorld genericMock)
@@ -130,7 +130,7 @@ namespace NMock2.AcceptanceTests
             const bool expectedSaveResult = true;
             PersistentClass persistentObject = CreatePersistentObject();
 
-            Expect.Once.On(genericMock).Method("Save").With(persistentObject).Will(Return.Value(expectedSaveResult));
+            Expect.Once.On(genericMock).Message("Save").With(persistentObject).Will(Return.Value(expectedSaveResult));
 
             bool saveResult = genericMock.Save<PersistentClass>(persistentObject);
             Assert.AreEqual(expectedSaveResult, saveResult,
@@ -140,13 +140,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithGenericParameterUsingValueTypeOnInterface()
         {
-            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericParameterUsingValueTypeOnClass()
         {
-            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithGenericParameterUsingValueType(IGenericHelloWorld genericMock)
@@ -154,7 +154,7 @@ namespace NMock2.AcceptanceTests
             const bool expectedSaveResult = true;
             const decimal decimalValue = 13.5m;
 
-            Expect.Once.On(genericMock).Method("Save").With(decimalValue).Will(Return.Value(expectedSaveResult));
+            Expect.Once.On(genericMock).Message("Save").With(decimalValue).Will(Return.Value(expectedSaveResult));
 
             bool saveResult = genericMock.Save<decimal>(decimalValue);
             Assert.AreEqual(expectedSaveResult, saveResult,
@@ -164,13 +164,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingMixedTypesOnInterface()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingMixedTypesOnClass()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(IGenericHelloWorld genericMock)
@@ -178,8 +178,8 @@ namespace NMock2.AcceptanceTests
             const int integerValue = 12;
             const string stringValue = "Hello World";
 
-            Expect.Once.On(genericMock).Method("Find").Will(Return.Value(integerValue));
-            Expect.Once.On(genericMock).Method("Find").Will(Return.Value(stringValue));
+            Expect.Once.On(genericMock).Message("Find").Will(Return.Value(integerValue));
+            Expect.Once.On(genericMock).Message("Find").Will(Return.Value(stringValue));
 
             int integerFindResult = genericMock.Find<int>();
             Assert.AreEqual(integerValue, integerFindResult,
@@ -193,20 +193,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingReferenceTypeOnInterface()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingReferenceTypeOnClass()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         public void AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(IGenericHelloWorld genericMock)
         {
             const string stringValue = "Hello World";
 
-            Expect.Once.On(genericMock).Method("Find").Will(Return.Value(stringValue));
+            Expect.Once.On(genericMock).Message("Find").Will(Return.Value(stringValue));
 
             string findResult = genericMock.Find<string>();
             Assert.AreEqual(stringValue, findResult, "Generic method did not return correct Reference Type value.");
@@ -215,20 +215,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingValueTypeOnInterface()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingValueTypeOnClass()
         {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(IGenericHelloWorld genericMock)
         {
             const int integerValue = 12;
 
-            Expect.Once.On(genericMock).Method("Find").Will(Return.Value(integerValue));
+            Expect.Once.On(genericMock).Message("Find").Will(Return.Value(integerValue));
 
             int findResult = genericMock.Find<int>();
             Assert.AreEqual(integerValue, findResult, "Generic method did not return correct Value Type value.");
@@ -237,23 +237,23 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithMixedParametersOnInterface()
         {
-            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithMixedParametersOnClass()
         {
-            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithMixedParameters(IGenericHelloWorld genericMock)
         {
             string variableA = "Contents of variable a";
             string variableB = "Contents of variable b";
-            Expect.Once.On(genericMock).Method("SetVariable").With("A", "Contents of variable a");
-            Expect.Once.On(genericMock).Method("SetVariable").With("B", "Contents of variable b");
-            Expect.Once.On(genericMock).Method("ReadVariable").With("A").Will(Return.Value(variableA));
-            Expect.Once.On(genericMock).Method("ReadVariable").With("B").Will(Return.Value(variableB));
+            Expect.Once.On(genericMock).Message("SetVariable").With("A", "Contents of variable a");
+            Expect.Once.On(genericMock).Message("SetVariable").With("B", "Contents of variable b");
+            Expect.Once.On(genericMock).Message("ReadVariable").With("A").Will(Return.Value(variableA));
+            Expect.Once.On(genericMock).Message("ReadVariable").With("B").Will(Return.Value(variableB));
 
             genericMock.SetVariable<string>("A", "Contents of variable a");
             string resultA = genericMock.ReadVariable<string>("A");

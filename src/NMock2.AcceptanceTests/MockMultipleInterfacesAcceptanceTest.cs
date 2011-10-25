@@ -78,7 +78,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockMultipleInterfaces()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IHaveAllMemberTypes>());
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -87,19 +87,19 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockClassAndInterfaces()
         {
-            var mock = Mocks.NewMock<SomeBase>(DefinedAs.Implementing(typeof(IEnumerable), typeof(IHaveAllMemberTypes)));
+            var mock = Mocks.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof(IEnumerable), typeof(IHaveAllMemberTypes)));
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
 
-            Expect.Once.On(mock).Method("GetName").Will(Return.Value("AAA"));
+            Expect.Once.On(mock).Message("GetName").Will(Return.Value("AAA"));
             Assert.AreSame("AAA", mock.GetName());
         }
 
         [Test]
         public void CanMockInheritedInterfaces()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing<IAmASubclass>());
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmASubclass>());
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -109,8 +109,8 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void DuplicateInterfacesAreIgnored()
         {
-            var mock = Mocks.NewMock<IHaveAllMemberTypes>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(IHaveAllMemberTypes)));
-            var otherMock = Mocks.NewMock<IHaveAllMemberTypes>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var mock = Mocks.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(IHaveAllMemberTypes)));
+            var otherMock = Mocks.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing<IHaveAllMemberTypes>());
 
             AssertExpectationsCanBeSet(mock);
             Assert.AreEqual(mock.GetType(), otherMock.GetType(), "Mocks were not of the same runtime type");
@@ -119,8 +119,8 @@ namespace NMock2.AcceptanceTests
         [Test, Ignore("This is an unlikely scenario. Is is mostly harmless and would have negative perf implications if fixed.")]
         public void DuplicateInheritedInterfacesAreIgnored()
         {
-            var mock = Mocks.NewMock<IAmASubclass>(DefinedAs.Implementing<IHaveAllMemberTypes>());
-            var otherMock = Mocks.NewMock<IAmASubclass>();
+            var mock = Mocks.NewInstanceOfRole<IAmASubclass>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var otherMock = Mocks.NewInstanceOfRole<IAmASubclass>();
 
             Assert.AreEqual(mock.GetType(), otherMock.GetType());
         }
@@ -128,8 +128,8 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void OrderOfInterfacesIsIgnored()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing(typeof(IDisposable), typeof(IHaveAllMemberTypes)));
-            var otherMock = Mocks.NewMock<IDisposable>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(IEnumerable)));
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof(IDisposable), typeof(IHaveAllMemberTypes)));
+            var otherMock = Mocks.NewInstanceOfRole<IDisposable>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(IEnumerable)));
 
             Assert.AreEqual(mock.GetType(), otherMock.GetType());
         }
@@ -137,7 +137,7 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockEmptyMarkerInterfaces()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing<IAmAMarkerInterface>());
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmAMarkerInterface>());
 
             Assert.IsInstanceOfType(typeof(IEnumerable), mock);
             Assert.IsInstanceOfType(typeof(IAmAMarkerInterface), mock);
@@ -146,31 +146,31 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockASingleClassTypeAsAnAdditionalType()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(SomeBase)));
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof(IHaveAllMemberTypes), typeof(SomeBase)));
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
 
-            Expect.Once.On(mock).Method("GetName").Will(Return.Value("AAA"));
+            Expect.Once.On(mock).Message("GetName").Will(Return.Value("AAA"));
             Assert.AreSame("AAA", (mock as SomeBase).GetName());
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void MockingMultipleClassesAsAdditionalTypesThrowsArgumentException()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.Implementing(typeof(SomeBase), typeof(SomeOtherClass)));
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof(SomeBase), typeof(SomeOtherClass)));
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void MockingAClassAsAnAdditionalTypeWhenAlreadyMockingAClassThrowsArgumentException()
         {
-            var mock = Mocks.NewMock<SomeBase>(DefinedAs.Implementing(typeof(IEnumerable), typeof(SomeOtherClass)));
+            var mock = Mocks.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof(IEnumerable), typeof(SomeOtherClass)));
         }
 
         [Test]
         public void TransparentMocksAllowImplementationOfClassTypeToBeCalled()
         {
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>()) as SomeBase;
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>()) as SomeBase;
 
             Assert.AreEqual(123, mock.GetSerialNumber());
         }
@@ -179,9 +179,9 @@ namespace NMock2.AcceptanceTests
         public void CallingAnInterfaceMethodOfATransparentMockWithAnExpectationSetWillSatisfyExpectation()
         {
             IEnumerator expected = new int[0].GetEnumerator();
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>());
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>());
 
-            Expect.Once.On(mock).Method("GetEnumerator").Will(Return.Value(expected));
+            Expect.Once.On(mock).Message("GetEnumerator").Will(Return.Value(expected));
 
             mock.GetEnumerator();
         }
@@ -192,7 +192,7 @@ namespace NMock2.AcceptanceTests
             // If we don't do this, the expectation exception will get rethrown in Teardown()
             SkipVerificationForThisTest();
 
-            var mock = Mocks.NewMock<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>());
+            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.OfStyle(MockStyle.Transparent).Implementing<SomeBase>());
 
             mock.GetEnumerator();
         }
@@ -206,7 +206,7 @@ namespace NMock2.AcceptanceTests
             Expect.Once.On(mock).Get["A"].Will(Return.Value(2));
             Expect.Once.On(mock).EventAdd("SomethingHappened");
             Expect.Once.On(mock).EventRemove("SomethingHappened");
-            Expect.Once.On(mock).Method("DoSomething").Will(Return.Value(3));
+            Expect.Once.On(mock).Message("DoSomething").Will(Return.Value(3));
             
             // Invoke members on mock and validate what we can
             mock.Value = 0;
@@ -226,7 +226,7 @@ namespace NMock2.AcceptanceTests
 
         private void AssertExpectationsCanBeSet(IAmASubclass mock)
         {
-            Expect.Once.On(mock).Method("DoSomethingElse").Will(Return.Value(4));
+            Expect.Once.On(mock).Message("DoSomethingElse").Will(Return.Value(4));
             
             Assert.AreEqual(4, mock.DoSomethingElse());
         }
@@ -234,7 +234,7 @@ namespace NMock2.AcceptanceTests
         private void AssertExpectationsCanBeSet(IEnumerable mock)
         {
             IEnumerator enumerator = new ArrayList().GetEnumerator();
-            Expect.Once.On(mock).Method("GetEnumerator").Will(Return.Value(enumerator));
+            Expect.Once.On(mock).Message("GetEnumerator").Will(Return.Value(enumerator));
 
             Assert.AreSame(enumerator, mock.GetEnumerator());
         }

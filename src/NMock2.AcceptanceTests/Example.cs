@@ -78,14 +78,14 @@ namespace NMock2.AcceptanceTests
 
             using (Mocks.Ordered)
             {
-                Expect.Once.On(joker).Method("Respond").With(Is.EqualTo("Who's there?"));
-                Expect.Once.On(joker).Method("Respond").With(Is.StringContaining(firstName) & Is.StringContaining("who?"));
+                Expect.Once.On(joker).Message("Respond").With(Is.EqualTo("Who's there?"));
+                Expect.Once.On(joker).Message("Respond").With(Is.StringContaining(firstName) & Is.StringContaining("who?"));
 
                 using (Mocks.Unordered)
                 {
-                    Expect.AtLeastOnce.On(joker).Method("Ha");
-                    Expect.AtLeastOnce.On(joker).Method("Ho");
-                    Expect.AtLeastOnce.On(joker).Method("Hee");
+                    Expect.AtLeastOnce.On(joker).Message("Ha");
+                    Expect.AtLeastOnce.On(joker).Message("Ho");
+                    Expect.AtLeastOnce.On(joker).Message("Hee");
                 }
             }
             
@@ -104,15 +104,15 @@ namespace NMock2.AcceptanceTests
 
             using (Mocks.Ordered)
             {
-                Expect.Once.On(joker).Method("Respond").With(Is.EqualTo("Who's there?"));
-                Expect.Once.On(joker).Method("Respond").With(Is.StringContaining(firstName) & Is.StringContaining("who?"));
+                Expect.Once.On(joker).Message("Respond").With(Is.EqualTo("Who's there?"));
+                Expect.Once.On(joker).Message("Respond").With(Is.StringContaining(firstName) & Is.StringContaining("who?"));
 
                 using (Mocks.Unordered)
                 {
                     // I use directly On instead of AtLeastOnce.On
-                    Expect.On(joker).Method("Ha");
-                    Expect.On(joker).Method("Ho");
-                    Expect.On(joker).Method("Hee");
+                    Expect.On(joker).Message("Ha");
+                    Expect.On(joker).Message("Ho");
+                    Expect.On(joker).Message("Hee");
                 }
             }
 

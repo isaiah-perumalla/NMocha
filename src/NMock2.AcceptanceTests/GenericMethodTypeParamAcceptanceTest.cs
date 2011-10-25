@@ -34,13 +34,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithSpecifiedTypeParameterOnInterface()
         {
-            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithSpecifiedTypeParameterOnClass()
         {
-            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithSpecifiedTypeParameter(IGenericHelloWorld genericHelloWorld)
@@ -48,9 +48,9 @@ namespace NMock2.AcceptanceTests
             const int iValue = 3;
             const string sValue = "test";
 
-            Stub.On(genericHelloWorld).Method("Find", typeof(int)).With().Will(Return.Value(iValue));
-            Stub.On(genericHelloWorld).Method("Find", typeof(string)).Will(Return.Value(sValue));
-            Stub.On(genericHelloWorld).Method("Find", typeof(IHelloWorld), typeof(bool)).Will(Return.Value(Mocks.NewMock<IHelloWorld>()));
+            Stub.On(genericHelloWorld).Message("Find", typeof(int)).With().Will(Return.Value(iValue));
+            Stub.On(genericHelloWorld).Message("Find", typeof(string)).Will(Return.Value(sValue));
+            Stub.On(genericHelloWorld).Message("Find", typeof(IHelloWorld), typeof(bool)).Will(Return.Value(Mocks.NewInstanceOfRole<IHelloWorld>()));
 
             string s = genericHelloWorld.Find<string>();
             int i = genericHelloWorld.Find<int>();
@@ -64,20 +64,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithUnspecifiedTypeParameterOnInterface()
         {
-            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithUnspecifiedTypeParameterOnClass()
         {
-            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithUnspecifiedTypeParameter(IGenericHelloWorld helloWorld)
         {
             const int iValue = 3;
 
-            Stub.On(helloWorld).Method("Find").Will(Return.Value(iValue));
+            Stub.On(helloWorld).Message("Find").Will(Return.Value(iValue));
 
             int i = helloWorld.Find<int>();
 
@@ -87,18 +87,18 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void CanMockGenericMethodWithMultipleTypeParametersOnInterface()
         {
-            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewMock<IGenericHelloWorld>());
+            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithMultipleTypeParametersOnClass()
         {
-            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewMock<GenericHelloWorld>());
+            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertCanMockGenericMethodWithMultipleTypeParameters(IGenericHelloWorld genericHelloWorld)
         {
-            Stub.On(genericHelloWorld).Method("Cast", typeof(int), typeof(string)).With(3).Will(Return.Value("three"));
+            Stub.On(genericHelloWorld).Message("Cast", typeof(int), typeof(string)).With(3).Will(Return.Value("three"));
 
             string s = genericHelloWorld.Cast<int, string>(3);
 
@@ -109,13 +109,13 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void HasCorrectErrorMessageOnUnexpectedInvocationOnInterface()
         {
-            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewMock<IGenericHelloWorld>());
+            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void HasCorrectErrorMessageOnUnexpectedInvocationOnClass()
         {
-            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewMock<GenericHelloWorld>());
+            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertHasCorrectErrorMessageOnUnexpectedInvocation(IGenericHelloWorld helloWorld)
@@ -137,20 +137,20 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void HasCorrectErrorMessageOnNotMetExpectationOnInterface()
         {
-            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewMock<IGenericHelloWorld>());
+            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewInstanceOfRole<IGenericHelloWorld>());
         }
 
         [Test, Class]
         public void HasCorrectErrorMessageOnNotMetExpectationOnClass()
         {
-            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewMock<GenericHelloWorld>());
+            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewInstanceOfRole<GenericHelloWorld>());
         }
 
         private void AssertHasCorrectErrorMessageOnNotMetExpectation(IGenericHelloWorld helloWorld)
         {
             SkipVerificationForThisTest();
 
-            Expect.Once.On(helloWorld).Method("Find", typeof(int)).Will(Return.Value(3));
+            Expect.Once.On(helloWorld).Message("Find", typeof(int)).Will(Return.Value(3));
 
             try
             {

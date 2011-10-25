@@ -46,12 +46,12 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(NMock2.Internal.ExpectationException))]
         public void VerifyFailure()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
-            Expect.Between(2,4).On(helloWorld).Method("Ask").With("What color is the fish?")
+            Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
+            Expect.Between(2,4).On(helloWorld).Message("Ask").With("What color is the fish?")
                 .Will(Return.Value("purple"));
-            Expect.AtLeast(1).On(helloWorld).Method("Ask").With("How big is the fish?")
+            Expect.AtLeast(1).On(helloWorld).Message("Ask").With("How big is the fish?")
                 .Will(Throw.Exception(new InvalidOperationException("stop asking about the fish!")));
 
             helloWorld.Hello();
@@ -63,12 +63,12 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(NMock2.Internal.ExpectationException))]
         public void UnexpectedInvocation()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
-            Expect.Between(2,4).On(helloWorld).Method("Ask").With("What color is the fish?")
+            Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
+            Expect.Between(2,4).On(helloWorld).Message("Ask").With("What color is the fish?")
                 .Will(Return.Value("purple"));
-            Expect.AtLeast(1).On(helloWorld).Method("Ask").With("How big is the fish?")
+            Expect.AtLeast(1).On(helloWorld).Message("Ask").With("How big is the fish?")
                 .Will(Throw.Exception(new InvalidOperationException("stop asking about the fish!")));
             
             helloWorld.Hello();

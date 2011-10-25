@@ -36,14 +36,14 @@ namespace NMock2.AcceptanceTests
         {
             base.Setup();
 
-            helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
         }
         
         [Test]
         public void DoesNotEnforceTheOrderOfCallsByDefault()
         {
-            Expect.Once.On(helloWorld).Method("Hello");
-            Expect.Once.On(helloWorld).Method("Goodbye");
+            Expect.Once.On(helloWorld).Message("Hello");
+            Expect.Once.On(helloWorld).Message("Goodbye");
 
             helloWorld.Goodbye();
             helloWorld.Hello();
@@ -52,8 +52,8 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void UnorderedExpectationsMatchInOrderOfSpecification()
         {
-            Expect.Once.On(helloWorld).Method("Ask").With(Is.Anything).Will(Return.Value("1"));
-            Expect.Once.On(helloWorld).Method("Ask").With(Is.Anything).Will(Return.Value("2"));
+            Expect.Once.On(helloWorld).Message("Ask").With(Is.Anything).Will(Return.Value("1"));
+            Expect.Once.On(helloWorld).Message("Ask").With(Is.Anything).Will(Return.Value("2"));
 
             Assert.AreEqual("1", helloWorld.Ask("ignored"), "first call");
             Assert.AreEqual("2", helloWorld.Ask("ignored"), "second call");
@@ -66,8 +66,8 @@ namespace NMock2.AcceptanceTests
             
             using(Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Hello");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
             
             helloWorld.Goodbye();
@@ -79,8 +79,8 @@ namespace NMock2.AcceptanceTests
         {
             using(Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Hello");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
             
             helloWorld.Hello();
@@ -92,13 +92,13 @@ namespace NMock2.AcceptanceTests
         {
             using(Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
+                Expect.Once.On(helloWorld).Message("Hello");
                 using (Mocks.Unordered)
                 {
-                    Expect.Once.On(helloWorld).Method("Umm");
-                    Expect.Once.On(helloWorld).Method("Err");
+                    Expect.Once.On(helloWorld).Message("Umm");
+                    Expect.Once.On(helloWorld).Message("Err");
                 }
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
 
             helloWorld.Hello();
@@ -114,13 +114,13 @@ namespace NMock2.AcceptanceTests
             
             using (Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
+                Expect.Once.On(helloWorld).Message("Hello");
                 using(Mocks.Unordered)
                 {
-                    Expect.Once.On(helloWorld).Method("Umm");
-                    Expect.Once.On(helloWorld).Method("Err");
+                    Expect.Once.On(helloWorld).Message("Umm");
+                    Expect.Once.On(helloWorld).Message("Err");
                 }
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
 
             helloWorld.Err();
@@ -136,13 +136,13 @@ namespace NMock2.AcceptanceTests
             
             using(Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
+                Expect.Once.On(helloWorld).Message("Hello");
                 using(Mocks.Unordered)
                 {
-                    Expect.Once.On(helloWorld).Method("Umm");
-                    Expect.Once.On(helloWorld).Method("Err");
+                    Expect.Once.On(helloWorld).Message("Umm");
+                    Expect.Once.On(helloWorld).Message("Err");
                 }
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
 
             helloWorld.Hello();
@@ -156,9 +156,9 @@ namespace NMock2.AcceptanceTests
         {
             using (Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
-                Expect.AtLeastOnce.On(helloWorld).Method("Err");
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Hello");
+                Expect.AtLeastOnce.On(helloWorld).Message("Err");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
             
             helloWorld.Hello();
@@ -175,8 +175,8 @@ namespace NMock2.AcceptanceTests
             
             using(Mocks.Ordered)
             {
-                Expect.Once.On(helloWorld).Method("Hello");
-                Expect.Once.On(helloWorld).Method("Goodbye");
+                Expect.Once.On(helloWorld).Message("Hello");
+                Expect.Once.On(helloWorld).Message("Goodbye");
             }
             
             helloWorld.Hello();

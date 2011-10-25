@@ -40,7 +40,7 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IInterfaceToMock mockInterfaceToMock = Mocks.NewMock<IInterfaceToMock>();
+            IInterfaceToMock mockInterfaceToMock = Mocks.NewInstanceOfRole<IInterfaceToMock>();
             Expect.Once.On(mockInterfaceToMock).EventRemove("Blah", Is.Anything);
             Fire.Event("Blah").On(mockInterfaceToMock).With(); //This call fails...
         }

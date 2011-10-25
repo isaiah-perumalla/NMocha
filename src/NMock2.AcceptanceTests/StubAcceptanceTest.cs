@@ -28,17 +28,17 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void StubsDoNotHaveToBeCalled()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Stub.On(helloWorld).Method("Hello").WithAnyArguments();
+            Stub.On(helloWorld).Message("Hello").WithAnyArguments();
         }
         
         [Test]
         public void StubsCanBeCalledAnyNumberOfTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Stub.On(helloWorld).Method("Hello").WithAnyArguments();
+            Stub.On(helloWorld).Message("Hello").WithAnyArguments();
             
             for (int i = 0; i < ANY_NUMBER; i++) helloWorld.Hello();
         }
@@ -46,10 +46,10 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void StubsMatchArgumentsAndPerformActionsJustLikeAnExpectation()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Stub.On(helloWorld).Method("Ask").With("Name").Will(Return.Value("Bob"));
-            Stub.On(helloWorld).Method("Ask").With("Age").Will(Return.Value("30"));
+            Stub.On(helloWorld).Message("Ask").With("Name").Will(Return.Value("Bob"));
+            Stub.On(helloWorld).Message("Ask").With("Age").Will(Return.Value("30"));
             
             for (int i = 0; i < ANY_NUMBER; i++)
             {

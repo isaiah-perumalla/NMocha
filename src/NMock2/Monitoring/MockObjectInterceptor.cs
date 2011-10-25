@@ -21,9 +21,8 @@ namespace NMock2.Monitoring
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Text;
     using Castle.Core.Interceptor;
-    using NMock2.Internal;
+    using Internal;
 
     internal class MockObjectInterceptor : MockObject, IInterceptor
     {

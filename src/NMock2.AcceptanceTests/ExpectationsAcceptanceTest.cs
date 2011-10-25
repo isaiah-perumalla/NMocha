@@ -31,9 +31,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
             
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
 
             Mocks.VerifyAllExpectationsHaveBeenMet();
         }
@@ -41,9 +41,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedOnceAndCalled()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
             
             helloWorld.Hello();
         }
@@ -53,9 +53,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
             
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Once.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Once.On(helloWorld).Message("Hello").WithNoArguments();
 
             helloWorld.Hello();
             helloWorld.Hello();
@@ -64,8 +64,8 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void TestShouldPassIfExpectedExactlyNTimesAndCalledNTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
-            Expect.Exactly(N).On(helloWorld).Method("Hello").WithNoArguments();
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
+            Expect.Exactly(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N; i++) helloWorld.Hello();
         }
@@ -75,8 +75,8 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
-            Expect.Exactly(N).On(helloWorld).Method("Hello").WithNoArguments();
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
+            Expect.Exactly(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N+1; i++) helloWorld.Hello();
 
@@ -88,8 +88,8 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
-            Expect.Exactly(N).On(helloWorld).Method("Hello").WithNoArguments();
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
+            Expect.Exactly(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N - 1; i++) helloWorld.Hello();
 
@@ -101,9 +101,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.AtLeast(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtLeast(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N-1; i++) helloWorld.Hello();
 
@@ -113,9 +113,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.AtLeast(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtLeast(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N; i++) helloWorld.Hello();
         }
@@ -123,9 +123,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.AtLeast(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtLeast(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N+1; i++) helloWorld.Hello();
         }
@@ -133,9 +133,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedAtMostNTimesAndCalledLessThanNTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.AtMost(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtMost(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N-1; i++) helloWorld.Hello();
         }
@@ -143,9 +143,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedAtMostNTimesAndCalledNTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.AtMost(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtMost(N).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N; i++) helloWorld.Hello();
         }
@@ -155,9 +155,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.AtMost(N).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.AtMost(N).On(helloWorld).Message("Hello").WithNoArguments();
             
             for (int i = 0; i < N+1; i++) helloWorld.Hello();
         }
@@ -167,9 +167,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Between(N,M).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Between(N,M).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N-1; i++) helloWorld.Hello();
 
@@ -181,9 +181,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Between(N,M).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Between(N,M).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < M; i++) helloWorld.Hello();
             helloWorld.Hello();
@@ -192,9 +192,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Between(N,M).On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Between(N,M).On(helloWorld).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < (N+M)/2; i++) helloWorld.Hello();
         }
@@ -204,9 +204,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
             
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Never.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Never.On(helloWorld).Message("Hello").WithNoArguments();
 
             helloWorld.Hello();
         }
@@ -214,9 +214,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodNeverExpectedIsNeverCalled()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Never.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Never.On(helloWorld).Message("Hello").WithNoArguments();
         }
         
         [Test, ExpectedException(typeof(ExpectationException))]
@@ -224,9 +224,9 @@ namespace NMock2.AcceptanceTests
         {
             SkipVerificationForThisTest();
 
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
-            Expect.Never.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.Never.On(helloWorld).Message("Hello").WithNoArguments();
             
             helloWorld.Hello();
         }
@@ -234,9 +234,9 @@ namespace NMock2.AcceptanceTests
         [Test]
         public void PassesTestIfMethodUsesDefaultExpectation()
         {
-            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld)Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.On(helloWorld).Method("Hello").WithNoArguments();
+            Expect.On(helloWorld).Message("Hello").WithNoArguments();
 
             helloWorld.Hello();
         }
@@ -255,7 +255,7 @@ namespace NMock2.AcceptanceTests
         [Ignore("Feature for future release: mock hashcode.")]
         public void MockHash()
         {
-            IHelloWorld helloWorld = Mocks.NewMock<IHelloWorld>();
+            IHelloWorld helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
 
             int i = helloWorld.GetHashCode();
 

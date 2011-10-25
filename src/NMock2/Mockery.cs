@@ -167,7 +167,7 @@ namespace NMock2
         /// <param name="mockedType">The type to mock.</param>
         /// <param name="definition">An <see cref="IMockDefinition"/> to create the mock from.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public object NewMock(Type mockedType, IMockDefinition definition)
+        public object NewInstanceOfRole(Type mockedType, IMockDefinition definition)
         {
             return definition.Create(mockedType, this, this.currentMockObjectFactory);
         }
@@ -179,9 +179,9 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public object NewMock(Type mockedType, params object[] constructorArgs)
+        public object NewInstanceOfRole(Type mockedType, params object[] constructorArgs)
         {
-            return this.NewMock(mockedType, DefinedAs.WithArgs(constructorArgs));
+            return this.NewInstanceOfRole(mockedType, DefinedAs.WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -192,9 +192,9 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A named dynamic mock for the specified type.</returns>
-        public object NewMock(Type mockedType, MockStyle mockStyle, params object[] constructorArgs)
+        public object NewInstanceOfRole(Type mockedType, MockStyle mockStyle, params object[] constructorArgs)
         {
-            return this.NewMock(mockedType, DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole(mockedType, DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace NMock2
         /// <typeparam name="TMockedType">The type to mock.</typeparam>
         /// <param name="definition">An <see cref="IMockDefinition"/> to create the mock from.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewMock<TMockedType>(IMockDefinition definition)
+        public TMockedType NewInstanceOfRole<TMockedType>(IMockDefinition definition)
         {
             return (TMockedType)definition.Create(typeof(TMockedType), this, this.currentMockObjectFactory);
         }
@@ -215,9 +215,9 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewMock<TMockedType>(params object[] constructorArgs)
+        public TMockedType NewInstanceOfRole<TMockedType>(params object[] constructorArgs)
         {
-            return this.NewMock<TMockedType>(DefinedAs.WithArgs(constructorArgs));
+            return this.NewInstanceOfRole<TMockedType>(DefinedAs.WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -228,9 +228,9 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewMock<TMockedType>(MockStyle mockStyle, params object[] constructorArgs)
+        public TMockedType NewInstanceOfRole<TMockedType>(MockStyle mockStyle, params object[] constructorArgs)
         {
-            return this.NewMock<TMockedType>(DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole<TMockedType>(DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace NMock2
         /// <returns>A named mock.</returns>
         public object NewNamedMock(Type mockedType, string name, params object[] constructorArgs)
         {
-            return this.NewMock(mockedType, DefinedAs.Named(name).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole(mockedType, DefinedAs.Named(name).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace NMock2
         /// <returns>A named mock.</returns>
         public object NewNamedMock(Type mockedType, string name, MockStyle mockStyle, params object[] constructorArgs)
         {
-            return this.NewMock(mockedType, DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole(mockedType, DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace NMock2
         /// <returns>A named mock.</returns>
         public TMockedType NewNamedMock<TMockedType>(string name, params object[] constructorArgs)
         {
-            return this.NewMock<TMockedType>(DefinedAs.Named(name).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole<TMockedType>(DefinedAs.Named(name).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace NMock2
         /// <returns>A named mock.</returns>
         public TMockedType NewNamedMock<TMockedType>(string name, MockStyle mockStyle, params object[] constructorArgs)
         {
-            return this.NewMock<TMockedType>(DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
+            return this.NewInstanceOfRole<TMockedType>(DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
         }
 
         /// <summary>

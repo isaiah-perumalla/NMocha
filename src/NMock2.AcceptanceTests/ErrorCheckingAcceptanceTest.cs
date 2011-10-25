@@ -40,29 +40,29 @@ namespace NMock2.AcceptanceTests
         public void CannotExpectAMethodOnAnRealObject()
         {
             object realObject = new object();
-            Expect.Once.On(realObject).Method(Is.Anything);
+            Expect.Once.On(realObject).Message(Is.Anything);
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectAMethodThatDoesNotExistInTheMockedType()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.Once.On(helloWorld).Method("NonexistentMethod");
+            Expect.Once.On(helloWorld).Message("NonexistentMethod");
         }
         
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectAMethodWithAnInvalidName()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
-            Expect.Once.On(helloWorld).Method("Invalid Name!");
+            Expect.Once.On(helloWorld).Message("Invalid Name!");
         }
 
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectGetOfAnInvalidProperty()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
             Expect.Once.On(helloWorld).GetProperty("NonexistentProperty");
         }
@@ -70,7 +70,7 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectSetOfAnInvalidProperty()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
             Expect.Once.On(helloWorld).SetProperty("NonexistentProperty").To("something");
         }
@@ -78,7 +78,7 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectGetOfIndexerIfNoIndexerInMockedType()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
             Expect.Once.On(helloWorld).Get["arg"].Will(Return.Value("something"));
         }
@@ -86,7 +86,7 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectSetOfIndexerIfNoIndexerInMockedType()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
             Expect.Once.On(helloWorld).Set["arg"].To("something");
         }
@@ -95,7 +95,7 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectAddToNonexistentEvent()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
             
             Expect.Once.On(helloWorld).EventAdd("NonexistentEvent");
         }
@@ -103,7 +103,7 @@ namespace NMock2.AcceptanceTests
         [Test, ExpectedException(typeof(ArgumentException))]
         public void CannotExpectRemoveFromNonexistentEvent()
         {
-            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewMock(typeof(IHelloWorld));
+            IHelloWorld helloWorld = (IHelloWorld) Mocks.NewInstanceOfRole(typeof(IHelloWorld));
 
             Expect.Once.On(helloWorld).EventRemove("NonexistentEvent", Is.Anything);
         }
@@ -117,9 +117,9 @@ namespace NMock2.AcceptanceTests
 		   "You have to set the return value for method 'IsPrime' on 'IMyHelloWorld' mock.")]
 		public void CorrectMessageWhenReturnValueNotSet()
 		{
-			IMyHelloWorld myHelloWorld = (IMyHelloWorld)Mocks.NewMock(typeof(IMyHelloWorld));
+			IMyHelloWorld myHelloWorld = (IMyHelloWorld)Mocks.NewInstanceOfRole(typeof(IMyHelloWorld));
 
-			Expect.Once.On(myHelloWorld).Method("IsPrime");//.Will(Return.Value(true));//, new SetNamedParameterAction("number", 3)); //.With();
+			Expect.Once.On(myHelloWorld).Message("IsPrime");//.Will(Return.Value(true));//, new SetNamedParameterAction("number", 3)); //.With();
 
 			int i = 3;
 			bool result = myHelloWorld.IsPrime(i);
@@ -128,9 +128,9 @@ namespace NMock2.AcceptanceTests
 		[Test]
 		public void NullReturnValue()
 		{
-			IHelloWorld helloWorld = Mocks.NewMock<IHelloWorld>();
+			IHelloWorld helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
 
-			Expect.Once.On(helloWorld).Method("Ask").Will(Return.Value(null));
+			Expect.Once.On(helloWorld).Message("Ask").Will(Return.Value(null));
 
 			string s = helloWorld.Ask("What?");
 
@@ -141,9 +141,9 @@ namespace NMock2.AcceptanceTests
 		[ExpectedException(typeof(ArgumentException))]
 		public void UnnecessaryReturnValue()
 		{
-			IHelloWorld helloWorld = Mocks.NewMock<IHelloWorld>();
+			IHelloWorld helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
 
-			Expect.Once.On(helloWorld).Method("Hello").Will(Return.Value("What?"));
+			Expect.Once.On(helloWorld).Message("Hello").Will(Return.Value("What?"));
 
 			helloWorld.Hello();
 		}
@@ -153,10 +153,10 @@ namespace NMock2.AcceptanceTests
 		[Test]
 		public void WrongReturnType()
 		{
-			IOperator o = Mocks.NewMock<IOperator>();
-			IBase b = Mocks.NewMock<IBase>();
+			IOperator o = Mocks.NewInstanceOfRole<IOperator>();
+			IBase b = Mocks.NewInstanceOfRole<IBase>();
 
-			Expect.Once.On(o).Method("Get").Will(Return.Value(b));
+			Expect.Once.On(o).Message("Get").Will(Return.Value(b));
 
 			try
 			{
@@ -191,7 +191,7 @@ namespace NMock2.AcceptanceTests
 		   "unexpected invocation of eventProvider.AnEvent += <System.EventHandler>\r\nExpected:\r\n")]
 		public void UnexpectedEventRegistrationHasUnderstandableMessage()
 		{
-			IEventProvider eventProvider = Mocks.NewMock<IEventProvider>();
+			IEventProvider eventProvider = Mocks.NewInstanceOfRole<IEventProvider>();
 
 			eventProvider.AnEvent += delegate { };
 		}
@@ -201,7 +201,7 @@ namespace NMock2.AcceptanceTests
 		   "unexpected invocation of eventProvider.CustomEvent += <System.EventHandler`1[NMock2.CustomEventArgs]>\r\nExpected:\r\n")]
 		public void UnexpectedEventRegistrationHasUnderstandableMessageWithCustomEventArgs()
 		{
-			IEventProvider eventProvider = Mocks.NewMock<IEventProvider>();
+			IEventProvider eventProvider = Mocks.NewInstanceOfRole<IEventProvider>();
 
 			eventProvider.CustomEvent += delegate { };
 		}
@@ -213,7 +213,7 @@ namespace NMock2.AcceptanceTests
 		   "Interfaces must not contain a declaration for ToString().")]
 		public void MockingInterfaceWithToStringMethodThrowsException()
 		{
-            Mocks.NewMock<InterfaceWithToStringMethod>();
+            Mocks.NewInstanceOfRole<InterfaceWithToStringMethod>();
 		}
 
 		public interface InterfaceWithToStringMethod

@@ -53,7 +53,7 @@ namespace NMock2.Internal
         [Test]
         public void MockStyleForStub()
         {
-            IMockObject mock = this.mockery.NewMock<IMockObject>();
+            IMockObject mock = this.mockery.NewInstanceOfRole<IMockObject>();
 
             this.testee[mock] = MockStyle.Stub;
 
@@ -67,7 +67,7 @@ namespace NMock2.Internal
         [Test]
         public void MockStyleForStubAndType()
         {
-            IMockObject mock = this.mockery.NewMock<IMockObject>();
+            IMockObject mock = this.mockery.NewInstanceOfRole<IMockObject>();
 
             this.testee[mock, typeof(IExpectException)] = MockStyle.Stub;
 
@@ -80,7 +80,7 @@ namespace NMock2.Internal
         [Test]
         public void RequestNonExistingItem()
         {
-            IMockObject mock = this.mockery.NewMock<IMockObject>();
+            IMockObject mock = this.mockery.NewInstanceOfRole<IMockObject>();
 
             Assert.IsNull(this.testee[mock, typeof(IExpectException)]);
         }
@@ -91,7 +91,7 @@ namespace NMock2.Internal
         [Test]
         public void Override()
         {
-            IMockObject mock = this.mockery.NewMock<IMockObject>();
+            IMockObject mock = this.mockery.NewInstanceOfRole<IMockObject>();
 
             this.testee[mock] = MockStyle.Transparent;
             this.testee[mock, typeof(IExpectException)] = MockStyle.Stub;
