@@ -519,17 +519,13 @@ namespace NMock2
         /// <param name="invocation">The invocation.</param>
         private void FailUnexpectedInvocation(Invocation invocation)
         {
-            DescriptionWriter writer = new DescriptionWriter();
+            var writer = new DescriptionWriter();
             writer.Write("unexpected invocation of ");
             invocation.DescribeTo(writer);
-            if(stateMachines.Any())
-            {
-                writer.Write("\nstates:\n");
-                stateMachines.ForEach(stateMachine => stateMachine.DescribeTo(writer));
-            }
+            
             writer.WriteLine();
             this.expectations.DescribeActiveExpectationsTo(writer);
-
+            DescribeStatesOn(writer);
             // try catch to get exception with stack trace.
             try
             {
@@ -544,6 +540,14 @@ namespace NMock2
                 }
 
                 throw;
+            }
+        }
+
+        private void DescribeStatesOn(DescriptionWriter writer) {
+            if (stateMachines.Any())
+            {
+                writer.Write("\nstates:\n");
+                stateMachines.ForEach(stateMachine => stateMachine.DescribeTo(writer));
             }
         }
 

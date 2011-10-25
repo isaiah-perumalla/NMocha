@@ -23,7 +23,7 @@ namespace NMock2.Syntax
     /// <summary>
     /// Syntax for defining expected arguments of a method call.
     /// </summary>
-    public interface IArgumentSyntax : IStateSyntax, IMatchSyntax
+    public interface IArgumentSyntax :  IMatchSyntax
     {
         /// <summary>
         /// Defines the arguments that are expected on the method call.

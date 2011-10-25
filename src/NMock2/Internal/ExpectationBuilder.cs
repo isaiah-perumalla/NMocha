@@ -25,7 +25,7 @@ namespace NMock2.Internal
     using Syntax;
 
     public class ExpectationBuilder : 
-        IReceiverSyntax, IMethodSyntax, IArgumentSyntax, IStateSyntax {
+        IReceiverSyntax, IMethodSyntax, IArgumentSyntax {
         private BuildableExpectation expectation;
         private IMockObject mockObject;
 
@@ -314,12 +314,14 @@ namespace NMock2.Internal
         }
 
        
-        public void When(IStatePredicate predicate) {
+        public IStateSyntax When(IStatePredicate predicate) {
             this.expectation.AddOrderingConstraint(new InStateOrderingConstraint(predicate));
+            return this;
         }
 
-        public void Then(State state) {
-            this.expectation.AddSideEffect(state.Activate);
+        public IStateSyntax Then(State state) {
+            this.expectation.AddSideEffect(new ChangeStateEffect(state));
+            return this;
 
         }
 
@@ -343,7 +345,7 @@ namespace NMock2.Internal
         /// <returns>
         /// Returns the comment syntax defined after will.
         /// </returns>
-        public ICommentSyntax Will(params IAction[] actions)
+        public IStateSyntax Will(params IAction[] actions)
         {
             foreach (IAction action in actions)
             {

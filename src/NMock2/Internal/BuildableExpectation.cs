@@ -45,7 +45,7 @@ namespace NMock2.Internal
         private ArrayList extraMatchers = new ArrayList();
         private ArrayList actions = new ArrayList();
         private readonly List<IOrderingConstraint> orderingConstraints = new List<IOrderingConstraint>();
-        private readonly List<Action> sideEffects = new List<Action>();
+        private readonly List<ISideEffect> sideEffects = new List<ISideEffect>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BuildableExpectation"/> class.
@@ -145,7 +145,7 @@ namespace NMock2.Internal
             {
                 action.Invoke(invocation);
             }
-            sideEffects.ForEach(sideEffect => sideEffect());
+            sideEffects.ForEach(sideEffect => sideEffect.Apply());
         }
 
         public void DescribeActiveExpectationsTo(TextWriter writer)
@@ -259,7 +259,8 @@ namespace NMock2.Internal
                 }
             }
             DescribeOrderingConstraintsOn(writer);
-
+            sideEffects.ForEach(sideEffect => sideEffect.DescribeTo(writer));
+            
 
             writer.Write(" [called ");
             writer.Write(this.callCount);
@@ -288,8 +289,12 @@ namespace NMock2.Internal
             this.orderingConstraints.Add(orderingConstraint);
         }
 
-        public void AddSideEffect(Action sideEffect) {
+        public void AddSideEffect(ISideEffect sideEffect) {
             this.sideEffects.Add(sideEffect);
         }
+    }
+
+    public interface ISideEffect : ISelfDescribing {
+        void Apply();
     }
 }

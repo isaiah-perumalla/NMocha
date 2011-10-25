@@ -16,18 +16,19 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using NMock2.Internal;
+
 namespace NMock2.Syntax
 {
     /// <summary>
     /// Syntax for defining actions.
     /// </summary>
-    public interface IActionSyntax : ICommentSyntax
-    {
+    public interface IActionSyntax : IStateSyntax    {
         /// <summary>
         /// Defines what will happen.
         /// </summary>
         /// <param name="actions">The actions to take.</param>
         /// <returns>Returns the comment syntax defined after will.</returns>
-        ICommentSyntax Will(params IAction[] actions);
+        IStateSyntax Will(params IAction[] actions);
     }
 }

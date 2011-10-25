@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using NMock2.Internal;
 
 namespace NMock2 {
     public class StateMachine : IStates {
@@ -19,7 +20,7 @@ namespace NMock2 {
         }
 
         public State Is(string state) {
-            return new State(this, state, x => x.Equals(this.currentState));
+            return State.IsIn(state, this);
         }
 
         public void StartAs(string s) {
@@ -27,7 +28,7 @@ namespace NMock2 {
         }
 
         public IStatePredicate IsNot(string state) {
-            return new State(this, state, x => !x.Equals(this.currentState));
+            return new NotPredicate(name, IsCurrentStateEquals, state);
         }
 
         public bool IsCurrentStateEquals(string s) {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace NMock2 {
     public class State : IStatePredicate
@@ -7,16 +6,15 @@ namespace NMock2 {
         
         private readonly StateMachine stateMachine;
         private readonly string state;
-        private readonly Predicate<string> statePredicate;
 
-        public State(StateMachine stateMachine, string state, Predicate<string > statePredicate) {
+        public State(StateMachine stateMachine, string state) {
             this.stateMachine = stateMachine;
             this.state = state;
-            this.statePredicate = statePredicate;
+            
         }
 
         public bool IsActive() {
-            return this.statePredicate(state);
+            return this.stateMachine.IsCurrentStateEquals(state);
         }
 
         public void Activate() {
@@ -27,6 +25,10 @@ namespace NMock2 {
             writer.Write(stateMachine.Name);
             writer.Write(" is ");
             writer.Write(this.state);
+        }
+
+        public static State IsIn(string s, StateMachine stateMachine) {
+            return new State(stateMachine, s);
         }
     }
 }
