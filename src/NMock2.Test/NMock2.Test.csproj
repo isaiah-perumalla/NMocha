@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EDBAD353-CCD6-41FE-BB87-B0995078631A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NMock2</RootNamespace>
+    <AssemblyName>NMock2.Test</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Actions\CollectActionTest.cs" />
+    <Compile Include="Actions\FireActionTest.cs" />
+    <Compile Include="Actions\ResultSynthesizerTest.cs" />
+    <Compile Include="Actions\ReturnActionTest.cs" />
+    <Compile Include="Actions\ReturnCloneActionTest.cs" />
+    <Compile Include="Actions\SetIndexedParameterActionTest.cs" />
+    <Compile Include="Actions\SetNamedParameterActionTest.cs" />
+    <Compile Include="Actions\ThrowActionTest.cs" />
+    <Compile Include="AssertDescription.cs" />
+    <Compile Include="Internal\BuildableExpectationTest.cs" />
+    <Compile Include="Internal\CompositeTypeTest.cs" />
+    <Compile Include="Internal\DescriptionWriterTest.cs" />
+    <Compile Include="Internal\InStateOrderingConstraintTest.cs" />
+    <Compile Include="Internal\StateMachineTest.cs" />
+    <Compile Include="Internal\StubMockStyleDictionaryTest.cs" />
+    <Compile Include="IsTest.cs" />
+    <Compile Include="Matchers\AlwaysMatcherTest.cs" />
+    <Compile Include="Matchers\AndMatcherTest.cs" />
+    <Compile Include="Matchers\ArgumentsMatcherTest.cs" />
+    <Compile Include="Matchers\ComparisonMatcherTest.cs" />
+    <Compile Include="Matchers\DescriptionOverrideTest.cs" />
+    <Compile Include="Matchers\ElementMatcherTest.cs" />
+    <Compile Include="Matchers\EqualMatcherTest.cs" />
+    <Compile Include="Matchers\FieldMatcherTest.cs" />
+    <Compile Include="Matchers\GenericMatcherTest.cs" />
+    <Compile Include="Matchers\MatcherWithDescription.cs" />
+    <Compile Include="Matchers\MethodNameMatcherTest.cs" />
+    <Compile Include="Matchers\MockMatcher.cs" />
+    <Compile Include="Matchers\NotMatcherTest.cs" />
+    <Compile Include="Matchers\NullMatcherTest.cs" />
+    <Compile Include="Matchers\OrMatcherTest.cs" />
+    <Compile Include="Matchers\PropertyMatcherTest.cs" />
+    <Compile Include="Matchers\SameMatcherTest.cs" />
+    <Compile Include="Matchers\StringContainsMatcherTest.cs" />
+    <Compile Include="Matchers\ToStringMatcherTest.cs" />
+    <Compile Include="Matchers\TypeMatcherTest.cs" />
+    <Compile Include="MockeryTest.cs" />
+    <Compile Include="Monitoring\InvocationSemanticsTest.cs" />
+    <Compile Include="Monitoring\InvocationTest.cs" />
+    <Compile Include="Monitoring\InvokerTest.cs" />
+    <Compile Include="Monitoring\MethodInfoStub.cs" />
+    <Compile Include="Monitoring\MockInvokable.cs" />
+    <Compile Include="Monitoring\MultiInterfaceFactoryTest.cs" />
+    <Compile Include="Monitoring\ParameterInfoStub.cs" />
+    <Compile Include="Monitoring\ParameterListTest.cs" />
+    <Compile Include="Monitoring\ProxiedObjectIdentityTest.cs" />
+    <Compile Include="Monitoring\ProxyInvokableAdapterTest.cs" />
+    <Compile Include="NamedObject.cs" />
+    <Compile Include="VerifyTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMock2\NMock2.csproj">
+      <Project>{79C78732-B34C-4429-B678-C8ADE5FB5BE1}</Project>
+      <Name>NMock2</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

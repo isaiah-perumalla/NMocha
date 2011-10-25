@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<project name="NMock2" default="build" xmlns="http://nant.sf.net/release/0.85/nant.xsd">
+    <property name="nant.settings.currentframework" value="net-2.0" />
+    <!-- if a property gets set outside of init, the property should not be changed back in the init. -->
+    <property name="set_from_outside" value="false" />
+    <property name="initialized" value="false" />
+    <property name="TortoiseProc.exe" value="${environment::get-folder-path('ProgramFiles')}\TortoiseSVN\bin\TortoiseProc.exe"/>
+    <property name="nunit.exe" value="${environment::get-folder-path('ProgramFiles')}\NUnit 2.4.8\bin\nunit-console.exe" />
+    <echo message="nunit will be run from: ${nunit.exe}" />
+    <property name="partcover.exe" value=".\tools\PartCover\PartCover.exe" />
+    <property name="partcover.com.dll" value=".\tools\PartCover\PartCover.CorDriver.dll" />
+    <echo message="partcover will be run from: ${partcover.exe}" />
+    <property name="reportgenerator.exe" value=".\tools\ReportGenerator\ReportGenerator.exe" />
+    <property name="is64bit" value="${environment::variable-exists('ProgramFiles(x86)')}"/>
+    <echo message="Running on 64Bit system: ${is64bit}"/>
+    <echo message="!!--- ignore following two [sysinfo] erros under 64 bit system due to nant bug 1213185 ---!!" if="${is64bit}"/>
+    <!-- failonerror set to false for sysinfo due to x64 nant-Bugs-1213185 -->
+    <sysinfo failonerror="false" />
+
+    <!--
+   =========================================================
+   Init target - change directories or flags here
+   =========================================================
+   -->
+    <target name="init" description="Initialize various properties" unless="${initialized}">
+        <tstamp />
+        <!--
+         This is the basic assumption: that the build process starts
+         its life in an arbitrary directory situated one hierarchy level
+         above the base project directory.
+        -->
+        <property name="base_dir" value="${project::get-base-directory()}" unless="${set_from_outside}" readonly="false" />
+        <property name="build_config" value="Debug" />
+        <property name="build_succeeded" value="false" />
+        <property name="compile_consts" value="INTERFACEONLY"/>
+        <property name="unittest_excludes" value="NOTHING"/>
+        <call target="InitIsAdmin" />
+        
+        <!-- Avoid calling init multiple times overriding settings in individual targets. -->
+        <property name="initialized" value="true" />
+    </target>
+
+    <target name="InitIsAdmin">
+        <script language="C#">
+            <code>
+                <![CDATA[
+     public static void ScriptMain(Project project)
+     {
+        System.Security.Principal.WindowsIdentity identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+        System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal (identity);
+        bool isAdmin = principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+        Console.WriteLine("Running under admin: {0}", isAdmin);
+        project.Properties.Add("isAdmin", isAdmin.ToString());
+     }
+     ]]>
+            </code>
+        </script>
+    </target>
+
+    <!--
+   =========================================================
+   Build targets
+   ========================================================= 
+   -->
+    <target name="build" depends="init" description="Builds a debug version with tests">
+        <call target="build_internal" />
+    </target>
+
+    <target name="build_release" depends="init" description="Builds a release version">
+        <property name="build_config" value="Release" />
+        <call target="build_internal" />
+    </target>
+
+    <target name="build_internal" depends="build_nmock2, copy_bin"
+            description="Builds all modules with the corresponding 'build_confg'.">
+    </target>
+
+    <target name="build_nmock2" depends="init" description="Builds all projects of the NMock2 solution">
+        <exec program="msbuild.exe" workingdir="${base_dir}\src\" commandline="/t:Rebuild /p:Configuration=${build_config};DefineConstants=${compile_consts}">
+            <arg file="${base_dir}\src\NMock2.sln"></arg>
+        </exec>
+        <echo message="Time: ${tstamp.time}" />
+        <property name="build_succeeded" value="true" />
+    </target>
+
+    <target name="clean" depends="init" description="Cleans the solution">
+        <property name="build_config" value="Debug" />
+        <call target="clean_internal" />
+        <property name="build_config" value="Release" />
+        <call target="clean_internal" />
+    </target>
+    
+    <target name="clean_internal" depends="init" description="Cleans all projects of the NMock2 solution">
+        <exec program="msbuild.exe" workingdir="${base_dir}\src\" commandline="/t:Clean /p:Configuration=${build_config};DefineConstants=CLASS=1">
+            <arg file="${base_dir}\src\NMock2.sln"></arg>
+        </exec>
+        <echo message="Time: ${tstamp.time}" />
+        <property name="build_succeeded" value="true" />
+    </target>
+
+  
+  <!--
+   =========================================================
+   Targets for publishing a new release
+   ========================================================= 
+   -->
+
+  <target name="publish" depends="init" description="Creates a new release for publishing">
+    <call target="readversion"/>
+    <call target="setversion"/>
+    <call target="clean"/>
+
+    <call target="integrate"/>
+    <!-- We have to call build first, because 'Debug' is the default target. 
+    <call target="build"/>
+    <call target="unittest"/>
+    -->
+    <call target="build_release"/>
+    <call target="unittest"/>
+
+    <call target ="package"/>
+    <call target="copy_assemblyinfo"/>
+    <call target="commit"/>
+  </target>
+
+  <target name="readversion" depends="init" description="Reads the version information from the file Version.txt" 
+          unless="${property::exists('version')}">
+    <loadfile file="Version.txt" property="version"/>
+  </target>
+  
+  <target name="setversion" depends="init" description="Stamp the version info onto AssemblyInfo.cs files">
+    <if test="${not property::exists('version')}">
+      <echo message="Please set property 'version' for this target" />
+      <fail/>
+    </if>
+
+    <foreach item="File" property="filename">
+      <in>
+        <items basedir="${base_dir}">
+          <include name="**/AssemblyInfo.cs"></include>
+        </items>
+      </in>
+      <do>
+        <script language="C#">
+          <code>
+            <![CDATA[
+     public static void ScriptMain(Project project)
+     {
+       Console.WriteLine(project.Properties["filename"]);
+       //FileStream file = File.Open(project.Properties["filename"], FileMode.Open, FileAccess.ReadWrite);
+       string contents = "";
+       using (StreamReader reader = new StreamReader(project.Properties["filename"]))
+       {
+         contents = reader.ReadToEnd();
+       }
+       string newText = contents.Replace("0.0.0.0", project.Properties["version"]);
+       using(StreamWriter writer = new StreamWriter(project.Properties["filename"], false))
+       {
+         writer.Write(newText);
+       }
+     }
+     ]]>
+          </code>
+        </script>
+      </do>
+    </foreach>
+  </target>
+
+  <target name="package" depends="init">
+    <mkdir dir="${base_dir}\publish" />
+    <regex pattern="(?'major'\d+)\.(?'minor'\d+).*$" input="${version}"/>
+    <zip zipfile="${base_dir}\publish\NMock2_${major}.${minor}.zip">
+      <fileset basedir="${base_dir}">
+        <include name="bin/**/*" />
+        <include name="doc/**/*" />
+        <include name="coverage/**/*" />
+          <include name="NMock2-coverage-report.html" />
+          <include name="LICENSE.TXT" />
+        <include name="NOTICE.TXT" />
+      </fileset>
+    </zip>
+  </target>
+
+  <target name="copy_assemblyinfo" depends="init" description="Copies the AssemblyInfo.cs.template to AssemblyInfo.cs">
+    <copy overwrite="true"
+          file="${base_dir}\src\Templates\AssemblyInfo.cs.template"
+          tofile="${base_dir}\src\AssemblyInfo.cs" />
+  </target>        
+
+  <target name="commit" depends="init" description="Shows the TortoiseSVN commit dialog">
+    <exec program="${TortoiseProc.exe}" workingdir="${base_dir}" 
+          commandline="/command:commit /path:${base_dir}\..\ /notempfile /logmsg:&quot;Publish Version ${major}.${minor}&quot;">
+      <arg file="${base_dir}\src\NMock2.sln"></arg>
+    </exec>
+  </target>
+  
+  
+  <!--
+   =========================================================
+   Misc targets
+   ========================================================= 
+   -->
+    <target name="unittest" depends="init" description="Execute unit tests.">
+        <echo message="Executing unittest on build_config='${build_config}' with excludes='${unittest_excludes}'"/>
+        <exec program="${nunit.exe}" workingdir="${base_dir}"
+              commandline="${base_dir}\src\NMock2.Test\bin\${build_config}\NMock2.Test.dll ${base_dir}\src\NMock2.AcceptanceTests\bin\${build_config}\NMock2.AcceptanceTests.Test.dll /exclude:${unittest_excludes}"/>  
+        
+        <!--<nunit2>
+            <formatter type="Plain" />
+            <test>
+                <assemblies basedir="${base_dir}\src\">
+                    <include name="**\bin\${build_config}\*Test.dll" />
+                </assemblies>
+                <categories>
+                    <exclude name="${unittest_excludes}" />
+                </categories>
+            </test>
+        </nunit2>-->
+    </target>
+
+    <target name="integrate" depends="init" description="Build and exectute unit tests for developers before commit their changes.">
+        <property name="compile_consts" value="INTERFACEONLY"/>
+        <property name="unittest_excludes" value="Class,CastleOnly"/>
+        <call target="build"/>
+        <call target="unittest"/>
+
+        <property name="compile_consts" value=""/>
+        <property name="unittest_excludes" value="NOTHING"/>
+        <call target="build"/>
+        <call target="unittest"/>
+        <!-- PartCover does not run without Administrator rights and not under 64 Bit 
+             (not under Windows 7 RC) due to com register error -->
+        <echo message="Coverage can only performed with Administrator user rights (Vista/Windows7)." unless="${isAdmin}"/>
+        <echo message="Cannot run coverage on a 64 Bit system." if="${is64bit}"/>
+        <call target="coverage" if="${isAdmin}" unless="${is64bit}"/>
+    </target>
+
+    <target name="copy_bin" description="Copies the final output to the top bin directory" if="${build_succeeded}">
+      <!-- Cleanup first -->
+      <delete>
+        <fileset basedir="${base_dir}\bin\${build_config}\">
+          <include name="*.dll" />
+          <include name="*.xml" />
+          <include name="*.pdb" />
+        </fileset>
+      </delete>
+      <!-- Copy NMock2 only; no tests will be copied -->
+      <copy overwrite="false" todir="${base_dir}\bin\${build_config}\" flatten="true">
+        <fileset basedir="${base_dir}\src\">
+          <include name="**/NMock2/bin/${build_config}/NMock2.dll" />
+          <!-- The xml comment file placed besides the dll will enable the intellisense feature of VS.NET. -->
+          <include name="**/NMock2/bin/${build_config}/NMock2.xml" />
+          <!-- The pdb file placed besides the dll will show line numbers in the stack trace even in the release build. -->
+          <include name="**/NMock2/bin/${build_config}/NMock2.pdb"/>
+        </fileset>
+      </copy>
+    </target>
+
+    <target name="coverage" description="compute coverage statistics for all unit tests defined in mts.nunit" 
+            depends="init,register-partcover-com">
+        <echo message="Executing coverage on build_config='${build_config}'."/>
+        <property name="date" value="${datetime::now()}" />
+        <property name="acceptable" value="95" />
+        <exec program="${partcover.exe}" failonerror="true">
+            <arg value="--target" />
+            <arg value="${nunit.exe}" />
+            <arg value="--target-work-dir" />
+            <arg value="${base_dir}\src\" />
+            <arg value="--target-args" />
+            <arg value="${base_dir}\src\NMock2.Test\bin\${build_config}\NMock2.Test.dll ${base_dir}\src\NMock2.AcceptanceTests\bin\${build_config}\NMock2.AcceptanceTests.Test.dll /exclude:${unittest_excludes}" />
+            <arg value="--include" />
+            <arg value="[NMock2]*" />
+            <arg value="--exclude" />
+            <arg value="[NMock2]Castle.*" />
+            <arg value="--output" />
+            <arg value=".\NMock2.coverage.xml" />
+        </exec>
+        <style style=".\tools\Xslt\PartCover-NCover-Like.report.xslt" in=".\NMock2.coverage.xml" out=".\NMock2-coverage-report.html">
+            <parameters>
+                <parameter name="DateTime" namespaceuri="" value="${date}" />
+                <parameter name="ProjectName" namespaceuri="" value="NMock2" />
+                <parameter name="Acceptable" namespaceuri="" value="${acceptable}" />
+            </parameters>
+        </style>
+        <!-- This generates the extension data which is needed for cruise control, the attribute "in" is just used for validation reason 
+        <style style=".\tools\Xslt\PartCover-Extension.xslt" in=".\NMock2.coverage.xml" out=".\NMock2.coverage.ext.xml">
+            <parameters>
+                <parameter name="DateTime" namespaceuri="" value="${date}" />
+                <parameter name="ProjectName" namespaceuri="" value="NMock2" />
+                <parameter name="Acceptable" namespaceuri="" value="${acceptable}" />
+            </parameters>
+        </style>
+        -->
+      <exec program="${reportgenerator.exe}" failonerror="true">
+        <arg value=".\NMock2.coverage.xml" />
+        <!-- The directory to place the coverage report -->
+        <arg value="Coverage" />
+      </exec>
+    </target>
+
+    <target name="register-partcover-com" description="registers the partcover com dll">
+        <comregister file="${partcover.com.dll}" />
+    </target>
+
+</project>

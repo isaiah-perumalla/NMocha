@@ -1,0 +1,3006 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="testsetreport-details.xslt" ?>
+<TestSetReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/TestSetReport.xsd">
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T17:32:57.970625+01:00</StartTime>
+		<Duration>259437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_173718_220_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T17:37:21.689375+01:00</StartTime>
+		<Duration>91734</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_173853_767_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T17:38:55.126875+01:00</StartTime>
+		<Duration>216218</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_174232_048_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T17:42:35.8925+01:00</StartTime>
+		<Duration>163578</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_174519_986_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T17:45:21.86125+01:00</StartTime>
+		<Duration>1001406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_180204_126_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Not Completed</TestResult>
+		<StartTime>2009-01-30T17:45:21.86125+01:00</StartTime>
+		<Duration>1054375</Duration>
+		<Comment>Exception: The process cannot access the file 'c:\taf\temp\report_00004.xml' because it is being used by another process.</Comment>
+		<DetailReportPath />
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:02:56.23625+01:00</StartTime>
+		<Duration>399125</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_180935_939_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:09:37.48625+01:00</StartTime>
+		<Duration>361859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_181540_439_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:15:44.11125+01:00</StartTime>
+		<Duration>348593</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_182133_501_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC14 test enter text</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:21:37.939375+01:00</StartTime>
+		<Duration>141500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_182359_923_Samples.CTC14 test enter text.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:24:01.8925+01:00</StartTime>
+		<Duration>365671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_183008_673_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:30:13.6425+01:00</StartTime>
+		<Duration>225968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_183400_251_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:34:02.61125+01:00</StartTime>
+		<Duration>90812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_183533_751_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:35:34.955+01:00</StartTime>
+		<Duration>205609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_183901_283_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:39:04.8925+01:00</StartTime>
+		<Duration>163093</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_184148_501_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T18:41:50.08+01:00</StartTime>
+		<Duration>1045937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_185917_830_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T18:59:22.658125+01:00</StartTime>
+		<Duration>357265</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_190520_501_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:05:22.345625+01:00</StartTime>
+		<Duration>361406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_191124_845_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:11:29.439375+01:00</StartTime>
+		<Duration>356234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_191726_642_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:17:30.908125+01:00</StartTime>
+		<Duration>370765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_192342_892_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:23:48.345625+01:00</StartTime>
+		<Duration>222562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_192731_548_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:27:34.29875+01:00</StartTime>
+		<Duration>93203</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_192907_736_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:29:09.1425+01:00</StartTime>
+		<Duration>215515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_193245_376_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:32:49.595625+01:00</StartTime>
+		<Duration>162437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_193532_548_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T19:35:34.48625+01:00</StartTime>
+		<Duration>1007250</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_195222_501_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:52:30.79875+01:00</StartTime>
+		<Duration>392468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_195903_845_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T19:59:05.67375+01:00</StartTime>
+		<Duration>369921</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_200516_689_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:05:20.626875+01:00</StartTime>
+		<Duration>364859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_201126_361_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:11:31.095625+01:00</StartTime>
+		<Duration>381609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_201753_861_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:17:59.501875+01:00</StartTime>
+		<Duration>228906</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_202149_033_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:21:52.08+01:00</StartTime>
+		<Duration>94265</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_202326_673_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:23:28.5175+01:00</StartTime>
+		<Duration>211328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_202700_548_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:27:04.470625+01:00</StartTime>
+		<Duration>165609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_202950_595_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T20:29:52.61125+01:00</StartTime>
+		<Duration>1049437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_204723_830_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:47:30.705+01:00</StartTime>
+		<Duration>378687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_205350_017_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:53:51.908125+01:00</StartTime>
+		<Duration>359218</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_205952_236_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T20:59:55.98625+01:00</StartTime>
+		<Duration>363390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_210600_267_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:06:03.61125+01:00</StartTime>
+		<Duration>377796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_211222_642_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:12:27.220625+01:00</StartTime>
+		<Duration>231453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_211619_283_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:16:21.564375+01:00</StartTime>
+		<Duration>94015</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_211755_908_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:17:57.17375+01:00</StartTime>
+		<Duration>220500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_212138_283_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:21:41.67375+01:00</StartTime>
+		<Duration>167000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_212429_173_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T21:24:30.955+01:00</StartTime>
+		<Duration>953593</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_214025_392_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:40:34.720625+01:00</StartTime>
+		<Duration>367781</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_214643_064_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:46:45.314375+01:00</StartTime>
+		<Duration>419515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_215345_939_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T21:53:49.626875+01:00</StartTime>
+		<Duration>369531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_220000_064_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:00:11.533125+01:00</StartTime>
+		<Duration>508781</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_220841_580_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:08:46.205+01:00</StartTime>
+		<Duration>236890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_221243_720_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:12:46.6425+01:00</StartTime>
+		<Duration>94671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_221421_642_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:14:22.955+01:00</StartTime>
+		<Duration>228531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_221812_189_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:18:16.126875+01:00</StartTime>
+		<Duration>169156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_222105_798_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T22:21:07.689375+01:00</StartTime>
+		<Duration>912609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_223622_111_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:36:27.251875+01:00</StartTime>
+		<Duration>412234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_224320_064_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:43:22.205+01:00</StartTime>
+		<Duration>382484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_224945_830_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:49:50.220625+01:00</StartTime>
+		<Duration>377140</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_225608_298_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T22:56:13.345625+01:00</StartTime>
+		<Duration>414953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_230309_517_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:03:15.314375+01:00</StartTime>
+		<Duration>244046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_230719_986_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:07:23.064375+01:00</StartTime>
+		<Duration>96421</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_230859_814_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:09:01.033125+01:00</StartTime>
+		<Duration>221453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_231243_205_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:12:47.04875+01:00</StartTime>
+		<Duration>174421</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_231541_970_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-01-30T23:15:43.970625+01:00</StartTime>
+		<Duration>1043312</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_233309_845_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Not Completed</TestResult>
+		<StartTime>2009-01-30T23:15:43.970625+01:00</StartTime>
+		<Duration>1135828</Duration>
+		<Comment>Exception: The process cannot access the file 'c:\taf\temp\results\PressButtonOnWindow\Mediainfo.ini' because it is being used by another process.</Comment>
+		<DetailReportPath />
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:34:39.814375+01:00</StartTime>
+		<Duration>333406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_234013_814_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:40:15.845625+01:00</StartTime>
+		<Duration>344609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_234601_580_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:46:05.720625+01:00</StartTime>
+		<Duration>359375</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_235205_970_Samples.ctc12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC14 test enter text</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:52:10.2675+01:00</StartTime>
+		<Duration>143218</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090130_235433_970_Samples.CTC14 test enter text.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>CTC10 create delete user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-30T23:54:36.095625+01:00</StartTime>
+		<Duration>364796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_000042_126_CTC10 create delete user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:00:47.79875+01:00</StartTime>
+		<Duration>166468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_000334_767_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:03:36.533125+01:00</StartTime>
+		<Duration>220281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_000717_439_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:07:20.29875+01:00</StartTime>
+		<Duration>92171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_000852_798_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:08:54.095625+01:00</StartTime>
+		<Duration>211343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_001226_189_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:12:30.345625+01:00</StartTime>
+		<Duration>162296</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_001513_142_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:15:14.814375+01:00</StartTime>
+		<Duration>219328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_001854_751_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:18:57.970625+01:00</StartTime>
+		<Duration>92687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_002031_001_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:20:32.220625+01:00</StartTime>
+		<Duration>214218</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_002407_142_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:24:11.220625+01:00</StartTime>
+		<Duration>162171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_002653_892_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:26:55.658125+01:00</StartTime>
+		<Duration>215875</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_003032_158_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:30:34.751875+01:00</StartTime>
+		<Duration>91484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_003206_564_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:32:07.970625+01:00</StartTime>
+		<Duration>214234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_003542_923_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:35:47.439375+01:00</StartTime>
+		<Duration>164531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_003832_470_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:38:34.001875+01:00</StartTime>
+		<Duration>218656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_004213_267_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:42:16.220625+01:00</StartTime>
+		<Duration>93500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_004350_048_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:43:51.455+01:00</StartTime>
+		<Duration>212453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_004724_626_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:47:29.33+01:00</StartTime>
+		<Duration>163671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_005013_501_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:50:15.439375+01:00</StartTime>
+		<Duration>220062</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_005356_111_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:53:59.205+01:00</StartTime>
+		<Duration>93203</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_005532_783_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:55:34.251875+01:00</StartTime>
+		<Duration>216546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_005911_501_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T00:59:15.5175+01:00</StartTime>
+		<Duration>163515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_010159_533_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:02:01.408125+01:00</StartTime>
+		<Duration>92000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_010333_736_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:03:35.095625+01:00</StartTime>
+		<Duration>347671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_010923_783_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:09:27.689375+01:00</StartTime>
+		<Duration>281390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_011409_658_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:14:11.189375+01:00</StartTime>
+		<Duration>362640</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_012014_720_Samples.CTC12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:20:19.283125+01:00</StartTime>
+		<Duration>166500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_012306_283_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:23:08.158125+01:00</StartTime>
+		<Duration>220765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_012649_533_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:26:52.283125+01:00</StartTime>
+		<Duration>92296</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_012824_939_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:28:27.48625+01:00</StartTime>
+		<Duration>229281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_013217_486_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:32:21.033125+01:00</StartTime>
+		<Duration>165281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_013506_814_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:35:08.564375+01:00</StartTime>
+		<Duration>228843</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_013858_080_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:39:00.595625+01:00</StartTime>
+		<Duration>93171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_014034_095_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:40:35.595625+01:00</StartTime>
+		<Duration>208328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_014404_658_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:44:08.98625+01:00</StartTime>
+		<Duration>167078</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_014656_564_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:46:58.595625+01:00</StartTime>
+		<Duration>230812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_015050_033_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:50:53.126875+01:00</StartTime>
+		<Duration>94093</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_015227_564_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:52:28.98625+01:00</StartTime>
+		<Duration>213546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_015603_220_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:56:07.001875+01:00</StartTime>
+		<Duration>166046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_015853_439_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T01:58:55.345625+01:00</StartTime>
+		<Duration>233281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_020249_251_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:02:52.501875+01:00</StartTime>
+		<Duration>94000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_020426_830_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:04:27.876875+01:00</StartTime>
+		<Duration>209765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_020758_330_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:08:02.283125+01:00</StartTime>
+		<Duration>167781</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_021050_564_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:10:52.470625+01:00</StartTime>
+		<Duration>230515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_021443_501_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:14:46.33+01:00</StartTime>
+		<Duration>93890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_021620_548_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:16:21.92375+01:00</StartTime>
+		<Duration>214218</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_021956_845_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:20:01.54875+01:00</StartTime>
+		<Duration>169171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_022251_236_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:22:53.2675+01:00</StartTime>
+		<Duration>228500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_022642_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:26:45.376875+01:00</StartTime>
+		<Duration>93421</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_022819_126_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:28:20.42375+01:00</StartTime>
+		<Duration>218281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_023159_423_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:32:03.158125+01:00</StartTime>
+		<Duration>170796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_023454_439_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:34:56.564375+01:00</StartTime>
+		<Duration>232328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_023849_533_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:38:52.48625+01:00</StartTime>
+		<Duration>93406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_024026_236_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:40:27.7675+01:00</StartTime>
+		<Duration>215968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_024404_439_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:44:08.408125+01:00</StartTime>
+		<Duration>168921</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_024657_830_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:46:59.845625+01:00</StartTime>
+		<Duration>235312</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_025055_767_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:50:58.876875+01:00</StartTime>
+		<Duration>95000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_025234_205_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:52:35.751875+01:00</StartTime>
+		<Duration>220109</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_025616_564_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:56:20.54875+01:00</StartTime>
+		<Duration>172187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_025913_251_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T02:59:15.158125+01:00</StartTime>
+		<Duration>369890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_030525_955_Samples.CTC12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:05:32.001875+01:00</StartTime>
+		<Duration>96375</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_030708_705_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:07:10.408125+01:00</StartTime>
+		<Duration>289812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_031200_798_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:12:02.595625+01:00</StartTime>
+		<Duration>360484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_031804_158_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC14 test enter text</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:18:08.955+01:00</StartTime>
+		<Duration>157140</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_032046_580_Samples.CTC14 test enter text.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:20:49.001875+01:00</StartTime>
+		<Duration>173078</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_032342_580_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:23:44.501875+01:00</StartTime>
+		<Duration>238375</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_032743_392_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:27:46.501875+01:00</StartTime>
+		<Duration>96718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_032923_548_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:29:24.705+01:00</StartTime>
+		<Duration>225000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_033310_423_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:33:14.61125+01:00</StartTime>
+		<Duration>173671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_033608_783_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:36:10.626875+01:00</StartTime>
+		<Duration>238796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_034010_048_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:40:13.29875+01:00</StartTime>
+		<Duration>96562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_034150_189_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:41:51.6425+01:00</StartTime>
+		<Duration>221453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_034533_814_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:45:37.5175+01:00</StartTime>
+		<Duration>174937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_034833_001_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:48:34.705+01:00</StartTime>
+		<Duration>241546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_035236_861_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:52:39.751875+01:00</StartTime>
+		<Duration>97968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_035418_048_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:54:19.376875+01:00</StartTime>
+		<Duration>227062</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_035807_158_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T03:58:10.5175+01:00</StartTime>
+		<Duration>176718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_040107_751_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:01:09.54875+01:00</StartTime>
+		<Duration>242906</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_040513_126_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:05:16.064375+01:00</StartTime>
+		<Duration>97796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_040654_189_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:06:55.705+01:00</StartTime>
+		<Duration>225531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_041041_955_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:10:46.61125+01:00</StartTime>
+		<Duration>176437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_041343_439_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:13:45.439375+01:00</StartTime>
+		<Duration>244609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_041750_658_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:17:53.658125+01:00</StartTime>
+		<Duration>97656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_041931_642_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:19:33.033125+01:00</StartTime>
+		<Duration>229343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_042323_205_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:23:27.0175+01:00</StartTime>
+		<Duration>180453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_042628_017_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:26:29.533125+01:00</StartTime>
+		<Duration>245015</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_043035_173_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:30:38.408125+01:00</StartTime>
+		<Duration>99078</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_043217_861_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:32:19.376875+01:00</StartTime>
+		<Duration>230812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_043610_908_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:36:14.783125+01:00</StartTime>
+		<Duration>180687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_043915_970_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:39:18.095625+01:00</StartTime>
+		<Duration>246812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_044325_517_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:43:28.67375+01:00</StartTime>
+		<Duration>98437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_044507_439_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:45:08.83+01:00</StartTime>
+		<Duration>228656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_044858_236_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:49:01.908125+01:00</StartTime>
+		<Duration>182125</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_045204_517_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:52:06.54875+01:00</StartTime>
+		<Duration>248500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_045615_658_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:56:18.42375+01:00</StartTime>
+		<Duration>100625</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_045759_376_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T04:58:00.7675+01:00</StartTime>
+		<Duration>240453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_050201_939_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:02:05.455+01:00</StartTime>
+		<Duration>178828</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_050504_783_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:05:06.3925+01:00</StartTime>
+		<Duration>250578</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_050917_595_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:09:20.2675+01:00</StartTime>
+		<Duration>101343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_051101_939_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:11:03.470625+01:00</StartTime>
+		<Duration>234890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_051459_080_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:15:03.095625+01:00</StartTime>
+		<Duration>182953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_051806_533_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:18:08.61125+01:00</StartTime>
+		<Duration>249234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_052218_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:22:21.126875+01:00</StartTime>
+		<Duration>100093</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_052401_548_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:24:03.001875+01:00</StartTime>
+		<Duration>240343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_052804_064_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:28:08.158125+01:00</StartTime>
+		<Duration>184078</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_053112_751_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:31:14.83+01:00</StartTime>
+		<Duration>254343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_053529_783_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:35:32.595625+01:00</StartTime>
+		<Duration>100750</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_053713_673_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:37:15.205+01:00</StartTime>
+		<Duration>236593</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_054112_517_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:41:16.5175+01:00</StartTime>
+		<Duration>183750</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_054420_767_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:44:22.83+01:00</StartTime>
+		<Duration>255515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_054838_986_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:48:41.8925+01:00</StartTime>
+		<Duration>102890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_055025_111_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:50:26.5175+01:00</StartTime>
+		<Duration>237437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_055424_673_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:54:28.439375+01:00</StartTime>
+		<Duration>184078</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_055733_095_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T05:57:34.83+01:00</StartTime>
+		<Duration>291734</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_060227_251_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:02:37.7675+01:00</StartTime>
+		<Duration>116718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_060434_814_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:04:36.0175+01:00</StartTime>
+		<Duration>242968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_060839_705_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:08:43.705+01:00</StartTime>
+		<Duration>187656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_061151_861_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:11:53.470625+01:00</StartTime>
+		<Duration>257156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_061611_251_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:16:14.345625+01:00</StartTime>
+		<Duration>104359</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_061759_048_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:18:00.533125+01:00</StartTime>
+		<Duration>240843</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_062202_080_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC14 test enter text</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:22:05.86125+01:00</StartTime>
+		<Duration>164656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_062450_986_Samples.CTC14 test enter text.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:24:52.86125+01:00</StartTime>
+		<Duration>188609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_062801_970_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:28:03.86125+01:00</StartTime>
+		<Duration>259250</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_063223_626_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:32:26.439375+01:00</StartTime>
+		<Duration>104140</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_063410_923_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:34:12.1425+01:00</StartTime>
+		<Duration>246187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_063819_048_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC12 user change password</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:38:22.86125+01:00</StartTime>
+		<Duration>412703</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_064516_455_Samples.CTC12 user change password.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:45:20.8925+01:00</StartTime>
+		<Duration>190578</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_064831_970_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:48:33.876875+01:00</StartTime>
+		<Duration>103953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_065018_064_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC11 unlock user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:50:19.376875+01:00</StartTime>
+		<Duration>411109</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_065711_580_Samples.CTC11 unlock user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T06:57:14.83+01:00</StartTime>
+		<Duration>315703</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_070231_126_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:02:32.705+01:00</StartTime>
+		<Duration>191437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_070544_642_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:05:46.439375+01:00</StartTime>
+		<Duration>258328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_071005_408_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:10:08.439375+01:00</StartTime>
+		<Duration>106328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_071155_095_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:11:56.705+01:00</StartTime>
+		<Duration>251546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_071608_876_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:16:12.783125+01:00</StartTime>
+		<Duration>192125</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_071925_408_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:19:27.439375+01:00</StartTime>
+		<Duration>257656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_072345_705_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:23:48.61125+01:00</StartTime>
+		<Duration>105921</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_072534_861_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:25:36.33+01:00</StartTime>
+		<Duration>254296</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_072951_330_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:29:55.0175+01:00</StartTime>
+		<Duration>190906</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_073306_423_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:33:08.376875+01:00</StartTime>
+		<Duration>262250</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_073731_251_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:37:33.86125+01:00</StartTime>
+		<Duration>106625</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_073920_814_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:39:22.095625+01:00</StartTime>
+		<Duration>258281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_074341_095_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:43:44.83+01:00</StartTime>
+		<Duration>191046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_074656_376_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:46:58.283125+01:00</StartTime>
+		<Duration>262609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_075121_517_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:51:24.23625+01:00</StartTime>
+		<Duration>106546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_075311_111_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:53:12.658125+01:00</StartTime>
+		<Duration>256453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_075729_830_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T07:57:33.67375+01:00</StartTime>
+		<Duration>192187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_080046_361_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:00:48.33+01:00</StartTime>
+		<Duration>262718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_080511_658_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:05:14.5175+01:00</StartTime>
+		<Duration>108156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_080702_986_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:07:04.376875+01:00</StartTime>
+		<Duration>262093</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_081127_173_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:11:30.98625+01:00</StartTime>
+		<Duration>193500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_081444_970_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:14:46.783125+01:00</StartTime>
+		<Duration>261250</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_081908_595_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:19:11.658125+01:00</StartTime>
+		<Duration>108062</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_082100_048_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:21:01.48625+01:00</StartTime>
+		<Duration>264703</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_082526_892_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:25:30.705+01:00</StartTime>
+		<Duration>195875</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_082847_080_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:28:49.04875+01:00</StartTime>
+		<Duration>264500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_083314_189_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:33:17.158125+01:00</StartTime>
+		<Duration>108937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_083506_423_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:35:07.876875+01:00</StartTime>
+		<Duration>262562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_083931_173_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:39:35.08+01:00</StartTime>
+		<Duration>193687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_084249_267_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:42:50.970625+01:00</StartTime>
+		<Duration>263656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_084715_236_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:47:17.908125+01:00</StartTime>
+		<Duration>109328</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_084907_564_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:49:08.86125+01:00</StartTime>
+		<Duration>262937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_085332_501_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:53:36.345625+01:00</StartTime>
+		<Duration>198406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_085655_251_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T08:56:57.08+01:00</StartTime>
+		<Duration>269671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_090127_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:01:30.48625+01:00</StartTime>
+		<Duration>110171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_090320_986_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T09:03:22.251875+01:00</StartTime>
+		<Duration>263375</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_090746_345_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:07:50.23625+01:00</StartTime>
+		<Duration>198703</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_091109_439_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:11:11.345625+01:00</StartTime>
+		<Duration>272593</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_091544_564_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:15:47.5175+01:00</StartTime>
+		<Duration>109437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_091737_298_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T09:17:38.751875+01:00</StartTime>
+		<Duration>267265</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_092206_720_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:22:10.04875+01:00</StartTime>
+		<Duration>198984</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_092529_533_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:25:31.345625+01:00</StartTime>
+		<Duration>271484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_093003_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:30:06.439375+01:00</StartTime>
+		<Duration>110515</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_093157_283_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T09:31:58.720625+01:00</StartTime>
+		<Duration>262531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_093621_955_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:36:25.2675+01:00</StartTime>
+		<Duration>202171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_093947_939_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:39:49.533125+01:00</StartTime>
+		<Duration>279828</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_094429_986_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:44:32.48625+01:00</StartTime>
+		<Duration>111484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_094624_298_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T09:46:25.501875+01:00</StartTime>
+		<Duration>266656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_095052_892_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:50:56.2675+01:00</StartTime>
+		<Duration>201937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_095418_595_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:54:20.455+01:00</StartTime>
+		<Duration>280562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_095901_626_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T09:59:04.158125+01:00</StartTime>
+		<Duration>112734</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_100057_220_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T10:00:58.501875+01:00</StartTime>
+		<Duration>263406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_100522_626_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:05:26.0175+01:00</StartTime>
+		<Duration>202953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_100849_408_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:08:52.751875+01:00</StartTime>
+		<Duration>285250</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_101338_517_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:13:41.79875+01:00</StartTime>
+		<Duration>114687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_101536_814_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T10:15:38.11125+01:00</StartTime>
+		<Duration>264140</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_102002_986_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:20:07.04875+01:00</StartTime>
+		<Duration>202968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_102330_517_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:23:32.439375+01:00</StartTime>
+		<Duration>286718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_102819_767_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:28:22.205+01:00</StartTime>
+		<Duration>113265</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_103015_798_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T10:30:17.1425+01:00</StartTime>
+		<Duration>267937</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_103445_798_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:34:49.470625+01:00</StartTime>
+		<Duration>204781</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_103814_751_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:38:16.814375+01:00</StartTime>
+		<Duration>288421</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_104305_861_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:43:08.439375+01:00</StartTime>
+		<Duration>113953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_104502_720_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T10:45:04.17375+01:00</StartTime>
+		<Duration>268187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_104933_095_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:49:36.908125+01:00</StartTime>
+		<Duration>205265</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_105302_673_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:53:04.533125+01:00</StartTime>
+		<Duration>288609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_105753_705_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T10:57:56.814375+01:00</StartTime>
+		<Duration>113812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_105950_955_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T10:59:52.205+01:00</StartTime>
+		<Duration>275625</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_110428_501_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:04:31.908125+01:00</StartTime>
+		<Duration>209156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_110801_564_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:08:03.11125+01:00</StartTime>
+		<Duration>292000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_111255_720_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:12:58.6425+01:00</StartTime>
+		<Duration>115000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_111453_986_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T11:14:55.5175+01:00</StartTime>
+		<Duration>272812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_111928_939_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:19:32.98625+01:00</StartTime>
+		<Duration>209484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_112302_986_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:23:04.83+01:00</StartTime>
+		<Duration>291968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_112757_423_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:28:00.67375+01:00</StartTime>
+		<Duration>116656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_112957_658_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T11:29:59.08+01:00</StartTime>
+		<Duration>277453</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_113437_251_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:34:40.439375+01:00</StartTime>
+		<Duration>210859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_113811_798_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:38:13.876875+01:00</StartTime>
+		<Duration>293562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_114308_064_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:43:11.17375+01:00</StartTime>
+		<Duration>116203</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_114507_705_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T11:45:09.158125+01:00</StartTime>
+		<Duration>279375</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_114949_236_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:49:53.345625+01:00</StartTime>
+		<Duration>213062</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_115326_908_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:53:28.439375+01:00</StartTime>
+		<Duration>298046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_115827_095_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T11:58:29.533125+01:00</StartTime>
+		<Duration>116828</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_120026_689_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T12:00:28.126875+01:00</StartTime>
+		<Duration>279093</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_120507_939_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:05:11.8925+01:00</StartTime>
+		<Duration>215796</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_120848_220_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:08:49.783125+01:00</StartTime>
+		<Duration>297187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_121347_595_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:13:49.955+01:00</StartTime>
+		<Duration>117562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_121547_845_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T12:15:49.0175+01:00</StartTime>
+		<Duration>281562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_122031_314_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:20:34.470625+01:00</StartTime>
+		<Duration>213968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_122408_939_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:24:10.595625+01:00</StartTime>
+		<Duration>299156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_122910_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:29:12.939375+01:00</StartTime>
+		<Duration>116609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_123109_876_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T12:31:11.033125+01:00</StartTime>
+		<Duration>283046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_123554_798_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:35:58.001875+01:00</StartTime>
+		<Duration>216281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_123934_783_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:39:36.455+01:00</StartTime>
+		<Duration>300859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_124437_955_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:44:40.67375+01:00</StartTime>
+		<Duration>118031</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_124639_033_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T12:46:40.376875+01:00</StartTime>
+		<Duration>282187</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_125123_361_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:51:26.501875+01:00</StartTime>
+		<Duration>220046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_125507_048_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T12:55:08.92375+01:00</StartTime>
+		<Duration>304562</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_130014_048_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:00:18.501875+01:00</StartTime>
+		<Duration>120031</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_130218_861_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T13:02:20.36125+01:00</StartTime>
+		<Duration>289546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_130710_626_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:07:14.33+01:00</StartTime>
+		<Duration>218312</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_131053_158_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:10:55.11125+01:00</StartTime>
+		<Duration>300812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_131556_533_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:15:59.54875+01:00</StartTime>
+		<Duration>120062</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_131759_939_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T13:18:01.439375+01:00</StartTime>
+		<Duration>287171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_132249_345_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:22:53.033125+01:00</StartTime>
+		<Duration>221671</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_132635_205_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:26:37.001875+01:00</StartTime>
+		<Duration>308468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_133146_095_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:31:49.001875+01:00</StartTime>
+		<Duration>123703</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_133353_033_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T13:33:54.48625+01:00</StartTime>
+		<Duration>289812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_133845_001_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:38:48.33+01:00</StartTime>
+		<Duration>221359</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_134230_189_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:42:32.158125+01:00</StartTime>
+		<Duration>309406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_134742_173_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:47:45.61125+01:00</StartTime>
+		<Duration>122437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_134948_267_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T13:49:49.79875+01:00</StartTime>
+		<Duration>291312</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_135441_814_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:54:45.58+01:00</StartTime>
+		<Duration>223281</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_135829_392_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T13:58:31.2675+01:00</StartTime>
+		<Duration>311859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_140343_642_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:03:46.54875+01:00</StartTime>
+		<Duration>123312</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_140550_205_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T14:05:52.42375+01:00</StartTime>
+		<Duration>307484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_141100_626_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:11:05.001875+01:00</StartTime>
+		<Duration>228734</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_141454_236_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:14:55.908125+01:00</StartTime>
+		<Duration>311687</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_142008_236_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:20:11.2675+01:00</StartTime>
+		<Duration>124750</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_142216_345_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T14:22:17.83+01:00</StartTime>
+		<Duration>297640</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_142716_189_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:27:20.001875+01:00</StartTime>
+		<Duration>226718</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_143107_220_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:31:09.220625+01:00</StartTime>
+		<Duration>315593</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_143625_423_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:36:28.48625+01:00</StartTime>
+		<Duration>123500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_143832_314_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T14:38:33.705+01:00</StartTime>
+		<Duration>297234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_144331_658_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:43:35.251875+01:00</StartTime>
+		<Duration>225656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_144721_408_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:47:23.220625+01:00</StartTime>
+		<Duration>310531</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_145234_376_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:52:36.79875+01:00</StartTime>
+		<Duration>125140</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_145442_283_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T14:54:43.61125+01:00</StartTime>
+		<Duration>304640</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_145948_861_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T14:59:53.158125+01:00</StartTime>
+		<Duration>227609</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_150341_267_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:03:43.08+01:00</StartTime>
+		<Duration>305828</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_150849_548_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:08:52.345625+01:00</StartTime>
+		<Duration>125656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_151058_330_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T15:10:59.751875+01:00</StartTime>
+		<Duration>305156</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_151605_611_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:16:09.92375+01:00</StartTime>
+		<Duration>230812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_152001_236_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:20:03.83+01:00</StartTime>
+		<Duration>318968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_152523_423_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:25:26.470625+01:00</StartTime>
+		<Duration>126765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_152733_564_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T15:27:34.79875+01:00</StartTime>
+		<Duration>307765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_153243_314_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:32:47.61125+01:00</StartTime>
+		<Duration>232500</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_153640_611_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:36:42.564375+01:00</StartTime>
+		<Duration>321640</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_154204_830_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:42:07.83+01:00</StartTime>
+		<Duration>127109</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_154415_283_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T15:44:16.7675+01:00</StartTime>
+		<Duration>306296</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_154923_689_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:49:27.626875+01:00</StartTime>
+		<Duration>234640</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_155322_751_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:53:24.61125+01:00</StartTime>
+		<Duration>322484</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_155847_720_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T15:58:50.6425+01:00</StartTime>
+		<Duration>126468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_160057_439_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Warning</TestResult>
+		<StartTime>2009-01-31T16:00:59.095625+01:00</StartTime>
+		<Duration>303343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_160603_173_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T16:06:06.658125+01:00</StartTime>
+		<Duration>234390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_161001_548_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-01-31T16:10:03.5175+01:00</StartTime>
+		<Duration>324656</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090131_161528_689_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Not Completed</TestResult>
+		<StartTime>2009-01-31T16:15:31.751875+01:00</StartTime>
+		<Duration>147817671</Duration>
+		<Comment>Exception: The remote procedure call failed. (Exception from HRESULT: 0x800706BE)</Comment>
+		<DetailReportPath />
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:19:10.033125+01:00</StartTime>
+		<Duration>226343</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_092257_892_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:23:01.54875+01:00</StartTime>
+		<Duration>277828</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_092740_001_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:27:41.6425+01:00</StartTime>
+		<Duration>162953</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_093025_095_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:30:26.814375+01:00</StartTime>
+		<Duration>223468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_093411_033_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:34:13.689375+01:00</StartTime>
+		<Duration>93046</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_093547_095_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:35:48.92375+01:00</StartTime>
+		<Duration>210031</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_093919_689_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:39:23.33+01:00</StartTime>
+		<Duration>275875</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_094359_767_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:44:01.2675+01:00</StartTime>
+		<Duration>167296</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_094649_111_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:46:50.564375+01:00</StartTime>
+		<Duration>223171</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_095034_345_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:50:36.533125+01:00</StartTime>
+		<Duration>91390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_095208_283_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:52:09.48625+01:00</StartTime>
+		<Duration>205406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_095535_658_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T09:55:39.705+01:00</StartTime>
+		<Duration>276984</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_100017_267_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>temp</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-02-02T10:16:51.705+01:00</StartTime>
+		<Duration>258812</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_102111_267_temp.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>temp</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T10:32:54.470625+01:00</StartTime>
+		<Duration>159921</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_103535_126_temp.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T11:30:19.6875+01:00</StartTime>
+		<Duration>264625</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_113446_343_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T11:34:55.5625+01:00</StartTime>
+		<Duration>104968</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_113640_953_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T11:36:42.1875+01:00</StartTime>
+		<Duration>209437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_114012_343_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T11:40:15.6875+01:00</StartTime>
+		<Duration>160000</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_114256_171_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.ctc6 enter samples</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-02-02T11:42:57.46875+01:00</StartTime>
+		<Duration>1029406</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_120011_218_Samples.ctc6 enter samples.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T12:20:05.90625+01:00</StartTime>
+		<Duration>272765</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_122439_687_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T12:24:44.203125+01:00</StartTime>
+		<Duration>98437</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_122622_890_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Not Completed</TestResult>
+		<StartTime>2009-02-02T12:26:24.71875+01:00</StartTime>
+		<Duration>171093</Duration>
+		<Comment>Exception: Unable to create the specified run results folder.
+The folder may be in use by another program.
+Close other programs that are using this folder.</Comment>
+		<DetailReportPath />
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T12:29:15.828125+01:00</StartTime>
+		<Duration>164390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_123200_875_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-02-02T12:40:54.15625+01:00</StartTime>
+		<Duration>366546</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_124701_500_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:02:44.25+01:00</StartTime>
+		<Duration>233890</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_130638_421_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:06:40.921875+01:00</StartTime>
+		<Duration>92234</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_130813_390_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:11:41.375+01:00</StartTime>
+		<Duration>231468</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_131533_796_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC1 add instruments</TestName>
+		<TestResult>Failed</TestResult>
+		<StartTime>2009-02-02T13:16:07.8125+01:00</StartTime>
+		<Duration>247859</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_132017_343_Samples.CTC1 add instruments.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC2 check buttons</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:20:19.921875+01:00</StartTime>
+		<Duration>93390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_132153_718_Samples.CTC2 check buttons.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC3 add and remove user</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:21:54.703125+01:00</StartTime>
+		<Duration>206750</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_132523_031_Samples.CTC3 add and remove user.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC5 Login</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:25:26.34375+01:00</StartTime>
+		<Duration>168390</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_132815_421_Samples.CTC5 Login.docx</DetailReportPath>
+	</TestCaseResult>
+	<TestCaseResult>
+		<TestName>Samples.CTC7 Exit and Startup</TestName>
+		<TestResult>Passed</TestResult>
+		<StartTime>2009-02-02T13:28:17.125+01:00</StartTime>
+		<Duration>281125</Duration>
+		<Comment />
+		<DetailReportPath>c:\taf\reports\20090202_133259_156_Samples.CTC7 Exit and Startup.docx</DetailReportPath>
+	</TestCaseResult>
+</TestSetReport>
