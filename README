@@ -1,0 +1,2 @@
+Fork of NMock2
+ported various features from Jmock2 to better support desing of inter-object protocols.
