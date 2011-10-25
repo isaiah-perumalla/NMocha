@@ -7,13 +7,19 @@ namespace NMock2 {
 
     [TestFixture]
     public class StatesAcceptanceTest : AcceptanceTestBase {
-        
+        private IHelloWorld helloWorld;
+
+        [SetUp]
+        public void Before() {
+             helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+        }
+
         [Test]
         [ExpectedException(typeof(ExpectationException))]
         public void CanConstrainExpectationToOccurOnlyInAGivenState() {
             this.SkipVerificationForThisTest();
             var readiness = Mocks.States("readiness");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            
             Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
             Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
 
@@ -26,7 +32,6 @@ namespace NMock2 {
         [Test]
         public void AllowsExpectationsToOccurInCorrectState() {
             var readiness = Mocks.States("readiness");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
             Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
             Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
           
@@ -38,16 +43,29 @@ namespace NMock2 {
         public void CanStartInASpecificState() {
             var readiness = Mocks.States("readiness");
             readiness.StartAs("ready");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
             Stub.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
             helloWorld.Hello();
            
         }
 
         [Test]
+        [ExpectedException(typeof(ExpectationException))]
+        public void CanConstrainExpectionToAllStateConstraints() {
+            SkipVerificationForThisTest();
+            var readiness = Mocks.States("readiness");
+            readiness.StartAs("ready");
+            var fruitiness = Mocks.States("fruitiness");
+
+            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"))
+                                                       .When(fruitiness.Is("apple"));
+            helloWorld.Hello();
+            
+        }
+
+        [Test]
         public void TransitionsStateAfterExceptionIsThrow() {
             var readiness = Mocks.States("readiness");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            
             Expect.Once.On(helloWorld).Message("Hello").Will(Throw.Exception(new TestException()))
                                                        .Then(readiness.Is("ready"));
             Expect.Once.On(helloWorld).Message("Umm").When(readiness.Is("ready"));
@@ -69,7 +87,7 @@ namespace NMock2 {
             fruitness.StartAs("apple");
             var vegginess = Mocks.States("veginess");
             vegginess.StartAs("Carrot");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            
             Stub.On(helloWorld).Message("Hello").When(fruitness.IsNot("apple"));
             try
             {
@@ -90,7 +108,6 @@ namespace NMock2 {
             this.SkipVerificationForThisTest();
             var fruitness = Mocks.States("fruitness");
             fruitness.StartAs("apple");
-            var helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
             
             Expect.On(helloWorld).Message("Hello").When(fruitness.IsNot("apple"))
                                                   .Then(fruitness.Is("orange"));
