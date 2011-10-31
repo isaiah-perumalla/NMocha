@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining a value.
     /// </summary>
-    public interface IValueSyntax
-    {
+    public interface IValueSyntax {
         /// <summary>
         /// Defines a value.
         /// </summary>

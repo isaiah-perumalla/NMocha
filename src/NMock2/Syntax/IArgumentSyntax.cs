@@ -16,15 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using NMock2.Internal;
-
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax for defining expected arguments of a method call.
     /// </summary>
-    public interface IArgumentSyntax :  IMatchSyntax
-    {
+    public interface IArgumentSyntax : IMatchSyntax {
         /// <summary>
         /// Defines the arguments that are expected on the method call.
         /// </summary>
@@ -43,8 +39,5 @@ namespace NMock2.Syntax
         /// </summary>
         /// <returns>Matcher syntax.</returns>
         IMatchSyntax WithAnyArguments();
-
-       
     }
-
 }

@@ -16,23 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System;
-    using NMock2.Actions;
+using System;
+using NMock2.Actions;
 
+namespace NMock2 {
     /// <summary>
     /// Defines action for throwing actions.
     /// </summary>
-    public class Throw
-    {
+    public class Throw {
         /// <summary>
         /// Throws an exeception when the action is invoked.
         /// </summary>
         /// <param name="exception">The exception to throw when invoked.</param>
         /// <returns>Returns a new instance of the <see cref="ThrowAction"/> class.</returns>
-        public static IAction Exception(Exception exception)
-        {
+        public static IAction Exception(Exception exception) {
             return new ThrowAction(exception);
         }
     }

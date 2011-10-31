@@ -16,21 +16,18 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using NMock2.Matchers;
+using NMock2.Monitoring;
+using NMock2.Syntax;
 
-    using Matchers;
-    using Monitoring;
-    using Syntax;
-
+namespace NMock2.Internal {
     /// <summary>
     /// Allows a mock object to be incrementally defined, and then finally created.
     /// </summary>
-    public class MockBuilder : IMockDefinitionSyntax
-    {
+    public class MockBuilder : IMockDefinitionSyntax {
         /// <summary>
         /// A single empty array instance that is used as a default value
         /// for constructor arguments.
@@ -38,14 +35,9 @@ namespace NMock2.Internal
         private static readonly object[] EmptyArgsArray = new object[0];
 
         /// <summary>
-        /// The name of the mock object. Null is a valid value.
-        /// </summary>
-        private string name = null;
-
-        /// <summary>
         /// The types that the mock object needs to implement.
         /// </summary>
-        private List<Type> types = new List<Type>();
+        private readonly List<Type> types = new List<Type>();
 
         /// <summary>
         /// Constructor arguments for any class type that this mock might subclass.
@@ -55,10 +47,9 @@ namespace NMock2.Internal
         private object[] constructorArgs = EmptyArgsArray;
 
         /// <summary>
-        /// The MockStyle for the mock. If not specified, this will ultimately be
-        /// assumed to be MockStyle.Default.
+        /// The name of the mock object. Null is a valid value.
         /// </summary>
-        private MockStyle? mockStyle = null;
+        private string name;
 
         #region IMockDefinitionSyntax Members
 
@@ -68,9 +59,8 @@ namespace NMock2.Internal
         /// </summary>
         /// <typeparam name="T">The type to implement.</typeparam>
         /// <returns>The mock object definition.</returns>
-        public IMockDefinitionSyntax Implementing<T>()
-        {
-            this.types.Add(typeof(T));
+        public IMockDefinitionSyntax Implementing<T>() {
+            types.Add(typeof (T));
 
             return this;
         }
@@ -81,27 +71,8 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="types">The types to implement.</param>
         /// <returns>The mock object definition.</returns>
-        public IMockDefinitionSyntax Implementing(params Type[] types)
-        {
+        public IMockDefinitionSyntax Implementing(params Type[] types) {
             this.types.AddRange(types);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies how the mock object should behave when first created.
-        /// It is invalid to set the MockStyle of a mock more than once.
-        /// </summary>
-        /// <param name="style">A MockStyle value.</param>
-        /// <returns>The mock object definition.</returns>
-        public IMockDefinitionSyntax OfStyle(MockStyle style)
-        {
-            if (this.mockStyle.HasValue)
-            {
-                throw new InvalidOperationException("MockStyle has already been set for this mock definition.");
-            }
-
-            this.mockStyle = style;
 
             return this;
         }
@@ -113,14 +84,14 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="args">The arguments for the class constructor.</param>
         /// <returns>The mock object definition.</returns>
-        public IMockDefinitionSyntax WithArgs(params object[] args)
-        {
-            if (this.constructorArgs != EmptyArgsArray)
+        public IMockDefinitionSyntax WithArgs(params object[] args) {
+            if (constructorArgs != EmptyArgsArray)
             {
-                throw new InvalidOperationException("Constructor arguments have already been specified for this mock definition.");
+                throw new InvalidOperationException(
+                    "Constructor arguments have already been specified for this mock definition.");
             }
 
-            this.constructorArgs = args;
+            constructorArgs = args;
 
             return this;
         }
@@ -132,8 +103,7 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="name">The name for the mock.</param>
         /// <returns>The mock object definition.</returns>
-        public IMockDefinitionSyntax Named(string name)
-        {
+        public IMockDefinitionSyntax Named(string name) {
             if (this.name != null)
             {
                 throw new InvalidOperationException("A name has already been specified for this mock definition.");
@@ -144,10 +114,6 @@ namespace NMock2.Internal
             return this;
         }
 
-        #endregion
-
-        #region IMockDefinition Members
-
         /// <summary>
         /// This method supports NMock2 infrastructure and is not intended to be called directly from your code.
         /// </summary>
@@ -155,18 +121,17 @@ namespace NMock2.Internal
         /// <param name="mockery">The current <see cref="Mockery"/> instance.</param>
         /// <param name="mockObjectFactory">An <see cref="IMockObjectFactory"/> to use when creating the mock.</param>
         /// <returns>A new mock instance.</returns>
-        public object Create(Type primaryType, Mockery mockery, IMockObjectFactory mockObjectFactory)
-        {
-            if (this.name == null)
+        public object Create(Type primaryType, Mockery mockery, IMockObjectFactory mockObjectFactory) {
+            if (name == null)
             {
-                this.name = this.DefaultNameFor(primaryType);
+                name = DefaultNameFor(primaryType);
             }
 
-            CompositeType compositeType = new CompositeType(primaryType, this.types.ToArray());
+            var compositeType = new CompositeType(primaryType, types.ToArray());
 
             if (compositeType.PrimaryType.IsInterface)
             {
-                if (this.constructorArgs.Length > 0)
+                if (constructorArgs.Length > 0)
                 {
                     throw new InvalidOperationException("Cannot specify constructor arguments when mocking an interface");
                 }
@@ -177,9 +142,8 @@ namespace NMock2.Internal
             return mockObjectFactory.CreateMock(
                 mockery,
                 compositeType,
-                this.name,
-                this.mockStyle ?? MockStyle.Default,
-                this.constructorArgs);
+                name,
+                constructorArgs);
         }
 
         #endregion
@@ -189,14 +153,13 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="type">The type to get the default name for.</param>
         /// <returns>Default name for the specified type.</returns>
-        protected virtual string DefaultNameFor(Type type)
-        {
+        protected virtual string DefaultNameFor(Type type) {
             string name = type.Name;
             int firstLower = FirstLowerCaseChar(name);
 
-            return firstLower == name.Length ?
-                    name.ToLower() :
-                    name.Substring(firstLower - 1, 1).ToLower() + name.Substring(firstLower);
+            return firstLower == name.Length
+                       ? name.ToLower()
+                       : name.Substring(firstLower - 1, 1).ToLower() + name.Substring(firstLower);
         }
 
         /// <summary>
@@ -204,8 +167,7 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="s">The string to inspect.</param>
         /// <returns>the first lower case char in the specified string.</returns>
-        private static int FirstLowerCaseChar(string s)
-        {
+        private static int FirstLowerCaseChar(string s) {
             int i = 0;
             while (i < s.Length && !Char.IsLower(s[i]))
             {
@@ -219,14 +181,12 @@ namespace NMock2.Internal
         /// Checks that interfaces do not contain ToString method declarations.
         /// </summary>
         /// <param name="mockedTypes">The types that are to be mocked.</param>
-        private static void CheckInterfacesDoNotContainToStringMethodDeclaration(CompositeType mockedTypes)
-        {
-            foreach (MethodInfo method in mockedTypes.GetMatchingMethods(new MethodNameMatcher("ToString"), false))
+        private static void CheckInterfacesDoNotContainToStringMethodDeclaration(CompositeType mockedTypes) {
+            if (
+                mockedTypes.GetMatchingMethods(new MethodNameMatcher("ToString"), false).Any(
+                    method => method.ReflectedType.IsInterface && method.GetParameters().Length == 0))
             {
-                if (method.ReflectedType.IsInterface && method.GetParameters().Length == 0)
-                {
-                    throw new ArgumentException("Interfaces must not contain a declaration for ToString().");
-                }
+                throw new ArgumentException("Interfaces must not contain a declaration for ToString().");
             }
         }
     }

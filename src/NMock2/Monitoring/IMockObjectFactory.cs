@@ -16,11 +16,9 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using NMock2.Internal;
-    
+using NMock2.Internal;
+
+namespace NMock2.Monitoring {
     /// <summary>
     /// Implementations of this interface are responsible for generating runtime
     /// proxies of classes and interfaces for use as mock objects.
@@ -30,17 +28,15 @@ namespace NMock2.Monitoring
     /// intercepting calls to their public members. Intercepted calls should be
     /// forwarded on to the supplied Mockery for processing against expectations.
     /// </remarks>
-    public interface IMockObjectFactory
-    {
+    public interface IMockObjectFactory {
         /// <summary>
         /// Creates a mock of the specified type(s).
         /// </summary>
         /// <param name="mockery">The mockery used to create this mock instance.</param>
         /// <param name="typesToMock">The type(s) to include in the mock.</param>
         /// <param name="name">The name to use for the mock instance.</param>
-        /// <param name="mockStyle">The behaviour of the mock instance when first created.</param>
         /// <param name="constructorArgs">Constructor arguments for the class to be mocked. Only valid if mocking a class type.</param>
         /// <returns>A mock instance of the specified type(s).</returns>
-        object CreateMock(Mockery mockery, CompositeType typesToMock, string name, MockStyle mockStyle, object[] constructorArgs);
+        object CreateMock(Mockery mockery, CompositeType typesToMock, string name, object[] constructorArgs);
     }
 }

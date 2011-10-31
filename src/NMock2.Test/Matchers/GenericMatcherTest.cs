@@ -17,57 +17,55 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace NMock2.Test.Matchers
-{
-    using NMock2.Matchers;
-    using NUnit.Framework;
+using NMock2.Matchers;
+using NUnit.Framework;
 
+namespace NMock2.Test.Matchers {
     /// <summary>
     /// Tests the implementation of <see cref="GenericMatcher{T}"/>
     /// </summary>
     [TestFixture]
-    public class GenericMatcherTest
-    {
-        /// <summary>
-        /// The object under test
-        /// </summary>
-        private GenericMatcher<string> testee;
+    public class GenericMatcherTest {
+        #region Setup/Teardown
 
         /// <summary>
         /// Sets up the tests.
         /// Creates the testee.
         /// </summary>
         [SetUp]
-        public void SetUp()
-        {
-            this.testee = new GenericMatcher<string>(value => value.Contains("abc"));
+        public void SetUp() {
+            testee = new GenericMatcher<string>(value => value.Contains("abc"));
+        }
+
+        #endregion
+
+        /// <summary>
+        /// The object under test
+        /// </summary>
+        private GenericMatcher<string> testee;
+
+        /// <summary>
+        /// A correct value matches the expectation.
+        /// </summary>
+        [Test]
+        public void CorrectValueMatch() {
+            Assert.IsTrue(testee.Matches("wwwabcxxx"));
         }
 
         /// <summary>
         /// A wrong type does not match the expectation.
         /// </summary>
         [Test]
-        public void WrongTypeDoesNotMatch()
-        {
-            Assert.IsFalse(this.testee.Matches(4));
+        public void WrongTypeDoesNotMatch() {
+            Assert.IsFalse(testee.Matches(4));
         }
 
         /// <summary>
         /// A wrong value does not match the expectation.
         /// </summary>
         [Test]
-        public void WrongValueDoesNotMatch()
-        {
-            Assert.IsFalse(this.testee.Matches("www"));
-        }
-
-        /// <summary>
-        /// A correct value matches the expectation.
-        /// </summary>
-        [Test]
-        public void CorrectValueMatch()
-        {
-            Assert.IsTrue(this.testee.Matches("wwwabcxxx"));
+        public void WrongValueDoesNotMatch() {
+            Assert.IsFalse(testee.Matches("www"));
         }
     }
 }

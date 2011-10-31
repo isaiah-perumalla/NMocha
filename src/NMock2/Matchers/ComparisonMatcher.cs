@@ -16,30 +16,28 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
+using System;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks a value against upper and lower bounds.
     /// </summary>
-    public class ComparisonMatcher : Matcher
-    {
+    public class ComparisonMatcher : Matcher {
         /// <summary>
-        /// Stores the value to be compared.
+        /// Stores the maximum comparison result for a successful match.
         /// </summary>
-        private readonly IComparable value;
-        
+        private readonly int maxComparisonResult;
+
         /// <summary>
         /// Stores the minimum comparison result for a successful match.
         /// </summary>
         private readonly int minComparisonResult;
 
         /// <summary>
-        /// Stores the maximum comparison result for a successful match.
+        /// Stores the value to be compared.
         /// </summary>
-        private readonly int maxComparisonResult;
+        private readonly IComparable value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ComparisonMatcher"/> class.
@@ -47,13 +45,12 @@ namespace NMock2.Matchers
         /// <param name="value">The value to compare.</param>
         /// <param name="comparisonResult1">The first allowed comparison result (result of value.CompareTo(other)).</param>
         /// <param name="comparisonResult2">The second allowed comparison result (result of value.CompareTo(other)).</param>
-        public ComparisonMatcher(IComparable value, int comparisonResult1, int comparisonResult2)
-        {
+        public ComparisonMatcher(IComparable value, int comparisonResult1, int comparisonResult2) {
             this.value = value;
-            this.minComparisonResult = Math.Min(comparisonResult1, comparisonResult2);
-            this.maxComparisonResult = Math.Max(comparisonResult1, comparisonResult2);
-            
-            if (this.minComparisonResult == -1 && this.maxComparisonResult == 1)
+            minComparisonResult = Math.Min(comparisonResult1, comparisonResult2);
+            maxComparisonResult = Math.Max(comparisonResult1, comparisonResult2);
+
+            if (minComparisonResult == -1 && maxComparisonResult == 1)
             {
                 throw new ArgumentException("comparison result range too large", "comparisonResult1, comparisonResult2");
             }
@@ -64,13 +61,12 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object compared to the value resulted in either of both specified comparison results.</returns>
-        public override bool Matches(object o)
-        {
-            if (o.GetType() == this.value.GetType())
+        public override bool Matches(object o) {
+            if (o.GetType() == value.GetType())
             {
-                int comparisonResult = -this.value.CompareTo(o);
-                return comparisonResult >= this.minComparisonResult
-                    && comparisonResult <= this.maxComparisonResult;
+                int comparisonResult = -value.CompareTo(o);
+                return comparisonResult >= minComparisonResult
+                       && comparisonResult <= maxComparisonResult;
             }
             else
             {
@@ -82,26 +78,25 @@ namespace NMock2.Matchers
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("? ");
-            if (this.minComparisonResult == -1)
+            if (minComparisonResult == -1)
             {
                 writer.Write("<");
             }
 
-            if (this.maxComparisonResult == 1)
+            if (maxComparisonResult == 1)
             {
                 writer.Write(">");
             }
 
-            if (this.minComparisonResult == 0 || this.maxComparisonResult == 0)
+            if (minComparisonResult == 0 || maxComparisonResult == 0)
             {
                 writer.Write("=");
             }
 
             writer.Write(" ");
-            writer.Write(this.value);
+            writer.Write(value);
         }
     }
 }

@@ -23,11 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D32A
 		..\publish.cmd = ..\publish.cmd
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMock2", "NMock2\NMock2.csproj", "{79C78732-B34C-4429-B678-C8ADE5FB5BE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha", "NMock2\NMocha.csproj", "{79C78732-B34C-4429-B678-C8ADE5FB5BE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMock2.Test", "NMock2.Test\NMock2.Test.csproj", "{EDBAD353-CCD6-41FE-BB87-B0995078631A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.Test", "NMock2.Test\NMocha.Test.csproj", "{EDBAD353-CCD6-41FE-BB87-B0995078631A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMock2.AcceptanceTests", "NMock2.AcceptanceTests\NMock2.AcceptanceTests.csproj", "{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.AcceptanceTests", "NMock2.AcceptanceTests\NMocha.AcceptanceTests.csproj", "{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

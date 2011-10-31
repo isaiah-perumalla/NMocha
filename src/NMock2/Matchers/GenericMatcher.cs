@@ -16,18 +16,27 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
+using System;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether a value matches the check provided as a delegate.
     /// the expectation.
     /// </summary>
     /// <typeparam name="T">The type of the expected value.</typeparam>
-    public class GenericMatcher<T> : Matcher
-    {
+    public class GenericMatcher<T> : Matcher {
+        #region Delegates
+
+        /// <summary>
+        /// The test that is performed to check if the <paramref name="value"/> matches the expectation.
+        /// </summary>
+        /// <param name="value">The actually received value.</param>
+        /// <returns>True then value matches the expectation.</returns>
+        public delegate bool MatchExpression(T value);
+
+        #endregion
+
         /// <summary>
         /// The test that is performed to see if the value matches the expectation.
         /// </summary>
@@ -38,8 +47,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="matchExpression">The test that is performed to check if the value matches expectation.</param>
         /// <exception cref="ArgumentNullException"><c>matchExpression</c> is null.</exception>
-        public GenericMatcher(MatchExpression matchExpression)
-        {
+        public GenericMatcher(MatchExpression matchExpression) {
             if (matchExpression == null)
             {
                 throw new ArgumentNullException("matchExpression", "matchExpression must not be null.");
@@ -49,28 +57,19 @@ namespace NMock2.Matchers
         }
 
         /// <summary>
-        /// The test that is performed to check if the <paramref name="value"/> matches the expectation.
-        /// </summary>
-        /// <param name="value">The actually received value.</param>
-        /// <returns>True then value matches the expectation.</returns>
-        public delegate bool MatchExpression(T value);
-
-        /// <summary>
         /// Matches the specified object to this matcher and returns whether it matches.
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object matches.</returns>
-        public override bool Matches(object o)
-        {
-            return o is T && this.matchExpression((T)o);
+        public override bool Matches(object o) {
+            return o is T && matchExpression((T) o);
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("generic match");
         }
     }

@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
-    using System.Reflection;
+using System.IO;
+using System.Reflection;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual object is a <see cref="MethodInfo"/> and its name is equal to the expected name.
     /// </summary>
-    public class MethodNameMatcher : Matcher
-    {
+    public class MethodNameMatcher : Matcher {
         /// <summary>
         /// Holds the expected name of the mocked method.
         /// </summary>
@@ -35,8 +33,7 @@ namespace NMock2.Matchers
         /// Initializes a new instance of the <see cref="MethodNameMatcher"/> class.
         /// </summary>
         /// <param name="methodName">The expected name of the method.</param>
-        public MethodNameMatcher(string methodName)
-        {
+        public MethodNameMatcher(string methodName) {
             this.methodName = methodName;
         }
 
@@ -45,18 +42,16 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The MethodInfo to match.</param>
         /// <returns>Whether the object is a MethodInfo and its name matches the expected one.</returns>
-        public override bool Matches(object o)
-        {
-            return o is MethodInfo && ((MethodInfo)o).Name == this.methodName;
+        public override bool Matches(object o) {
+            return o is MethodInfo && ((MethodInfo) o).Name == methodName;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
-            writer.Write(this.methodName);
+        public override void DescribeTo(TextWriter writer) {
+            writer.Write(methodName);
         }
     }
 }

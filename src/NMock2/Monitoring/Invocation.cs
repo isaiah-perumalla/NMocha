@@ -16,25 +16,17 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Text;
-
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using NMock2.Internal;
 
+namespace NMock2.Monitoring {
     /// <summary>
     /// Represents the invocation of a method on an object (receiver).
     /// </summary>
-    public class Invocation : ISelfDescribing
-    {
-        /// <summary>
-        /// Holds the receiver providing the method.
-        /// </summary>
-        public readonly object Receiver;
-
+    public class Invocation : ISelfDescribing {
         /// <summary>
         /// Holds the method that is being invoked.
         /// </summary>
@@ -46,9 +38,9 @@ using NMock2.Internal;
         public readonly ParameterList Parameters;
 
         /// <summary>
-        /// Holds the result of the invocation.
+        /// Holds the receiver providing the method.
         /// </summary>
-        private object result = Missing.Value;
+        public readonly object Receiver;
 
         /// <summary>
         /// Holds the exception to be thrown. When this field has been set, <see cref="isThrowing"/> will become true.
@@ -61,36 +53,35 @@ using NMock2.Internal;
         private bool isThrowing;
 
         /// <summary>
+        /// Holds the result of the invocation.
+        /// </summary>
+        private object result = Missing.Value;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Invocation"/> class.
         /// </summary>
         /// <param name="receiver">The receiver providing the method.</param>
         /// <param name="method">The method.</param>
         /// <param name="parameters">The parameters passed to the method..</param>
-        public Invocation(object receiver, MethodInfo method, object[] parameters)
-        {
-            this.Receiver = receiver;
-            this.Method = method;
-            this.Parameters = new ParameterList(method, parameters);
+        public Invocation(object receiver, MethodInfo method, object[] parameters) {
+            Receiver = receiver;
+            Method = method;
+            Parameters = new ParameterList(method, parameters);
         }
 
         /// <summary>
         /// Gets or sets the result of the invocation.
         /// </summary>
         /// <value>The result.</value>
-        public object Result
-        {
-            get
-            {
-                return this.result;
-            }
+        public object Result {
+            get { return result; }
 
-            set
-            {
-                this.CheckReturnType(value);
+            set {
+                CheckReturnType(value);
 
-                this.result = value;
-                this.exception = null;
-                this.isThrowing = false;
+                result = value;
+                exception = null;
+                isThrowing = false;
             }
         }
 
@@ -98,23 +89,18 @@ using NMock2.Internal;
         /// Gets or sets the exception that is thrown on the invocation.
         /// </summary>
         /// <value>The exception.</value>
-        public Exception Exception
-        {
-            get
-            {
-                return this.exception;
-            }
+        public Exception Exception {
+            get { return exception; }
 
-            set
-            {
+            set {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
                 }
 
-                this.exception = value;
-                this.result = null;
-                this.isThrowing = true;
+                exception = value;
+                result = null;
+                isThrowing = true;
             }
         }
 
@@ -124,22 +110,68 @@ using NMock2.Internal;
         /// <value>
         ///     <c>true</c> if this invocation is throwing an exception; otherwise, <c>false</c>.
         /// </value>
-        public bool IsThrowing
-        {
-            get { return this.isThrowing; }
+        public bool IsThrowing {
+            get { return isThrowing; }
         }
+
+        #region ISelfDescribing Members
+
+        /// <summary>
+        /// Describes this object to the specified <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="writer">The text writer the description is added to.</param>
+        public void DescribeTo(TextWriter writer) {
+            // This should really be a mock object in most cases, but a few testcases
+            // seem to supply strings etc as a Receiver.
+            var mock = Receiver as IMockObject;
+
+            if (mock != null)
+            {
+                writer.Write(mock.MockName);
+            }
+            else
+            {
+                writer.Write(Receiver.ToString());
+            }
+
+            if (MethodIsIndexerGetter())
+            {
+                DescribeAsIndexerGetter(writer);
+            }
+            else if (MethodIsIndexerSetter())
+            {
+                DescribeAsIndexerSetter(writer);
+            }
+            else if (MethodIsEventAdder())
+            {
+                DescribeAsEventAdder(writer);
+            }
+            else if (MethodIsEventRemover())
+            {
+                DescribeAsEventRemover(writer);
+            }
+            else if (MethodIsProperty())
+            {
+                DescribeAsProperty(writer);
+            }
+            else
+            {
+                DescribeNormalMethod(writer);
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Invokes this invocation on the specified receiver and stores the result and exception
         /// returns/thrown by the invocation.
         /// </summary>
         /// <param name="otherReceiver">The other receiver.</param>
-        public void InvokeOn(object otherReceiver)
-        {
+        public void InvokeOn(object otherReceiver) {
             try
             {
-                this.Result = this.Method.Invoke(otherReceiver, this.Parameters.AsArray);
-                this.Parameters.MarkAllValuesAsSet();
+                Result = Method.Invoke(otherReceiver, Parameters.AsArray);
+                Parameters.MarkAllValuesAsSet();
             }
             catch (TargetInvocationException e)
             {
@@ -148,73 +180,30 @@ using NMock2.Internal;
         }
 
         /// <summary>
-        /// Describes this object to the specified <paramref name="writer"/>.
-        /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer)
-        {
-            // This should really be a mock object in most cases, but a few testcases
-            // seem to supply strings etc as a Receiver.
-            IMockObject mock = this.Receiver as IMockObject;
-
-            if (mock != null)
-            {
-                writer.Write(mock.MockName);
-            }
-            else
-            {
-                writer.Write(this.Receiver.ToString());
-            }
-
-            if (this.MethodIsIndexerGetter())
-            {
-                this.DescribeAsIndexerGetter(writer);
-            }
-            else if (this.MethodIsIndexerSetter())
-            {
-                this.DescribeAsIndexerSetter(writer);
-            }
-            else if (this.MethodIsEventAdder())
-            {
-                this.DescribeAsEventAdder(writer);
-            }
-            else if (this.MethodIsEventRemover())
-            {
-                this.DescribeAsEventRemover(writer);
-            }
-            else if (this.MethodIsProperty())
-            {
-                this.DescribeAsProperty(writer);
-            }
-            else
-            {
-                this.DescribeNormalMethod(writer);
-            }
-        }
-
-        /// <summary>
         /// Checks the returnType of the initialized method if it is valid to be mocked.
         /// </summary>
         /// <param name="value">The return value to be checked.</param>
-        private void CheckReturnType(object value)
-        {
-            if (this.Method.ReturnType == typeof(void) && value != null)
+        private void CheckReturnType(object value) {
+            if (Method.ReturnType == typeof (void) && value != null)
             {
                 throw new ArgumentException("cannot return a value from a void method", "value");
             }
 
-            if (this.Method.ReturnType != typeof(void) && this.Method.ReturnType.IsValueType && value == null)
+            if (Method.ReturnType != typeof (void) && Method.ReturnType.IsValueType && value == null)
             {
-                if (!(this.Method.ReturnType.IsGenericType && this.Method.ReturnType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (
+                    !(Method.ReturnType.IsGenericType &&
+                      Method.ReturnType.GetGenericTypeDefinition() == typeof (Nullable<>)))
                 {
                     throw new ArgumentException("cannot return a null value type", "value");
                 }
             }
 
-            if (value != null && !this.Method.ReturnType.IsInstanceOfType(value))
+            if (value != null && !Method.ReturnType.IsInstanceOfType(value))
             {
                 throw new ArgumentException(
-                    "cannot return a value of type " + this.DescribeType(value) + " from a method returning " + this.Method.ReturnType,
+                    "cannot return a value of type " + DescribeType(value) + " from a method returning " +
+                    Method.ReturnType,
                     "value");
             }
         }
@@ -225,11 +214,10 @@ using NMock2.Internal;
         /// <returns>
         /// Returns true if initialized method is a property; false otherwise.
         /// </returns>
-        private bool MethodIsProperty()
-        {
-            return this.Method.IsSpecialName &&
-                   ((this.Method.Name.StartsWith("get_") && this.Parameters.Count == 0) ||
-                    (this.Method.Name.StartsWith("set_") && this.Parameters.Count == 1));
+        private bool MethodIsProperty() {
+            return Method.IsSpecialName &&
+                   ((Method.Name.StartsWith("get_") && Parameters.Count == 0) ||
+                    (Method.Name.StartsWith("set_") && Parameters.Count == 1));
         }
 
         /// <summary>
@@ -238,11 +226,10 @@ using NMock2.Internal;
         /// <returns>
         /// Returns true if initialized method is an index getter; false otherwise.
         /// </returns>
-        private bool MethodIsIndexerGetter()
-        {
-            return this.Method.IsSpecialName
-                && this.Method.Name == "get_Item"
-                && this.Parameters.Count >= 1;
+        private bool MethodIsIndexerGetter() {
+            return Method.IsSpecialName
+                   && Method.Name == "get_Item"
+                   && Parameters.Count >= 1;
         }
 
         /// <summary>
@@ -251,11 +238,10 @@ using NMock2.Internal;
         /// <returns>
         /// Returns true if initialized method is an index setter; false otherwise.
         /// </returns>
-        private bool MethodIsIndexerSetter()
-        {
-            return this.Method.IsSpecialName
-                && this.Method.Name == "set_Item"
-                && this.Parameters.Count >= 2;
+        private bool MethodIsIndexerSetter() {
+            return Method.IsSpecialName
+                   && Method.Name == "set_Item"
+                   && Parameters.Count >= 2;
         }
 
         /// <summary>
@@ -264,12 +250,11 @@ using NMock2.Internal;
         /// <returns>
         /// Returns true if initialized method is an event adder; false otherwise.
         /// </returns>
-        private bool MethodIsEventAdder()
-        {
-            return this.Method.IsSpecialName
-                && this.Method.Name.StartsWith("add_")
-                && this.Parameters.Count == 1
-                && typeof(Delegate).IsAssignableFrom(this.Method.GetParameters()[0].ParameterType);
+        private bool MethodIsEventAdder() {
+            return Method.IsSpecialName
+                   && Method.Name.StartsWith("add_")
+                   && Parameters.Count == 1
+                   && typeof (Delegate).IsAssignableFrom(Method.GetParameters()[0].ParameterType);
         }
 
         /// <summary>
@@ -278,26 +263,24 @@ using NMock2.Internal;
         /// <returns>
         /// Returns true if initialized method is an event remover; false otherwise.
         /// </returns>
-        private bool MethodIsEventRemover()
-        {
-            return this.Method.IsSpecialName
-                && this.Method.Name.StartsWith("remove_")
-                && this.Parameters.Count == 1
-                && typeof(Delegate).IsAssignableFrom(this.Method.GetParameters()[0].ParameterType);
+        private bool MethodIsEventRemover() {
+            return Method.IsSpecialName
+                   && Method.Name.StartsWith("remove_")
+                   && Parameters.Count == 1
+                   && typeof (Delegate).IsAssignableFrom(Method.GetParameters()[0].ParameterType);
         }
 
         /// <summary>
         /// Describes the property with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsProperty(TextWriter writer)
-        {
+        private void DescribeAsProperty(TextWriter writer) {
             writer.Write(".");
-            writer.Write(this.Method.Name.Substring(4));
-            if (this.Parameters.Count > 0)
+            writer.Write(Method.Name.Substring(4));
+            if (Parameters.Count > 0)
             {
                 writer.Write(" = ");
-                writer.Write(this.Parameters[0]);
+                writer.Write(Parameters[0]);
             }
         }
 
@@ -305,10 +288,9 @@ using NMock2.Internal;
         /// Describes the index setter with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsIndexerGetter(TextWriter writer)
-        {
+        private void DescribeAsIndexerGetter(TextWriter writer) {
             writer.Write("[");
-            this.WriteParameterList(writer, this.Parameters.Count);
+            WriteParameterList(writer, Parameters.Count);
             writer.Write("]");
         }
 
@@ -316,27 +298,25 @@ using NMock2.Internal;
         /// Describes the index setter with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsIndexerSetter(TextWriter writer)
-        {
+        private void DescribeAsIndexerSetter(TextWriter writer) {
             writer.Write("[");
-            this.WriteParameterList(writer, this.Parameters.Count - 1);
+            WriteParameterList(writer, Parameters.Count - 1);
             writer.Write("] = ");
-            writer.Write(this.Parameters[this.Parameters.Count - 1]);
+            writer.Write(Parameters[Parameters.Count - 1]);
         }
 
         /// <summary>
         /// Describes the method with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeNormalMethod(TextWriter writer)
-        {
+        private void DescribeNormalMethod(TextWriter writer) {
             writer.Write(".");
-            writer.Write(this.Method.Name);
+            writer.Write(Method.Name);
 
-            this.WriteTypeParams(writer);
+            WriteTypeParams(writer);
 
             writer.Write("(");
-            this.WriteParameterList(writer, this.Parameters.Count);
+            WriteParameterList(writer, Parameters.Count);
             writer.Write(")");
         }
 
@@ -344,9 +324,8 @@ using NMock2.Internal;
         /// Writes the generic parameters of the method to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void WriteTypeParams(TextWriter writer)
-        {
-            Type[] types = this.Method.GetGenericArguments();
+        private void WriteTypeParams(TextWriter writer) {
+            Type[] types = Method.GetGenericArguments();
             if (types.Length > 0)
             {
                 writer.Write("<");
@@ -370,8 +349,7 @@ using NMock2.Internal;
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
         /// <param name="count">The count of parameters to describe.</param>
-        private void WriteParameterList(TextWriter writer, int count)
-        {
+        private void WriteParameterList(TextWriter writer, int count) {
             for (int i = 0; i < count; i++)
             {
                 if (i > 0)
@@ -379,13 +357,13 @@ using NMock2.Internal;
                     writer.Write(", ");
                 }
 
-                if (this.Method.GetParameters()[i].IsOut)
+                if (Method.GetParameters()[i].IsOut)
                 {
                     writer.Write("out");
                 }
                 else
                 {
-                    writer.Write(this.Parameters[i]);
+                    writer.Write(Parameters[i]);
                 }
             }
         }
@@ -394,24 +372,22 @@ using NMock2.Internal;
         /// Describes the event adder to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsEventAdder(TextWriter writer)
-        {
+        private void DescribeAsEventAdder(TextWriter writer) {
             writer.Write(".");
-            writer.Write(this.Method.Name.Substring(4));
+            writer.Write(Method.Name.Substring(4));
             writer.Write(" += ");
-            writer.Write(this.Parameters[0]);
+            writer.Write(Parameters[0]);
         }
 
         /// <summary>
         /// Describes the event remover to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsEventRemover(TextWriter writer)
-        {
+        private void DescribeAsEventRemover(TextWriter writer) {
             writer.Write(".");
-            writer.Write(this.Method.Name.Substring(7));
+            writer.Write(Method.Name.Substring(7));
             writer.Write(" -= ");
-            writer.Write(this.Parameters[0]);
+            writer.Write(Parameters[0]);
         }
 
         /// <summary>
@@ -421,10 +397,9 @@ using NMock2.Internal;
         /// <returns>
         /// Returns a string containing the description of the given object's interfaces.
         /// </returns>
-        private string DescribeType(object obj)
-        {
+        private string DescribeType(object obj) {
             Type type = obj.GetType();
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(type);
 
             Type[] interfaceTypes = type.GetInterfaces();

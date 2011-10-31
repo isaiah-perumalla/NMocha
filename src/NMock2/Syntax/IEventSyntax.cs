@@ -16,15 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
-    using NMock2.Syntax;
-
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax for defining the object that fires an event. 
     /// </summary>
-    public interface IEventSyntax
-    {
+    public interface IEventSyntax {
         /// <summary>
         /// Defines the object that fires the event.
         /// </summary>
@@ -36,8 +32,7 @@ namespace NMock2.Syntax
     /// <summary>
     /// Syntax for defining the event that is fired.
     /// </summary>
-    public interface INewEventSyntax
-    {
+    public interface INewEventSyntax {
         /// <summary>
         /// Defines the event to fire.
         /// </summary>

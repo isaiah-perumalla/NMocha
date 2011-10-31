@@ -17,17 +17,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using NMock2.Syntax;
+using System.Reflection;
+using NMock2.Internal;
+using NMock2.Monitoring;
 
-namespace NMock2
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using Internal;
-    using Monitoring;
-
+namespace NMock2 {
     /// <summary>
     /// Delegate used to override default type returned in stub behavior.
     /// </summary>
@@ -40,28 +37,25 @@ namespace NMock2
     /// The mockery is used to create dynamic mocks and check that all expectations were met during a unit test.
     /// </summary>
     /// <remarks>Name inspired by Ivan Moore.</remarks>
-    public class Mockery : IDisposable
-    {
+    public class Mockery :  IDisposable, IExpectationCollector, IInvocationListener {
         /// <summary>
         /// In the rare case where the default mock object factory is replaced, we hold on to the
         /// previous factory (or factories) in case we need to switch back to them.
         /// </summary>
-        private static readonly Dictionary<Type, IMockObjectFactory> availableMockObjectFactories = new Dictionary<Type, IMockObjectFactory>();
+        private static readonly Dictionary<Type, IMockObjectFactory> availableMockObjectFactories =
+            new Dictionary<Type, IMockObjectFactory>();
+
+        /// <summary>
+        /// The mock object factory that will be used when a new Mockery instance is created
+        /// </summary>
+        private static IMockObjectFactory defaultMockObjectFactory;
 
         /// <summary>
         /// The mock object factory that is being used by this Mockery instance.
         /// </summary>
         private readonly IMockObjectFactory currentMockObjectFactory;
 
-        /// <summary>
-        /// Holds all mapping from mocks/types to mock styles.
-        /// </summary>
-        private readonly StubMockStyleDictionary stubMockStyleDictionary = new StubMockStyleDictionary();
-
-        /// <summary>
-        /// The mock object factory that will be used when a new Mockery instance is created
-        /// </summary>
-        private static IMockObjectFactory defaultMockObjectFactory;
+        private readonly List<IStates> stateMachines = new List<IStates>();
 
         /// <summary>
         /// Depth of cascaded ordered, unordered expectation blocks.
@@ -74,9 +68,9 @@ namespace NMock2
         private IExpectationOrdering expectations;
 
         /// <summary>
-        /// Expectations at current cascade level.
+        /// The delegate used to resolve the default type returned as return value in calls to mocks with stub behavior.
         /// </summary>
-        private IExpectationOrdering topOrdering;
+        private ResolveTypeDelegate resolveTypeDelegate;
 
         /// <summary>
         /// If an unexpected invocation exception is thrown then it is stored here to re-throw it in the 
@@ -85,29 +79,25 @@ namespace NMock2
         private ExpectationException thrownUnexpectedInvocationException;
 
         /// <summary>
-        /// The delegate used to resolve the default type returned as return value in calls to mocks with stub behavior.
+        /// Expectations at current cascade level.
         /// </summary>
-        private ResolveTypeDelegate resolveTypeDelegate;
-
-        readonly List<IStates> stateMachines = new List<IStates>();
+        private IExpectationOrdering topOrdering;
 
         /// <summary>
         /// Initializes static members of the <see cref="NMock2.Mockery"/> class.
         /// </summary>
-        static Mockery()
-        {
-            ChangeDefaultMockObjectFactory(typeof(CastleMockObjectFactory));
+        static Mockery() {
+            ChangeDefaultMockObjectFactory(typeof (CastleMockObjectFactory));
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NMock2.Mockery"/> class.
         /// Clears all expectations.
         /// </summary>
-        public Mockery()
-        {
-            this.currentMockObjectFactory = defaultMockObjectFactory;
-            
-            this.ClearExpectations();
+        public Mockery() {
+            currentMockObjectFactory = defaultMockObjectFactory;
+
+            ClearExpectations();
         }
 
         /// <summary>
@@ -116,9 +106,8 @@ namespace NMock2
         /// </summary>
         /// <value>Disposable object. When this object is disposed then the ordered expectation mode is set back to the mode it was previously
         /// to call to <see cref="Ordered"/>.</value>
-        public IDisposable Ordered
-        {
-            get { return this.Push(new OrderedExpectations(this.depth)); }
+        public IDisposable Ordered {
+            get { return Push(new OrderedExpectations(depth)); }
         }
 
         /// <summary>
@@ -127,19 +116,28 @@ namespace NMock2
         /// </summary>
         /// <value>Disposable object. When this object is disposed then the unordered expectation mode is set back to the mode it was previously
         /// to the call to <see cref="Unordered"/>.</value>
-        public IDisposable Unordered
-        {
-            get { return this.Push(new UnorderedExpectations(this.depth)); }
+        public IDisposable Unordered {
+            get { return Push(new UnorderedExpectations(depth)); }
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// Disposes the mockery be verifying that all expectations were met.
+        /// </summary>
+        public void Dispose() {
+            VerifyAllExpectationsHaveBeenMet();
+        }
+
+        #endregion
 
         /// <summary>
         /// Allows the default <see cref="IMockObjectFactory"/> to be replaced with a different implementation.
         /// </summary>
         /// <param name="factoryType">The System.Type of the <see cref="IMockObjectFactory"/> implementation to use.
         /// This is expected to implement <see cref="IMockObjectFactory"/> and have a default constructor.</param>
-        public static void ChangeDefaultMockObjectFactory(Type factoryType)
-        {
-            if (!typeof(IMockObjectFactory).IsAssignableFrom(factoryType))
+        public static void ChangeDefaultMockObjectFactory(Type factoryType) {
+            if (!typeof (IMockObjectFactory).IsAssignableFrom(factoryType))
             {
                 throw new ArgumentException("Supplied factory type does not implement IMockObjectFactory", "factoryType");
             }
@@ -150,12 +148,13 @@ namespace NMock2
                 {
                     try
                     {
-                        defaultMockObjectFactory = (IMockObjectFactory)Activator.CreateInstance(factoryType);
+                        defaultMockObjectFactory = (IMockObjectFactory) Activator.CreateInstance(factoryType);
                         availableMockObjectFactories[factoryType] = defaultMockObjectFactory;
                     }
                     catch (MissingMethodException)
                     {
-                        throw new ArgumentException("Supplied factory type does not have a default constructor", "factoryType");
+                        throw new ArgumentException("Supplied factory type does not have a default constructor",
+                                                    "factoryType");
                     }
                 }
             }
@@ -167,9 +166,8 @@ namespace NMock2
         /// <param name="mockedType">The type to mock.</param>
         /// <param name="definition">An <see cref="IMockDefinition"/> to create the mock from.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public object NewInstanceOfRole(Type mockedType, IMockDefinition definition)
-        {
-            return definition.Create(mockedType, this, this.currentMockObjectFactory);
+        public object NewInstanceOfRole(Type mockedType, IMockDefinition definition) {
+            return definition.Create(mockedType, this, currentMockObjectFactory);
         }
 
         /// <summary>
@@ -179,22 +177,8 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public object NewInstanceOfRole(Type mockedType, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole(mockedType, DefinedAs.WithArgs(constructorArgs));
-        }
-
-        /// <summary>
-        /// Creates a new dynamic mock of the specified type.
-        /// </summary>
-        /// <param name="mockedType">The type to mock.</param>
-        /// <param name="mockStyle">Specifies how the mock object should behave when first created.</param>
-        /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
-        /// Only applicable when mocking classes with non-default constructors.</param>
-        /// <returns>A named dynamic mock for the specified type.</returns>
-        public object NewInstanceOfRole(Type mockedType, MockStyle mockStyle, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole(mockedType, DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
+        public object NewInstanceOfRole(Type mockedType, params object[] constructorArgs) {
+            return NewInstanceOfRole(mockedType, DefinedAs.WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -203,9 +187,8 @@ namespace NMock2
         /// <typeparam name="TMockedType">The type to mock.</typeparam>
         /// <param name="definition">An <see cref="IMockDefinition"/> to create the mock from.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewInstanceOfRole<TMockedType>(IMockDefinition definition)
-        {
-            return (TMockedType)definition.Create(typeof(TMockedType), this, this.currentMockObjectFactory);
+        public TMockedType NewInstanceOfRole<TMockedType>(IMockDefinition definition) {
+            return (TMockedType) definition.Create(typeof (TMockedType), this, currentMockObjectFactory);
         }
 
         /// <summary>
@@ -215,22 +198,8 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewInstanceOfRole<TMockedType>(params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole<TMockedType>(DefinedAs.WithArgs(constructorArgs));
-        }
-
-        /// <summary>
-        /// Creates a new dynamic mock of the specified type.
-        /// </summary>
-        /// <typeparam name="TMockedType">The type to mock.</typeparam>
-        /// <param name="mockStyle">Specifies how the mock object should behave when first created.</param>
-        /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
-        /// Only applicable when mocking classes with non-default constructors.</param>
-        /// <returns>A dynamic mock for the specified type.</returns>
-        public TMockedType NewInstanceOfRole<TMockedType>(MockStyle mockStyle, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole<TMockedType>(DefinedAs.OfStyle(mockStyle).WithArgs(constructorArgs));
+        public TMockedType NewInstanceOfRole<TMockedType>(params object[] constructorArgs) {
+            return NewInstanceOfRole<TMockedType>(DefinedAs.WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -241,24 +210,8 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A named mock.</returns>
-        public object NewNamedMock(Type mockedType, string name, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole(mockedType, DefinedAs.Named(name).WithArgs(constructorArgs));
-        }
-
-        /// <summary>
-        /// Creates a new named dynamic mock of the specified type and allows the style
-        /// of the mock to be specified.
-        /// </summary>
-        /// <param name="mockedType">The type to mock.</param>
-        /// <param name="name">A name for the mock that will be used in error messages.</param>
-        /// <param name="mockStyle">Specifies how the mock object should behave when first created.</param>
-        /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
-        /// Only applicable when mocking classes with non-default constructors.</param>
-        /// <returns>A named mock.</returns>
-        public object NewNamedMock(Type mockedType, string name, MockStyle mockStyle, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole(mockedType, DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
+        public object NewNamedInstanceOfRole(Type mockedType, string name, params object[] constructorArgs) {
+            return NewInstanceOfRole(mockedType, DefinedAs.Named(name).WithArgs(constructorArgs));
         }
 
         /// <summary>
@@ -269,121 +222,56 @@ namespace NMock2
         /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
         /// Only applicable when mocking classes with non-default constructors.</param>
         /// <returns>A named mock.</returns>
-        public TMockedType NewNamedMock<TMockedType>(string name, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole<TMockedType>(DefinedAs.Named(name).WithArgs(constructorArgs));
-        }
-
-        /// <summary>
-        /// Creates a new named dynamic mock of the specified type and allows the style
-        /// of the mock to be specified.
-        /// </summary>
-        /// <typeparam name="TMockedType">The type to mock.</typeparam>
-        /// <param name="name">A name for the mock that will be used in error messages.</param>
-        /// <param name="mockStyle">Specifies how the mock object should behave when first created.</param>
-        /// <param name="constructorArgs">The arguments for the constructor of the class to be mocked.
-        /// Only applicable when mocking classes with non-default constructors.</param>
-        /// <returns>A named mock.</returns>
-        public TMockedType NewNamedMock<TMockedType>(string name, MockStyle mockStyle, params object[] constructorArgs)
-        {
-            return this.NewInstanceOfRole<TMockedType>(DefinedAs.Named(name).OfStyle(mockStyle).WithArgs(constructorArgs));
+        public TMockedType NewNamedInstanceOfRole<TMockedType>(string name, params object[] constructorArgs) {
+            return NewInstanceOfRole<TMockedType>(DefinedAs.Named(name).WithArgs(constructorArgs));
         }
 
         /// <summary>
         /// Verifies that all expectations have been met.
         /// Will be called in <see cref="Dispose"/>, too. 
         /// </summary>
-        public void VerifyAllExpectationsHaveBeenMet()
-        {
+        public void VerifyAllExpectationsHaveBeenMet() {
             // check for swallowed exception
-            if (this.thrownUnexpectedInvocationException != null)
+            if (thrownUnexpectedInvocationException != null)
             {
-                Exception exceptionToBeRethrown = this.thrownUnexpectedInvocationException;
-                this.thrownUnexpectedInvocationException = null; // only rethrow once
+                Exception exceptionToBeRethrown = thrownUnexpectedInvocationException;
+                thrownUnexpectedInvocationException = null; // only rethrow once
                 throw exceptionToBeRethrown;
             }
 
-            if (!this.expectations.HasBeenMet)
+            if (!expectations.HasBeenMet)
             {
-                this.FailUnmetExpectations();
+                FailUnmetExpectations();
             }
-        }
-
-        /// <summary>
-        /// Disposes the mockery be verifying that all expectations were met.
-        /// </summary>
-        public void Dispose()
-        {
-            this.VerifyAllExpectationsHaveBeenMet();
         }
 
         /// <summary>
         /// Sets the resolve type handler used to override default values returned by stubs.
         /// </summary>
         /// <param name="resolveTypeHandler">The resolve type handler.</param>
-        public void SetResolveTypeHandler(ResolveTypeDelegate resolveTypeHandler)
-        {
-            this.resolveTypeDelegate = resolveTypeHandler;
-        }
-
-        /// <summary>
-        /// Sets the mock style used for all properties and methods returning a value of any type of the <paramref name="mock"/>.
-        /// Can be overridden with a type specific mock style with <see cref="SetStubMockStyle{TStub}"/>.
-        /// </summary>
-        /// <param name="mock">The mock (with mock style Stub).</param>
-        /// <param name="nestedMockStyle">The nested mock style.</param>
-        public void SetStubMockStyle(object mock, MockStyle nestedMockStyle)
-        {
-            IMockObject mockObject = CastToMockObject(mock);
-            this.stubMockStyleDictionary[mockObject] = nestedMockStyle;
-        }
-
-        /// <summary>
-        /// Sets the mock style used for all properties and methods returning a value of type <typeparamref name="TStub"/>
-        /// of the <paramref name="mock"/>.
-        /// </summary>
-        /// <typeparam name="TStub">The type of the stub.</typeparam>
-        /// <param name="mock">The mock (with mock style Stub).</param>
-        /// <param name="nestedMockStyle">The nested mock style.</param>
-        public void SetStubMockStyle<TStub>(object mock, MockStyle nestedMockStyle)
-        {
-            this.SetStubMockStyle(mock, typeof(TStub), nestedMockStyle);
-        }
-
-        /// <summary>
-        /// Sets the mock style used for all properties and methods returning a value of type <paramref name="nestedMockType"/>
-        /// of the <paramref name="mock"/>.
-        /// </summary>
-        /// <param name="mock">The mock (with mock style Stub).</param>
-        /// <param name="nestedMockType">Type of the nested mock.</param>
-        /// <param name="nestedMockStyle">The nested mock style.</param>
-        public void SetStubMockStyle(object mock, Type nestedMockType, MockStyle nestedMockStyle)
-        {
-            IMockObject mockObject = CastToMockObject(mock);
-            this.stubMockStyleDictionary[mockObject, nestedMockType] = nestedMockStyle;
+        public void SetResolveTypeHandler(ResolveTypeDelegate resolveTypeHandler) {
+            resolveTypeDelegate = resolveTypeHandler;
         }
 
         /// <summary>
         /// Clears all expectation on the specified mock.
         /// </summary>
         /// <param name="mock">The mock for which all expectations are cleared.</param>
-        public void ClearExpectation(object mock)
-        {
+        public void ClearExpectation(object mock) {
             IMockObject mockObject = CastToMockObject(mock);
 
-            List<IExpectation> result = new List<IExpectation>();
-            this.expectations.QueryExpectationsBelongingTo(mockObject, result);
+            var result = new List<IExpectation>();
+            expectations.QueryExpectationsBelongingTo(mockObject, result);
 
-            result.ForEach(expectation => this.expectations.RemoveExpectation(expectation));
+            result.ForEach(expectation => expectations.RemoveExpectation(expectation));
         }
 
         /// <summary>
         /// Adds the expectation.
         /// </summary>
         /// <param name="expectation">The expectation.</param>
-        internal void AddExpectation(IExpectation expectation)
-        {
-            this.topOrdering.AddExpectation(expectation);
+        private void AddExpectation(IExpectation expectation) {
+            topOrdering.AddExpectation(expectation);
         }
 
         /// <summary>
@@ -393,36 +281,22 @@ namespace NMock2
         /// <param name="requestedType">The type of the return value.</param>
         /// <returns>The object to be returned as return value; or <see cref="Missing.Value"/>
         /// if the default value should be used.</returns>
-        internal object ResolveType(object mock, Type requestedType)
-        {
-            return this.resolveTypeDelegate != null ? this.resolveTypeDelegate(mock, requestedType) : Missing.Value;
+        internal object ResolveType(object mock, Type requestedType) {
+            return resolveTypeDelegate != null ? resolveTypeDelegate(mock, requestedType) : Missing.Value;
         }
 
-        /// <summary>
-        /// Gets the mock style to be used for a mock created for a return value of a call to mock with stub behavior.
-        /// </summary>
-        /// <param name="mock">The mock that wants to create a mock.</param>
-        /// <param name="requestedType">The type of the requested mock.</param>
-        /// <returns>The mock style to use on the created mock. Null if <see cref="MockStyle.Default"/> has to be used.</returns>
-        internal MockStyle? GetDependencyMockStyle(object mock, Type requestedType)
-        {
-            IMockObject mockObject = CastToMockObject(mock);
-            return this.stubMockStyleDictionary[mockObject, requestedType];
-        }
-        
         /// <summary>
         /// Dispatches the specified invocation.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        internal void Dispatch(Invocation invocation)
-        {
-            if (this.expectations.Matches(invocation))
+        private void Dispatch(Invocation invocation) {
+            if (expectations.Matches(invocation))
             {
-                this.expectations.Perform(invocation);
+                expectations.Perform(invocation);
             }
             else
             {
-                this.FailUnexpectedInvocation(invocation);
+                FailUnexpectedInvocation(invocation);
             }
         }
 
@@ -432,14 +306,12 @@ namespace NMock2
         /// <param name="invocation">The invocation.</param>
         /// <returns><c>true</c> if there exist expectations for the specified invocation; otherwise, <c>false</c>.
         /// </returns>
-        internal bool HasExpectationFor(Invocation invocation)
-        {
-            return this.expectations.Matches(invocation);
+        internal bool HasExpectationFor(Invocation invocation) {
+            return expectations.Matches(invocation);
         }
 
-        internal bool HasExpectationForIgnoringIsActive(Invocation invocation)
-        {
-            return this.expectations.MatchesIgnoringIsActive(invocation);
+        internal bool HasExpectationForIgnoringIsActive(Invocation invocation) {
+            return expectations.MatchesIgnoringIsActive(invocation);
         }
 
         /// <summary>
@@ -449,14 +321,13 @@ namespace NMock2
         /// <returns>The argument casted to <see cref="IMockObject"/></returns>
         /// <throws cref="ArgumentNullException">Thrown if <paramref name="mock"/> is null</throws>
         /// <throws cref="ArgumentException">Thrown if <paramref name="mock"/> is not a <see cref="IMockObject"/></throws>
-        private static IMockObject CastToMockObject(object mock)
-        {
+        private static IMockObject CastToMockObject(object mock) {
             if (mock == null)
             {
                 throw new ArgumentNullException("mock", "mock must not be null");
             }
 
-            IMockObject mockObject = mock as IMockObject;
+            var mockObject = mock as IMockObject;
 
             if (mockObject != null)
             {
@@ -469,11 +340,10 @@ namespace NMock2
         /// <summary>
         /// Clears the expectations.
         /// </summary>
-        private void ClearExpectations()
-        {
-            this.depth = 1;
-            this.expectations = new UnorderedExpectations();
-            this.topOrdering = this.expectations;
+        private void ClearExpectations() {
+            depth = 1;
+            expectations = new UnorderedExpectations();
+            topOrdering = expectations;
         }
 
         /// <summary>
@@ -481,12 +351,11 @@ namespace NMock2
         /// </summary>
         /// <param name="newOrdering">The new ordering.</param>
         /// <returns>Disposable popper.</returns>
-        private Popper Push(IExpectationOrdering newOrdering)
-        {
-            this.topOrdering.AddExpectation(newOrdering);
-            IExpectationOrdering oldOrdering = this.topOrdering;
-            this.topOrdering = newOrdering;
-            this.depth++;
+        private Popper Push(IExpectationOrdering newOrdering) {
+            topOrdering.AddExpectation(newOrdering);
+            IExpectationOrdering oldOrdering = topOrdering;
+            topOrdering = newOrdering;
+            depth++;
             return new Popper(this, oldOrdering);
         }
 
@@ -494,21 +363,19 @@ namespace NMock2
         /// Pops the specified old ordering from the expectations stack.
         /// </summary>
         /// <param name="oldOrdering">The old ordering.</param>
-        private void Pop(IExpectationOrdering oldOrdering)
-        {
-            this.topOrdering = oldOrdering;
-            this.depth--;
+        private void Pop(IExpectationOrdering oldOrdering) {
+            topOrdering = oldOrdering;
+            depth--;
         }
 
         /// <summary>
         /// Throws an exception listing all unmet expectations.
         /// </summary>
-        private void FailUnmetExpectations()
-        {
-            DescriptionWriter writer = new DescriptionWriter();
+        private void FailUnmetExpectations() {
+            var writer = new DescriptionWriter();
             writer.WriteLine("not all expected invocations were performed");
-            this.expectations.DescribeUnmetExpectationsTo(writer);
-            this.ClearExpectations();
+            expectations.DescribeUnmetExpectationsTo(writer);
+            ClearExpectations();
 
             throw new ExpectationException(writer.ToString());
         }
@@ -517,14 +384,13 @@ namespace NMock2
         /// Throws an exception indicating that the specified invocation is not expected.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        private void FailUnexpectedInvocation(Invocation invocation)
-        {
+        private void FailUnexpectedInvocation(Invocation invocation) {
             var writer = new DescriptionWriter();
             writer.Write("unexpected invocation of ");
             invocation.DescribeTo(writer);
-            
+
             writer.WriteLine();
-            this.expectations.DescribeActiveExpectationsTo(writer);
+            expectations.DescribeActiveExpectationsTo(writer);
             DescribeStatesOn(writer);
             // try catch to get exception with stack trace.
             try
@@ -534,9 +400,9 @@ namespace NMock2
             catch (ExpectationException e)
             {
                 // remember only first exception
-                if (this.thrownUnexpectedInvocationException == null)
+                if (thrownUnexpectedInvocationException == null)
                 {
-                    this.thrownUnexpectedInvocationException = e;
+                    thrownUnexpectedInvocationException = e;
                 }
 
                 throw;
@@ -551,11 +417,18 @@ namespace NMock2
             }
         }
 
+        public IStates States(string name) {
+            var stateMachine = new StateMachine(name);
+            stateMachines.Add(stateMachine);
+            return stateMachine;
+        }
+
+        #region Nested type: Popper
+
         /// <summary>
         /// A popper pops an expectation ordering from the expectations stack on disposal.
         /// </summary>
-        private class Popper : IDisposable
-        {
+        private class Popper : IDisposable {
             /// <summary>
             /// The mockery.
             /// </summary>
@@ -571,25 +444,31 @@ namespace NMock2
             /// </summary>
             /// <param name="mockery">The mockery.</param>
             /// <param name="previous">The previous.</param>
-            public Popper(Mockery mockery, IExpectationOrdering previous)
-            {
+            public Popper(Mockery mockery, IExpectationOrdering previous) {
                 this.previous = previous;
                 this.mockery = mockery;
             }
 
+            #region IDisposable Members
+
             /// <summary>
             /// Pops the expectation ordering from the stack.
             /// </summary>
-            public void Dispose()
-            {
-                this.mockery.Pop(this.previous);
+            public void Dispose() {
+                mockery.Pop(previous);
             }
+
+            #endregion
         }
 
-        public IStates States(string name) {
-            var stateMachine = new StateMachine(name);
-            stateMachines.Add(stateMachine);
-            return stateMachine;
+        #endregion
+
+        void IExpectationCollector.Add(IExpectation expectation) {
+            this.AddExpectation(expectation);
+        }
+
+        void IInvocationListener.NotifyInvocation(Invocation invocation) {
+            Dispatch(invocation);
         }
     }
 }

@@ -4,15 +4,16 @@ using System.IO;
 namespace NMock2.Internal {
     public class NotPredicate : IStatePredicate {
         private readonly string name;
-        private readonly string state;
         private readonly Predicate<string> predicate;
+        private readonly string state;
 
         public NotPredicate(string name, Predicate<string> predicate, string state) {
             this.name = name;
             this.state = state;
             this.predicate = predicate;
-            
         }
+
+        #region IStatePredicate Members
 
         public void DescribeTo(TextWriter writer) {
             writer.Write(name);
@@ -21,7 +22,9 @@ namespace NMock2.Internal {
         }
 
         public bool IsActive() {
-            return !this.predicate(state);
+            return !predicate(state);
         }
+
+        #endregion
     }
 }

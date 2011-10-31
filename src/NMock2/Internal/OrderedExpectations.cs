@@ -16,60 +16,30 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using NMock2.Monitoring;
+using System.Collections.Generic;
+using System.IO;
+using NMock2.Monitoring;
 
-    public class OrderedExpectations : IExpectationOrdering
-    {
+namespace NMock2.Internal {
+    public class OrderedExpectations : IExpectationOrdering {
+        private readonly int depth;
         private readonly List<IExpectation> expectations = new List<IExpectation>();
-        private int current = 0;
-        private int depth;
+        private int current;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedExpectations"/> class.
         /// </summary>
         /// <param name="depth">The depth.</param>
-        public OrderedExpectations(int depth)
-        {
+        public OrderedExpectations(int depth) {
             this.depth = depth;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is active.
-        /// </summary>
-        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
-        public bool IsActive
-        {
-            get { return this.expectations.Count > 0 && this.CurrentExpectation.IsActive; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance has been met.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance has been met; otherwise, <c>false</c>.
-        /// </value>
-        public bool HasBeenMet
-        {
-            get
-            {
-                // Count == 0 fixes issue 1912662 of NMock
-                // (http://sourceforge.net/tracker/index.php?func=detail&aid=1912662&group_id=66591&atid=515017)
-                return this.expectations.Count == 0
-                    || (this.CurrentExpectation.HasBeenMet && this.NextExpectationHasBeenMet());
-            }
         }
 
         /// <summary>
         /// Gets the current expectation.
         /// </summary>
         /// <value>The current expectation.</value>
-        private IExpectation CurrentExpectation
-        {
-            get { return this.expectations[this.current]; }
+        private IExpectation CurrentExpectation {
+            get { return expectations[current]; }
         }
 
         /// <summary>
@@ -78,18 +48,41 @@ namespace NMock2.Internal
         /// <value>
         ///     <c>true</c> if this instance has next expectation; otherwise, <c>false</c>.
         /// </value>
-        private bool HasNextExpectation
-        {
-            get { return this.current < this.expectations.Count - 1; }
+        private bool HasNextExpectation {
+            get { return current < expectations.Count - 1; }
         }
 
         /// <summary>
         /// Gets the next expectation.
         /// </summary>
         /// <value>The next expectation.</value>
-        private IExpectation NextExpectation
-        {
-            get { return this.expectations[this.current + 1]; }
+        private IExpectation NextExpectation {
+            get { return expectations[current + 1]; }
+        }
+
+        #region IExpectationOrdering Members
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
+        public bool IsActive {
+            get { return expectations.Count > 0 && CurrentExpectation.IsActive; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance has been met.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance has been met; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasBeenMet {
+            get {
+                // Count == 0 fixes issue 1912662 of NMock
+                // (http://sourceforge.net/tracker/index.php?func=detail&aid=1912662&group_id=66591&atid=515017)
+                return expectations.Count == 0
+                       || (CurrentExpectation.HasBeenMet && NextExpectationHasBeenMet());
+            }
         }
 
         /// <summary>
@@ -97,68 +90,61 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="invocation">The invocation to check.</param>
         /// <returns>Returns whether one of the stored expectations has met the specified invocation.</returns>
-        public bool Matches(Invocation invocation)
-        {
-            return this.expectations.Count != 0 &&
-                   (this.CurrentExpectation.Matches(invocation) ||
-                       (this.CurrentExpectation.HasBeenMet && this.NextExpectationMatches(invocation)));
+        public bool Matches(Invocation invocation) {
+            return expectations.Count != 0 &&
+                   (CurrentExpectation.Matches(invocation) ||
+                    (CurrentExpectation.HasBeenMet && NextExpectationMatches(invocation)));
         }
 
-        public bool MatchesIgnoringIsActive(Invocation invocation)
-        {
-            return this.expectations.Count != 0 &&
-                   (this.CurrentExpectation.MatchesIgnoringIsActive(invocation) ||
-                       (this.CurrentExpectation.HasBeenMet && this.NextExpectationMatchesIgnoringIsActive(invocation)));
+        public bool MatchesIgnoringIsActive(Invocation invocation) {
+            return expectations.Count != 0 &&
+                   (CurrentExpectation.MatchesIgnoringIsActive(invocation) ||
+                    (CurrentExpectation.HasBeenMet && NextExpectationMatchesIgnoringIsActive(invocation)));
         }
 
-        public void AddExpectation(IExpectation expectation)
-        {
-            this.expectations.Add(expectation);
+        public void AddExpectation(IExpectation expectation) {
+            expectations.Add(expectation);
         }
 
-        public void RemoveExpectation(IExpectation expectation)
-        {
-            this.expectations.Remove(expectation);
+        public void RemoveExpectation(IExpectation expectation) {
+            expectations.Remove(expectation);
         }
 
-        public void Perform(Invocation invocation)
-        {
+        public void Perform(Invocation invocation) {
             // If the current expectation doesn't match, it must have been met, by the contract
             // for the IExpectation interface and due to the implementation of this.Matches
-            if (!this.CurrentExpectation.Matches(invocation))
+            if (!CurrentExpectation.Matches(invocation))
             {
-                this.current++;
+                current++;
             }
 
-            this.CurrentExpectation.Perform(invocation);
+            CurrentExpectation.Perform(invocation);
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer)
-        {
+        public void DescribeActiveExpectationsTo(TextWriter writer) {
             writer.WriteLine("Ordered:");
-            for (int i = 0; i < this.expectations.Count; i++)
+            for (int i = 0; i < expectations.Count; i++)
             {
-                IExpectation expectation = (IExpectation)this.expectations[i];
+                IExpectation expectation = expectations[i];
 
                 if (expectation.IsActive)
                 {
-                    this.Indent(writer, this.depth + 1);
+                    Indent(writer, depth + 1);
                     expectation.DescribeActiveExpectationsTo(writer);
                     writer.WriteLine();
                 }
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer)
-        {
+        public void DescribeUnmetExpectationsTo(TextWriter writer) {
             writer.WriteLine("Ordered:");
-            for (int i = 0; i < this.expectations.Count; i++)
+            for (int i = 0; i < expectations.Count; i++)
             {
-                IExpectation expectation = (IExpectation)this.expectations[i];
+                IExpectation expectation = expectations[i];
 
                 if (!expectation.HasBeenMet)
                 {
-                    this.Indent(writer, this.depth + 1);
+                    Indent(writer, depth + 1);
                     expectation.DescribeUnmetExpectationsTo(writer);
                     writer.WriteLine();
                 }
@@ -170,28 +156,25 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="mock">The mock for which expectations are queried.</param>
         /// <param name="result">The result to add matching expectations to.</param>
-        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result)
-        {
-            this.expectations.ForEach(expectation => expectation.QueryExpectationsBelongingTo(mock, result));
+        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {
+            expectations.ForEach(expectation => expectation.QueryExpectationsBelongingTo(mock, result));
         }
 
-        private bool NextExpectationHasBeenMet()
-        {
-            return (!this.HasNextExpectation) || this.NextExpectation.HasBeenMet;
+        #endregion
+
+        private bool NextExpectationHasBeenMet() {
+            return (!HasNextExpectation) || NextExpectation.HasBeenMet;
         }
 
-        private bool NextExpectationMatches(Invocation invocation)
-        {
-            return this.HasNextExpectation && this.NextExpectation.Matches(invocation);
+        private bool NextExpectationMatches(Invocation invocation) {
+            return HasNextExpectation && NextExpectation.Matches(invocation);
         }
 
-        private bool NextExpectationMatchesIgnoringIsActive(Invocation invocation)
-        {
-            return this.HasNextExpectation && this.NextExpectation.MatchesIgnoringIsActive(invocation);
+        private bool NextExpectationMatchesIgnoringIsActive(Invocation invocation) {
+            return HasNextExpectation && NextExpectation.MatchesIgnoringIsActive(invocation);
         }
-        
-        private void Indent(TextWriter writer, int n)
-        {
+
+        private void Indent(TextWriter writer, int n) {
             for (int i = 0; i < n; i++)
             {
                 writer.Write("  ");

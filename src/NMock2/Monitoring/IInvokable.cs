@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
+namespace NMock2.Monitoring {
     /// <summary>
     /// IInvokable objects can be invoked.
     /// </summary>
-    public interface IInvokable
-    {
+    public interface IInvokable {
         /// <summary>
         /// Invokes this object.
         /// </summary>

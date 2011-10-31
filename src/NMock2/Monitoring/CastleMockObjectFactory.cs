@@ -16,22 +16,19 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Castle.Core.Interceptor;
-    using Castle.DynamicProxy;
-    using NMock2.Internal;
+using System;
+using System.Collections.Generic;
+using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
+using NMock2.Internal;
 
+namespace NMock2.Monitoring {
     /// <summary>
     /// Class that creates mocks for interfaces and classes (virtual members only) using the
     /// Castle proxy generator.
     /// </summary>
-    public class CastleMockObjectFactory : IMockObjectFactory
-    {
-        private Dictionary<CompositeType, Type> cachedProxyTypes = new Dictionary<CompositeType, Type>();
+    public class CastleMockObjectFactory : IMockObjectFactory {
+        private readonly Dictionary<CompositeType, Type> cachedProxyTypes = new Dictionary<CompositeType, Type>();
 
         #region IMockObjectFactory Members
 
@@ -41,24 +38,22 @@ namespace NMock2.Monitoring
         /// <param name="mockery">The mockery used to create this mock instance.</param>
         /// <param name="typesToMock">The type(s) to include in the mock.</param>
         /// <param name="name">The name to use for the mock instance.</param>
-        /// <param name="mockStyle">The behaviour of the mock instance when first created.</param>
         /// <param name="constructorArgs">Constructor arguments for the class to be mocked. Only valid if mocking a class type.</param>
         /// <returns>A mock instance of the specified type(s).</returns>
-        public object CreateMock(Mockery mockery, CompositeType typesToMock, string name, MockStyle mockStyle, object[] constructorArgs)
-        {
-            Type proxyType = this.GetProxyType(typesToMock);
+        public object CreateMock(Mockery mockery, CompositeType typesToMock, string name, object[] constructorArgs) {
+            Type proxyType = GetProxyType(typesToMock);
 
-            return this.InstantiateProxy(typesToMock, proxyType, mockery, mockStyle, name, constructorArgs);
+            return InstantiateProxy(typesToMock, proxyType, mockery, name, constructorArgs);
         }
 
         #endregion
 
-        private Type GetProxyType(CompositeType compositeType)
-        {
-            if (!this.cachedProxyTypes.ContainsKey(compositeType))
+        private Type GetProxyType(CompositeType compositeType) {
+            if (!cachedProxyTypes.ContainsKey(compositeType))
             {
-                DefaultProxyBuilder proxyBuilder = new DefaultProxyBuilder();
-                Type[] additionalInterfaceTypes = this.BuildAdditionalTypeArrayForProxyType(compositeType.AdditionalInterfaceTypes);
+                var proxyBuilder = new DefaultProxyBuilder();
+                Type[] additionalInterfaceTypes =
+                    BuildAdditionalTypeArrayForProxyType(compositeType.AdditionalInterfaceTypes);
                 Type proxyType;
 
                 if (compositeType.PrimaryType.IsClass)
@@ -68,7 +63,7 @@ namespace NMock2.Monitoring
                         throw new ArgumentException("Cannot mock sealed classes.");
                     }
 
-                    proxyType = proxyBuilder.CreateClassProxy( 
+                    proxyType = proxyBuilder.CreateClassProxy(
                         compositeType.PrimaryType,
                         additionalInterfaceTypes,
                         ProxyGenerationOptions.Default);
@@ -78,45 +73,42 @@ namespace NMock2.Monitoring
                     proxyType = proxyBuilder.CreateInterfaceProxyTypeWithoutTarget(
                         compositeType.PrimaryType,
                         additionalInterfaceTypes,
-                        new ProxyGenerationOptions() { BaseTypeForInterfaceProxy = typeof(InterfaceMockBase) });
+                        new ProxyGenerationOptions {BaseTypeForInterfaceProxy = typeof (InterfaceMockBase)});
                 }
 
-                this.cachedProxyTypes[compositeType] = proxyType;
+                cachedProxyTypes[compositeType] = proxyType;
             }
 
-            return this.cachedProxyTypes[compositeType];
+            return cachedProxyTypes[compositeType];
         }
 
         private object InstantiateProxy(
             CompositeType compositeType,
             Type proxyType,
             Mockery mockery,
-            MockStyle mockStyle,
             string name,
-            object[] constructorArgs)
-        {
-            IInterceptor interceptor = new MockObjectInterceptor(mockery, compositeType, name, mockStyle);
+            object[] constructorArgs) {
+            IInterceptor interceptor = new MockObjectInterceptor(compositeType, name, mockery, mockery);
             object[] activationArgs;
 
             if (compositeType.PrimaryType.IsClass)
             {
                 activationArgs = new object[constructorArgs.Length + 1];
                 constructorArgs.CopyTo(activationArgs, 1);
-                activationArgs[0] = new IInterceptor[] { interceptor };
+                activationArgs[0] = new[] {interceptor};
             }
             else
             {
-                activationArgs = new object[] { new IInterceptor[] { interceptor }, new object(), name };
+                activationArgs = new[] {new[] {interceptor}, new object(), name};
             }
-           
+
             return Activator.CreateInstance(proxyType, activationArgs);
         }
 
-        private Type[] BuildAdditionalTypeArrayForProxyType(Type[] additionalTypes)
-        {
-            Type[] allAdditionalTypes = new Type[additionalTypes.Length + 1];
+        private Type[] BuildAdditionalTypeArrayForProxyType(Type[] additionalTypes) {
+            var allAdditionalTypes = new Type[additionalTypes.Length + 1];
 
-            allAdditionalTypes[0] = typeof(IMockObject);
+            allAdditionalTypes[0] = typeof (IMockObject);
 
             if (additionalTypes.Length > 0)
             {
@@ -126,27 +118,28 @@ namespace NMock2.Monitoring
             return allAdditionalTypes;
         }
 
+        #region Nested type: InterfaceMockBase
+
         /// <summary>
         /// Used as a base for interface mocks in order to provide a holder
         /// for a meaningful ToString() value.
         /// </summary>
-        public class InterfaceMockBase
-        {
-            private string stringValue;
+        public class InterfaceMockBase {
+            private readonly string stringValue;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="InterfaceMockBase"/> class.
             /// </summary>
             /// <param name="stringValue">The string value.</param>
-            public InterfaceMockBase(string stringValue)
-            {
+            public InterfaceMockBase(string stringValue) {
                 this.stringValue = stringValue;
             }
 
-            public override string ToString()
-            {
-                return this.stringValue;
+            public override string ToString() {
+                return stringValue;
             }
         }
+
+        #endregion
     }
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{79C78732-B34C-4429-B678-C8ADE5FB5BE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NMock2</RootNamespace>
-    <AssemblyName>NMock2</AssemblyName>
+    <RootNamespace>NMocha</RootNamespace>
+    <AssemblyName>NMocha</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
@@ -45,7 +45,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\NMock2.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\NMocha.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,7 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\NMock2.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\NMocha.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -74,8 +74,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Actions\CollectAction.cs" />
-    <Compile Include="Actions\DelegateAction.cs" />
-    <Compile Include="Actions\FireAction.cs" />
     <Compile Include="Actions\GenericCollectAction.cs" />
     <Compile Include="Actions\LazyReturnAction.cs" />
     <Compile Include="Actions\ResultSynthesizer.cs" />
@@ -93,7 +91,6 @@
     <Compile Include="Internal\IOrderingConstraint.cs" />
     <Compile Include="Internal\IStateSyntax.cs" />
     <Compile Include="Internal\MockBuilder.cs" />
-    <Compile Include="Internal\StubMockStyleDictionary.cs" />
     <Compile Include="IStatePredicate.cs" />
     <Compile Include="IStates.cs" />
     <Compile Include="Internal\NotPredicate.cs" />
@@ -102,13 +99,11 @@
     <Compile Include="Syntax\IMockDefinitionSyntax.cs" />
     <Compile Include="Internal\CompositeType.cs" />
     <Compile Include="Expect.cs" />
-    <Compile Include="Fire.cs" />
     <Compile Include="Has.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IExpectation.cs" />
     <Compile Include="Internal\BuildableExpectation.cs" />
     <Compile Include="Internal\DescriptionWriter.cs" />
-    <Compile Include="Internal\EventInvocationBuilder.cs" />
     <Compile Include="Internal\ExpectationBuilder.cs" />
     <Compile Include="Internal\ExpectationException.cs" />
     <Compile Include="Internal\IExpectationOrdering.cs" />
@@ -142,7 +137,6 @@
     <Compile Include="Matchers\ToStringMatcher.cs" />
     <Compile Include="Matchers\TypeMatcher.cs" />
     <Compile Include="Mockery.cs" />
-    <Compile Include="MockStyle.cs" />
     <Compile Include="Monitoring\CastleMockObjectFactory.cs" />
     <Compile Include="Monitoring\IInvokable.cs" />
     <Compile Include="Monitoring\IMockObjectFactory.cs" />

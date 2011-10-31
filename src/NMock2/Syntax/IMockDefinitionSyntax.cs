@@ -16,15 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
-    using System;
+using System;
 
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax describing the initial characteristics of a new mock object.
     /// </summary>
-    public interface IMockDefinitionSyntax : IMockDefinition
-    {
+    public interface IMockDefinitionSyntax : IMockDefinition {
         /// <summary>
         /// Specifies a type that this mock should implement. This may be a class or interface,
         /// but there can only be a maximum of one class implemented by a mock.
@@ -40,14 +38,6 @@ namespace NMock2.Syntax
         /// <param name="types">The types to implement.</param>
         /// <returns>The mock object definition.</returns>
         IMockDefinitionSyntax Implementing(params Type[] types);
-
-        /// <summary>
-        /// Specifies how the mock object should behave when first created.
-        /// It is invalid to set the MockStyle of a mock more than once.
-        /// </summary>
-        /// <param name="style">A MockStyle value.</param>
-        /// <returns>The mock object definition.</returns>
-        IMockDefinitionSyntax OfStyle(MockStyle style);
 
         /// <summary>
         /// Specifies the arguments for the constructor of the class to be mocked.

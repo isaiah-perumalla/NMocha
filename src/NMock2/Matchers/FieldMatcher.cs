@@ -16,17 +16,15 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
-    using System.Reflection;
+using System;
+using System.IO;
+using System.Reflection;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the specified field of the actual object matches with the specified matcher. 
     /// </summary>
-    public class FieldMatcher : Matcher
-    {
+    public class FieldMatcher : Matcher {
         /// <summary>
         /// Name of the field to match against the <seealso cref="valueMatcher"/>.
         /// </summary>
@@ -42,8 +40,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="fieldName">Name of the field to match against the <paramref name="valueMatcher"/>.</param>
         /// <param name="valueMatcher">The value matcher.</param>
-        public FieldMatcher(string fieldName, Matcher valueMatcher)
-        {
+        public FieldMatcher(string fieldName, Matcher valueMatcher) {
             this.fieldName = fieldName;
             this.valueMatcher = valueMatcher;
         }
@@ -53,28 +50,26 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object matches.</returns>
-        public override bool Matches(object o)
-        {
+        public override bool Matches(object o) {
             Type type = o.GetType();
-            FieldInfo field = type.GetField(this.fieldName, BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
 
             if (field == null)
             {
                 return false;
             }
-            
+
             object value = field.GetValue(o);
-            return this.valueMatcher.Matches(value);
+            return valueMatcher.Matches(value);
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
-            writer.Write(string.Format("field '{0}' ", this.fieldName));
-            this.valueMatcher.DescribeTo(writer);
+        public override void DescribeTo(TextWriter writer) {
+            writer.Write(string.Format("field '{0}' ", fieldName));
+            valueMatcher.DescribeTo(writer);
         }
     }
 }

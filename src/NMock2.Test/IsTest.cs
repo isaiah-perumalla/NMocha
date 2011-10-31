@@ -20,27 +20,25 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NMock2
-{
-    using Matchers;
-    using NUnit.Framework;
+using NMock2;
+using NMock2.Matchers;
+using NUnit.Framework;
 
+namespace NMocha.Test {
     /// <summary>
     /// Tests the <see cref="Is"/> class.
     /// </summary>
     [TestFixture]
-    public class IsTest
-    {
+    public class IsTest {
         /// <summary>
         /// Is.TypeOf{T} returns a type matcher on the specified type."/>
         /// </summary>
         [Test]
-        public void IsTypeOfGeneric()
-        {
+        public void IsTypeOfGeneric() {
             Matcher matcher = Is.TypeOf<Matcher>();
 
             Assert.IsNotNull(matcher);
-            Assert.IsInstanceOfType(typeof(TypeMatcher), matcher);
+            Assert.IsInstanceOfType(typeof (TypeMatcher), matcher);
             Assert.IsTrue(matcher.Matches(matcher));
         }
     }

@@ -16,17 +16,15 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
-    using System.Reflection;
-    using NMock2.Monitoring;
+using System.IO;
+using System.Reflection;
+using NMock2.Monitoring;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether parameters of a method match with the specified list of matchers.
     /// </summary>
-    public class ArgumentsMatcher : Matcher
-    {
+    public class ArgumentsMatcher : Matcher {
         /// <summary>
         /// Stores the out parameter.
         /// </summary>
@@ -41,8 +39,7 @@ namespace NMock2.Matchers
         /// Initializes a new instance of the <see cref="ArgumentsMatcher"/> class.
         /// </summary>
         /// <param name="valueMatchers">The value matchers. This is an ordered list of matchers, each matching a single method argument.</param>
-        public ArgumentsMatcher(params Matcher[] valueMatchers)
-        {
+        public ArgumentsMatcher(params Matcher[] valueMatchers) {
             this.valueMatchers = valueMatchers;
         }
 
@@ -51,19 +48,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object is an <see cref="Invocation"/> and all method arguments match their corresponding matcher.</returns>
-        public override bool Matches(object o)
-        {
-            return o is Invocation && this.MatchesArguments((Invocation)o);
+        public override bool Matches(object o) {
+            return o is Invocation && MatchesArguments((Invocation) o);
         }
-        
+
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("(");
-            this.WriteListOfMatchers(this.MatcherCount(), writer);
+            WriteListOfMatchers(MatcherCount(), writer);
             writer.Write(")");
         }
 
@@ -71,18 +66,16 @@ namespace NMock2.Matchers
         /// Number of argument matchers.
         /// </summary>
         /// <returns>Returns the number of argument matchers.</returns>
-        protected int MatcherCount()
-        {
-            return this.valueMatchers.Length;
+        protected int MatcherCount() {
+            return valueMatchers.Length;
         }
 
         /// <summary>
         /// Returns the last argument matcher.
         /// </summary>
         /// <returns>Argument matcher</returns>
-        protected Matcher LastMatcher()
-        {
-            return this.valueMatchers[this.valueMatchers.Length - 1];
+        protected Matcher LastMatcher() {
+            return valueMatchers[valueMatchers.Length - 1];
         }
 
         /// <summary>
@@ -90,8 +83,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="listLength">Length of the list.</param>
         /// <param name="writer">The writer.</param>
-        protected void WriteListOfMatchers(int listLength, TextWriter writer)
-        {
+        protected void WriteListOfMatchers(int listLength, TextWriter writer) {
             for (int i = 0; i < listLength; i++)
             {
                 if (i > 0)
@@ -99,25 +91,23 @@ namespace NMock2.Matchers
                     writer.Write(", ");
                 }
 
-                this.valueMatchers[i].DescribeTo(writer);
+                valueMatchers[i].DescribeTo(writer);
             }
         }
 
-        private bool MatchesArguments(Invocation invocation)
-        {
-            return invocation.Parameters.Count == this.valueMatchers.Length
-                && this.MatchesArgumentValues(invocation);
+        private bool MatchesArguments(Invocation invocation) {
+            return invocation.Parameters.Count == valueMatchers.Length
+                   && MatchesArgumentValues(invocation);
         }
 
-        private bool MatchesArgumentValues(Invocation invocation)
-        {
+        private bool MatchesArgumentValues(Invocation invocation) {
             ParameterInfo[] paramsInfo = invocation.Method.GetParameters();
 
             for (int i = 0; i < invocation.Parameters.Count; i++)
             {
                 object value = paramsInfo[i].IsOut ? OutParameter : invocation.Parameters[i];
 
-                if (!this.valueMatchers[i].Matches(value))
+                if (!valueMatchers[i].Matches(value))
                 {
                     return false;
                 }
@@ -126,18 +116,18 @@ namespace NMock2.Matchers
             return true;
         }
 
+        #region Nested type: OutMatcher
+
         /// <summary>
         /// Matcher that matches method out parameters. 
         /// </summary>
-        public class OutMatcher : Matcher
-        {
+        public class OutMatcher : Matcher {
             /// <summary>
             /// Matches the specified object to this matcher and returns whether it matches.
             /// </summary>
             /// <param name="o">The object to match.</param>
             /// <returns>Whether the object mached is an out parameter.</returns>
-            public override bool Matches(object o)
-            {
+            public override bool Matches(object o) {
                 return o == OutParameter;
             }
 
@@ -145,10 +135,11 @@ namespace NMock2.Matchers
             /// Describes this object.
             /// </summary>
             /// <param name="writer">The text writer the description is added to.</param>
-            public override void DescribeTo(TextWriter writer)
-            {
+            public override void DescribeTo(TextWriter writer) {
                 writer.Write("out");
             }
         }
+
+        #endregion
     }
 }

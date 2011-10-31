@@ -16,17 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
+using System.Collections.Generic;
+using System.Reflection;
 
+namespace NMock2.Internal {
     /// <summary>
     /// Interface for mocks.
     /// </summary>
-    public interface IMockObject
-    {
+    public interface IMockObject {
         // Q: What happens if any of these members are also defined on class/interface to be mocked???
         // - Implement explicitly?
 
@@ -49,32 +46,11 @@ namespace NMock2.Internal
         /// <param name="methodMatcher">A Matcher to use in identifying the methods.</param>
         /// <returns>A list of zero or more matching MethodInfo instances.</returns>
         IList<MethodInfo> GetMethodsMatching(Matcher methodMatcher);
-        
+
         /// <summary>
         /// Adds an expectation to this mock.
         /// </summary>
         /// <param name="expectation">The expectation to add.</param>
-        void AddExpectation(IExpectation expectation);
-
-        /// <summary>
-        /// Adds an event handler on this mock.
-        /// </summary>
-        /// <param name="eventName">The name of the event.</param>
-        /// <param name="handler">The handler to add.</param>
-        void AddEventHandler(string eventName, Delegate handler);
-
-        /// <summary>
-        /// Removes an event handler from this mock.
-        /// </summary>
-        /// <param name="eventName">The name of the event.</param>
-        /// <param name="handler">The handler to remove.</param>
-        void RemoveEventHandler(string eventName, Delegate handler);
-
-        /// <summary>
-        /// Raises an event on this mock.
-        /// </summary>
-        /// <param name="eventName">Name of the event to fire.</param>
-        /// <param name="args">The arguments passed to the event.</param>
-        void RaiseEvent(string eventName, params object[] args);
+        void  AddExpectation(IExpectation expectation);
     }
 }

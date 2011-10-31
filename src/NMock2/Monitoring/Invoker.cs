@@ -16,21 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
+using System;
 
+namespace NMock2.Monitoring {
     /// <summary>
     /// An invoker invokes an <see cref="Invocation"/> on a target if
     /// it is responsible for the target type, otherwise the invocation is passed
     /// to the next invoker in the 'next' chain.
     /// </summary>
-    public class Invoker : IInvokable
-    {
+    public class Invoker : IInvokable {
         /// <summary>
-        /// Holds the type of the target. Can not be inferred from target because it could be a base type.
+        /// Holds the next <see cref="IInvokable"/> to pass the invocation to, 
+        /// if this instance is not responsible for the target type on an invocation.
         /// </summary>
-        private readonly Type targetType;
+        private readonly IInvokable next;
 
         /// <summary>
         /// Holds the target.
@@ -38,10 +37,9 @@ namespace NMock2.Monitoring
         private readonly object target;
 
         /// <summary>
-        /// Holds the next <see cref="IInvokable"/> to pass the invocation to, 
-        /// if this instance is not responsible for the target type on an invocation.
+        /// Holds the type of the target. Can not be inferred from target because it could be a base type.
         /// </summary>
-        private readonly IInvokable next;
+        private readonly Type targetType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Invoker"/> class.
@@ -51,12 +49,13 @@ namespace NMock2.Monitoring
         /// <param name="target">The target.</param>
         /// <param name="next">The next <see cref="IInvokable"/> to pass the invocation to, 
         /// if this instance is not responsible for the target type on an invocation.</param>
-        public Invoker(Type targetType, object target, IInvokable next)
-        {
+        public Invoker(Type targetType, object target, IInvokable next) {
             this.targetType = targetType;
             this.target = target;
             this.next = next;
         }
+
+        #region IInvokable Members
 
         /// <summary>
         /// Executes the <paramref name="invocation"/> on the target of this instance
@@ -64,16 +63,17 @@ namespace NMock2.Monitoring
         /// is passed to the next <see cref="IInvokable"/> specified in the constructor.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation)
-        {
-            if (this.targetType == invocation.Method.DeclaringType)
+        public void Invoke(Invocation invocation) {
+            if (targetType == invocation.Method.DeclaringType)
             {
-                invocation.InvokeOn(this.target);
+                invocation.InvokeOn(target);
             }
             else
             {
-                this.next.Invoke(invocation);
+                next.Invoke(invocation);
             }
         }
+
+        #endregion
     }
 }

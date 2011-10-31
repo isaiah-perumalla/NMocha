@@ -16,21 +16,19 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using NMock2.Internal;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+using NMock2.Internal;
 
+namespace NMock2.Monitoring {
     /// <summary>
     /// Class that creates mocks for interfaces only. This was the original implementation
     /// of NMock2 mocks used before the Castle proxies were introduced.
     /// </summary>
-    public class InterfaceOnlyMockObjectFactory : IMockObjectFactory
-    {
+    public class InterfaceOnlyMockObjectFactory : IMockObjectFactory {
         private static readonly Hashtable createdTypes = new Hashtable();
         private static readonly MultiInterfaceFactory facadeFactory = new MultiInterfaceFactory("Mocks");
         private readonly ModuleBuilder moduleBuilder;
@@ -38,15 +36,58 @@ namespace NMock2.Monitoring
         /// <summary>
         /// Initializes a new instance of the <see cref="InterfaceOnlyMockObjectFactory"/> class.
         /// </summary>
-        public InterfaceOnlyMockObjectFactory()
-        {
+        public InterfaceOnlyMockObjectFactory() {
             string name = "MockObjects";
-            AssemblyName name1 = new AssemblyName();
+            var name1 = new AssemblyName();
             name1.Name = name;
-            this.moduleBuilder =
+            moduleBuilder =
                 AppDomain.CurrentDomain.DefineDynamicAssembly(
                     name1, AssemblyBuilderAccess.Run).DefineDynamicModule(name);
         }
+
+        #region IMockObjectFactory Members
+
+        /// <summary>
+        /// Creates a mock of the specified type(s).
+        /// </summary>
+        /// <param name="mockery">The mockery used to create this mock instance.</param>
+        /// <param name="typesToMock">The type(s) to include in the mock.</param>
+        /// <param name="name">The name to use for the mock instance.</param>
+        /// <param name="constructorArgs">Constructor arguments for the class to be mocked. Only valid if mocking a class type.</param>
+        /// <returns>
+        /// A mock instance of the specified type(s).
+        /// </returns>
+        public object CreateMock(Mockery mockery, CompositeType typesToMock, string name, object[] constructorArgs) {
+            Type mockedType = typesToMock.PrimaryType;
+
+            if (mockedType.IsClass)
+            {
+                throw new NotSupportedException(GetType().Name + " does not support mocking of classes.");
+            }
+
+            if (typesToMock.AdditionalInterfaceTypes.Length > 0)
+            {
+                throw new NotSupportedException(GetType().Name + " does not support mocking of multiple interfaces.");
+            }
+
+            Type facadeType = facadeFactory.GetType(typeof (IMockObject), mockedType);
+
+            var mockObject =
+                Activator.CreateInstance(
+                    GetMockedType(
+                        Id(new[] {mockedType, typeof (IMockObject)}), mockedType),
+                    new object[] {mockery, mockedType, name})
+                as MockObject;
+
+            var adapter =
+                new ProxyInvokableAdapter(
+                    facadeType,
+                    new ProxiedObjectIdentity(mockObject, new Invoker(typeof (IMockObject), mockObject, mockObject)));
+
+            return adapter.GetTransparentProxy();
+        }
+
+        #endregion
 
         /// <summary>
         /// Returns an array of <see langword="string"/>s that represent
@@ -54,9 +95,8 @@ namespace NMock2.Monitoring
         /// </summary>
         /// <param name="args">The parameter info array.</param>
         /// <returns>An array containing parameter names.</returns>
-        public static string[] GetGenericParameterNames(Type[] args)
-        {
-            string[] names = new string[args.Length];
+        public static string[] GetGenericParameterNames(Type[] args) {
+            var names = new string[args.Length];
             for (int i = 0; i < args.Length; i++)
             {
                 names[i] = args[i].Name;
@@ -73,9 +113,8 @@ namespace NMock2.Monitoring
         /// <returns>
         /// An array containing parameter <see cref="System.Type"/>s.
         /// </returns>
-        public static Type[] GetParameterTypes(ParameterInfo[] args)
-        {
-            Type[] types = new Type[args.Length];
+        public static Type[] GetParameterTypes(ParameterInfo[] args) {
+            var types = new Type[args.Length];
             for (int i = 0; i < args.Length; i++)
             {
                 types[i] = args[i].ParameterType;
@@ -84,58 +123,12 @@ namespace NMock2.Monitoring
             return types;
         }
 
-        #region IMockObjectFactory Members
-        /// <summary>
-        /// Creates a mock of the specified type(s).
-        /// </summary>
-        /// <param name="mockery">The mockery used to create this mock instance.</param>
-        /// <param name="typesToMock">The type(s) to include in the mock.</param>
-        /// <param name="name">The name to use for the mock instance.</param>
-        /// <param name="mockStyle">The behaviour of the mock instance when first created.</param>
-        /// <param name="constructorArgs">Constructor arguments for the class to be mocked. Only valid if mocking a class type.</param>
-        /// <returns>
-        /// A mock instance of the specified type(s).
-        /// </returns>
-        public object CreateMock(Mockery mockery, CompositeType typesToMock, string name, MockStyle mockStyle, object[] constructorArgs)
-        {
-            Type mockedType = typesToMock.PrimaryType;
-
-            if (mockedType.IsClass)
-            {
-                throw new NotSupportedException(this.GetType().Name + " does not support mocking of classes.");
-            }
-
-            if (typesToMock.AdditionalInterfaceTypes.Length > 0)
-            {
-                throw new NotSupportedException(this.GetType().Name + " does not support mocking of multiple interfaces.");
-            }
-
-            Type facadeType = facadeFactory.GetType(typeof(IMockObject), mockedType);
-
-            MockObject mockObject =
-                Activator.CreateInstance(
-                    this.GetMockedType(
-                        Id(new Type[] { mockedType, typeof(IMockObject) }), mockedType),
-                    new object[] { mockery, mockedType, name })
-                as MockObject;
-
-            ProxyInvokableAdapter adapter =
-                new ProxyInvokableAdapter(
-                    facadeType,
-                    new ProxiedObjectIdentity(mockObject, new Invoker(typeof(IMockObject), mockObject, mockObject)));
-
-            return adapter.GetTransparentProxy();
-        }
-        #endregion
-
-        private static bool AllTypes(Type type, object criteria)
-        {
+        private static bool AllTypes(Type type, object criteria) {
             return true;
         }
 
         private static void BuildAllInterfaceMethods(
-            Type mockedType, TypeBuilder typeBuilder)
-        {
+            Type mockedType, TypeBuilder typeBuilder) {
             Type[] typeArray1 = mockedType.FindInterfaces(AllTypes, null);
             foreach (Type type1 in typeArray1)
             {
@@ -145,10 +138,9 @@ namespace NMock2.Monitoring
             BuildInterfaceMethods(typeBuilder, mockedType);
         }
 
-        private static void BuildConstructor(TypeBuilder typeBuilder)
-        {
-            Type[] typeArray1 =
-                new Type[] { typeof(Mockery), typeof(Type), typeof(string) };
+        private static void BuildConstructor(TypeBuilder typeBuilder) {
+            var typeArray1 =
+                new[] {typeof (Mockery), typeof (Type), typeof (string)};
 
             ILGenerator generator1 =
                 typeBuilder.DefineConstructor(
@@ -156,7 +148,7 @@ namespace NMock2.Monitoring
                     GetILGenerator();
 
             ConstructorInfo info1 =
-                typeof(MockObject).GetConstructor(
+                typeof (MockObject).GetConstructor(
                     BindingFlags.NonPublic | BindingFlags.Instance, null, typeArray1, null);
 
             generator1.Emit(OpCodes.Ldarg_0);
@@ -167,8 +159,7 @@ namespace NMock2.Monitoring
             generator1.Emit(OpCodes.Ret);
         }
 
-        private static void BuildInterfaceMethods(TypeBuilder typeBuilder, Type mockedType)
-        {
+        private static void BuildInterfaceMethods(TypeBuilder typeBuilder, Type mockedType) {
             typeBuilder.AddInterfaceImplementation(mockedType);
             MethodInfo[] infoArray1 = mockedType.GetMethods();
             foreach (MethodInfo info1 in infoArray1)
@@ -177,21 +168,18 @@ namespace NMock2.Monitoring
             }
         }
 
-        private static void EmitReferenceMethodBody(ILGenerator gen)
-        {
+        private static void EmitReferenceMethodBody(ILGenerator gen) {
             gen.Emit(OpCodes.Ldnull);
             gen.Emit(OpCodes.Ret);
         }
 
-        private static void EmitValueMethodBody(MethodInfo method, ILGenerator gen)
-        {
+        private static void EmitValueMethodBody(MethodInfo method, ILGenerator gen) {
             gen.DeclareLocal(method.ReturnType);
             gen.Emit(OpCodes.Ldloc_0);
             gen.Emit(OpCodes.Ret);
         }
 
-        private static void GenerateMethodBody(TypeBuilder typeBuilder, MethodInfo method)
-        {
+        private static void GenerateMethodBody(TypeBuilder typeBuilder, MethodInfo method) {
             MethodBuilder methodBuilder = DefineMethod(typeBuilder, method, false);
             DefineParameters(methodBuilder, method);
             ILGenerator generator1 = methodBuilder.GetILGenerator();
@@ -214,8 +202,7 @@ namespace NMock2.Monitoring
             }
         }
 
-        private static TypeId Id(params Type[] types)
-        {
+        private static TypeId Id(params Type[] types) {
             return new TypeId(types);
         }
 
@@ -235,8 +222,7 @@ namespace NMock2.Monitoring
         private static MethodBuilder DefineMethod(
             TypeBuilder typeBuilder,
             MethodInfo method,
-            bool explicitImplementation)
-        {
+            bool explicitImplementation) {
             string name = method.Name;
             MethodAttributes attributes = MethodAttributes.Public | MethodAttributes.ReuseSlot
                                           | MethodAttributes.HideBySig | MethodAttributes.Virtual;
@@ -267,7 +253,7 @@ namespace NMock2.Monitoring
                     gtpBuilders[i].SetGenericParameterAttributes(genericArguments[i].GenericParameterAttributes);
 
                     Type[] constraints = genericArguments[i].GetGenericParameterConstraints();
-                    List<Type> interfaces = new List<Type>(constraints.Length);
+                    var interfaces = new List<Type>(constraints.Length);
                     foreach (Type constraint in constraints)
                     {
                         if (constraint.IsClass)
@@ -292,8 +278,7 @@ namespace NMock2.Monitoring
         /// </summary>
         /// <param name="methodBuilder">The <see cref="System.Reflection.Emit.MethodBuilder"/> to use.</param>
         /// <param name="method">The method to proxy.</param>
-        private static void DefineParameters(MethodBuilder methodBuilder, MethodInfo method)
-        {
+        private static void DefineParameters(MethodBuilder methodBuilder, MethodInfo method) {
             int n = 1;
             foreach (ParameterInfo param in method.GetParameters())
             {
@@ -302,21 +287,19 @@ namespace NMock2.Monitoring
             }
         }
 
-        private Type CreateType(string typeName, Type mockedType)
-        {
+        private Type CreateType(string typeName, Type mockedType) {
             TypeBuilder builder1 =
-                this.moduleBuilder.DefineType(
+                moduleBuilder.DefineType(
                     typeName,
                     TypeAttributes.Public,
-                    typeof(MockObject),
-                    new Type[] { mockedType });
+                    typeof (MockObject),
+                    new[] {mockedType});
             BuildConstructor(builder1);
             BuildAllInterfaceMethods(mockedType, builder1);
             return builder1.CreateType();
         }
 
-        private Type GetMockedType(TypeId id1, Type mockedType)
-        {
+        private Type GetMockedType(TypeId id1, Type mockedType) {
             Type type1;
             if (createdTypes.ContainsKey(id1))
             {
@@ -325,7 +308,7 @@ namespace NMock2.Monitoring
             else
             {
                 createdTypes[id1] =
-                    type1 = this.CreateType("MockObjectType" + (createdTypes.Count + 1), mockedType);
+                    type1 = CreateType("MockObjectType" + (createdTypes.Count + 1), mockedType);
             }
 
             return type1;
@@ -333,28 +316,24 @@ namespace NMock2.Monitoring
 
         #region Nested type: TypeId
 
-        private class TypeId
-        {
+        private class TypeId {
             private readonly Type[] types;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="TypeId"/> class.
             /// </summary>
             /// <param name="types">The types.</param>
-            public TypeId(params Type[] types)
-            {
+            public TypeId(params Type[] types) {
                 this.types = types;
             }
 
-            public override bool Equals(object obj)
-            {
-                return (obj is TypeId) && this.ContainsSameTypesAs((TypeId) obj);
+            public override bool Equals(object obj) {
+                return (obj is TypeId) && ContainsSameTypesAs((TypeId) obj);
             }
 
-            public override int GetHashCode()
-            {
+            public override int GetHashCode() {
                 int num1 = 0;
-                foreach (Type type1 in this.types)
+                foreach (Type type1 in types)
                 {
                     num1 ^= type1.GetHashCode();
                 }
@@ -362,16 +341,15 @@ namespace NMock2.Monitoring
                 return num1;
             }
 
-            private bool ContainsSameTypesAs(TypeId other)
-            {
-                if (other.types.Length != this.types.Length)
+            private bool ContainsSameTypesAs(TypeId other) {
+                if (other.types.Length != types.Length)
                 {
                     return false;
                 }
 
-                for (int num1 = 0; num1 < this.types.Length; num1++)
+                for (int num1 = 0; num1 < types.Length; num1++)
                 {
-                    if (Array.IndexOf(other.types, this.types[num1]) < 0)
+                    if (Array.IndexOf(other.types, types[num1]) < 0)
                     {
                         return false;
                     }

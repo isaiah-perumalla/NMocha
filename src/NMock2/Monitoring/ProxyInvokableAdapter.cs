@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.Collections;
-    using System.Reflection;
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime.Remoting.Proxies;
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Proxies;
 
-    public class ProxyInvokableAdapter : RealProxy
-    {
+namespace NMock2.Monitoring {
+    public class ProxyInvokableAdapter : RealProxy {
         private readonly IInvokable invokable;
 
         /// <summary>
@@ -33,22 +31,20 @@ namespace NMock2.Monitoring
         /// </summary>
         /// <param name="proxyType">Type of the proxy.</param>
         /// <param name="invokable">The invokable.</param>
-        public ProxyInvokableAdapter(Type proxyType, IInvokable invokable) : base(proxyType)
-        {
+        public ProxyInvokableAdapter(Type proxyType, IInvokable invokable) : base(proxyType) {
             this.invokable = invokable;
         }
-        
-        public override IMessage Invoke(IMessage msg)
-        {
-            MethodCall call = new MethodCall(msg);
+
+        public override IMessage Invoke(IMessage msg) {
+            var call = new MethodCall(msg);
             ParameterInfo[] parameters = call.MethodBase.GetParameters();
-            Invocation invocation = new Invocation(
+            var invocation = new Invocation(
                 GetTransparentProxy(),
-                (MethodInfo)call.MethodBase,
+                (MethodInfo) call.MethodBase,
                 call.Args);
-            
-            this.invokable.Invoke(invocation);
-            
+
+            invokable.Invoke(invocation);
+
             if (invocation.IsThrowing)
             {
                 // TODO: it is impossible to set output parameters and throw an exception,
@@ -59,32 +55,31 @@ namespace NMock2.Monitoring
             {
                 object[] outArgs = CollectOutputArguments(invocation, call, parameters);
 
-                MethodInfo methodInfo = (MethodInfo)call.MethodBase;
-                if (invocation.Result == Missing.Value && methodInfo.ReturnType != typeof(void))
+                var methodInfo = (MethodInfo) call.MethodBase;
+                if (invocation.Result == Missing.Value && methodInfo.ReturnType != typeof (void))
                 {
                     throw new InvalidOperationException(
                         string.Format(
                             "You have to set the return value for method '{0}' on '{1}' mock.",
-                            call.MethodName, 
+                            call.MethodName,
                             call.MethodBase.DeclaringType.Name));
                 }
 
                 return new ReturnMessage(
-                    invocation.Result, 
-                    outArgs, 
+                    invocation.Result,
+                    outArgs,
                     outArgs.Length,
-                    call.LogicalCallContext, 
+                    call.LogicalCallContext,
                     call);
             }
         }
-        
+
         private static object[] CollectOutputArguments(
-            Invocation invocation, 
-            MethodCall call, 
-            ParameterInfo[] parameters)
-        {
-            ArrayList outArgs = new ArrayList(call.ArgCount);
-            
+            Invocation invocation,
+            MethodCall call,
+            ParameterInfo[] parameters) {
+            var outArgs = new ArrayList(call.ArgCount);
+
             for (int i = 0; i < call.ArgCount; i++)
             {
                 if (!parameters[i].IsIn)
@@ -92,7 +87,7 @@ namespace NMock2.Monitoring
                     outArgs.Add(invocation.Parameters[i]);
                 }
             }
-            
+
             return outArgs.ToArray();
         }
     }

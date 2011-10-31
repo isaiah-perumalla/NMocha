@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax for defining event arguments.
     /// </summary>
-    public interface IEventArgumentSyntax
-    {
+    public interface IEventArgumentSyntax {
         /// <summary>
         /// Defines the event arguments.
         /// </summary>

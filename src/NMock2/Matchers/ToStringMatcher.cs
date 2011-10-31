@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual value in string representation (actual.ToString())
     /// matches with the wrapped matcher.
     /// </summary>
-    public class ToStringMatcher : Matcher
-    {
+    public class ToStringMatcher : Matcher {
         /// <summary>
         /// Holds the wrapped matcher.
         /// </summary>
@@ -35,8 +33,7 @@ namespace NMock2.Matchers
         /// Initializes a new instance of the <see cref="ToStringMatcher"/> class.
         /// </summary>
         /// <param name="matcher">The wrapped matcher.</param>
-        public ToStringMatcher(Matcher matcher)
-        {
+        public ToStringMatcher(Matcher matcher) {
             this.matcher = matcher;
         }
 
@@ -45,19 +42,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object in string representation (o.ToString()) matches the wrapped matcher.</returns>
-        public override bool Matches(object o)
-        {
-            return this.matcher.Matches(o.ToString());
+        public override bool Matches(object o) {
+            return matcher.Matches(o.ToString());
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("an object with a string representation that is ");
-            this.matcher.DescribeTo(writer);
+            matcher.DescribeTo(writer);
         }
     }
 }

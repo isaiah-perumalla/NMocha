@@ -16,47 +16,44 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.Collections;
-    using System.Reflection;
+using System;
+using System.Collections;
+using System.Reflection;
 
+namespace NMock2.Monitoring {
     /// <summary>
     /// Manages a list of parameters for a mocked method together with the parameter's values.
     /// </summary>
-    public class ParameterList
-    {
-        /// <summary>
-        /// Holds the method to be mocked.
-        /// </summary>
-        private readonly MethodInfo method;
-        
-        /// <summary>
-        /// An array holding the values of the parameters.
-        /// </summary>
-        private readonly object[] values;
-        
+    public class ParameterList {
         /// <summary>
         /// Holds a boolean for each value if it was set or not.
         /// </summary>
         private readonly BitArray isValueSet;
 
         /// <summary>
+        /// Holds the method to be mocked.
+        /// </summary>
+        private readonly MethodInfo method;
+
+        /// <summary>
+        /// An array holding the values of the parameters.
+        /// </summary>
+        private readonly object[] values;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ParameterList"/> class.
         /// </summary>
         /// <param name="method">The method to be mocked.</param>
         /// <param name="values">The values of the parameters.</param>
-        public ParameterList(MethodInfo method, object[] values)
-        {
+        public ParameterList(MethodInfo method, object[] values) {
             this.method = method;
             this.values = values;
-            this.isValueSet = new BitArray(values.Length);
-            
+            isValueSet = new BitArray(values.Length);
+
             ParameterInfo[] parameters = method.GetParameters();
             for (int i = 0; i < parameters.Length; i++)
             {
-                this.isValueSet[i] = !parameters[i].IsOut;
+                isValueSet[i] = !parameters[i].IsOut;
             }
         }
 
@@ -64,18 +61,16 @@ namespace NMock2.Monitoring
         /// Gets the number of values.
         /// </summary>
         /// <value>The number of values.</value>
-        public int Count
-        {
-            get { return this.values.Length; }
+        public int Count {
+            get { return values.Length; }
         }
 
         /// <summary>
         /// Gets the values as array.
         /// </summary>
         /// <value>Values as array.</value>
-        internal object[] AsArray
-        {
-            get { return this.values; }
+        internal object[] AsArray {
+            get { return values; }
         }
 
         /// <summary>
@@ -85,28 +80,27 @@ namespace NMock2.Monitoring
         /// <value>
         /// The value of a parameter specified by its <paramref name="index"/>.
         /// </value>
-        public object this[int index]
-        {
-            get
-            {
-                if (this.IsValueSet(index))
+        public object this[int index] {
+            get {
+                if (IsValueSet(index))
                 {
-                    return this.values[index];
+                    return values[index];
                 }
-                
-                throw new InvalidOperationException(string.Format("Parameter '{0}' has not been set.", this.GetParameterName(index)));
+
+                throw new InvalidOperationException(string.Format("Parameter '{0}' has not been set.",
+                                                                  GetParameterName(index)));
             }
 
-            set
-            {
-                if (this.CanValueBeSet(index))
+            set {
+                if (CanValueBeSet(index))
                 {
-                    this.values[index] = value;
-                    this.isValueSet[index] = true;
+                    values[index] = value;
+                    isValueSet[index] = true;
                 }
                 else
                 {
-                    throw new InvalidOperationException(string.Format("Cannot set the value of in parameter '{0}'", this.GetParameterName(index)));
+                    throw new InvalidOperationException(string.Format("Cannot set the value of in parameter '{0}'",
+                                                                      GetParameterName(index)));
                 }
             }
         }
@@ -118,17 +112,15 @@ namespace NMock2.Monitoring
         /// <returns>
         /// Returns <c>true</c> if value specified by index was set; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsValueSet(int index)
-        {
-            return this.isValueSet[index];
+        public bool IsValueSet(int index) {
+            return isValueSet[index];
         }
 
         /// <summary>
         /// Marks all values as set.
         /// </summary>
-        internal void MarkAllValuesAsSet()
-        {
-            this.isValueSet.SetAll(true);
+        internal void MarkAllValuesAsSet() {
+            isValueSet.SetAll(true);
         }
 
         /// <summary>
@@ -138,9 +130,8 @@ namespace NMock2.Monitoring
         /// <returns>
         /// Returns <c>true</c> if the parameter specified by index can be set; otherwise, <c>false</c>.
         /// </returns>
-        private bool CanValueBeSet(int index)
-        {
-            return !this.method.GetParameters()[index].IsIn;
+        private bool CanValueBeSet(int index) {
+            return !method.GetParameters()[index].IsIn;
         }
 
         /// <summary>
@@ -150,9 +141,8 @@ namespace NMock2.Monitoring
         /// <returns>
         /// Returns the parameter name with the given index.
         /// </returns>
-        private string GetParameterName(int index)
-        {
-            return this.method.GetParameters()[index].Name;
+        private string GetParameterName(int index) {
+            return method.GetParameters()[index].Name;
         }
     }
 }

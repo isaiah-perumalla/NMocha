@@ -16,36 +16,32 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using NMock2.Matchers;
+using NMock2.Monitoring;
 
-namespace NMock2.Internal
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using NMock2.Matchers;
-    using NMock2.Monitoring;
-
-    public class BuildableExpectation : IExpectation
-    {
+namespace NMock2.Internal {
+    public class BuildableExpectation : IExpectation {
         private const string AddEventHandlerPrefix = "add_";
         private const string RemoveEventHandlerPrefix = "remove_";
-        private int callCount = 0;
-        
-        private string expectationDescription;
-        private string expectationComment;
-        private Matcher requiredCountMatcher, matchingCountMatcher;
-        
-        private IMockObject receiver;
-        private string methodSeparator = ".";
-        private Matcher methodMatcher = new AlwaysMatcher(true, "<any method>");
-        private Matcher genericMethodTypeMatcher = new AlwaysMatcher(true, string.Empty);
-        private Matcher argumentsMatcher = new AlwaysMatcher(true, "(any arguments)");
-        private ArrayList extraMatchers = new ArrayList();
-        private ArrayList actions = new ArrayList();
+        private readonly ArrayList actions = new ArrayList();
+
+        private readonly string expectationDescription;
+        private readonly ArrayList extraMatchers = new ArrayList();
+        private readonly Matcher matchingCountMatcher;
         private readonly List<IOrderingConstraint> orderingConstraints = new List<IOrderingConstraint>();
+        private readonly Matcher requiredCountMatcher;
         private readonly List<ISideEffect> sideEffects = new List<ISideEffect>();
+        private Matcher argumentsMatcher = new AlwaysMatcher(true, "(any arguments)");
+        private int callCount;
+        private string expectationComment;
+        private Matcher genericMethodTypeMatcher = new AlwaysMatcher(true, string.Empty);
+        private Matcher methodMatcher = new AlwaysMatcher(true, "<any method>");
+        private string methodSeparator = ".";
+        private IMockObject receiver;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BuildableExpectation"/> class.
@@ -53,60 +49,41 @@ namespace NMock2.Internal
         /// <param name="expectationDescription">The expectation description.</param>
         /// <param name="requiredCountMatcher">The required count matcher.</param>
         /// <param name="matchingCountMatcher">The matching count matcher.</param>
-        public BuildableExpectation(string expectationDescription, Matcher requiredCountMatcher, Matcher matchingCountMatcher)
-        {
+        public BuildableExpectation(string expectationDescription, Matcher requiredCountMatcher,
+                                    Matcher matchingCountMatcher) {
             this.expectationDescription = expectationDescription;
             this.requiredCountMatcher = requiredCountMatcher;
             this.matchingCountMatcher = matchingCountMatcher;
         }
-        
-        public IMockObject Receiver
-        {
-            get { return this.receiver; }
-            set { this.receiver = value; }
-        }
-        
-        public Matcher MethodMatcher
-        {
-            get { return this.methodMatcher; }
-            set { this.methodMatcher = value; }
+
+        public IMockObject Receiver {
+            get { return receiver; }
+            set { receiver = value; }
         }
 
-        public Matcher GenericMethodTypeMatcher
-        {
-            get { return this.genericMethodTypeMatcher; }
-            set { this.genericMethodTypeMatcher = value; }
+        public Matcher MethodMatcher {
+            get { return methodMatcher; }
+            set { methodMatcher = value; }
         }
 
-        public Matcher ArgumentsMatcher
-        {
-            get { return this.argumentsMatcher; }
-            set { this.argumentsMatcher = value; }
+        public Matcher GenericMethodTypeMatcher {
+            get { return genericMethodTypeMatcher; }
+            set { genericMethodTypeMatcher = value; }
         }
 
-        public bool IsActive
-        {
-            get { return this.matchingCountMatcher.Matches(this.callCount + 1); }
+        public Matcher ArgumentsMatcher {
+            get { return argumentsMatcher; }
+            set { argumentsMatcher = value; }
         }
 
-        public bool HasBeenMet
-        {
-            get { return this.requiredCountMatcher.Matches(this.callCount); }
+        #region IExpectation Members
+
+        public bool IsActive {
+            get { return matchingCountMatcher.Matches(callCount + 1); }
         }
 
-        public void AddInvocationMatcher(Matcher matcher)
-        {
-            this.extraMatchers.Add(matcher);
-        }
-        
-        public void AddAction(IAction action)
-        {
-            this.actions.Add(action);
-        }
-
-        public void AddComment(string comment)
-        {
-            this.expectationComment = comment;
+        public bool HasBeenMet {
+            get { return requiredCountMatcher.Matches(callCount); }
         }
 
         /// <summary>
@@ -115,52 +92,43 @@ namespace NMock2.Internal
         /// <param name="invocation">The invocation to check.</param>
         /// <returns>Returns whether one of the stored expectations has met the specified invocation.</returns>
         public bool Matches(Invocation invocation) {
-            return this.IsActive
-                   && this.receiver == invocation.Receiver
-                   && this.methodMatcher.Matches(invocation.Method)
-                   && this.argumentsMatcher.Matches(invocation)
-                   && this.ExtraMatchersMatch(invocation)
-                   && this.GenericMethodTypeMatcher.Matches(invocation)
-                   && this.IsInCorrectOrder();
+            return IsActive
+                   && receiver == invocation.Receiver
+                   && methodMatcher.Matches(invocation.Method)
+                   && argumentsMatcher.Matches(invocation)
+                   && ExtraMatchersMatch(invocation)
+                   && GenericMethodTypeMatcher.Matches(invocation)
+                   && IsInCorrectOrder();
         }
 
-        private bool IsInCorrectOrder() {
-            return orderingConstraints.All(orderConstraint => orderConstraint.AllowsInvocationNow());
+        public bool MatchesIgnoringIsActive(Invocation invocation) {
+            return receiver == invocation.Receiver
+                   && methodMatcher.Matches(invocation.Method)
+                   && argumentsMatcher.Matches(invocation)
+                   && ExtraMatchersMatch(invocation)
+                   && GenericMethodTypeMatcher.Matches(invocation);
         }
 
-        public bool MatchesIgnoringIsActive(Invocation invocation)
-        {
-            return this.receiver == invocation.Receiver
-                && this.methodMatcher.Matches(invocation.Method)
-                && this.argumentsMatcher.Matches(invocation)
-                && this.ExtraMatchersMatch(invocation)
-                && this.GenericMethodTypeMatcher.Matches(invocation);
-        }
-        
-        public void Perform(Invocation invocation)
-        {
-            this.callCount++;
-            ProcessEventHandlers(invocation);
-            foreach (IAction action in this.actions)
+        public void Perform(Invocation invocation) {
+            callCount++;
+            foreach (IAction action in actions)
             {
                 action.Invoke(invocation);
             }
             sideEffects.ForEach(sideEffect => sideEffect.Apply());
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer)
-        {
-            if (this.IsActive)
+        public void DescribeActiveExpectationsTo(TextWriter writer) {
+            if (IsActive)
             {
-                this.DescribeTo(writer);
+                DescribeTo(writer);
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer)
-        {
-            if (!this.HasBeenMet)
+        public void DescribeUnmetExpectationsTo(TextWriter writer) {
+            if (!HasBeenMet)
             {
-                this.DescribeTo(writer);
+                DescribeTo(writer);
             }
         }
 
@@ -170,59 +138,37 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="mock">The mock for which expectations are queried.</param>
         /// <param name="result">The result to add matching expectations to.</param>
-        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result)
-        {
-            if (this.Receiver == mock)
+        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {
+            if (Receiver == mock)
             {
                 result.Add(this);
             }
         }
 
-        public void DescribeAsIndexer()
-        {
-            this.methodSeparator = string.Empty;
-        }
-        
-        private static void ProcessEventHandlers(Invocation invocation)
-        {
-            if (IsEventAccessorMethod(invocation))
-            {
-                IMockObject mockObject = invocation.Receiver as IMockObject;
-                if (mockObject != null)
-                {
-                    MockEventHandler(invocation, mockObject);
-                }
-            }
+        #endregion
+
+        public void AddInvocationMatcher(Matcher matcher) {
+            extraMatchers.Add(matcher);
         }
 
-        private static void MockEventHandler(Invocation invocation, IMockObject mockObject)
-        {
-            Delegate handler = invocation.Parameters[0] as Delegate;
-
-            if (invocation.Method.Name.StartsWith(AddEventHandlerPrefix))
-            {
-                mockObject.AddEventHandler(
-                    invocation.Method.Name.Substring(AddEventHandlerPrefix.Length), handler);
-            }
-
-            if (invocation.Method.Name.StartsWith(RemoveEventHandlerPrefix))
-            {
-                mockObject.RemoveEventHandler(
-                    invocation.Method.Name.Substring(RemoveEventHandlerPrefix.Length),
-                    handler);
-            }
+        public void AddAction(IAction action) {
+            actions.Add(action);
         }
 
-        private static bool IsEventAccessorMethod(Invocation invocation)
-        {
-            return invocation.Method.IsSpecialName &&
-                   (invocation.Method.Name.StartsWith(AddEventHandlerPrefix) ||
-                    invocation.Method.Name.StartsWith(RemoveEventHandlerPrefix));
+        public void AddComment(string comment) {
+            expectationComment = comment;
         }
 
-        private bool ExtraMatchersMatch(Invocation invocation)
-        {
-            foreach (Matcher matcher in this.extraMatchers)
+        private bool IsInCorrectOrder() {
+            return orderingConstraints.All(orderConstraint => orderConstraint.AllowsInvocationNow());
+        }
+
+        public void DescribeAsIndexer() {
+            methodSeparator = string.Empty;
+        }
+
+        private bool ExtraMatchersMatch(Invocation invocation) {
+            foreach (Matcher matcher in extraMatchers)
             {
                 if (!matcher.Matches(invocation))
                 {
@@ -233,64 +179,63 @@ namespace NMock2.Internal
             return true;
         }
 
-        private void DescribeTo(TextWriter writer)
-        {
-            writer.Write(this.expectationDescription);
+        private void DescribeTo(TextWriter writer) {
+            writer.Write(expectationDescription);
             writer.Write(": ");
-            writer.Write(this.receiver.MockName);
-            writer.Write(this.methodSeparator);
-            this.methodMatcher.DescribeTo(writer);
-            this.genericMethodTypeMatcher.DescribeTo(writer);
-            this.argumentsMatcher.DescribeTo(writer);
-            foreach (Matcher extraMatcher in this.extraMatchers)
+            writer.Write(receiver.MockName);
+            writer.Write(methodSeparator);
+            methodMatcher.DescribeTo(writer);
+            genericMethodTypeMatcher.DescribeTo(writer);
+            argumentsMatcher.DescribeTo(writer);
+            foreach (Matcher extraMatcher in extraMatchers)
             {
                 writer.Write(", ");
                 extraMatcher.DescribeTo(writer);
             }
 
-            if (this.actions.Count > 0)
+            if (actions.Count > 0)
             {
                 writer.Write(", will ");
-                ((IAction)this.actions[0]).DescribeTo(writer);
-                for (int i = 1; i < this.actions.Count; i++)
+                ((IAction) actions[0]).DescribeTo(writer);
+                for (int i = 1; i < actions.Count; i++)
                 {
                     writer.Write(", ");
-                    ((IAction)this.actions[i]).DescribeTo(writer);
+                    ((IAction) actions[i]).DescribeTo(writer);
                 }
             }
             DescribeOrderingConstraintsOn(writer);
             sideEffects.ForEach(sideEffect => sideEffect.DescribeTo(writer));
-            
+
 
             writer.Write(" [called ");
-            writer.Write(this.callCount);
+            writer.Write(callCount);
             writer.Write(" time");
-            if (this.callCount != 1)
+            if (callCount != 1)
             {
                 writer.Write("s");
             }
 
             writer.Write("]");
 
-            if (!string.IsNullOrEmpty(this.expectationComment))
+            if (!string.IsNullOrEmpty(expectationComment))
             {
                 writer.Write(" Comment: ");
-                writer.Write(this.expectationComment);
+                writer.Write(expectationComment);
             }
         }
 
         private void DescribeOrderingConstraintsOn(TextWriter writer) {
-            if(!orderingConstraints.Any()) return;
+            if (!orderingConstraints.Any()) return;
             writer.Write(" ");
             orderingConstraints.ForEach(constraint => constraint.DescribeTo(writer));
         }
 
         public void AddOrderingConstraint(IOrderingConstraint orderingConstraint) {
-            this.orderingConstraints.Add(orderingConstraint);
+            orderingConstraints.Add(orderingConstraint);
         }
 
         public void AddSideEffect(ISideEffect sideEffect) {
-            this.sideEffects.Add(sideEffect);
+            sideEffects.Add(sideEffect);
         }
     }
 

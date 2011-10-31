@@ -16,16 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using NMock2.Monitoring;
+using NMock2.Monitoring;
 
+namespace NMock2 {
     /// <summary>
     /// An action defines something that has to be done.
     /// For example the action to return a result value.
     /// </summary>
-    public interface IAction : IInvokable, ISelfDescribing
-    {
+    public interface IAction : IInvokable, ISelfDescribing {
     }
 }
-

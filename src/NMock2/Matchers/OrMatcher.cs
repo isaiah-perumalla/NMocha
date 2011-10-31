@@ -16,22 +16,19 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that combines two matcher with a logically or.
     /// </summary>
-    public class OrMatcher : BinaryOperator
-    {
+    public class OrMatcher : BinaryOperator {
         /// <summary>
         /// Initializes a new instance of the <see cref="OrMatcher"/> class.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
-        public OrMatcher(Matcher left, Matcher right) : base(left, right)
-        {
+        public OrMatcher(Matcher left, Matcher right) : base(left, right) {
         }
 
         /// <summary>
@@ -39,8 +36,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object matches one of the two combined matchers.</returns>
-        public override bool Matches(object o)
-        {
+        public override bool Matches(object o) {
             return Left.Matches(o) || Right.Matches(o);
         }
 
@@ -48,8 +44,7 @@ namespace NMock2.Matchers
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("`");
             Left.DescribeTo(writer);
             writer.Write("' or `");

@@ -16,32 +16,29 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// A matcher that will always or never match independent of the value matched but depending on how it is initialized.
     /// </summary>
-    public class AlwaysMatcher : Matcher
-    {
-        /// <summary>
-        /// Stores the matcher value which was given at initialization.
-        /// </summary>
-        private readonly bool matches;
-
+    public class AlwaysMatcher : Matcher {
         /// <summary>
         /// Stores the description which was given at initialization.
         /// </summary>
         private readonly string description;
 
         /// <summary>
+        /// Stores the matcher value which was given at initialization.
+        /// </summary>
+        private readonly bool matches;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AlwaysMatcher"/> class.
         /// </summary>
         /// <param name="matches">if set to <c>true</c> the matcher will always match, otherwise it will never match.</param>
         /// <param name="description">The description which will be printed out when calling <see cref="DescribeTo"/>.</param>
-        public AlwaysMatcher(bool matches, string description)
-        {
+        public AlwaysMatcher(bool matches, string description) {
             this.matches = matches;
             this.description = description;
         }
@@ -51,18 +48,16 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Returns whether the object matches.</returns>
-        public override bool Matches(object o)
-        {
-            return this.matches;
+        public override bool Matches(object o) {
+            return matches;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
-            writer.Write(this.description);
+        public override void DescribeTo(TextWriter writer) {
+            writer.Write(description);
         }
     }
 }

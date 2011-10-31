@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining matching criterias.
     /// </summary>
-    public interface IMatchSyntax : IActionSyntax
-    {
+    public interface IMatchSyntax : IActionSyntax {
         /// <summary>
         /// Defines a matching criteria.
         /// </summary>

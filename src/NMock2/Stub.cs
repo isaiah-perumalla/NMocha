@@ -16,26 +16,23 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using NMock2.Internal;
-    using NMock2.Syntax;
+using NMock2.Internal;
+using NMock2.Syntax;
 
+namespace NMock2 {
     /// <summary>
     /// Defines stubs for interfaces. Stubs are used when it does not matter how many times (even 0) something is called.
     /// A stub is the same as an "at least once" expecation.
     /// Normally you use stubs on mocks that just provide information to your object under test.
     /// </summary>
-    public class Stub
-    {
+    public class Stub {
         /// <summary>
         /// Defines the mock that is stubbed.
         /// </summary>
         /// <param name="mock">The mock to stub.</param>
         /// <returns>Method syntax defining the method, property or event to stub.</returns>
-        public static IMethodSyntax On(object mock)
-        {
-            ExpectationBuilder builder = new ExpectationBuilder("Stub", Is.Anything, Is.Anything);
+        public static IMethodSyntax On(object mock) {
+            var builder = new ExpectationBuilder("Stub", Is.Anything, Is.Anything);
             return builder.On(mock);
         }
     }

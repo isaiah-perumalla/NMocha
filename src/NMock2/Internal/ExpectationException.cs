@@ -16,23 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System;
-    using System.Runtime.Serialization;
+using System;
+using System.Runtime.Serialization;
 
+namespace NMock2.Internal {
     /// <summary>
     /// Exception representing an expectation exception.
     /// </summary>
     [Serializable]
-    public class ExpectationException : Exception
-    {
+    public class ExpectationException : Exception {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpectationException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public ExpectationException(string message) : base(message)
-        {
+        public ExpectationException(string message) : base(message) {
         }
 
         /// <summary>
@@ -40,8 +37,7 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public ExpectationException(string message, Exception innerException) : base(message, innerException)
-        {
+        public ExpectationException(string message, Exception innerException) : base(message, innerException) {
         }
 
         /// <summary>
@@ -55,8 +51,7 @@ namespace NMock2.Internal
         /// <exception cref="T:System.Runtime.Serialization.SerializationException">
         /// The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0).
         /// </exception>
-        public ExpectationException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
+        public ExpectationException(SerializationInfo info, StreamingContext context) : base(info, context) {
         }
     }
 }

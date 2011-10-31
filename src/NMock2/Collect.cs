@@ -17,15 +17,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NMock2
-{
-    using Actions;
+using NMock2.Actions;
 
+namespace NMock2 {
     /// <summary>
     /// Gather information about invocations.
     /// </summary>
-    public class Collect
-    {
+    public class Collect {
         /// <summary>
         /// Calls the specified <paramref name="collectDelegate"/> with the method argument at index <paramref name="argumentIndex"/>.
         /// Can only be used as action of an expectation on a method call.
@@ -34,8 +32,8 @@ namespace NMock2
         /// <param name="argumentIndex">Index of the argument.</param>
         /// <param name="collectDelegate">The collect delegate.</param>
         /// <returns>Action that collects a method argument.</returns>
-        public static IAction MethodArgument<TArgument>(int argumentIndex, CollectAction<TArgument>.Collect collectDelegate)
-        {
+        public static IAction MethodArgument<TArgument>(int argumentIndex,
+                                                        CollectAction<TArgument>.Collect collectDelegate) {
             return new CollectAction<TArgument>(argumentIndex, collectDelegate);
         }
 
@@ -46,8 +44,7 @@ namespace NMock2
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="collectDelegate">The collect delegate.</param>
         /// <returns>Action that collects a property value.</returns>
-        public static IAction PropertyValue<TValue>(CollectAction<TValue>.Collect collectDelegate)
-        {
+        public static IAction PropertyValue<TValue>(CollectAction<TValue>.Collect collectDelegate) {
             return new CollectAction<TValue>(0, collectDelegate);
         }
     }

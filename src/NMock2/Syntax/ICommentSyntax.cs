@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax for adding an explanation for the expectation.
     /// </summary>
-    public interface ICommentSyntax
-    {
+    public interface ICommentSyntax {
         /// <summary>
         /// Adds a comment for the expectation that is added to the error message if the expectation is not met.
         /// </summary>

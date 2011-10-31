@@ -16,23 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual object is the same as the expected one (equality by reference).
     /// </summary>
-    public class SameMatcher : Matcher
-    {
+    public class SameMatcher : Matcher {
         private readonly object expected;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SameMatcher"/> class.
         /// </summary>
         /// <param name="expected">The expected object.</param>
-        public SameMatcher(object expected)
-        {
+        public SameMatcher(object expected) {
             this.expected = expected;
         }
 
@@ -41,19 +38,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object is the same as the expected one.</returns>
-        public override bool Matches(object o)
-        {
-            return this.expected == o;
+        public override bool Matches(object o) {
+            return expected == o;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("same as ");
-            writer.Write(this.expected);
+            writer.Write(expected);
         }
     }
 }

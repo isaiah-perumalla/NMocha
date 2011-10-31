@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System;
-    using System.ComponentModel;
+using System;
+using System.ComponentModel;
+using NMock2.Monitoring;
 
-    using Monitoring;
-
+namespace NMock2 {
     /// <summary>
     /// The definition of a mock object.
     /// </summary>
@@ -31,8 +29,7 @@ namespace NMock2
     /// how a mock object is defined, and provide the ability to be able to
     /// instantiate an instance of it.
     /// </remarks>
-    public interface IMockDefinition
-    {
+    public interface IMockDefinition {
         /// <summary>
         /// This method supports NMock2 infrastructure and is not intended to be called directly from your code.
         /// </summary>

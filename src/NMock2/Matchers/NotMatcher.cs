@@ -16,15 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that negates another matcher.
     /// </summary>
-    public class NotMatcher : Matcher
-    {
+    public class NotMatcher : Matcher {
         /// <summary>
         /// Holds the matcher to negate.
         /// </summary>
@@ -34,8 +32,7 @@ namespace NMock2.Matchers
         /// Initializes a new instance of the <see cref="NotMatcher"/> class.
         /// </summary>
         /// <param name="negated">The matcher to negate.</param>
-        public NotMatcher(Matcher negated)
-        {
+        public NotMatcher(Matcher negated) {
             this.negated = negated;
         }
 
@@ -44,19 +41,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object does not matche the wrapped matcher.</returns>
-        public override bool Matches(object o)
-        {
-            return !this.negated.Matches(o);
+        public override bool Matches(object o) {
+            return !negated.Matches(o);
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("not ");
-            this.negated.DescribeTo(writer);
+            negated.DescribeTo(writer);
         }
     }
 }

@@ -16,15 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that is used to change the description the wrapped matcher.
     /// </summary>
-    public class DescriptionOverride : Matcher
-    {
+    public class DescriptionOverride : Matcher {
         /// <summary>
         /// Stores the new description for the wrapped matcher.
         /// </summary>
@@ -40,8 +38,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="description">The new description for the wrapped matcher.</param>
         /// <param name="otherMatcher">The matcher to wrap.</param>
-        public DescriptionOverride(string description, Matcher otherMatcher)
-        {
+        public DescriptionOverride(string description, Matcher otherMatcher) {
             this.description = description;
             this.otherMatcher = otherMatcher;
         }
@@ -51,18 +48,16 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the wrapped matcher matches.</returns>
-        public override bool Matches(object o)
-        {
-            return this.otherMatcher.Matches(o);
+        public override bool Matches(object o) {
+            return otherMatcher.Matches(o);
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
-            writer.Write(this.description);
+        public override void DescribeTo(TextWriter writer) {
+            writer.Write(description);
         }
     }
 }

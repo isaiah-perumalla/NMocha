@@ -16,35 +16,31 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring
-{
-    using System;
-    using System.Collections;
-    using System.Reflection;
-    using System.Reflection.Emit;
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Reflection.Emit;
 
-    public class MultiInterfaceFactory
-    {
-        private static Hashtable createdTypes = new Hashtable();
-        private ModuleBuilder moduleBuilder;
+namespace NMock2.Monitoring {
+    public class MultiInterfaceFactory {
+        private static readonly Hashtable createdTypes = new Hashtable();
+        private readonly ModuleBuilder moduleBuilder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiInterfaceFactory"/> class.
         /// </summary>
         /// <param name="name">The name of the assembly to generate.</param>
-        public MultiInterfaceFactory(string name)
-        {
-            AssemblyName assemblyName = new AssemblyName();
+        public MultiInterfaceFactory(string name) {
+            var assemblyName = new AssemblyName();
             assemblyName.Name = name;
-       
+
             AssemblyBuilder assemblyBuilder =
                 AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            this.moduleBuilder = assemblyBuilder.DefineDynamicModule(name);
+            moduleBuilder = assemblyBuilder.DefineDynamicModule(name);
         }
-        
-        public Type GetType(params Type[] baseInterfaces)
-        {
-            TypeId id = this.Id(baseInterfaces);
+
+        public Type GetType(params Type[] baseInterfaces) {
+            TypeId id = Id(baseInterfaces);
             if (createdTypes.ContainsKey(id))
             {
                 return (Type) createdTypes[id];
@@ -52,68 +48,63 @@ namespace NMock2.Monitoring
             else
             {
                 string typeName = "MultiInterface" + (createdTypes.Count + 1);
-                Type newType = this.CreateType(typeName, baseInterfaces);
+                Type newType = CreateType(typeName, baseInterfaces);
                 createdTypes[id] = newType;
                 return newType;
             }
         }
-        
-        private Type CreateType(string typeName, Type[] baseInterfaces)
-        {
-            TypeBuilder typeBuilder = this.moduleBuilder.DefineType(
+
+        private Type CreateType(string typeName, Type[] baseInterfaces) {
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
                 typeName,
                 TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Interface,
                 null,
                 baseInterfaces);
-            
+
             return typeBuilder.CreateType();
         }
 
-        private TypeId Id(params Type[] types)
-        {
+        private TypeId Id(params Type[] types) {
             return new TypeId(types);
         }
 
-        private class TypeId
-        {
-            private Type[] types;
+        #region Nested type: TypeId
+
+        private class TypeId {
+            private readonly Type[] types;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="TypeId"/> class.
             /// </summary>
             /// <param name="types">The types.</param>
-            public TypeId(params Type[] types)
-            {
+            public TypeId(params Type[] types) {
                 this.types = types;
             }
 
-            public override int GetHashCode()
-            {
+            public override int GetHashCode() {
                 int hashCode = 0;
-                foreach (Type type in this.types)
+                foreach (Type type in types)
                 {
                     hashCode ^= type.GetHashCode();
                 }
 
                 return hashCode;
             }
-            
-            public override bool Equals(object obj)
-            {
+
+            public override bool Equals(object obj) {
                 return obj is TypeId
-                    && this.ContainsSameTypesAs((TypeId)obj);
+                       && ContainsSameTypesAs((TypeId) obj);
             }
 
-            private bool ContainsSameTypesAs(TypeId other)
-            {
-                if (other.types.Length != this.types.Length)
+            private bool ContainsSameTypesAs(TypeId other) {
+                if (other.types.Length != types.Length)
                 {
                     return false;
                 }
 
-                for (int i = 0; i < this.types.Length; i++)
+                for (int i = 0; i < types.Length; i++)
                 {
-                    if (Array.IndexOf(other.types, this.types[i]) < 0)
+                    if (Array.IndexOf(other.types, types[i]) < 0)
                     {
                         return false;
                     }
@@ -122,5 +113,7 @@ namespace NMock2.Monitoring
                 return true;
             }
         }
+
+        #endregion
     }
 }

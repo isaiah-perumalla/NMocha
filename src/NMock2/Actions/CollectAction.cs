@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Actions
-{
-    using System.IO;
-    using NMock2.Monitoring;
+using System.IO;
+using NMock2.Monitoring;
 
+namespace NMock2.Actions {
     /// <summary>
     /// Action that returns the n-th element of the arguments to an invocation.
     /// </summary>
-    public class CollectAction : IAction
-    {
+    public class CollectAction : IAction {
         /// <summary>
         /// Stores the index of the argument.
         /// </summary>
@@ -40,8 +38,7 @@ namespace NMock2.Actions
         /// Initializes a new instance of the <see cref="CollectAction"/> class.
         /// </summary>
         /// <param name="argumentIndex">Index of the argument to collect.</param>
-        public CollectAction(int argumentIndex)
-        {
+        public CollectAction(int argumentIndex) {
             this.argumentIndex = argumentIndex;
         }
 
@@ -49,28 +46,29 @@ namespace NMock2.Actions
         /// Gets the collected parameter.
         /// </summary>
         /// <value>The collected parameter (n-th parameter of parameter list of the method's call.</value>
-        public object Parameter
-        {
-            get { return this.collectedArgumentValue; }
+        public object Parameter {
+            get { return collectedArgumentValue; }
         }
+
+        #region IAction Members
 
         /// <summary>
         /// Invokes this object.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation)
-        {
-            this.collectedArgumentValue = invocation.Parameters[this.argumentIndex];
+        public void Invoke(Invocation invocation) {
+            collectedArgumentValue = invocation.Parameters[argumentIndex];
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer)
-        {
+        public void DescribeTo(TextWriter writer) {
             writer.Write("collect argument at index ");
-            writer.Write(this.argumentIndex);
+            writer.Write(argumentIndex);
         }
+
+        #endregion
     }
 }

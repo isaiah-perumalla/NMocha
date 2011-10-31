@@ -16,18 +16,16 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using Internal;
-    using NMock2.Monitoring;
+using System.Collections.Generic;
+using System.IO;
+using NMock2.Internal;
+using NMock2.Monitoring;
 
+namespace NMock2 {
     /// <summary>
     /// Represents an expectation.
     /// </summary>
-    public interface IExpectation
-    {
+    public interface IExpectation {
         /// <summary>
         /// Gets a value indicating whether this instance is active.
         /// </summary>
@@ -82,4 +80,3 @@ namespace NMock2
         void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result);
     }
 }
-

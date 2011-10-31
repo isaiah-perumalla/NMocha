@@ -16,24 +16,21 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.Collections;
-    using System.IO;
+using System.Collections;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether a single object is in a collection of elements.
     /// </summary>
-    public class ElementMatcher : Matcher
-    {
+    public class ElementMatcher : Matcher {
         private readonly ICollection collection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ElementMatcher"/> class.
         /// </summary>
         /// <param name="collection">The collection to match against.</param>
-        public ElementMatcher(ICollection collection)
-        {
+        public ElementMatcher(ICollection collection) {
             this.collection = collection;
         }
 
@@ -42,9 +39,8 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="actual">The object to match.</param>
         /// <returns>Whether to object matches.</returns>
-        public override bool Matches(object actual)
-        {
-            foreach (object element in this.collection)
+        public override bool Matches(object actual) {
+            foreach (object element in collection)
             {
                 if (Equals(element, actual))
                 {
@@ -59,12 +55,11 @@ namespace NMock2.Matchers
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("element of [");
 
             bool separate = false;
-            foreach (object element in this.collection)
+            foreach (object element in collection)
             {
                 if (separate)
                 {

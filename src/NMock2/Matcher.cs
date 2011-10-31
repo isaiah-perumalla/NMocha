@@ -16,25 +16,32 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System.IO;
-    using NMock2.Internal;
-    using NMock2.Matchers;
+using System.IO;
+using NMock2.Internal;
+using NMock2.Matchers;
 
+namespace NMock2 {
     /// <summary>
     /// A matcher is used to match objects against it.
     /// </summary>
-    public abstract class Matcher : ISelfDescribing
-    {
+    public abstract class Matcher : ISelfDescribing {
+        #region ISelfDescribing Members
+
+        /// <summary>
+        /// Describes this object.
+        /// </summary>
+        /// <param name="writer">The text writer the description is added to.</param>
+        public abstract void DescribeTo(TextWriter writer);
+
+        #endregion
+
         /// <summary>
         /// Logical and of to matchers.
         /// </summary>
         /// <param name="m1">First matcher.</param>
         /// <param name="m2">Second matcher.</param>
         /// <returns>Matcher combining the two operands.</returns>
-        public static Matcher operator &(Matcher m1, Matcher m2)
-        {
+        public static Matcher operator &(Matcher m1, Matcher m2) {
             return new AndMatcher(m1, m2);
         }
 
@@ -44,8 +51,7 @@ namespace NMock2
         /// <param name="m1">First matcher.</param>
         /// <param name="m2">Second matcher.</param>
         /// <returns>Matcher combining the two operands.</returns>
-        public static Matcher operator |(Matcher m1, Matcher m2)
-        {
+        public static Matcher operator |(Matcher m1, Matcher m2) {
             return new OrMatcher(m1, m2);
         }
 
@@ -54,8 +60,7 @@ namespace NMock2
         /// </summary>
         /// <param name="m">Matcher to negate.</param>
         /// <returns>Negation of the specified matcher.</returns>
-        public static Matcher operator !(Matcher m)
-        {
+        public static Matcher operator !(Matcher m) {
             return new NotMatcher(m);
         }
 
@@ -67,23 +72,15 @@ namespace NMock2
         public abstract bool Matches(object o);
 
         /// <summary>
-        /// Describes this object.
-        /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public abstract void DescribeTo(TextWriter writer);
-
-        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override string ToString()
-        {
-            DescriptionWriter writer = new DescriptionWriter();
-            this.DescribeTo(writer);
+        public override string ToString() {
+            var writer = new DescriptionWriter();
+            DescribeTo(writer);
             return writer.ToString();
         }
     }
 }
-

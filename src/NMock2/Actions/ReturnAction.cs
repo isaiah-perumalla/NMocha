@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Actions
-{
-    using System.IO;
-    using NMock2.Monitoring;
+using System.IO;
+using NMock2.Monitoring;
 
+namespace NMock2.Actions {
     /// <summary>
     /// Action that sets the result value on an invocation.
     /// </summary>
-    public class ReturnAction : IAction
-    {
+    public class ReturnAction : IAction {
         /// <summary>
         /// Stores the result to set on the invocation as the return value.
         /// </summary>
@@ -35,28 +33,29 @@ namespace NMock2.Actions
         /// Initializes a new instance of the <see cref="ReturnAction"/> class.
         /// </summary>
         /// <param name="result">The result to set on the invocation as the return value.</param>
-        public ReturnAction(object result)
-        {
+        public ReturnAction(object result) {
             this.result = result;
         }
+
+        #region IAction Members
 
         /// <summary>
         /// Invokes this object. Sets the result value of the invocation.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation)
-        {
-            invocation.Result = this.result;
+        public void Invoke(Invocation invocation) {
+            invocation.Result = result;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer)
-        {
+        public void DescribeTo(TextWriter writer) {
             writer.Write("return ");
-            writer.Write(this.result);
+            writer.Write(result);
         }
+
+        #endregion
     }
 }

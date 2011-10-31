@@ -5,11 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EDBAD353-CCD6-41FE-BB87-B0995078631A}</ProjectGuid>
+    <ProjectGuid>{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NMock2</RootNamespace>
-    <AssemblyName>NMock2.Test</AssemblyName>
+    <RootNamespace>NMocha.AcceptanceTests</RootNamespace>
+    <AssemblyName>NMocha.AcceptanceTests</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>NMock2.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -57,66 +59,52 @@
       <HintPath>..\..\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Actions\CollectActionTest.cs" />
-    <Compile Include="Actions\FireActionTest.cs" />
-    <Compile Include="Actions\ResultSynthesizerTest.cs" />
-    <Compile Include="Actions\ReturnActionTest.cs" />
-    <Compile Include="Actions\ReturnCloneActionTest.cs" />
-    <Compile Include="Actions\SetIndexedParameterActionTest.cs" />
-    <Compile Include="Actions\SetNamedParameterActionTest.cs" />
-    <Compile Include="Actions\ThrowActionTest.cs" />
-    <Compile Include="AssertDescription.cs" />
-    <Compile Include="Internal\BuildableExpectationTest.cs" />
-    <Compile Include="Internal\CompositeTypeTest.cs" />
-    <Compile Include="Internal\DescriptionWriterTest.cs" />
-    <Compile Include="Internal\InStateOrderingConstraintTest.cs" />
-    <Compile Include="Internal\StateMachineTest.cs" />
-    <Compile Include="Internal\StubMockStyleDictionaryTest.cs" />
-    <Compile Include="IsTest.cs" />
-    <Compile Include="Matchers\AlwaysMatcherTest.cs" />
-    <Compile Include="Matchers\AndMatcherTest.cs" />
-    <Compile Include="Matchers\ArgumentsMatcherTest.cs" />
-    <Compile Include="Matchers\ComparisonMatcherTest.cs" />
-    <Compile Include="Matchers\DescriptionOverrideTest.cs" />
-    <Compile Include="Matchers\ElementMatcherTest.cs" />
-    <Compile Include="Matchers\EqualMatcherTest.cs" />
-    <Compile Include="Matchers\FieldMatcherTest.cs" />
-    <Compile Include="Matchers\GenericMatcherTest.cs" />
-    <Compile Include="Matchers\MatcherWithDescription.cs" />
-    <Compile Include="Matchers\MethodNameMatcherTest.cs" />
-    <Compile Include="Matchers\MockMatcher.cs" />
-    <Compile Include="Matchers\NotMatcherTest.cs" />
-    <Compile Include="Matchers\NullMatcherTest.cs" />
-    <Compile Include="Matchers\OrMatcherTest.cs" />
-    <Compile Include="Matchers\PropertyMatcherTest.cs" />
-    <Compile Include="Matchers\SameMatcherTest.cs" />
-    <Compile Include="Matchers\StringContainsMatcherTest.cs" />
-    <Compile Include="Matchers\ToStringMatcherTest.cs" />
-    <Compile Include="Matchers\TypeMatcherTest.cs" />
-    <Compile Include="MockeryTest.cs" />
-    <Compile Include="Monitoring\InvocationSemanticsTest.cs" />
-    <Compile Include="Monitoring\InvocationTest.cs" />
-    <Compile Include="Monitoring\InvokerTest.cs" />
-    <Compile Include="Monitoring\MethodInfoStub.cs" />
-    <Compile Include="Monitoring\MockInvokable.cs" />
-    <Compile Include="Monitoring\MultiInterfaceFactoryTest.cs" />
-    <Compile Include="Monitoring\ParameterInfoStub.cs" />
-    <Compile Include="Monitoring\ParameterListTest.cs" />
-    <Compile Include="Monitoring\ProxiedObjectIdentityTest.cs" />
-    <Compile Include="Monitoring\ProxyInvokableAdapterTest.cs" />
-    <Compile Include="NamedObject.cs" />
-    <Compile Include="VerifyTest.cs" />
+    <Compile Include="ArgumentMatchingAcceptanceTest.cs" />
+    <Compile Include="BugReproduction\InterceptCallOnMockInEmptyOrderedExpectationOrdering.cs" />
+    <Compile Include="BugReproduction\MockServiceModelIClientChannel.cs" />
+    <Compile Include="BugReproduction\OrderedWithoutExpectations_1912662.cs" />
+    <Compile Include="BugReproduction\SetNamedParameterOnRef_2003169.cs" />
+    <Compile Include="ClassAttribute.cs" />
+    <Compile Include="ClassMockAcceptanceTest.cs" />
+    <Compile Include="AcceptanceTestBase.cs" />
+    <Compile Include="CastleOnlyAttribute.cs" />
+    <Compile Include="MockMultipleInterfacesAcceptanceTest.cs" />
+    <Compile Include="SetupFixture.cs" />
+    <Compile Include="ErrorCheckingAcceptanceTest.cs" />
+    <Compile Include="ErrorMessageDemo.cs" />
+    <Compile Include="Example.cs" />
+    <Compile Include="ExceptionsAreNotSwallowedTest.cs" />
+    <Compile Include="ExpectationsAcceptanceTest.cs" />
+    <Compile Include="CommentAcceptanceTest.cs" />
+    <Compile Include="GenericMethodParameterAcceptanceTest.cs" />
+    <Compile Include="GenericMethodTypeParamAcceptanceTest.cs" />
+    <Compile Include="GenericOutParamAcceptanceTest.cs" />
+    <Compile Include="IEventProvider.cs" />
+    <Compile Include="IGenerics.cs" />
+    <Compile Include="ISpeaker.cs" />
+    <Compile Include="IndexersAcceptanceTest.cs" />
+    <Compile Include="MockeryAcceptanceTest.cs" />
+    <Compile Include="MockIEnumerableAcceptanceTest.cs" />
+    <Compile Include="OrderedCallsAcceptanceTest.cs" />
+    <Compile Include="OutParamAcceptanceTest.cs" />
+    <Compile Include="PropertiesAcceptanceTest.cs" />
+    <Compile Include="StatesAcceptanceTest.cs" />
+    <Compile Include="StubAcceptanceTest.cs" />
+    <Compile Include="Syntax\SyntaxAcceptanceTest.cs" />
+    <Compile Include="ThreadSynchronizationAcceptanceTest.cs" />
+    <Compile Include="UsingBlockAcceptanceTest.cs" />
+    <Compile Include="VisibilityAcceptanceTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NMock2\NMock2.csproj">
-      <Project>{79C78732-B34C-4429-B678-C8ADE5FB5BE1}</Project>
-      <Name>NMock2</Name>
-    </ProjectReference>
+    <None Include="NMock2.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -134,6 +122,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMock2\NMocha.csproj">
+      <Project>{79C78732-B34C-4429-B678-C8ADE5FB5BE1}</Project>
+      <Name>NMocha</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

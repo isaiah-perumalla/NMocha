@@ -16,15 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2 {
     /// <summary>
     /// This interface is used to get a description of the implementator.
     /// </summary>
-    public interface ISelfDescribing
-    {
+    public interface ISelfDescribing {
         /// <summary>
         /// Describes this object.
         /// </summary>

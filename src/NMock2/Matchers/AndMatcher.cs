@@ -16,22 +16,19 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that is the logical and combination of two matchers.
     /// </summary>
-    public class AndMatcher : BinaryOperator
-    {
+    public class AndMatcher : BinaryOperator {
         /// <summary>
         /// Initializes a new instance of the <see cref="AndMatcher"/> class.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
-        public AndMatcher(Matcher left, Matcher right) : base(left, right)
-        {
+        public AndMatcher(Matcher left, Matcher right) : base(left, right) {
         }
 
         /// <summary>
@@ -39,8 +36,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Returns whether the object matches.</returns>
-        public override bool Matches(object o)
-        {
+        public override bool Matches(object o) {
             return Left.Matches(o) && Right.Matches(o);
         }
 
@@ -48,8 +44,7 @@ namespace NMock2.Matchers
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("`");
             Left.DescribeTo(writer);
             writer.Write("' and `");
@@ -58,4 +53,3 @@ namespace NMock2.Matchers
         }
     }
 }
-

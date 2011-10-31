@@ -8,6 +8,8 @@ namespace NMock2.Internal {
             this.predicate = predicate;
         }
 
+        #region IOrderingConstraint Members
+
         public bool AllowsInvocationNow() {
             return predicate.IsActive();
         }
@@ -16,5 +18,7 @@ namespace NMock2.Internal {
             writer.Write("when ");
             predicate.DescribeTo(writer);
         }
+
+        #endregion
     }
 }

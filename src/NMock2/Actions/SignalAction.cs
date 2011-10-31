@@ -16,18 +16,16 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Actions
-{
-    using System.IO;
-    using System.Threading;
-    using NMock2.Monitoring;
+using System.IO;
+using System.Threading;
+using NMock2.Monitoring;
 
+namespace NMock2.Actions {
     /// <summary>
     /// Action that signals an event.
     /// You can use this action to synchronize threads when an expectation is invoked.
     /// </summary>
-    public class SignalAction : IAction
-    {
+    public class SignalAction : IAction {
         /// <summary>
         /// Stores the wait handle to be signalled.
         /// </summary>
@@ -37,8 +35,7 @@ namespace NMock2.Actions
         /// Initializes a new instance of the <see cref="SignalAction"/> class.
         /// </summary>
         /// <param name="signal">The signal.</param>
-        public SignalAction(EventWaitHandle signal)
-        {
+        public SignalAction(EventWaitHandle signal) {
             this.signal = signal;
         }
 
@@ -47,27 +44,28 @@ namespace NMock2.Actions
         /// You can use this signal to wait for this action beeing invoked.
         /// </summary>
         /// <value>The signal.</value>
-        public EventWaitHandle Signal
-        {
-            get { return this.signal; }
+        public EventWaitHandle Signal {
+            get { return signal; }
         }
+
+        #region IAction Members
 
         /// <summary>
         /// Invokes this object by signaling the event.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation)
-        {
-            this.signal.Set();
+        public void Invoke(Invocation invocation) {
+            signal.Set();
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer)
-        {
+        public void DescribeTo(TextWriter writer) {
             writer.Write("signals");
         }
+
+        #endregion
     }
 }

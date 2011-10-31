@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
+namespace NMock2.Internal {
     /// <summary>
     /// Represents expectations (order or unordered).
     /// </summary>
-    public interface IExpectationOrdering : IExpectation
-    {
+    public interface IExpectationOrdering : IExpectation {
         /// <summary>
         /// Adds an expectation.
         /// </summary>

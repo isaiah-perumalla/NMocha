@@ -16,17 +16,15 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System;
-    using System.Collections;
-    using NMock2.Matchers;
+using System;
+using System.Collections;
+using NMock2.Matchers;
 
+namespace NMock2 {
     /// <summary>
     /// Provides shortcuts to <see cref="Matcher"/>s.
     /// </summary>
-    public class Is
-    {
+    public class Is {
         /// <summary>
         /// Matches anything.
         /// </summary>
@@ -36,7 +34,7 @@ namespace NMock2
         /// Matches nothing.
         /// </summary>
         public static readonly Matcher Nothing = new AlwaysMatcher(false, "nothing");
-        
+
         /// <summary>
         /// Matches if the value is null.
         /// </summary>
@@ -58,8 +56,7 @@ namespace NMock2
         /// </summary>
         /// <param name="expected">The expected.</param>
         /// <returns>Returns a new instance of the <see cref="EqualMatcher"/> class.</returns>
-        public static Matcher EqualTo(object expected)
-        {
+        public static Matcher EqualTo(object expected) {
             return new EqualMatcher(expected);
         }
 
@@ -69,8 +66,7 @@ namespace NMock2
         /// </summary>
         /// <param name="expected">The expected object.</param>
         /// <returns>Returns a new instance of the <see cref="SameMatcher"/> class.</returns>
-        public static Matcher Same(object expected)
-        {
+        public static Matcher Same(object expected) {
             return new SameMatcher(expected);
         }
 
@@ -79,8 +75,7 @@ namespace NMock2
         /// </summary>
         /// <param name="substring">The substring.</param>
         /// <returns>Returns a new instance of the <see cref="StringContainsMatcher"/> class.</returns>
-        public static Matcher StringContaining(string substring)
-        {
+        public static Matcher StringContaining(string substring) {
             return new StringContainsMatcher(substring);
         }
 
@@ -89,8 +84,7 @@ namespace NMock2
         /// </summary>
         /// <param name="value">The value to compare.</param>
         /// <returns>Returns a new instance of the <see cref="ComparisonMatcher"/> class.</returns>
-        public static Matcher GreaterThan(IComparable value)
-        {
+        public static Matcher GreaterThan(IComparable value) {
             return new ComparisonMatcher(value, 1, 1);
         }
 
@@ -99,8 +93,7 @@ namespace NMock2
         /// </summary>
         /// <param name="value">The value to compare.</param>
         /// <returns>Returns a new instance of the <see cref="ComparisonMatcher"/> class.</returns>
-        public static Matcher AtLeast(IComparable value)
-        {
+        public static Matcher AtLeast(IComparable value) {
             return new ComparisonMatcher(value, 0, 1);
         }
 
@@ -109,8 +102,7 @@ namespace NMock2
         /// </summary>
         /// <param name="value">The value to compare.</param>
         /// <returns>Returns a new instance of the <see cref="ComparisonMatcher"/> class.</returns>
-        public static Matcher LessThan(IComparable value)
-        {
+        public static Matcher LessThan(IComparable value) {
             return new ComparisonMatcher(value, -1, -1);
         }
 
@@ -119,8 +111,7 @@ namespace NMock2
         /// </summary>
         /// <param name="value">The value to compare.</param>
         /// <returns>Returns a new instance of the <see cref="ComparisonMatcher"/> class.</returns>
-        public static Matcher AtMost(IComparable value)
-        {
+        public static Matcher AtMost(IComparable value) {
             return new ComparisonMatcher(value, -1, 0);
         }
 
@@ -129,8 +120,7 @@ namespace NMock2
         /// </summary>
         /// <param name="collection">The collection with objects to match.</param>
         /// <returns>Returns a new instance of the <see cref="ElementMatcher"/> class.</returns>
-        public static Matcher In(ICollection collection)
-        {
+        public static Matcher In(ICollection collection) {
             return new ElementMatcher(collection);
         }
 
@@ -139,8 +129,7 @@ namespace NMock2
         /// </summary>
         /// <param name="elements">The elements to match.</param>
         /// <returns>Returns a new instance of the <see cref="ElementMatcher"/> class.</returns>
-        public static Matcher OneOf(params object[] elements)
-        {
+        public static Matcher OneOf(params object[] elements) {
             return new ElementMatcher(elements);
         }
 
@@ -149,8 +138,7 @@ namespace NMock2
         /// </summary>
         /// <param name="type">The type to match.</param>
         /// <returns>Returns a new instance of the <see cref="TypeMatcher"/> class.</returns>
-        public static Matcher TypeOf(Type type)
-        {
+        public static Matcher TypeOf(Type type) {
             return new TypeMatcher(type);
         }
 
@@ -161,9 +149,8 @@ namespace NMock2
         /// <returns>
         /// Returns a new instance of the <see cref="TypeMatcher"/> class.
         /// </returns>
-        public static Matcher TypeOf<T>()
-        {
-            return new TypeMatcher(typeof(T));
+        public static Matcher TypeOf<T>() {
+            return new TypeMatcher(typeof (T));
         }
 
         /// <summary>
@@ -172,10 +159,8 @@ namespace NMock2
         /// <typeparam name="T">Type of the value to match.</typeparam>
         /// <param name="expression">The match expression.</param>
         /// <returns>returns a new instance of the <see cref="GenericMatcher{T}"/>.</returns>
-        public static Matcher Match<T>(GenericMatcher<T>.MatchExpression expression)
-        {
+        public static Matcher Match<T>(GenericMatcher<T>.MatchExpression expression) {
             return new GenericMatcher<T>(expression);
         }
     }
 }
-

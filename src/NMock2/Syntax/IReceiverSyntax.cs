@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining a receiver.
     /// </summary>
-    public interface IReceiverSyntax
-    {
+    public interface IReceiverSyntax {
         /// <summary>
         /// Defines the receiver.
         /// </summary>

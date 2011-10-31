@@ -16,23 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual value contains the expected substring.
     /// </summary>
-    public class StringContainsMatcher : Matcher
-    {
+    public class StringContainsMatcher : Matcher {
         private readonly string substring;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringContainsMatcher"/> class.
         /// </summary>
         /// <param name="substring">The substring that is expected.</param>
-        public StringContainsMatcher(string substring)
-        {
+        public StringContainsMatcher(string substring) {
             this.substring = substring;
         }
 
@@ -41,21 +38,19 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object is a string and contains the expected substring.</returns>
-        public override bool Matches(object o)
-        {
+        public override bool Matches(object o) {
             return o != null
-                && o is string
-                && ((string)o).IndexOf(this.substring) >= 0;
+                   && o is string
+                   && ((string) o).IndexOf(substring) >= 0;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("containing ");
-            writer.Write((object)this.substring);
+            writer.Write((object) substring);
         }
     }
 }

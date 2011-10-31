@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System.IO;
-    using Internal;
+using System.IO;
+using NMock2.Internal;
 
+namespace NMock2 {
     /// <summary>
     /// Verify that a condition is met.
     /// </summary>
-    public static class Verify
-    {
+    public static class Verify {
         /// <summary>
         /// Verifies that the <paramref name="actualValue"/> is matched by the <paramref name="matcher"/>.
         /// </summary>
@@ -34,8 +32,7 @@ namespace NMock2
         /// <param name="message">The error message.</param>
         /// <param name="formatArgs">The format args for the error message.</param>
         /// <exception cref="ExpectationException">Thrown if value does not match.</exception>
-        public static void That(object actualValue, Matcher matcher, string message, params object[] formatArgs)
-        {
+        public static void That(object actualValue, Matcher matcher, string message, params object[] formatArgs) {
             if (!matcher.Matches(actualValue))
             {
                 var writer = new DescriptionWriter();
@@ -52,13 +49,12 @@ namespace NMock2
         /// <param name="actualValue">The actual value.</param>
         /// <param name="matcher">The matcher.</param>
         /// <exception cref="ExpectationException">Thrown if value does not match.</exception>
-        public static void That(object actualValue, Matcher matcher)
-        {
+        public static void That(object actualValue, Matcher matcher) {
             if (!matcher.Matches(actualValue))
             {
                 var writer = new DescriptionWriter();
                 WriteDescriptionOfFailedMatch(writer, actualValue, matcher);
-                
+
                 throw new ExpectationException(writer.ToString());
             }
         }
@@ -69,8 +65,7 @@ namespace NMock2
         /// <param name="writer">The <see cref="TextWriter"/> where the description is written to.</param>
         /// <param name="actualValue">The actual value to be written.</param>
         /// <param name="matcher">The matcher which is used for the expected value to be written.</param>
-        private static void WriteDescriptionOfFailedMatch(TextWriter writer, object actualValue, Matcher matcher)
-        {
+        private static void WriteDescriptionOfFailedMatch(TextWriter writer, object actualValue, Matcher matcher) {
             writer.WriteLine();
             writer.Write("Expected: ");
             matcher.DescribeTo(writer);

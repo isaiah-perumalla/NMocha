@@ -16,59 +16,54 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using NMock2.Monitoring;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using NMock2.Monitoring;
 
-    public class UnorderedExpectations : IExpectationOrdering
-    {
-        /// <summary>
-        /// Stores the expectations that could be added.
-        /// </summary>
-        private List<IExpectation> expectations = new List<IExpectation>();
-
+namespace NMock2.Internal {
+    public class UnorderedExpectations : IExpectationOrdering {
         /// <summary>
         /// Stores the calling depth for the document writer output.
         /// </summary>
-        private int depth;
+        private readonly int depth;
+
+        /// <summary>
+        /// Stores the expectations that could be added.
+        /// </summary>
+        private readonly List<IExpectation> expectations = new List<IExpectation>();
 
         /// <summary>
         /// Stores the string to be presented whe describing the expectation.
         /// </summary>
-        private string prompt;
+        private readonly string prompt;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnorderedExpectations"/> class.
         /// </summary>
-        public UnorderedExpectations()
-        {
-            this.depth = 0;
-            this.prompt = "Expected:";
+        public UnorderedExpectations() {
+            depth = 0;
+            prompt = "Expected:";
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnorderedExpectations"/> class.
         /// </summary>
         /// <param name="depth">The calling depth.</param>
-        public UnorderedExpectations(int depth)
-        {
+        public UnorderedExpectations(int depth) {
             this.depth = depth;
-            this.prompt = "Unordered:";
+            prompt = "Unordered:";
         }
+
+        #region IExpectationOrdering Members
 
         /// <summary>
         /// Gets a value indicating whether this instance is active.
         /// </summary>
         /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
-        public bool IsActive
-        {
-            get
-            {
-                foreach (IExpectation e in this.expectations)
+        public bool IsActive {
+            get {
+                foreach (IExpectation e in expectations)
                 {
                     if (e.IsActive)
                     {
@@ -86,11 +81,9 @@ namespace NMock2.Internal
         /// <value>
         ///     <c>true</c> if this instance has been met; otherwise, <c>false</c>.
         /// </value>
-        public bool HasBeenMet
-        {
-            get
-            {
-                foreach (IExpectation e in this.expectations)
+        public bool HasBeenMet {
+            get {
+                foreach (IExpectation e in expectations)
                 {
                     if (!e.HasBeenMet)
                     {
@@ -107,9 +100,8 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="invocation">The invocation to check.</param>
         /// <returns>Returns whether one of the stored expectations has met the specified invocation.</returns>
-        public bool Matches(Invocation invocation)
-        {
-            foreach (IExpectation e in this.expectations)
+        public bool Matches(Invocation invocation) {
+            foreach (IExpectation e in expectations)
             {
                 if (e.Matches(invocation))
                 {
@@ -120,9 +112,8 @@ namespace NMock2.Internal
             return false;
         }
 
-        public bool MatchesIgnoringIsActive(Invocation invocation)
-        {
-            foreach (IExpectation e in this.expectations)
+        public bool MatchesIgnoringIsActive(Invocation invocation) {
+            foreach (IExpectation e in expectations)
             {
                 if (e.MatchesIgnoringIsActive(invocation))
                 {
@@ -137,9 +128,8 @@ namespace NMock2.Internal
         /// Performs the specified invocation on the corresponding expectation if a match was found.
         /// </summary>
         /// <param name="invocation">The invocation to match.</param>
-        public void Perform(Invocation invocation)
-        {
-            foreach (IExpectation e in this.expectations)
+        public void Perform(Invocation invocation) {
+            foreach (IExpectation e in expectations)
             {
                 if (e.Matches(invocation))
                 {
@@ -151,28 +141,26 @@ namespace NMock2.Internal
             throw new InvalidOperationException("No matching expectation");
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer)
-        {
-            writer.WriteLine(this.prompt);
-            foreach (IExpectation expectation in this.expectations)
+        public void DescribeActiveExpectationsTo(TextWriter writer) {
+            writer.WriteLine(prompt);
+            foreach (IExpectation expectation in expectations)
             {
                 if (expectation.IsActive)
                 {
-                    this.Indent(writer, this.depth + 1);
+                    Indent(writer, depth + 1);
                     expectation.DescribeActiveExpectationsTo(writer);
                     writer.WriteLine();
                 }
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer)
-        {
-            writer.WriteLine(this.prompt);
-            foreach (IExpectation expectation in this.expectations)
+        public void DescribeUnmetExpectationsTo(TextWriter writer) {
+            writer.WriteLine(prompt);
+            foreach (IExpectation expectation in expectations)
             {
                 if (!expectation.HasBeenMet)
                 {
-                    this.Indent(writer, this.depth + 1);
+                    Indent(writer, depth + 1);
                     expectation.DescribeUnmetExpectationsTo(writer);
                     writer.WriteLine();
                 }
@@ -184,23 +172,21 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="mock">The mock for which expectations are queried.</param>
         /// <param name="result">The result to add matching expectations to.</param>
-        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result)
-        {
-            this.expectations.ForEach(expectation => expectation.QueryExpectationsBelongingTo(mock, result));
+        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {
+            expectations.ForEach(expectation => expectation.QueryExpectationsBelongingTo(mock, result));
         }
 
-        public void AddExpectation(IExpectation expectation)
-        {
-            this.expectations.Add(expectation);
+        public void AddExpectation(IExpectation expectation) {
+            expectations.Add(expectation);
         }
 
-        public void RemoveExpectation(IExpectation expectation)
-        {
-            this.expectations.Remove(expectation);
+        public void RemoveExpectation(IExpectation expectation) {
+            expectations.Remove(expectation);
         }
 
-        private void Indent(TextWriter writer, int n)
-        {
+        #endregion
+
+        private void Indent(TextWriter writer, int n) {
             for (int i = 0; i < n; i++)
             {
                 writer.Write("  ");

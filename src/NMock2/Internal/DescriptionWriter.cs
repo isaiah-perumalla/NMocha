@@ -16,15 +16,13 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Internal {
     /// <summary>
     /// Used to describe Matchers and other classes for exception handling.
     /// </summary>
-    public class DescriptionWriter : StringWriter
-    {
+    public class DescriptionWriter : StringWriter {
         /// <summary>
         /// Writes the text representation of an object to the text stream by calling ToString on that object.
         /// </summary>
@@ -35,9 +33,8 @@ namespace NMock2.Internal
         /// <exception cref="T:System.IO.IOException">
         /// An I/O error occurs.
         /// </exception>
-        public override void Write(object value)
-        {
-            this.Write(this.FormatValue(value));
+        public override void Write(object value) {
+            this.Write(FormatValue(value));
         }
 
         /// <summary>
@@ -45,19 +42,18 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>Returns the formatted string.</returns>
-        private string FormatValue(object value)
-        {
+        private string FormatValue(object value) {
             if (value == null)
             {
                 return "null";
             }
             else if (value is string)
             {
-                return this.FormatString((string)value);
+                return FormatString((string) value);
             }
             else
             {
-                return "<" + value.ToString() + ">";
+                return "<" + value + ">";
             }
         }
 
@@ -66,8 +62,7 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="s">The string to replace backslashes.</param>
         /// <returns>Returns the escaped string.</returns>
-        private string FormatString(string s)
-        {
+        private string FormatString(string s) {
             const string Quote = "\"";
             const string EscapedQuote = "\\\"";
 

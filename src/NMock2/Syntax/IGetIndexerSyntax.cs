@@ -16,13 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining an indexer get operation.
     /// </summary>
-    public interface IGetIndexerSyntax
-    {
+    public interface IGetIndexerSyntax {
         /// <summary>
         /// Defines the indexer.
         /// </summary>
@@ -30,9 +28,6 @@ namespace NMock2.Syntax
         /// Match syntax to define a matcher for the object returned by the indexer.
         /// </value>
         /// <param name="args">The arguments of the matcher.</param>
-        IMatchSyntax this[params object[] args] 
-        { 
-            get; 
-        }
+        IMatchSyntax this[params object[] args] { get; }
     }
 }

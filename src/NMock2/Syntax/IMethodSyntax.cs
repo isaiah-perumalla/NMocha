@@ -16,16 +16,14 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Syntax
-{
-    using System;
-    using System.Reflection;
+using System;
+using System.Reflection;
 
+namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining a method, property or event (de)registration.
     /// </summary>
-    public interface IMethodSyntax
-    {
+    public interface IMethodSyntax {
         /// <summary>
         /// Gets an indexer (get operation).
         /// </summary>
@@ -64,6 +62,7 @@ namespace NMock2.Syntax
         /// <returns>Argument syntax defining the arguments of the method.</returns>
         IArgumentSyntax Message(MethodInfo method, params Type[] typeParams);
 
+
         /// <summary>
         /// Defines a method.
         /// </summary>
@@ -85,51 +84,5 @@ namespace NMock2.Syntax
         /// <param name="name">The name of the property.</param>
         /// <returns>Match Syntax defining the property behavior.</returns>
         IMatchSyntax GetProperty(string name);
-
-        /// <summary>
-        /// Defines an event registration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <returns>Match syntax defining the behavior of the event adder.</returns>
-        IMatchSyntax EventAdd(string eventName);
-
-        /// <summary>
-        /// Defines an event registration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="listenerMatcher">The listener matcher.</param>
-        /// <returns>Match syntax defining the behavior of the event adder.</returns>
-        IMatchSyntax EventAdd(string eventName, Matcher listenerMatcher);
-
-        /// <summary>
-        /// Defines an event registration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="equalListener">Delegate defining compatible listeners.</param>
-        /// <returns>Match syntax defining the behavior of the event adder.</returns>
-        IMatchSyntax EventAdd(string eventName, Delegate equalListener);
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <returns>Match syntax defining the behavior of the event remover.</returns>
-        IMatchSyntax EventRemove(string eventName);
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="listenerMatcher">The listener matcher.</param>
-        /// <returns>Match syntax defining the behavior of the event remover.</returns>
-        IMatchSyntax EventRemove(string eventName, Matcher listenerMatcher);
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="equalListener">Delegate defining compatible listeners.</param>
-        /// <returns> Match syntax defining the behavior of the event remover.</returns>
-        IMatchSyntax EventRemove(string eventName, Delegate equalListener);
     }
 }

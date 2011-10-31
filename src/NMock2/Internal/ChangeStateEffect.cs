@@ -8,6 +8,8 @@ namespace NMock2.Internal {
             this.state = state;
         }
 
+        #region ISideEffect Members
+
         public void DescribeTo(TextWriter writer) {
             writer.Write("\nthen ");
             state.DescribeTo(writer);
@@ -17,5 +19,7 @@ namespace NMock2.Internal {
         public void Apply() {
             state.Activate();
         }
+
+        #endregion
     }
 }

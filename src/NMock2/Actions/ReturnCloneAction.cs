@@ -16,17 +16,15 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Actions
-{
-    using System;
-    using System.IO;
-    using NMock2.Monitoring;
+using System;
+using System.IO;
+using NMock2.Monitoring;
 
+namespace NMock2.Actions {
     /// <summary>
     /// Action that set the result value of an invocation to a clone of the specified prototype.
     /// </summary>
-    public class ReturnCloneAction : IAction
-    {
+    public class ReturnCloneAction : IAction {
         /// <summary>
         /// Stores the prototype that will be cloned.
         /// </summary>
@@ -36,28 +34,29 @@ namespace NMock2.Actions
         /// Initializes a new instance of the <see cref="ReturnCloneAction"/> class.
         /// </summary>
         /// <param name="prototype">The prototype.</param>
-        public ReturnCloneAction(ICloneable prototype)
-        {
+        public ReturnCloneAction(ICloneable prototype) {
             this.prototype = prototype;
         }
+
+        #region IAction Members
 
         /// <summary>
         /// Invokes this object. Sets the result value of the invocation to a clone of the prototype.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation)
-        {
-            invocation.Result = this.prototype.Clone();
+        public void Invoke(Invocation invocation) {
+            invocation.Result = prototype.Clone();
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer)
-        {
+        public void DescribeTo(TextWriter writer) {
             writer.Write("a clone of ");
-            writer.Write(this.prototype);
+            writer.Write(prototype);
         }
+
+        #endregion
     }
 }

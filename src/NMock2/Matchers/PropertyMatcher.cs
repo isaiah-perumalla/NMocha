@@ -16,18 +16,16 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
-    using System.Reflection;
+using System;
+using System.IO;
+using System.Reflection;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual object has a property with the specified name 
     /// and its value matches the specified matcher.
     /// </summary>
-    public class PropertyMatcher : Matcher
-    {
+    public class PropertyMatcher : Matcher {
         private readonly string propertyName;
         private readonly Matcher valueMatcher;
 
@@ -36,8 +34,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="valueMatcher">The value matcher.</param>
-        public PropertyMatcher(string propertyName, Matcher valueMatcher)
-        {
+        public PropertyMatcher(string propertyName, Matcher valueMatcher) {
             this.propertyName = propertyName;
             this.valueMatcher = valueMatcher;
         }
@@ -47,10 +44,9 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object has a property with the expected name and expected value.</returns>
-        public override bool Matches(object o)
-        {
+        public override bool Matches(object o) {
             Type type = o.GetType();
-            PropertyInfo property = type.GetProperty(this.propertyName, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
             if (property == null)
             {
@@ -61,19 +57,18 @@ namespace NMock2.Matchers
             {
                 return false;
             }
-            
+
             object value = property.GetValue(o, null);
-            return this.valueMatcher.Matches(value);
+            return valueMatcher.Matches(value);
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
-            writer.Write(string.Format("property '{0}' ", this.propertyName));
-            this.valueMatcher.DescribeTo(writer);
+        public override void DescribeTo(TextWriter writer) {
+            writer.Write(string.Format("property '{0}' ", propertyName));
+            valueMatcher.DescribeTo(writer);
         }
     }
 }

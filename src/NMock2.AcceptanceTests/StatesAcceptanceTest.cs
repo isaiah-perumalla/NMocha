@@ -4,123 +4,124 @@ using NMock2.Internal;
 using NUnit.Framework;
 
 namespace NMock2 {
-
     [TestFixture]
     public class StatesAcceptanceTest : AcceptanceTestBase {
-        private IHelloWorld helloWorld;
+        #region Setup/Teardown
 
         [SetUp]
         public void Before() {
-             helloWorld = Mocks.NewInstanceOfRole<IHelloWorld>();
+            speaker = Mocks.NewInstanceOfRole<ISpeaker>();
         }
 
-        [Test]
-        [ExpectedException(typeof(ExpectationException))]
-        public void CanConstrainExpectationToOccurOnlyInAGivenState() {
-            this.SkipVerificationForThisTest();
-            var readiness = Mocks.States("readiness");
-            
-            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
-            Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
+        #endregion
 
-            helloWorld.Hello();
-            helloWorld.Umm();
-            Mocks.VerifyAllExpectationsHaveBeenMet();
-            
-        }
+        private ISpeaker speaker;
 
         [Test]
         public void AllowsExpectationsToOccurInCorrectState() {
-            var readiness = Mocks.States("readiness");
-            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
-            Expect.Once.On(helloWorld).Message("Umm").Then(readiness.Is("ready"));
-          
-            helloWorld.Umm();
-            helloWorld.Hello();
+            IStates readiness = Mocks.States("readiness");
+            Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"));
+            Expect.Once.On(speaker).Message("Umm").Then(readiness.Is("ready"));
+
+            speaker.Umm();
+            speaker.Hello();
+        }
+
+        [Test]
+        [ExpectedException(typeof (ExpectationException))]
+        public void CanConstrainExpectationToOccurOnlyInAGivenState() {
+            SkipVerificationForThisTest();
+            IStates readiness = Mocks.States("readiness");
+
+            Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"));
+            Expect.Once.On(speaker).Message("Umm").Then(readiness.Is("ready"));
+
+            speaker.Hello();
+            speaker.Umm();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        [Test]
+        [ExpectedException(typeof (ExpectationException))]
+        public void CanConstrainExpectionToAllStateConstraints() {
+            SkipVerificationForThisTest();
+            IStates readiness = Mocks.States("readiness");
+            readiness.StartAs("ready");
+            IStates fruitiness = Mocks.States("fruitiness");
+
+            Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"))
+                .When(fruitiness.Is("apple"));
+            speaker.Hello();
         }
 
         [Test]
         public void CanStartInASpecificState() {
-            var readiness = Mocks.States("readiness");
+            IStates readiness = Mocks.States("readiness");
             readiness.StartAs("ready");
-            Stub.On(helloWorld).Message("Hello").When(readiness.Is("ready"));
-            helloWorld.Hello();
-           
-        }
-
-        [Test]
-        [ExpectedException(typeof(ExpectationException))]
-        public void CanConstrainExpectionToAllStateConstraints() {
-            SkipVerificationForThisTest();
-            var readiness = Mocks.States("readiness");
-            readiness.StartAs("ready");
-            var fruitiness = Mocks.States("fruitiness");
-
-            Expect.Once.On(helloWorld).Message("Hello").When(readiness.Is("ready"))
-                                                       .When(fruitiness.Is("apple"));
-            helloWorld.Hello();
-            
-        }
-
-        [Test]
-        public void TransitionsStateAfterExceptionIsThrow() {
-            var readiness = Mocks.States("readiness");
-            
-            Expect.Once.On(helloWorld).Message("Hello").Will(Throw.Exception(new TestException()))
-                                                       .Then(readiness.Is("ready"));
-            Expect.Once.On(helloWorld).Message("Umm").When(readiness.Is("ready"));
-
-            try
-            {
-                helloWorld.Hello();
-            }
-            catch(TestException)
-            {
-                helloWorld.Umm();
-            }
+            Stub.On(speaker).Message("Hello").When(readiness.Is("ready"));
+            speaker.Hello();
         }
 
         [Test]
         public void ErrorMessageShowsCurrentStates() {
-            this.SkipVerificationForThisTest();
-            var fruitness = Mocks.States("fruitness");
+            SkipVerificationForThisTest();
+            IStates fruitness = Mocks.States("fruitness");
             fruitness.StartAs("apple");
-            var vegginess = Mocks.States("veginess");
+            IStates vegginess = Mocks.States("veginess");
             vegginess.StartAs("Carrot");
-            
-            Stub.On(helloWorld).Message("Hello").When(fruitness.IsNot("apple"));
-            try
-            {
-                helloWorld.Hello();
-                Assert.Fail("should have failed with Expectation Exception");
-            }
-            catch(ExpectationException e)
-            {
-                Assert.That(e.Message.Contains("veginess is Carrot"), "should contain veggieness is Carrot but  msg was '{0}'", e.Message);
-                Assert.That(e.Message.Contains("fruitness is not apple"), "should contain fruitness is not apple but  msg was '{0}'", e.Message);
-               
-            }
-        }
 
-        [Test]
-        public void ErrorReportShowAllSideEffectsOfExpectedInvocation()
-        {
-            this.SkipVerificationForThisTest();
-            var fruitness = Mocks.States("fruitness");
-            fruitness.StartAs("apple");
-            
-            Expect.On(helloWorld).Message("Hello").When(fruitness.IsNot("apple"))
-                                                  .Then(fruitness.Is("orange"));
+            Stub.On(speaker).Message("Hello").When(fruitness.IsNot("apple"));
             try
             {
-                helloWorld.Hello();
+                speaker.Hello();
                 Assert.Fail("should have failed with Expectation Exception");
             }
             catch (ExpectationException e)
             {
-                Assert.That(e.Message.Contains("when fruitness is not apple"), "should containwhen fruitness is not apple but  msg was '{0}'", e.Message);
-                Assert.That(e.Message.Contains("then fruitness is orange"), "should contain then fruitness is orange but  msg was '{0}'", e.Message);
+                Assert.That(e.Message.Contains("veginess is Carrot"),
+                            "should contain veggieness is Carrot but  msg was '{0}'", e.Message);
+                Assert.That(e.Message.Contains("fruitness is not apple"),
+                            "should contain fruitness is not apple but  msg was '{0}'", e.Message);
+            }
+        }
 
+        [Test]
+        public void ErrorReportShowAllSideEffectsOfExpectedInvocation() {
+            SkipVerificationForThisTest();
+            IStates fruitness = Mocks.States("fruitness");
+            fruitness.StartAs("apple");
+
+            Expect.On(speaker).Message("Hello").When(fruitness.IsNot("apple"))
+                .Then(fruitness.Is("orange"));
+            try
+            {
+                speaker.Hello();
+                Assert.Fail("should have failed with Expectation Exception");
+            }
+            catch (ExpectationException e)
+            {
+                Assert.That(e.Message.Contains("when fruitness is not apple"),
+                            "should containwhen fruitness is not apple but  msg was '{0}'", e.Message);
+                Assert.That(e.Message.Contains("then fruitness is orange"),
+                            "should contain then fruitness is orange but  msg was '{0}'", e.Message);
+            }
+        }
+
+        [Test]
+        public void TransitionsStateAfterExceptionIsThrow() {
+            IStates readiness = Mocks.States("readiness");
+
+            Expect.Once.On(speaker).Message("Hello").Will(Throw.Exception(new TestException()))
+                .Then(readiness.Is("ready"));
+            Expect.Once.On(speaker).Message("Umm").When(readiness.Is("ready"));
+
+            try
+            {
+                speaker.Hello();
+            }
+            catch (TestException)
+            {
+                speaker.Umm();
             }
         }
     }

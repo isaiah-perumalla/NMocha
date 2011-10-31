@@ -16,18 +16,15 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
-    using System.Reflection;
-    using NMock2.Monitoring;
+using System;
+using System.IO;
+using NMock2.Monitoring;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether parameters of a method match with the specified list of matchers.
     /// </summary>
-    public class GenericMethodTypeParametersMatcher : Matcher
-    {
+    public class GenericMethodTypeParametersMatcher : Matcher {
         /// <summary>
         /// An ordered list of type <see cref="Matcher"/>'s each matching a single method argument.
         /// </summary>
@@ -37,8 +34,7 @@ namespace NMock2.Matchers
         /// Initializes a new instance of the <see cref="GenericMethodTypeParametersMatcher"/> class.
         /// </summary>
         /// <param name="typeMatchers">The value matchers. This is an ordered list of matchers, each matching a single method argument.</param>
-        public GenericMethodTypeParametersMatcher(params Matcher[] typeMatchers)
-        {
+        public GenericMethodTypeParametersMatcher(params Matcher[] typeMatchers) {
             this.typeMatchers = typeMatchers;
         }
 
@@ -47,19 +43,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object is an <see cref="Invocation"/> and all method arguments match their corresponding matcher.</returns>
-        public override bool Matches(object o)
-        {
-            return o is Invocation && this.MatchesTypes((Invocation)o);
+        public override bool Matches(object o) {
+            return o is Invocation && MatchesTypes((Invocation) o);
         }
-        
+
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("<");
-            this.WriteListOfMatchers(this.MatcherCount(), writer);
+            WriteListOfMatchers(MatcherCount(), writer);
             writer.Write(">");
         }
 
@@ -67,18 +61,16 @@ namespace NMock2.Matchers
         /// Number of argument matchers.
         /// </summary>
         /// <returns>Returns the number of argument matchers.</returns>
-        protected int MatcherCount()
-        {
-            return this.typeMatchers.Length;
+        protected int MatcherCount() {
+            return typeMatchers.Length;
         }
 
         /// <summary>
         /// Returns the last argument matcher.
         /// </summary>
         /// <returns>Argument matcher</returns>
-        protected Matcher LastMatcher()
-        {
-            return this.typeMatchers[this.typeMatchers.Length - 1];
+        protected Matcher LastMatcher() {
+            return typeMatchers[typeMatchers.Length - 1];
         }
 
         /// <summary>
@@ -86,8 +78,7 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="listLength">Length of the list.</param>
         /// <param name="writer">The writer.</param>
-        protected void WriteListOfMatchers(int listLength, TextWriter writer)
-        {
+        protected void WriteListOfMatchers(int listLength, TextWriter writer) {
             for (int i = 0; i < listLength; i++)
             {
                 if (i > 0)
@@ -95,7 +86,7 @@ namespace NMock2.Matchers
                     writer.Write(", ");
                 }
 
-                this.typeMatchers[i].DescribeTo(writer);
+                typeMatchers[i].DescribeTo(writer);
             }
         }
 
@@ -106,10 +97,9 @@ namespace NMock2.Matchers
         /// <returns>
         /// Returns true if invocation matches the initial arguments; false otherwise.
         /// </returns>
-        private bool MatchesTypes(Invocation invocation)
-        {
-            return invocation.Method.GetGenericArguments().Length == this.typeMatchers.Length
-                   && this.MatchesTypeValues(invocation);
+        private bool MatchesTypes(Invocation invocation) {
+            return invocation.Method.GetGenericArguments().Length == typeMatchers.Length
+                   && MatchesTypeValues(invocation);
         }
 
         /// <summary>
@@ -119,13 +109,12 @@ namespace NMock2.Matchers
         /// <returns>
         /// Returns true if invocation types matches the inital argument types; false otherwise.
         /// </returns>
-        private bool MatchesTypeValues(Invocation invocation)
-        {
+        private bool MatchesTypeValues(Invocation invocation) {
             Type[] types = invocation.Method.GetGenericArguments();
 
             for (int i = 0; i < types.Length; i++)
             {
-                if (!this.typeMatchers[i].Matches(types[i]))
+                if (!typeMatchers[i].Matches(types[i]))
                 {
                     return false;
                 }

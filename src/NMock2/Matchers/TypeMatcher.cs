@@ -16,24 +16,21 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System;
-    using System.IO;
+using System;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher that checks whether the actual object can be assigned to the expected type.
     /// </summary>
-    public class TypeMatcher : Matcher
-    {
+    public class TypeMatcher : Matcher {
         private readonly Type type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeMatcher"/> class.
         /// </summary>
         /// <param name="type">The expected type.</param>
-        public TypeMatcher(Type type)
-        {
+        public TypeMatcher(Type type) {
             this.type = type;
         }
 
@@ -42,19 +39,17 @@ namespace NMock2.Matchers
         /// </summary>
         /// <param name="o">The object to match.</param>
         /// <returns>Whether the object castable to the expected type.</returns>
-        public override bool Matches(object o)
-        {
-            return this.type.IsAssignableFrom(o.GetType()); 
+        public override bool Matches(object o) {
+            return type.IsAssignableFrom(o.GetType());
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("type assignable to ");
-            writer.Write(this.type);
+            writer.Write(type);
         }
     }
 }

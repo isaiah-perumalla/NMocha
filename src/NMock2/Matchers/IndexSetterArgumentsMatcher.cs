@@ -16,29 +16,25 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Matchers
-{
-    using System.IO;
+using System.IO;
 
+namespace NMock2.Matchers {
     /// <summary>
     /// Matcher for indexer setters. Checks that the arguments passed to the indexer match.
     /// </summary>
-    public class IndexSetterArgumentsMatcher : ArgumentsMatcher
-    {
+    public class IndexSetterArgumentsMatcher : ArgumentsMatcher {
         /// <summary>
         /// Initializes a new instance of the <see cref="IndexSetterArgumentsMatcher"/> class.
         /// </summary>
         /// <param name="valueMatchers">The value matchers. This is an ordered list of matchers, each matching a single method argument.</param>
-        public IndexSetterArgumentsMatcher(params Matcher[] valueMatchers) : base(valueMatchers)
-        {
+        public IndexSetterArgumentsMatcher(params Matcher[] valueMatchers) : base(valueMatchers) {
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
         /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer)
-        {
+        public override void DescribeTo(TextWriter writer) {
             writer.Write("[");
             WriteListOfMatchers(MatcherCount() - 1, writer);
             writer.Write("] = (");

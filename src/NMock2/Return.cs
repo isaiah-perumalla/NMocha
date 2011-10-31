@@ -16,23 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2
-{
-    using System;
-    using NMock2.Actions;
+using System;
+using NMock2.Actions;
 
+namespace NMock2 {
     /// <summary>
     /// Defines the return value of a mocked method call.
     /// </summary>
-    public class Return
-    {
+    public class Return {
         /// <summary>
         /// Returns a value as method return value.
         /// </summary>
         /// <param name="result">The result value.</param>
         /// <returns>Action defining the return value of a method.</returns>
-        public static IAction Value(object result)
-        {
+        public static IAction Value(object result) {
             return new ReturnAction(result);
         }
 
@@ -41,8 +38,7 @@ namespace NMock2
         /// </summary>
         /// <param name="prototype">The prototype to clone.</param>
         /// <returns>Action defining the return value of a method.</returns>
-        public static IAction CloneOf(ICloneable prototype)
-        {
+        public static IAction CloneOf(ICloneable prototype) {
             return new ReturnCloneAction(prototype);
         }
 
@@ -52,8 +48,7 @@ namespace NMock2
         /// <param name="parameterName">Name of the parameter.</param>
         /// <param name="value">The value to return.</param>
         /// <returns>Action defining the value of an out parameter.</returns>
-        public static IAction OutValue(string parameterName, object value)
-        {
+        public static IAction OutValue(string parameterName, object value) {
             return new SetNamedParameterAction(parameterName, value);
         }
 
@@ -63,8 +58,7 @@ namespace NMock2
         /// <param name="parameterIndex">Index of the parameter.</param>
         /// <param name="value">The value to return.</param>
         /// <returns>Action defining the value of an out parameter.</returns>
-        public static IAction OutValue(int parameterIndex, object value)
-        {
+        public static IAction OutValue(int parameterIndex, object value) {
             return new SetIndexedParameterAction(parameterIndex, value);
         }
     }

@@ -1,12 +1,9 @@
-using System;
 using System.IO;
 using NUnit.Framework;
 
 namespace NMock2.Internal {
-    
     [TestFixture]
     public class InStateOrderingConstraintTest {
-     
         [Test]
         public void AllowsInvocationWhenStateIsActive() {
             var state = new FakeStatePredicate();
@@ -23,12 +20,12 @@ namespace NMock2.Internal {
             var state = new FakeStatePredicate();
             state.description = "Fake Predicate";
             var inStateOrdering = new InStateOrderingConstraint(state);
-            Assert.That(StringDescription.Describe(inStateOrdering), NUnit.Framework.SyntaxHelpers.Is.EqualTo("when Fake Predicate"));
+            Assert.That(StringDescription.Describe(inStateOrdering),
+                        NUnit.Framework.SyntaxHelpers.Is.EqualTo("when Fake Predicate"));
         }
     }
 
-    public class StringDescription 
-    {
+    public class StringDescription {
         public static string Describe(ISelfDescribing inStateOrdering) {
             var stringWriter = new StringWriter();
             inStateOrdering.DescribeTo(stringWriter);
@@ -37,8 +34,10 @@ namespace NMock2.Internal {
     }
 
     public class FakeStatePredicate : IStatePredicate {
-        public bool isActive;
         public string description;
+        public bool isActive;
+
+        #region IStatePredicate Members
 
         public bool IsActive() {
             return isActive;
@@ -47,5 +46,7 @@ namespace NMock2.Internal {
         public void DescribeTo(TextWriter writer) {
             writer.Write(description);
         }
+
+        #endregion
     }
 }

@@ -16,17 +16,16 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Internal
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using Matchers;
-    using Syntax;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using NMock2.Matchers;
+using NMock2.Syntax;
 
-    public class ExpectationBuilder : 
+namespace NMock2.Internal {
+    public class ExpectationBuilder :
         IReceiverSyntax, IMethodSyntax, IArgumentSyntax {
-        private BuildableExpectation expectation;
+        private readonly BuildableExpectation expectation;
         private IMockObject mockObject;
 
         /// <summary>
@@ -35,25 +34,103 @@ namespace NMock2.Internal
         /// <param name="description">The description.</param>
         /// <param name="requiredCountMatcher">The required count matcher.</param>
         /// <param name="acceptedCountMatcher">The accepted count matcher.</param>
-        public ExpectationBuilder(string description, Matcher requiredCountMatcher, Matcher acceptedCountMatcher)
-        {
-            this.expectation = new BuildableExpectation(description, requiredCountMatcher, acceptedCountMatcher);
+        public ExpectationBuilder(string description, Matcher requiredCountMatcher, Matcher acceptedCountMatcher) {
+            expectation = new BuildableExpectation(description, requiredCountMatcher, acceptedCountMatcher);
         }
+
+        #region IArgumentSyntax Members
+
+        /// <summary>
+        /// Defines the arguments that are expected on the method call.
+        /// </summary>
+        /// <param name="expectedArguments">The expected arguments.</param>
+        /// <returns>Matcher syntax.</returns>
+        public IMatchSyntax With(params object[] expectedArguments) {
+            expectation.ArgumentsMatcher = new ArgumentsMatcher(ArgumentMatchers(expectedArguments));
+            return this;
+        }
+
+        /// <summary>
+        /// Defines that no arguments are expected on the method call.
+        /// </summary>
+        /// <returns>Matcher syntax.</returns>
+        public IMatchSyntax WithNoArguments() {
+            return With(new Matcher[0]);
+        }
+
+        /// <summary>
+        /// Defines that all arguments are allowed on the method call.
+        /// </summary>
+        /// <returns>Matcher syntax.</returns>
+        public IMatchSyntax WithAnyArguments() {
+            expectation.ArgumentsMatcher = new AlwaysMatcher(true, "(any arguments)");
+            return this;
+        }
+
+
+        public IStateSyntax When(IStatePredicate predicate) {
+            expectation.AddOrderingConstraint(new InStateOrderingConstraint(predicate));
+            return this;
+        }
+
+        public IStateSyntax Then(State state) {
+            expectation.AddSideEffect(new ChangeStateEffect(state));
+            return this;
+        }
+
+        /// <summary>
+        /// Defines a matching criteria.
+        /// </summary>
+        /// <param name="matcher">The matcher.</param>
+        /// <returns>
+        /// Action syntax defining the action to take.
+        /// </returns>
+        public IActionSyntax Matching(Matcher matcher) {
+            expectation.AddInvocationMatcher(matcher);
+            return this;
+        }
+
+        /// <summary>
+        /// Defines what will happen.
+        /// </summary>
+        /// <param name="actions">The actions to take.</param>
+        /// <returns>
+        /// Returns the comment syntax defined after will.
+        /// </returns>
+        public IStateSyntax Will(params IAction[] actions) {
+            foreach (IAction action in actions)
+            {
+                expectation.AddAction(action);
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a comment for the expectation that is added to the error message if the expectation is not met.
+        /// </summary>
+        /// <param name="comment">The comment that is shown in the error message if this expectation is not met.
+        /// You can describe here why this expectation has to be met.</param>
+        public void Comment(string comment) {
+            expectation.AddComment(comment);
+        }
+
+        #endregion
+
+        #region IMethodSyntax Members
 
         /// <summary>
         /// Gets an indexer (get operation).
         /// </summary>
         /// <value>Get indexer syntax defining the value returned by the indexer.</value>
-        public IGetIndexerSyntax Get
-        {
-            get
-            {
+        public IGetIndexerSyntax Get {
+            get {
                 Matcher methodMatcher = NewMethodNameMatcher(string.Empty, "get_Item");
-                this.EnsureMatchingMethodExistsOnMock(methodMatcher, "an indexed getter");
+                EnsureMatchingMethodExistsOnMock(methodMatcher, "an indexed getter");
 
-                this.expectation.DescribeAsIndexer();
-                this.expectation.MethodMatcher = methodMatcher;
-                return new IndexGetterBuilder(this.expectation, this);
+                expectation.DescribeAsIndexer();
+                expectation.MethodMatcher = methodMatcher;
+                return new IndexGetterBuilder(expectation, this);
             }
         }
 
@@ -61,39 +138,15 @@ namespace NMock2.Internal
         /// Gets an indexer (set operation).
         /// </summary>
         /// <value>Set indexer syntax defining the value the indexer is set to.</value>
-        public ISetIndexerSyntax Set
-        {
-            get
-            {
+        public ISetIndexerSyntax Set {
+            get {
                 Matcher methodMatcher = NewMethodNameMatcher(string.Empty, "set_Item");
-                this.EnsureMatchingMethodExistsOnMock(methodMatcher, "an indexed getter");
+                EnsureMatchingMethodExistsOnMock(methodMatcher, "an indexed getter");
 
-                this.expectation.DescribeAsIndexer();
-                this.expectation.MethodMatcher = methodMatcher;
-                return new IndexSetterBuilder(this.expectation, this);
+                expectation.DescribeAsIndexer();
+                expectation.MethodMatcher = methodMatcher;
+                return new IndexSetterBuilder(expectation, this);
             }
-        }
-
-        /// <summary>
-        /// Defines the receiver.
-        /// </summary>
-        /// <param name="receiver">The dynamic mock on which the expectation or stub is applied.</param>
-        /// <returns>Method syntax defining the method, property or event.</returns>
-        public IMethodSyntax On(object receiver)
-        {
-            if (receiver is IMockObject)
-            {
-                this.mockObject = (IMockObject)receiver;
-
-                this.expectation.Receiver = this.mockObject;
-                this.mockObject.AddExpectation(this.expectation);
-            }
-            else
-            {
-                throw new ArgumentException("not a mock object", "receiver");
-            }
-            
-            return this;
         }
 
         /// <summary>
@@ -102,9 +155,8 @@ namespace NMock2.Internal
         /// <param name="methodName">Name of the method.</param>
         /// <param name="typeParams">The type params.</param>
         /// <returns></returns>
-        public IArgumentSyntax Message(string methodName, params Type[] typeParams)
-        {
-            return this.Message(new MethodNameMatcher(methodName), typeParams);
+        public IArgumentSyntax Message(string methodName, params Type[] typeParams) {
+            return Message(new MethodNameMatcher(methodName), typeParams);
         }
 
         /// <summary>
@@ -115,10 +167,10 @@ namespace NMock2.Internal
         /// <returns>
         /// Argument syntax defining the arguments of the method.
         /// </returns>
-        public IArgumentSyntax Message(MethodInfo method, params Type[] typeParams)
-        {
-            return this.Message(new DescriptionOverride(method.Name, Is.Same(method)), typeParams);
+        public IArgumentSyntax Message(MethodInfo method, params Type[] typeParams) {
+            return Message(new DescriptionOverride(method.Name, Is.Same(method)), typeParams);
         }
+
 
         /// <summary>
         /// Methods the specified method matcher.
@@ -126,22 +178,21 @@ namespace NMock2.Internal
         /// <param name="methodMatcher">The method matcher.</param>
         /// <param name="typeParams">The type params.</param>
         /// <returns></returns>
-        public IArgumentSyntax Message(Matcher methodMatcher, params Type[] typeParams)
-        {
+        public IArgumentSyntax Message(Matcher methodMatcher, params Type[] typeParams) {
             if (typeParams != null && typeParams.Length > 0)
             {
-                List<Matcher> typeMatchers = new List<Matcher>();
+                var typeMatchers = new List<Matcher>();
                 foreach (Type type in typeParams)
                 {
                     typeMatchers.Add(new DescriptionOverride(type.FullName, new SameMatcher(type)));
                 }
 
-                return this.Message(
+                return Message(
                     methodMatcher, new GenericMethodTypeParametersMatcher(typeMatchers.ToArray()));
             }
             else
             {
-                return this.Message(methodMatcher, new AlwaysMatcher(true, string.Empty)); 
+                return Message(methodMatcher, new AlwaysMatcher(true, string.Empty));
             }
         }
 
@@ -153,13 +204,12 @@ namespace NMock2.Internal
         /// <returns>
         /// Argument syntax defining the arguments of the method.
         /// </returns>
-        public IArgumentSyntax Message(Matcher methodMatcher, Matcher typeParamsMatcher)
-        {
-            this.EnsureMatchingMethodExistsOnMock(methodMatcher, "a method matching " + methodMatcher);
+        public IArgumentSyntax Message(Matcher methodMatcher, Matcher typeParamsMatcher) {
+            EnsureMatchingMethodExistsOnMock(methodMatcher, "a method matching " + methodMatcher);
 
-            this.expectation.MethodMatcher = methodMatcher;
-            this.expectation.GenericMethodTypeMatcher = typeParamsMatcher;
-            
+            expectation.MethodMatcher = methodMatcher;
+            expectation.GenericMethodTypeMatcher = typeParamsMatcher;
+
             return this;
         }
 
@@ -168,15 +218,14 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns></returns>
-        public IMatchSyntax GetProperty(string propertyName)
-        {
+        public IMatchSyntax GetProperty(string propertyName) {
             Matcher methodMatcher = NewMethodNameMatcher(propertyName, "get_" + propertyName);
 
-            this.EnsureMatchingMethodExistsOnMock(methodMatcher, "a getter for property " + propertyName);
+            EnsureMatchingMethodExistsOnMock(methodMatcher, "a getter for property " + propertyName);
 
-            this.expectation.MethodMatcher = methodMatcher;
-            this.expectation.ArgumentsMatcher = new DescriptionOverride(string.Empty, new ArgumentsMatcher());
-            
+            expectation.MethodMatcher = methodMatcher;
+            expectation.ArgumentsMatcher = new DescriptionOverride(string.Empty, new ArgumentsMatcher());
+
             return this;
         }
 
@@ -185,194 +234,49 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns></returns>
-        public IValueSyntax SetProperty(string propertyName)
-        {
+        public IValueSyntax SetProperty(string propertyName) {
             Matcher methodMatcher = NewMethodNameMatcher(propertyName + " = ", "set_" + propertyName);
 
-            this.EnsureMatchingMethodExistsOnMock(methodMatcher, "a setter for property " + propertyName);
+            EnsureMatchingMethodExistsOnMock(methodMatcher, "a setter for property " + propertyName);
 
-            this.expectation.MethodMatcher = methodMatcher;
+            expectation.MethodMatcher = methodMatcher;
             return new PropertyValueBuilder(this);
         }
 
-        /// <summary>
-        /// Defines an event registration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event adder.
-        /// </returns>
-        public IMatchSyntax EventAdd(string eventName)
-        {
-            return this.EventAdd(eventName, Is.Anything);
-        }
+        #endregion
+
+        #region IReceiverSyntax Members
 
         /// <summary>
-        /// Defines an event registration.
+        /// Defines the receiver.
         /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="listenerMatcher">The listener matcher.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event adder.
-        /// </returns>
-        public IMatchSyntax EventAdd(string eventName, Matcher listenerMatcher)
-        {
-            Matcher methodMatcher = NewMethodNameMatcher(eventName + " += ", "add_" + eventName);
-            
-            this.EnsureMatchingMethodExistsOnMock(methodMatcher, "an event named " + eventName);
-
-            this.expectation.MethodMatcher = methodMatcher;
-            this.expectation.ArgumentsMatcher = new ArgumentsMatcher(listenerMatcher);
-            return this;
-        }
-
-        /// <summary>
-        /// Defines an event registration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="equalListener">Delegate defining compatible listeners.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event adder.
-        /// </returns>
-        public IMatchSyntax EventAdd(string eventName, Delegate equalListener)
-        {
-            return this.EventAdd(eventName, Is.EqualTo(equalListener));
-        }
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="listenerMatcher">The listener matcher.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event remover.
-        /// </returns>
-        public IMatchSyntax EventRemove(string eventName, Matcher listenerMatcher)
-        {
-            Matcher methodMatcher = NewMethodNameMatcher(eventName + " -= ", "remove_" + eventName);
-            
-            this.EnsureMatchingMethodExistsOnMock(methodMatcher, "an event named " + eventName);
-
-            this.expectation.MethodMatcher = methodMatcher;
-            this.expectation.ArgumentsMatcher = new ArgumentsMatcher(listenerMatcher);
-            return this;
-        }
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event remover.
-        /// </returns>
-        public IMatchSyntax EventRemove(string eventName)
-        {
-            return this.EventRemove(eventName, Is.Anything);
-        }
-
-        /// <summary>
-        /// Defines an event deregistration.
-        /// </summary>
-        /// <param name="eventName">Name of the event.</param>
-        /// <param name="equalListener">Delegate defining compatible listeners.</param>
-        /// <returns>
-        /// Match syntax defining the behavior of the event remover.
-        /// </returns>
-        public IMatchSyntax EventRemove(string eventName, Delegate equalListener)
-        {
-            return this.EventRemove(eventName, Is.EqualTo(equalListener));
-        }
-
-        /// <summary>
-        /// Defines the arguments that are expected on the method call.
-        /// </summary>
-        /// <param name="expectedArguments">The expected arguments.</param>
-        /// <returns>Matcher syntax.</returns>
-        public IMatchSyntax With(params object[] expectedArguments)
-        {
-            this.expectation.ArgumentsMatcher = new ArgumentsMatcher(ArgumentMatchers(expectedArguments));
-            return this;
-        }
-
-        /// <summary>
-        /// Defines that no arguments are expected on the method call.
-        /// </summary>
-        /// <returns>Matcher syntax.</returns>
-        public IMatchSyntax WithNoArguments()
-        {
-            return this.With(new Matcher[0]);
-        }
-
-        /// <summary>
-        /// Defines that all arguments are allowed on the method call.
-        /// </summary>
-        /// <returns>Matcher syntax.</returns>
-        public IMatchSyntax WithAnyArguments()
-        {
-            this.expectation.ArgumentsMatcher = new AlwaysMatcher(true, "(any arguments)");
-            return this;
-        }
-
-       
-        public IStateSyntax When(IStatePredicate predicate) {
-            this.expectation.AddOrderingConstraint(new InStateOrderingConstraint(predicate));
-            return this;
-        }
-
-        public IStateSyntax Then(State state) {
-            this.expectation.AddSideEffect(new ChangeStateEffect(state));
-            return this;
-
-        }
-
-        /// <summary>
-        /// Defines a matching criteria.
-        /// </summary>
-        /// <param name="matcher">The matcher.</param>
-        /// <returns>
-        /// Action syntax defining the action to take.
-        /// </returns>
-        public IActionSyntax Matching(Matcher matcher)
-        {
-            this.expectation.AddInvocationMatcher(matcher);
-            return this;
-        }
-
-        /// <summary>
-        /// Defines what will happen.
-        /// </summary>
-        /// <param name="actions">The actions to take.</param>
-        /// <returns>
-        /// Returns the comment syntax defined after will.
-        /// </returns>
-        public IStateSyntax Will(params IAction[] actions)
-        {
-            foreach (IAction action in actions)
+        /// <param name="receiver">The dynamic mock on which the expectation or stub is applied.</param>
+        /// <returns>Method syntax defining the method, property or event.</returns>
+        public IMethodSyntax On(object receiver) {
+            if (receiver is IMockObject)
             {
-                this.expectation.AddAction(action);
+                mockObject = (IMockObject) receiver;
+
+                expectation.Receiver = mockObject;
+                mockObject.AddExpectation(expectation);
+            }
+            else
+            {
+                throw new ArgumentException("not a mock object", "receiver");
             }
 
             return this;
         }
 
-        /// <summary>
-        /// Adds a comment for the expectation that is added to the error message if the expectation is not met.
-        /// </summary>
-        /// <param name="comment">The comment that is shown in the error message if this expectation is not met.
-        /// You can describe here why this expectation has to be met.</param>
-        public void Comment(string comment)
-        {
-            this.expectation.AddComment(comment);
-        }
+        #endregion
 
         /// <summary>
         /// Arguments the matchers.
         /// </summary>
         /// <param name="expectedArguments">The expected arguments.</param>
         /// <returns></returns>
-        private static Matcher[] ArgumentMatchers(object[] expectedArguments)
-        {
-            Matcher[] matchers = new Matcher[expectedArguments.Length];
+        private static Matcher[] ArgumentMatchers(object[] expectedArguments) {
+            var matchers = new Matcher[expectedArguments.Length];
             for (int i = 0; i < matchers.Length; i++)
             {
                 object o = expectedArguments[i];
@@ -388,8 +292,7 @@ namespace NMock2.Internal
         /// <param name="description">The description.</param>
         /// <param name="methodName">Name of the method.</param>
         /// <returns></returns>
-        private static Matcher NewMethodNameMatcher(string description, string methodName)
-        {
+        private static Matcher NewMethodNameMatcher(string description, string methodName) {
             return new DescriptionOverride(description, new MethodNameMatcher(methodName));
         }
 
@@ -398,13 +301,12 @@ namespace NMock2.Internal
         /// </summary>
         /// <param name="methodMatcher">The method matcher.</param>
         /// <param name="methodDescription">The method description.</param>
-        private void EnsureMatchingMethodExistsOnMock(Matcher methodMatcher, string methodDescription)
-        {
-            IList<MethodInfo> matches = this.mockObject.GetMethodsMatching(methodMatcher);
+        private void EnsureMatchingMethodExistsOnMock(Matcher methodMatcher, string methodDescription) {
+            IList<MethodInfo> matches = mockObject.GetMethodsMatching(methodMatcher);
 
             if (matches.Count == 0)
             {
-                throw new ArgumentException("mock object " + this.mockObject.MockName + " does not have " + methodDescription);
+                throw new ArgumentException("mock object " + mockObject.MockName + " does not have " + methodDescription);
             }
 
             foreach (MethodInfo methodInfo in matches)
@@ -418,67 +320,49 @@ namespace NMock2.Internal
                 }
             }
 
-            throw new ArgumentException("mock object " + this.mockObject.MockName + " has " + methodDescription + ", but it is not virtual or abstract");
+            throw new ArgumentException("mock object " + mockObject.MockName + " has " + methodDescription +
+                                        ", but it is not virtual or abstract");
         }
 
-        private class PropertyValueBuilder : IValueSyntax
-        {
-            private readonly ExpectationBuilder builder;
+        #region Nested type: IndexGetterBuilder
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="PropertyValueBuilder"/> class.
-            /// </summary>
-            /// <param name="builder">The builder.</param>
-            public PropertyValueBuilder(ExpectationBuilder builder)
-            {
-                this.builder = builder;
-            }
-
-            public IMatchSyntax To(Matcher valueMatcher)
-            {
-                return this.builder.With(valueMatcher);
-            }
-
-            public IMatchSyntax To(object equalValue)
-            {
-                return this.To(Is.EqualTo(equalValue));
-            }
-        }
-
-        private class IndexGetterBuilder : IGetIndexerSyntax
-        {
-            private readonly BuildableExpectation expectation;
-
+        private class IndexGetterBuilder : IGetIndexerSyntax {
             /// <summary>
             /// Holds the instance to the <see cref="ExpectationBuilder"/>.
             /// </summary>
             private readonly ExpectationBuilder builder;
+
+            private readonly BuildableExpectation expectation;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="IndexGetterBuilder"/> class.
             /// </summary>
             /// <param name="expectation">The expectation.</param>
             /// <param name="builder">The builder.</param>
-            public IndexGetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder)
-            {
+            public IndexGetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder) {
                 this.expectation = expectation;
                 this.builder = builder;
             }
 
-            public IMatchSyntax this[params object[] expectedArguments]
-            {
-                get
-                {
-                    this.expectation.ArgumentsMatcher = new IndexGetterArgumentsMatcher(ArgumentMatchers(expectedArguments));
-                    return this.builder;
+            #region IGetIndexerSyntax Members
+
+            public IMatchSyntax this[params object[] expectedArguments] {
+                get {
+                    expectation.ArgumentsMatcher = new IndexGetterArgumentsMatcher(ArgumentMatchers(expectedArguments));
+                    return builder;
                 }
             }
+
+            #endregion
         }
 
-        private class IndexSetterBuilder : ISetIndexerSyntax, IValueSyntax
-        {
-            private readonly BuildableExpectation expectation;
+        #endregion
+
+        #region Nested type: IndexSetterBuilder
+
+        private class IndexSetterBuilder : ISetIndexerSyntax, IValueSyntax {
             private readonly ExpectationBuilder builder;
+            private readonly BuildableExpectation expectation;
             private Matcher[] matchers;
 
             /// <summary>
@@ -486,40 +370,72 @@ namespace NMock2.Internal
             /// </summary>
             /// <param name="expectation">The expectation.</param>
             /// <param name="builder">The builder.</param>
-            public IndexSetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder)
-            {
+            public IndexSetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder) {
                 this.expectation = expectation;
                 this.builder = builder;
             }
 
-            public IValueSyntax this[params object[] expectedArguments]
-            {
-                get
-                {
+            #region ISetIndexerSyntax Members
+
+            public IValueSyntax this[params object[] expectedArguments] {
+                get {
                     Matcher[] indexMatchers = ArgumentMatchers(expectedArguments);
-                    this.matchers = new Matcher[indexMatchers.Length + 1];
-                    Array.Copy(indexMatchers, this.matchers, indexMatchers.Length);
-                    this.SetValueMatcher(Is.Anything);
+                    matchers = new Matcher[indexMatchers.Length + 1];
+                    Array.Copy(indexMatchers, matchers, indexMatchers.Length);
+                    SetValueMatcher(Is.Anything);
                     return this;
                 }
             }
 
-            public IMatchSyntax To(Matcher matcher)
-            {
-                this.SetValueMatcher(matcher);
-                return this.builder;
+            #endregion
+
+            #region IValueSyntax Members
+
+            public IMatchSyntax To(Matcher matcher) {
+                SetValueMatcher(matcher);
+                return builder;
             }
 
-            public IMatchSyntax To(object equalValue)
-            {
-                return this.To(Is.EqualTo(equalValue));
+            public IMatchSyntax To(object equalValue) {
+                return To(Is.EqualTo(equalValue));
             }
 
-            private void SetValueMatcher(Matcher matcher)
-            {
-                this.matchers[this.matchers.Length - 1] = matcher;
-                this.expectation.ArgumentsMatcher = new IndexSetterArgumentsMatcher(this.matchers);
+            #endregion
+
+            private void SetValueMatcher(Matcher matcher) {
+                matchers[matchers.Length - 1] = matcher;
+                expectation.ArgumentsMatcher = new IndexSetterArgumentsMatcher(matchers);
             }
         }
-    }
+
+        #endregion
+
+        #region Nested type: PropertyValueBuilder
+
+        private class PropertyValueBuilder : IValueSyntax {
+            private readonly ExpectationBuilder builder;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="PropertyValueBuilder"/> class.
+            /// </summary>
+            /// <param name="builder">The builder.</param>
+            public PropertyValueBuilder(ExpectationBuilder builder) {
+                this.builder = builder;
+            }
+
+            #region IValueSyntax Members
+
+            public IMatchSyntax To(Matcher valueMatcher) {
+                return builder.With(valueMatcher);
+            }
+
+            public IMatchSyntax To(object equalValue) {
+                return To(Is.EqualTo(equalValue));
+            }
+
+            #endregion
+        }
+
+        #endregion
+        }
 }

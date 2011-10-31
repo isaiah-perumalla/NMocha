@@ -1,6 +1,6 @@
 ﻿namespace NMock2.Internal {
-    public interface IOrderingConstraint: ISelfDescribing {
+
+    public interface IOrderingConstraint : ISelfDescribing {
         bool AllowsInvocationNow();
-      
     }
 }
