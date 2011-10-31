@@ -77,7 +77,6 @@
     <Compile Include="AcceptanceTestBase.cs" />
     <Compile Include="CastleOnlyAttribute.cs" />
     <Compile Include="MockMultipleInterfacesAcceptanceTest.cs" />
-    <Compile Include="SetupFixture.cs" />
     <Compile Include="ErrorCheckingAcceptanceTest.cs" />
     <Compile Include="ErrorMessageDemo.cs" />
     <Compile Include="Example.cs" />

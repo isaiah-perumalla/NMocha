@@ -80,9 +80,7 @@ namespace NMock2.Monitoring {
             }
 
             // Ok, this call is targeting a member of the mocked class
-            object invocationTarget = MockedTypes.PrimaryType.IsInterface
-                                          ? interceptedInvocation.Proxy
-                                          : interceptedInvocation.InvocationTarget;
+            object invocationTarget = GetInvocationTarget(interceptedInvocation);
             var invocationForMock = new Invocation(
                 invocationTarget,
                 interceptedInvocation.Method,
@@ -90,6 +88,12 @@ namespace NMock2.Monitoring {
 
 
             interceptedInvocation.ReturnValue = ProcessCallAgainstExpectations(invocationForMock);
+        }
+
+        private object GetInvocationTarget(IInvocation interceptedInvocation) {
+            return MockedTypes.PrimaryType.IsInterface
+                       ? interceptedInvocation.Proxy
+                       : interceptedInvocation.InvocationTarget;
         }
 
         #endregion

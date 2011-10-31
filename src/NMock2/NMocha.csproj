@@ -87,6 +87,8 @@
     <Compile Include="DefinedAs.cs" />
     <Compile Include="IMockDefinition.cs" />
     <Compile Include="Internal\ChangeStateEffect.cs" />
+    <Compile Include="Internal\IExpectationCollector.cs" />
+    <Compile Include="Internal\IInvocationListener.cs" />
     <Compile Include="Internal\InStateOrderingConstraint.cs" />
     <Compile Include="Internal\IOrderingConstraint.cs" />
     <Compile Include="Internal\IStateSyntax.cs" />

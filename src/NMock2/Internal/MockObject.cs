@@ -16,49 +16,20 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using NMock2.Monitoring;
 
 namespace NMock2.Internal {
     public class MockObject : IInvokable, IMockObject {
-        /// <summary>
-        /// Stores the mocked type(s).
-        /// </summary>
+      
         private readonly CompositeType mockedTypes;
 
-        /// <summary>
-        /// Stores the name of the mock object.
-        /// </summary>
         private readonly string name;
 
-        /// <summary>
-        /// Results that have been generated for methods or property getters.
-        /// These will be returned for all subsequent calls to the same member.
-        /// </summary>
-        private readonly Dictionary<MethodInfo, object> rememberedMethodResults = new Dictionary<MethodInfo, object>();
+        private readonly IExpectationCollector expectationCollector;
+        private readonly IInvocationListener invocationListener;
 
-        private IExpectationCollector expectationCollector;
-        private IInvocationListener invocationListener;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MockObject"/> class.
-        /// This constructor is needed by the <see cref="InterfaceOnlyMockObjectFactory"/> (the IL generation has to be changed!)
-        /// </summary>
-        /// <param name="mockedType">Type of the mocked.</param>
-        /// <param name="name">The name.</param>
-        protected MockObject(Type mockedType, string name, IExpectationCollector expectationCollector, IInvocationListener invocationListener)
-            : this(new CompositeType(new[] {mockedType}), name, expectationCollector, invocationListener) {
-            this.expectationCollector = expectationCollector;
-            this.invocationListener = invocationListener;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MockObject"/> class.
-        /// </summary>
-        /// <param name="mockedType">Type of the mocked.</param>
-        /// <param name="name">The name.</param>
         protected MockObject(CompositeType mockedType, string name, IExpectationCollector expectationCollector, IInvocationListener invocationListener) {
             this.name = name;
             this.invocationListener = invocationListener;
@@ -101,13 +72,5 @@ namespace NMock2.Internal {
         public override string ToString() {
             return name;
         }
-    }
-
-    public interface IInvocationListener {
-        void NotifyInvocation(Invocation invocation);
-    }
-
-    public interface IExpectationCollector {
-        void Add(IExpectation expectation);
     }
 }

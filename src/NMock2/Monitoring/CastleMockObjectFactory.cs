@@ -29,6 +29,13 @@ namespace NMock2.Monitoring {
     /// </summary>
     public class CastleMockObjectFactory : IMockObjectFactory {
         private readonly Dictionary<CompositeType, Type> cachedProxyTypes = new Dictionary<CompositeType, Type>();
+        private readonly IExpectationCollector expectationCollector;
+        private readonly IInvocationListener invocationListener;
+
+        public CastleMockObjectFactory(IExpectationCollector expectationCollector, IInvocationListener invocationListener) {
+            this.expectationCollector = expectationCollector;
+            this.invocationListener = invocationListener;
+        }
 
         #region IMockObjectFactory Members
 
@@ -43,7 +50,7 @@ namespace NMock2.Monitoring {
         public object CreateMock(Mockery mockery, CompositeType typesToMock, string name, object[] constructorArgs) {
             Type proxyType = GetProxyType(typesToMock);
 
-            return InstantiateProxy(typesToMock, proxyType, mockery, name, constructorArgs);
+            return InstantiateProxy(typesToMock, proxyType, name, constructorArgs);
         }
 
         #endregion
@@ -82,13 +89,12 @@ namespace NMock2.Monitoring {
             return cachedProxyTypes[compositeType];
         }
 
-        private object InstantiateProxy(
+        private  object InstantiateProxy(
             CompositeType compositeType,
             Type proxyType,
-            Mockery mockery,
             string name,
             object[] constructorArgs) {
-            IInterceptor interceptor = new MockObjectInterceptor(compositeType, name, mockery, mockery);
+            IInterceptor interceptor = new MockObjectInterceptor(compositeType, name, expectationCollector, invocationListener);
             object[] activationArgs;
 
             if (compositeType.PrimaryType.IsClass)

@@ -32,9 +32,7 @@ namespace NMock2.AcceptanceTests {
 
         [TearDown]
         public void TearDown() {
-            // We're mucking around with changing the default IMockObjectFactory in some tests
-            // in this fixture. Here we restore things back to normal after each test.
-            SetupFixture.SetMockObjectFactoryToDefault();
+         
         }
 
         #endregion
@@ -76,23 +74,16 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void ChangingDefaultMockObjectFactoryChangesBehaviourOfNewMockeryInstances() {
-            Mockery.ChangeDefaultMockObjectFactory(typeof (TestingMockObjectFactoryA));
             var mocksA = new Mockery();
+            mocksA.SetMockFactoryAs(new TestingMockObjectFactoryA());
             Assert.AreEqual("TestingMockObjectFactoryA", mocksA.NewInstanceOfRole<INamed>().GetName());
 
-            Mockery.ChangeDefaultMockObjectFactory(typeof (TestingMockObjectFactoryB));
-            var mocksB = new Mockery();
-            Assert.AreEqual("TestingMockObjectFactoryB", mocksB.NewInstanceOfRole<INamed>().GetName());
+            
+            mocksA.SetMockFactoryAs(new TestingMockObjectFactoryB());
+            Assert.AreEqual("TestingMockObjectFactoryB", mocksA.NewInstanceOfRole<INamed>().GetName());
         }
 
-        [Test]
-        public void ChangingDefaultMockObjectFactoryDoesNotAffectExistingMockeryInstances() {
-            Mockery.ChangeDefaultMockObjectFactory(typeof (TestingMockObjectFactoryA));
-            var mocks = new Mockery();
-            Mockery.ChangeDefaultMockObjectFactory(typeof (TestingMockObjectFactoryB));
-
-            Assert.AreEqual("TestingMockObjectFactoryA", mocks.NewInstanceOfRole<INamed>().GetName());
-        }
+       
 
         [Test]
         public void MockObjectsMayBePlacedIntoServiceContainers() {

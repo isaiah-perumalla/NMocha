@@ -43,9 +43,7 @@ namespace NMock2.Test {
 
         [TearDown]
         public void TearDown() {
-            // We're mucking around with changing the default IMockObjectFactory in some tests
-            // in this fixture. Here we restore things back to normal after each test.
-            Mockery.ChangeDefaultMockObjectFactory(typeof (CastleMockObjectFactory));
+           
         }
 
         #endregion
@@ -239,17 +237,7 @@ namespace NMock2.Test {
             var mock = _mockery.NewInstanceOfRole<SampleGenericClass<string>>();
         }
 
-        [Test, ExpectedException(typeof (ArgumentException))]
-        public void ChangingDefaultMockObjectFactoryToClassThatDoesnotImplementIMockObjectFactoryThrowsArgumentException
-            () {
-            Mockery.ChangeDefaultMockObjectFactory(GetType());
-        }
-
-        [Test, ExpectedException(typeof (ArgumentException))]
-        public void ChangingDefaultMockObjectFactoryToClassWithNoDefaultConstructorThrowsArgumentException() {
-            Mockery.ChangeDefaultMockObjectFactory(typeof (TestingMockObjectFactoryWithNoDefaultConstructor));
-        }
-
+ 
         [Test]
         public void ClassMockReturnsDefaultNameFromMockNameProperty() {
             var mock = (IMockObject) _mockery.NewInstanceOfRole<SampleClass>();
