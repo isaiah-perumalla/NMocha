@@ -42,7 +42,7 @@ namespace NMock2.AcceptanceTests {
         public void Setup() {
             base.Setup();
 
-            myEnumerable = Mocks.NewInstanceOfRole<IMyEnumerable>();
+            myEnumerable = Mockery.NewInstanceOfRole<IMyEnumerable>();
 
             data = new[] {"a", "b", "c", "d", "e"};
 

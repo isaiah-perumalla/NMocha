@@ -37,7 +37,7 @@ namespace NMock2.AcceptanceTests {
         /// </summary>
         [Test]
         public void FirstSwallowedUnexpectedInvocationExceptionIsRethrownInVerify() {
-            var mock = Mocks.NewInstanceOfRole<ISpeaker>();
+            var mock = Mockery.NewInstanceOfRole<ISpeaker>();
             ExpectationException firstException = null;
 
             try
@@ -61,7 +61,7 @@ namespace NMock2.AcceptanceTests {
 
             try
             {
-                Mocks.VerifyAllExpectationsHaveBeenMet();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
             }
             catch (ExpectationException rethrownException)
             {
@@ -81,7 +81,7 @@ namespace NMock2.AcceptanceTests {
         /// </summary>
         [Test]
         public void UnexpectedInvocationExceptionIsClearedAfterBeingThrownInVerify() {
-            var mock = Mocks.NewInstanceOfRole<ISpeaker>();
+            var mock = Mockery.NewInstanceOfRole<ISpeaker>();
 
             try
             {
@@ -95,14 +95,14 @@ namespace NMock2.AcceptanceTests {
             try
             {
                 // Exception should be initially rethrown here...
-                Mocks.VerifyAllExpectationsHaveBeenMet();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
             }
             catch (ExpectationException)
             {
             }
 
             // It should not be rethrown again...
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         [ExpectedException(typeof (ExpectationException))]
         public void UnexpectedInvocationExceptionsAreRethrownInVerify() {
-            var mock = Mocks.NewInstanceOfRole<ISpeaker>();
+            var mock = Mockery.NewInstanceOfRole<ISpeaker>();
 
             try
             {
@@ -122,7 +122,7 @@ namespace NMock2.AcceptanceTests {
                 // evil code >:-]
             }
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
     }
 }

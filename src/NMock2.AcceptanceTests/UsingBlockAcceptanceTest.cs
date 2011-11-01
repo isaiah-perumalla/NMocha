@@ -69,7 +69,7 @@ namespace NMock2.AcceptanceTests {
         /// </summary>
         [Test, ExpectedException(typeof (InvalidOperationException))]
         public void ReturnValueForgottenWithVerify() {
-            var usingBlock = Mocks.NewInstanceOfRole<IUsingBlock>();
+            var usingBlock = Mockery.NewInstanceOfRole<IUsingBlock>();
 
             Expect.Once.On(usingBlock).Message("IntReturnValue"); // Developer forgot to set: .Will(Return.Value(12));
             Expect.Once.On(usingBlock).Message("NoReturnValue");

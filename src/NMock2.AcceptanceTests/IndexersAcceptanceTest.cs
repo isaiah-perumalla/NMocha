@@ -97,42 +97,42 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanExpectIndexedGetterOnClass() {
-            AssertCanExpectIndexedGetter(Mocks.NewInstanceOfRole<Indexed>());
+            AssertCanExpectIndexedGetter(Mockery.NewInstanceOfRole<Indexed>());
         }
 
         [Test]
         public void CanExpectIndexedGetterOnInterface() {
-            AssertCanExpectIndexedGetter(Mocks.NewInstanceOfRole<IIndexed>());
+            AssertCanExpectIndexedGetter(Mockery.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void CanExpectIndexedSetterOnClass() {
-            AssertCanExpectIndexedSetter(Mocks.NewInstanceOfRole<Indexed>());
+            AssertCanExpectIndexedSetter(Mockery.NewInstanceOfRole<Indexed>());
         }
 
         [Test]
         public void CanExpectIndexedSetterOnInterface() {
-            AssertCanExpectIndexedSetter(Mocks.NewInstanceOfRole<IIndexed>());
+            AssertCanExpectIndexedSetter(Mockery.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfIndexedGetterNotHiddenMethodOnClass() {
-            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewInstanceOfRole<Indexed>());
+            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mockery.NewInstanceOfRole<Indexed>());
         }
 
         [Test]
         public void ErrorMessagesContainNameOfIndexedGetterNotHiddenMethodOnInterface() {
-            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mocks.NewInstanceOfRole<IIndexed>());
+            AssertErrorMessagesContainNameOfIndexedGetterNotHiddenMethod(Mockery.NewInstanceOfRole<IIndexed>());
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfIndexedSetterNotHiddenMethodOnClass() {
-            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewInstanceOfRole<Indexed>());
+            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mockery.NewInstanceOfRole<Indexed>());
         }
 
         [Test]
         public void ErrorMessagesContainNameOfIndexedSetterNotHiddenMethodOnInterface() {
-            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mocks.NewInstanceOfRole<IIndexed>());
+            AssertErrorMessagesContainNameOfIndexedSetterNotHiddenMethod(Mockery.NewInstanceOfRole<IIndexed>());
         }
     }
 }

@@ -32,7 +32,7 @@ namespace NMock2.AcceptanceTests {
             var signalFromBackgroundThread = new AutoResetEvent(false);
             var signalFromForegroundThread = new AutoResetEvent(false);
 
-            var speaker = Mocks.NewInstanceOfRole<ISpeaker>();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
 
             Expect.Once.On(speaker).Message("Hello").Will(Signal.EventWaitHandle(signalFromBackgroundThread));
 

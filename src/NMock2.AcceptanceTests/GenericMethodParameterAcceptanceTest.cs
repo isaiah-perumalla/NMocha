@@ -75,8 +75,8 @@ namespace NMock2.AcceptanceTests {
         }
 
         private void AssertCanMockGenericMethod(ILocator locatorMock) {
-            var serviceOneMock = Mocks.NewInstanceOfRole<IServiceOne>();
-            var serviceTwoMock = Mocks.NewInstanceOfRole<IServiceTwo>();
+            var serviceOneMock = Mockery.NewInstanceOfRole<IServiceOne>();
+            var serviceTwoMock = Mockery.NewInstanceOfRole<IServiceTwo>();
 
             // That works only with Expect and if the order of calls to Get match the order of the expectations:
             Expect.Once.On(locatorMock).Message("Get").Will(Return.Value(serviceOneMock));
@@ -170,73 +170,73 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanMockGenericMethodOnClass() {
-            AssertCanMockGenericMethod(Mocks.NewInstanceOfRole<Locator>());
+            AssertCanMockGenericMethod(Mockery.NewInstanceOfRole<Locator>());
         }
 
         [Test]
         public void CanMockGenericMethodOnInterface() {
-            AssertCanMockGenericMethod(Mocks.NewInstanceOfRole<ILocator>());
+            AssertCanMockGenericMethod(Mockery.NewInstanceOfRole<ILocator>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericParameterOnClass() {
-            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericParameter(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithGenericParameterOnInterface() {
-            AssertCanMockGenericMethodWithGenericParameter(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericParameter(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericParameterUsingValueTypeOnClass() {
-            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithGenericParameterUsingValueTypeOnInterface() {
-            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericParameterUsingValueType(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingMixedTypesOnClass() {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingMixedTypesOnInterface() {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingMixedTypes(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingReferenceTypeOnClass() {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingReferenceTypeOnInterface() {
             AssertCanMockGenericMethodWithGenericReturnValueUsingReferenceType(
-                Mocks.NewInstanceOfRole<IGenericSpeaker>());
+                Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithGenericReturnValueUsingValueTypeOnClass() {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithGenericReturnValueUsingValueTypeOnInterface() {
-            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithGenericReturnValueUsingValueType(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithMixedParametersOnClass() {
-            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithMixedParameters(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithMixedParametersOnInterface() {
-            AssertCanMockGenericMethodWithMixedParameters(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithMixedParameters(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
     }
 }

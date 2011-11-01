@@ -69,16 +69,16 @@ namespace NMock2.AcceptanceTests {
         public void KnockKnockJoke() {
             const string firstName = "Doctor";
             const string punchline = "How did you know?";
-            var joker = (IJoker) Mocks.NewNamedInstanceOfRole(typeof (IJoker), "joker");
+            var joker = (IJoker) Mockery.NewNamedInstanceOfRole(typeof (IJoker), "joker");
             var audience = new Audience();
 
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(joker).Message("Respond").With(Is.EqualTo("Who's there?"));
                 Expect.Once.On(joker).Message("Respond").With(Is.StringContaining(firstName) &
                                                               Is.StringContaining("who?"));
 
-                using (Mocks.Unordered)
+                using (Mockery.Unordered)
                 {
                     Expect.AtLeastOnce.On(joker).Message("Ha");
                     Expect.AtLeastOnce.On(joker).Message("Ho");
@@ -95,16 +95,16 @@ namespace NMock2.AcceptanceTests {
         public void KnockKnockJoke_UsingDefaultExpectation() {
             const string firstName = "Doctor";
             const string punchline = "How did you know?";
-            var joker = (IJoker) Mocks.NewNamedInstanceOfRole(typeof (IJoker), "joker");
+            var joker = (IJoker) Mockery.NewNamedInstanceOfRole(typeof (IJoker), "joker");
             var audience = new Audience();
 
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(joker).Message("Respond").With(Is.EqualTo("Who's there?"));
                 Expect.Once.On(joker).Message("Respond").With(Is.StringContaining(firstName) &
                                                               Is.StringContaining("who?"));
 
-                using (Mocks.Unordered)
+                using (Mockery.Unordered)
                 {
                     // I use directly On instead of AtLeastOnce.On
                     Expect.On(joker).Message("Ha");

@@ -151,7 +151,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanHaveClassWithIMockObjectMembers() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithIMockObjectMembers>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithIMockObjectMembers>();
             Expect.Once.On(mock).Message("Multiply").Will(Return.Value(133));
             int result = mock.Multiply(12, 12);
             //// even if 12 by 12 is 144, we mocked the method with 133:
@@ -160,7 +160,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnAbstractMethod() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
 
             // Abstract target method
             Expect.Once.On(mock).Message("Add").With(1.1m, 2.1m).Will(Return.Value(10));
@@ -169,7 +169,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnAbstractMethodOfClassMock() {
-            var mock = Mocks.NewInstanceOfRole<SampleAbstractClass>();
+            var mock = Mockery.NewInstanceOfRole<SampleAbstractClass>();
 
             Expect.Once.On(mock).Message("Add").Will(Return.Value(7));
 
@@ -178,7 +178,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnGenericMethodOnMockedClass() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithGenericMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithGenericMethods>();
 
             Expect.Once.On(mock).Message("GetStringValue").Will(Return.Value("ABC"));
 
@@ -187,7 +187,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnGenericMethodWithConstraintOnMockedClass() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithGenericMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithGenericMethods>();
 
             Expect.Once.On(mock).Message("GetCount").Will(Return.Value(3));
 
@@ -196,7 +196,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnMethodOnMockedGenericClass() {
-            var mock = Mocks.NewInstanceOfRole<SampleGenericClass<string>>();
+            var mock = Mockery.NewInstanceOfRole<SampleGenericClass<string>>();
 
             Expect.Once.On(mock).Message("GetDefault").Will(Return.Value("ABC"));
 
@@ -205,7 +205,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnMethodOnSuperClassOfMockedClass() {
-            var mock = Mocks.NewInstanceOfRole<SampleSubClass>();
+            var mock = Mockery.NewInstanceOfRole<SampleSubClass>();
 
             Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(5));
 
@@ -214,7 +214,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnMethodWhenAtLeastOneMatchedOverloadIsVirtualOrAbstract() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
 
             // Three possible matches here...
             Expect.Exactly(2).On(mock).Message("Add").Will(Return.Value(10));
@@ -225,7 +225,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnMethodWithOutParameterOnMockedClass() {
-            var mock = Mocks.NewInstanceOfRole<SampleClass>();
+            var mock = Mockery.NewInstanceOfRole<SampleClass>();
 
             Expect.Once.On(mock).Message("Divide").Will(Return.Value(3), Return.OutValue("remainder", 15m));
 
@@ -237,7 +237,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnOverriddenObjectMembersOnClassMock() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithObjectOverrides>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithObjectOverrides>();
 
             Expect.Once.On(mock).Message("ToString").Will(Return.Value("ABC"));
             Expect.Once.On(mock).Message("Equals").Will(Return.Value(false));
@@ -250,7 +250,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanSetExpectationOnVirtualMethod() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
 
             // Virtual target method
             Expect.Once.On(mock).Message("Add").With(1, 2).Will(Return.Value(10));
@@ -259,7 +259,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void LocalCallsWithinMockedClassCanSatisfyExpectations() {
-            var mock = Mocks.NewInstanceOfRole<SampleClass>();
+            var mock = Mockery.NewInstanceOfRole<SampleClass>();
 
             Expect.Once.On(mock).Message("DoAdd").Will(Return.Value(7)); // Should be called from Add()
 
@@ -270,7 +270,7 @@ namespace NMock2.AcceptanceTests {
          ExpectedException(typeof (ArgumentException),
              "mock object myMock has a method matching SomeOtherMethod, but it is not virtual or abstract")]
         public void SettingExpectationOnInheritedNonVirtualImplOfInterfaceMethodThrowsArgumentException() {
-            var mock = Mocks.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
+            var mock = Mockery.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
             Expect.Never.On(mock).Message("SomeOtherMethod");
@@ -280,7 +280,7 @@ namespace NMock2.AcceptanceTests {
          ExpectedException(typeof (ArgumentException),
              "mock object myMock has a method matching SomeGenericMethod, but it is not virtual or abstract")]
         public void SettingExpectationOnNonVirtualImplOfInterfaceGenericMethodThrowsArgumentException() {
-            var mock = Mocks.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
+            var mock = Mockery.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
             Expect.Never.On(mock).Message("SomeGenericMethod", typeof (int));
@@ -290,7 +290,7 @@ namespace NMock2.AcceptanceTests {
          ExpectedException(typeof (ArgumentException),
              "mock object myMock has a method matching SomeMethod, but it is not virtual or abstract")]
         public void SettingExpectationOnNonVirtualImplOfInterfaceMethodThrowsArgumentException() {
-            var mock = Mocks.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
+            var mock = Mockery.NewNamedInstanceOfRole<SampleInterfaceImpl>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
             Expect.Never.On(mock).Message("SomeMethod");
@@ -300,7 +300,7 @@ namespace NMock2.AcceptanceTests {
          ExpectedException(typeof (ArgumentException),
              "mock object myMock has a method matching Subtract, but it is not virtual or abstract")]
         public void SettingExpectationOnNonVirtualMethodThrowsArgumentException() {
-            var mock = Mocks.NewNamedInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>("myMock");
+            var mock = Mockery.NewNamedInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>("myMock");
 
             // The target method is non-virtual, so we expect an exception.
             // (we use 'Never' here to avoid an undesired failure in teardown).
@@ -313,7 +313,7 @@ namespace NMock2.AcceptanceTests {
         [Test, Class, ExpectedException(typeof (ArgumentException))]
         [Ignore("We can't identify overloaded non-virtual members by arguments.")]
         public void SettingExpectationOnNonVirtualOverloadOfVirtualMethodThrowsArgumentException() {
-            var mock = Mocks.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
+            var mock = Mockery.NewInstanceOfRole<SampleClassWithVirtualAndNonVirtualMethods>();
 
             // The target method is non-virtual, so we expect an exception.
             Expect.Once.On(mock).Message("Add").With(1, 2, 3).Will(Return.Value(10));

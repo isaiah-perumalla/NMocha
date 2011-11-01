@@ -299,5 +299,9 @@ namespace NMock2 {
         public void SetMockFactoryAs(IMockObjectFactory factory) {
             this.mockObjectFactory = factory;
         }
+
+        public ISequence Sequence(string name) {
+            return new NamedSequence(name);
+        }
     }
 }

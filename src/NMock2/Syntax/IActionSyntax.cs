@@ -22,7 +22,7 @@ namespace NMock2.Syntax {
     /// <summary>
     /// Syntax for defining actions.
     /// </summary>
-    public interface IActionSyntax : IStateSyntax {
+    public interface IActionSyntax : IStateSyntax, ISequenceSyntax {
         /// <summary>
         /// Defines what will happen.
         /// </summary>

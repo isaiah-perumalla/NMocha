@@ -10,7 +10,7 @@ namespace NMock2 {
 
         [SetUp]
         public void Before() {
-            speaker = Mocks.NewInstanceOfRole<ISpeaker>();
+            speaker = Mockery.NewInstanceOfRole<ISpeaker>();
         }
 
         #endregion
@@ -19,7 +19,7 @@ namespace NMock2 {
 
         [Test]
         public void AllowsExpectationsToOccurInCorrectState() {
-            IStates readiness = Mocks.States("readiness");
+            IStates readiness = Mockery.States("readiness");
             Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"));
             Expect.Once.On(speaker).Message("Umm").Then(readiness.Is("ready"));
 
@@ -31,23 +31,23 @@ namespace NMock2 {
         [ExpectedException(typeof (ExpectationException))]
         public void CanConstrainExpectationToOccurOnlyInAGivenState() {
             SkipVerificationForThisTest();
-            IStates readiness = Mocks.States("readiness");
+            IStates readiness = Mockery.States("readiness");
 
             Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"));
             Expect.Once.On(speaker).Message("Umm").Then(readiness.Is("ready"));
 
             speaker.Hello();
             speaker.Umm();
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
         [ExpectedException(typeof (ExpectationException))]
         public void CanConstrainExpectionToAllStateConstraints() {
             SkipVerificationForThisTest();
-            IStates readiness = Mocks.States("readiness");
+            IStates readiness = Mockery.States("readiness");
             readiness.StartAs("ready");
-            IStates fruitiness = Mocks.States("fruitiness");
+            IStates fruitiness = Mockery.States("fruitiness");
 
             Expect.Once.On(speaker).Message("Hello").When(readiness.Is("ready"))
                 .When(fruitiness.Is("apple"));
@@ -56,7 +56,7 @@ namespace NMock2 {
 
         [Test]
         public void CanStartInASpecificState() {
-            IStates readiness = Mocks.States("readiness");
+            IStates readiness = Mockery.States("readiness");
             readiness.StartAs("ready");
             Stub.On(speaker).Message("Hello").When(readiness.Is("ready"));
             speaker.Hello();
@@ -65,9 +65,9 @@ namespace NMock2 {
         [Test]
         public void ErrorMessageShowsCurrentStates() {
             SkipVerificationForThisTest();
-            IStates fruitness = Mocks.States("fruitness");
+            IStates fruitness = Mockery.States("fruitness");
             fruitness.StartAs("apple");
-            IStates vegginess = Mocks.States("veginess");
+            IStates vegginess = Mockery.States("veginess");
             vegginess.StartAs("Carrot");
 
             Stub.On(speaker).Message("Hello").When(fruitness.IsNot("apple"));
@@ -88,7 +88,7 @@ namespace NMock2 {
         [Test]
         public void ErrorReportShowAllSideEffectsOfExpectedInvocation() {
             SkipVerificationForThisTest();
-            IStates fruitness = Mocks.States("fruitness");
+            IStates fruitness = Mockery.States("fruitness");
             fruitness.StartAs("apple");
 
             Expect.On(speaker).Message("Hello").When(fruitness.IsNot("apple"))
@@ -109,7 +109,7 @@ namespace NMock2 {
 
         [Test]
         public void TransitionsStateAfterExceptionIsThrow() {
-            IStates readiness = Mocks.States("readiness");
+            IStates readiness = Mockery.States("readiness");
 
             Expect.Once.On(speaker).Message("Hello").Will(Throw.Exception(new TestException()))
                 .Then(readiness.Is("ready"));

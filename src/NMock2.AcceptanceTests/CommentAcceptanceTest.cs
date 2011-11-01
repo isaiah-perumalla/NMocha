@@ -30,7 +30,7 @@ namespace NMock2.AcceptanceTests {
         public override void Setup() {
             base.Setup();
 
-            mock = Mocks.NewInstanceOfRole<IComment>();
+            mock = Mockery.NewInstanceOfRole<IComment>();
         }
 
         public override void Teardown() {
@@ -46,7 +46,7 @@ namespace NMock2.AcceptanceTests {
         private void VerifyException() {
             try
             {
-                Mocks.VerifyAllExpectationsHaveBeenMet();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
 
                 Assert.Fail("An ExpectationException should occur.");
             }

@@ -36,7 +36,7 @@ namespace NMock2.AcceptanceTests {
             Stub.On(genericSpeaker).Message("Find", typeof (int)).With().Will(Return.Value(iValue));
             Stub.On(genericSpeaker).Message("Find", typeof (string)).Will(Return.Value(sValue));
             Stub.On(genericSpeaker).Message("Find", typeof (ISpeaker), typeof (bool)).Will(
-                Return.Value(Mocks.NewInstanceOfRole<ISpeaker>()));
+                Return.Value(Mockery.NewInstanceOfRole<ISpeaker>()));
 
             var s = genericSpeaker.Find<string>();
             var i = genericSpeaker.Find<int>();
@@ -90,7 +90,7 @@ namespace NMock2.AcceptanceTests {
 
             try
             {
-                Mocks.VerifyAllExpectationsHaveBeenMet();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
 
                 Assert.Fail("An ExpectationException should have been thrown");
             }
@@ -104,52 +104,52 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanMockGenericMethodWithMultipleTypeParametersOnClass() {
-            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithMultipleTypeParameters(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithMultipleTypeParametersOnInterface() {
-            AssertCanMockGenericMethodWithMultipleTypeParameters(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithMultipleTypeParameters(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithSpecifiedTypeParameterOnClass() {
-            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithSpecifiedTypeParameterOnInterface() {
-            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithSpecifiedTypeParameter(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void CanMockGenericMethodWithUnspecifiedTypeParameterOnClass() {
-            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void CanMockGenericMethodWithUnspecifiedTypeParameterOnInterface() {
-            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertCanMockGenericMethodWithUnspecifiedTypeParameter(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void HasCorrectErrorMessageOnNotMetExpectationOnClass() {
-            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertHasCorrectErrorMessageOnNotMetExpectation(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void HasCorrectErrorMessageOnNotMetExpectationOnInterface() {
-            AssertHasCorrectErrorMessageOnNotMetExpectation(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertHasCorrectErrorMessageOnNotMetExpectation(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
 
         [Test, Class]
         public void HasCorrectErrorMessageOnUnexpectedInvocationOnClass() {
-            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewInstanceOfRole<GenericSpeaker>());
+            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mockery.NewInstanceOfRole<GenericSpeaker>());
         }
 
         [Test]
         public void HasCorrectErrorMessageOnUnexpectedInvocationOnInterface() {
-            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mocks.NewInstanceOfRole<IGenericSpeaker>());
+            AssertHasCorrectErrorMessageOnUnexpectedInvocation(Mockery.NewInstanceOfRole<IGenericSpeaker>());
         }
     }
 }

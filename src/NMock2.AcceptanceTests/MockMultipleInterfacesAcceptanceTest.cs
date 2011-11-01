@@ -90,7 +90,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         public void CanMockASingleClassTypeAsAnAdditionalType() {
             var mock =
-                Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
+                Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
                                                                             typeof (SomeBase)));
 
             AssertExpectationsCanBeSet(mock);
@@ -104,7 +104,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         public void CanMockClassAndInterfaces() {
             var mock =
-                Mocks.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof (IEnumerable),
+                Mockery.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof (IEnumerable),
                                                                          typeof (IHaveAllMemberTypes)));
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
@@ -116,7 +116,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CanMockEmptyMarkerInterfaces() {
-            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmAMarkerInterface>());
+            var mock = Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmAMarkerInterface>());
 
             Assert.IsInstanceOfType(typeof (IEnumerable), mock);
             Assert.IsInstanceOfType(typeof (IAmAMarkerInterface), mock);
@@ -124,7 +124,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CanMockInheritedInterfaces() {
-            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmASubclass>());
+            var mock = Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IAmASubclass>());
 
             AssertExpectationsCanBeSet(mock);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -133,7 +133,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CanMockMultipleInterfaces() {
-            var mock = Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var mock = Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing<IHaveAllMemberTypes>());
 
             AssertExpectationsCanBeSet(mock);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -143,8 +143,8 @@ namespace NMock2.AcceptanceTests {
          Ignore(
              "This is an unlikely scenario. Is is mostly harmless and would have negative perf implications if fixed.")]
         public void DuplicateInheritedInterfacesAreIgnored() {
-            var mock = Mocks.NewInstanceOfRole<IAmASubclass>(DefinedAs.Implementing<IHaveAllMemberTypes>());
-            var otherMock = Mocks.NewInstanceOfRole<IAmASubclass>();
+            var mock = Mockery.NewInstanceOfRole<IAmASubclass>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var otherMock = Mockery.NewInstanceOfRole<IAmASubclass>();
 
             Assert.AreEqual(mock.GetType(), otherMock.GetType());
         }
@@ -152,9 +152,9 @@ namespace NMock2.AcceptanceTests {
         [Test]
         public void DuplicateInterfacesAreIgnored() {
             var mock =
-                Mocks.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
+                Mockery.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
                                                                                     typeof (IHaveAllMemberTypes)));
-            var otherMock = Mocks.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing<IHaveAllMemberTypes>());
+            var otherMock = Mockery.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing<IHaveAllMemberTypes>());
 
             AssertExpectationsCanBeSet(mock);
             Assert.AreEqual(mock.GetType(), otherMock.GetType(), "Mocks were not of the same runtime type");
@@ -163,22 +163,22 @@ namespace NMock2.AcceptanceTests {
         [Test, ExpectedException(typeof (ArgumentException))]
         public void MockingAClassAsAnAdditionalTypeWhenAlreadyMockingAClassThrowsArgumentException() {
             var mock =
-                Mocks.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof (IEnumerable), typeof (SomeOtherClass)));
+                Mockery.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof (IEnumerable), typeof (SomeOtherClass)));
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void MockingMultipleClassesAsAdditionalTypesThrowsArgumentException() {
             var mock =
-                Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (SomeBase), typeof (SomeOtherClass)));
+                Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (SomeBase), typeof (SomeOtherClass)));
         }
 
         [Test]
         public void OrderOfInterfacesIsIgnored() {
             var mock =
-                Mocks.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IDisposable),
+                Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IDisposable),
                                                                             typeof (IHaveAllMemberTypes)));
             var otherMock =
-                Mocks.NewInstanceOfRole<IDisposable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
+                Mockery.NewInstanceOfRole<IDisposable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
                                                                             typeof (IEnumerable)));
 
             Assert.AreEqual(mock.GetType(), otherMock.GetType());

@@ -46,14 +46,14 @@ namespace NMock2.AcceptanceTests {
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void EventAdd() {
-            var sugar = (ISyntacticSugar) Mocks.NewNamedInstanceOfRole(typeof (ISyntacticSugar), "sugar");
+            var sugar = (ISyntacticSugar) Mockery.NewNamedInstanceOfRole(typeof (ISyntacticSugar), "sugar");
 
             sugar.Actions += DoAction;
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void IndexerSet() {
-            var sugar = (ISyntacticSugar) Mocks.NewNamedInstanceOfRole(typeof (ISyntacticSugar), "sugar");
+            var sugar = (ISyntacticSugar) Mockery.NewNamedInstanceOfRole(typeof (ISyntacticSugar), "sugar");
 
             Expect.Once.On(sugar).Set[10, "goodbye"].To(12);
 
@@ -62,7 +62,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void UnexpectedInvocation() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Hello").WithNoArguments();
             Expect.Between(2, 4).On(speaker).Message("Ask").With("What color is the fish?")
@@ -77,7 +77,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void VerifyFailure() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Hello").WithNoArguments();
             Expect.Between(2, 4).On(speaker).Message("Ask").With("What color is the fish?")
@@ -88,7 +88,7 @@ namespace NMock2.AcceptanceTests {
             speaker.Hello();
             speaker.Ask("What color is the fish?");
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
     }
 }

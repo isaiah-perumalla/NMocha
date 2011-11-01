@@ -69,7 +69,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanMockMethodWithOutParamOnClass() {
-            AssertCanMockMethodWithOutParam(Mocks.NewInstanceOfRole<OutParamClass>());
+            AssertCanMockMethodWithOutParam(Mockery.NewInstanceOfRole<OutParamClass>());
         }
 
         [Test, CastleOnly]
@@ -77,27 +77,27 @@ namespace NMock2.AcceptanceTests {
             // InterfaceOnlyMockObjectFactory-generated mocks do not currently support this
             // - They expect out params to be explicitly set
 
-            AssertCanMockMethodWithOutParam(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParam(Mockery.NewInstanceOfRole<IGenericOutParamInterface>());
         }
 
         [Test, Class]
         public void CanMockMethodWithOutParamWithDefinedValueOnClass() {
-            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewInstanceOfRole<OutParamClass>());
+            AssertCanMockMethodWithOutParamWithDefinedValue(Mockery.NewInstanceOfRole<OutParamClass>());
         }
 
         [Test]
         public void CanMockMethodWithOutParamWithDefinedValueOnInterface() {
-            AssertCanMockMethodWithOutParamWithDefinedValue(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParamWithDefinedValue(Mockery.NewInstanceOfRole<IGenericOutParamInterface>());
         }
 
         [Test, Class]
         public void CanMockMethodWithOutParamWithIsAnythingOnClass() {
-            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewInstanceOfRole<OutParamClass>());
+            AssertCanMockMethodWithOutParamWithIsAnything(Mockery.NewInstanceOfRole<OutParamClass>());
         }
 
         [Test]
         public void CanMockMethodWithOutParamWithIsAnythingOnInterface() {
-            AssertCanMockMethodWithOutParamWithIsAnything(Mocks.NewInstanceOfRole<IGenericOutParamInterface>());
+            AssertCanMockMethodWithOutParamWithIsAnything(Mockery.NewInstanceOfRole<IGenericOutParamInterface>());
         }
     }
 }

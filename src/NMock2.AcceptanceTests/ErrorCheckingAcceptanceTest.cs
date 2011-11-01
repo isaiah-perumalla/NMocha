@@ -57,42 +57,42 @@ namespace NMock2.AcceptanceTests {
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectAMethodThatDoesNotExistInTheMockedType() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("NonexistentMethod");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectAMethodWithAnInvalidName() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Invalid Name!");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectGetOfAnInvalidProperty() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).GetProperty("NonexistentProperty");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectGetOfIndexerIfNoIndexerInMockedType() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Get["arg"].Will(Return.Value("something"));
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectSetOfAnInvalidProperty() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).SetProperty("NonexistentProperty").To("something");
         }
 
         [Test, ExpectedException(typeof (ArgumentException))]
         public void CannotExpectSetOfIndexerIfNoIndexerInMockedType() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Set["arg"].To("something");
         }
@@ -101,7 +101,7 @@ namespace NMock2.AcceptanceTests {
         [Test, ExpectedException(typeof (InvalidOperationException),
             "You have to set the return value for method 'IsPrime' on 'IMyHelloWorld' mock.")]
         public void CorrectMessageWhenReturnValueNotSet() {
-            var myHelloWorld = (IMyHelloWorld) Mocks.NewInstanceOfRole(typeof (IMyHelloWorld));
+            var myHelloWorld = (IMyHelloWorld) Mockery.NewInstanceOfRole(typeof (IMyHelloWorld));
 
             Expect.Once.On(myHelloWorld).Message("IsPrime");
                 //.Will(Return.Value(true));//, new SetNamedParameterAction("number", 3)); //.With();
@@ -114,12 +114,12 @@ namespace NMock2.AcceptanceTests {
         [ExpectedException(typeof (ArgumentException),
             "Interfaces must not contain a declaration for ToString().")]
         public void MockingInterfaceWithToStringMethodThrowsException() {
-            Mocks.NewInstanceOfRole<InterfaceWithToStringMethod>();
+            Mockery.NewInstanceOfRole<InterfaceWithToStringMethod>();
         }
 
         [Test]
         public void NullReturnValue() {
-            var speaker = Mocks.NewInstanceOfRole<ISpeaker>();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
 
             Expect.Once.On(speaker).Message("Ask").Will(Return.Value(null));
 
@@ -132,7 +132,7 @@ namespace NMock2.AcceptanceTests {
         [ExpectedException(typeof (ExpectationException),
             "unexpected invocation of eventProvider.AnEvent += <System.EventHandler>\r\nExpected:\r\n")]
         public void UnexpectedEventRegistrationHasUnderstandableMessage() {
-            var eventProvider = Mocks.NewInstanceOfRole<IEventProvider>();
+            var eventProvider = Mockery.NewInstanceOfRole<IEventProvider>();
 
             eventProvider.AnEvent += delegate { };
         }
@@ -142,7 +142,7 @@ namespace NMock2.AcceptanceTests {
             "unexpected invocation of eventProvider.CustomEvent += <System.EventHandler`1[NMock2.CustomEventArgs]>\r\nExpected:\r\n"
             )]
         public void UnexpectedEventRegistrationHasUnderstandableMessageWithCustomEventArgs() {
-            var eventProvider = Mocks.NewInstanceOfRole<IEventProvider>();
+            var eventProvider = Mockery.NewInstanceOfRole<IEventProvider>();
 
             eventProvider.CustomEvent += delegate { };
         }
@@ -150,7 +150,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         [ExpectedException(typeof (ArgumentException))]
         public void UnnecessaryReturnValue() {
-            var speaker = Mocks.NewInstanceOfRole<ISpeaker>();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
 
             Expect.Once.On(speaker).Message("Hello").Will(Return.Value("What?"));
 
@@ -159,8 +159,8 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void WrongReturnType() {
-            var o = Mocks.NewInstanceOfRole<IOperator>();
-            var b = Mocks.NewInstanceOfRole<IBase>();
+            var o = Mockery.NewInstanceOfRole<IOperator>();
+            var b = Mockery.NewInstanceOfRole<IBase>();
 
             Expect.Once.On(o).Message("Get").Will(Return.Value(b));
 

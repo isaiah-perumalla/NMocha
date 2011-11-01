@@ -31,20 +31,20 @@ namespace NMock2.AcceptanceTests {
         public void FailsTestIfMethodExpectedAtLeastNTimesButCalledLessThanNTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtLeast(N).On(speaker).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N - 1; i++) speaker.Hello();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void FailsTestIfMethodExpectedAtMostNTimesAndCalledMoreThanNTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtMost(N).On(speaker).Message("Hello").WithNoArguments();
 
@@ -55,7 +55,7 @@ namespace NMock2.AcceptanceTests {
         public void FailsTestIfMethodExpectedBetweenNAndMTimesAndCalledMoreThanMTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Between(N, M).On(speaker).Message("Hello").WithNoArguments();
 
@@ -67,20 +67,20 @@ namespace NMock2.AcceptanceTests {
         public void FailsTestIfMethodExpectedBetweenNAndMTimesButCalledLessThanNTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Between(N, M).On(speaker).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N - 1; i++) speaker.Hello();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void FailsTestIfMethodExpectedOnceButCalledTwice() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Hello").WithNoArguments();
 
@@ -92,18 +92,18 @@ namespace NMock2.AcceptanceTests {
         public void FailsTestIfMethodExpectedOnceButNotCalled() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Hello").WithNoArguments();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void FailsTestIfMethodNeverExpectedIsActuallyCalled() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Never.On(speaker).Message("Hello").WithNoArguments();
 
@@ -114,7 +114,7 @@ namespace NMock2.AcceptanceTests {
         public void FailsTestIfMethodNeverExpectedIsCalled() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Never.On(speaker).Message("Hello").WithNoArguments();
 
@@ -124,7 +124,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         [Ignore("Feature for future release: mock hashcode.")]
         public void MockHash() {
-            var speaker = Mocks.NewInstanceOfRole<ISpeaker>();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
 
             int i = speaker.GetHashCode();
 
@@ -133,7 +133,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void MockToString() {
-            var speaker = Mocks.NewNamedInstanceOfRole<ISpeaker>("text");
+            var speaker = Mockery.NewNamedInstanceOfRole<ISpeaker>("text");
 
             string s = speaker.ToString();
 
@@ -142,7 +142,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtLeast(N).On(speaker).Message("Hello").WithNoArguments();
 
@@ -151,7 +151,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtLeast(N).On(speaker).Message("Hello").WithNoArguments();
 
@@ -160,7 +160,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedAtMostNTimesAndCalledLessThanNTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtMost(N).On(speaker).Message("Hello").WithNoArguments();
 
@@ -169,7 +169,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedAtMostNTimesAndCalledNTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.AtMost(N).On(speaker).Message("Hello").WithNoArguments();
 
@@ -178,7 +178,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Between(N, M).On(speaker).Message("Hello").WithNoArguments();
 
@@ -187,7 +187,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodExpectedOnceAndCalled() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Once.On(speaker).Message("Hello").WithNoArguments();
 
@@ -196,14 +196,14 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void PassesTestIfMethodNeverExpectedIsNeverCalled() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.Never.On(speaker).Message("Hello").WithNoArguments();
         }
 
         [Test]
         public void PassesTestIfMethodUsesDefaultExpectation() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Expect.On(speaker).Message("Hello").WithNoArguments();
 
@@ -214,29 +214,29 @@ namespace NMock2.AcceptanceTests {
         public void TestShouldFailIfExpectedExactlyNTimesAndCalledLessThanNTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
             Expect.Exactly(N).On(speaker).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N - 1; i++) speaker.Hello();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void TestShouldFailIfExpectedExactlyNTimesAndCalledMoreThanNTimes() {
             SkipVerificationForThisTest();
 
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
             Expect.Exactly(N).On(speaker).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N + 1; i++) speaker.Hello();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
         public void TestShouldPassIfExpectedExactlyNTimesAndCalledNTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
             Expect.Exactly(N).On(speaker).Message("Hello").WithNoArguments();
 
             for (int i = 0; i < N; i++) speaker.Hello();

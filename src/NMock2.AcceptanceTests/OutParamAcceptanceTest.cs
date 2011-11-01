@@ -57,27 +57,27 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanMockInAndOutParamOnClassMethod() {
-            AssertCanMockInAndOutParamOnMethod(Mocks.NewInstanceOfRole<Adder>());
+            AssertCanMockInAndOutParamOnMethod(Mockery.NewInstanceOfRole<Adder>());
         }
 
         [Test]
         public void CanMockInAndOutParamOnInterfaceMethod() {
-            AssertCanMockInAndOutParamOnMethod(Mocks.NewInstanceOfRole<IAdder>());
+            AssertCanMockInAndOutParamOnMethod(Mockery.NewInstanceOfRole<IAdder>());
         }
 
         [Test, Class]
         public void CanMockInAndOutParamWithReturnValueOnClassMethod() {
-            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewInstanceOfRole<Adder>());
+            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mockery.NewInstanceOfRole<Adder>());
         }
 
         [Test]
         public void CanMockInAndOutParamWithReturnValueOnInterfaceMethod() {
-            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mocks.NewInstanceOfRole<IAdder>());
+            AssertCanMockInAndOutParamWithReturnValueOnMethod(Mockery.NewInstanceOfRole<IAdder>());
         }
 
         [Test]
         public void CanMockOutParameterUsingShortcutOnReturnClass() {
-            var adder = Mocks.NewInstanceOfRole<IAdder>();
+            var adder = Mockery.NewInstanceOfRole<IAdder>();
 
             Expect.Once.On(adder).Message("Add").With(3, 5, Is.Out).Will(Return.OutValue("c", 8));
 

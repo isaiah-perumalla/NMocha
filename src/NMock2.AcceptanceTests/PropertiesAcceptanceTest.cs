@@ -101,44 +101,44 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanExpectPropertyGetterOnClass() {
-            AssertCanExpectPropertyGetter(Mocks.NewInstanceOfRole<PersonRecord>());
+            AssertCanExpectPropertyGetter(Mockery.NewInstanceOfRole<PersonRecord>());
         }
 
         [Test]
         public void CanExpectPropertyGetterOnInterface() {
-            AssertCanExpectPropertyGetter(Mocks.NewInstanceOfRole<IPersonRecord>());
+            AssertCanExpectPropertyGetter(Mockery.NewInstanceOfRole<IPersonRecord>());
         }
 
         [Test, Class]
         public void CanExpectPropertySetterOnClass() {
-            AssertCanExpectPropertySetter(Mocks.NewInstanceOfRole<PersonRecord>());
+            AssertCanExpectPropertySetter(Mockery.NewInstanceOfRole<PersonRecord>());
         }
 
         [Test]
         public void CanExpectPropertySetterOnInterface() {
-            AssertCanExpectPropertySetter(Mocks.NewInstanceOfRole<IPersonRecord>());
+            AssertCanExpectPropertySetter(Mockery.NewInstanceOfRole<IPersonRecord>());
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfPropertyGetterNotHiddenMethodOnClass() {
-            AssertErrorMessagesContainNameOfPropertyGetterNotHiddenMethod(Mocks.NewNamedInstanceOfRole<PersonRecord>("p"));
+            AssertErrorMessagesContainNameOfPropertyGetterNotHiddenMethod(Mockery.NewNamedInstanceOfRole<PersonRecord>("p"));
         }
 
         [Test]
         public void ErrorMessagesContainNameOfPropertyGetterNotHiddenMethodOnInterface() {
             AssertErrorMessagesContainNameOfPropertyGetterNotHiddenMethod(
-                Mocks.NewNamedInstanceOfRole<IPersonRecord>("p"));
+                Mockery.NewNamedInstanceOfRole<IPersonRecord>("p"));
         }
 
         [Test, Class]
         public void ErrorMessagesContainNameOfPropertySetterNotHiddenMethodOnClass() {
-            AssertErrorMessagesContainNameOfPropertySetterNotHiddenMethod(Mocks.NewNamedInstanceOfRole<PersonRecord>("p"));
+            AssertErrorMessagesContainNameOfPropertySetterNotHiddenMethod(Mockery.NewNamedInstanceOfRole<PersonRecord>("p"));
         }
 
         [Test]
         public void ErrorMessagesContainNameOfPropertySetterNotHiddenMethodOnInterface() {
             AssertErrorMessagesContainNameOfPropertySetterNotHiddenMethod(
-                Mocks.NewNamedInstanceOfRole<IPersonRecord>("p"));
+                Mockery.NewNamedInstanceOfRole<IPersonRecord>("p"));
         }
     }
 }

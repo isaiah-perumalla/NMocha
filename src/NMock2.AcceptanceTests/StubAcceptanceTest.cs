@@ -27,7 +27,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void StubsCanBeCalledAnyNumberOfTimes() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Stub.On(speaker).Message("Hello").WithAnyArguments();
 
@@ -36,14 +36,14 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void StubsDoNotHaveToBeCalled() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Stub.On(speaker).Message("Hello").WithAnyArguments();
         }
 
         [Test]
         public void StubsMatchArgumentsAndPerformActionsJustLikeAnExpectation() {
-            var speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            var speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
 
             Stub.On(speaker).Message("Ask").With("Name").Will(Return.Value("Bob"));
             Stub.On(speaker).Message("Ask").With("Age").Will(Return.Value("30"));

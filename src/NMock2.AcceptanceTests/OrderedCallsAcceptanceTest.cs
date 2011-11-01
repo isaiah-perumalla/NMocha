@@ -30,7 +30,7 @@ namespace NMock2.AcceptanceTests {
         public void SetUp() {
             base.Setup();
 
-            speaker = (ISpeaker) Mocks.NewInstanceOfRole(typeof (ISpeaker));
+            speaker = (ISpeaker) Mockery.NewInstanceOfRole(typeof (ISpeaker));
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void AllowsCallsIfCalledInSameOrderAsExpectedWithinAnInOrderBlock() {
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(speaker).Message("Hello");
                 Expect.Once.On(speaker).Message("Goodbye");
@@ -54,7 +54,7 @@ namespace NMock2.AcceptanceTests {
         public void CallsInOrderedBlocksThatAreNotMatchedFailVerification() {
             SkipVerificationForThisTest();
 
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(speaker).Message("Hello");
                 Expect.Once.On(speaker).Message("Goodbye");
@@ -62,12 +62,12 @@ namespace NMock2.AcceptanceTests {
 
             speaker.Hello();
 
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
         public void CallsWithinAnInOrderedBlockCanBeExpectedMoreThanOnce() {
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(speaker).Message("Hello");
                 Expect.AtLeastOnce.On(speaker).Message("Err");
@@ -82,10 +82,10 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CanExpectUnorderedCallsWithinAnOrderedSequence() {
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(speaker).Message("Hello");
-                using (Mocks.Unordered)
+                using (Mockery.Unordered)
                 {
                     Expect.Once.On(speaker).Message("Umm");
                     Expect.Once.On(speaker).Message("Err");
@@ -109,48 +109,90 @@ namespace NMock2.AcceptanceTests {
         }
 
         [Test, ExpectedException(typeof (ExpectationException))]
-        public void EnforcesTheOrderOfCallsWithinAnInOrderBlock() {
+        public void EnforcesTheOrderOfCallsWithinASequence() {
+            
             SkipVerificationForThisTest();
-
-            using (Mocks.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
+            var seq = Mockery.Sequence("s");
+            Expect.Once.On(speaker).Message("Hello").InSequence(seq);
+            Expect.Once.On(speaker).Message("Goodbye").InSequence(seq);
+            
 
             speaker.Goodbye();
             speaker.Hello();
+
+
         }
 
-        [Test, ExpectedException(typeof (ExpectationException))]
-        public void UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations() {
-            SkipVerificationForThisTest();
+        [Test]
+        public void AllowsExpectationsInSpecifiedSeq() {
 
-            using (Mocks.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                using (Mocks.Unordered)
-                {
-                    Expect.Once.On(speaker).Message("Umm");
-                    Expect.Once.On(speaker).Message("Err");
-                }
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
+            var seq = Mockery.Sequence("s");
+            Expect.Once.On(speaker).Message("Hello").InSequence(seq);
+            Expect.Once.On(speaker).Message("Goodbye").InSequence(seq);
+
 
             speaker.Hello();
+            speaker.Goodbye();
+        }
+
+        [Test]
+        public void ExpectationIncludesSequenceInTheDescription() {
+
+            SkipVerificationForThisTest();
+            var seq = Mockery.Sequence("s");
+            Expect.Once.On(speaker).Message("Hello").InSequence(seq);
+            Expect.Once.On(speaker).Message("Goodbye").InSequence(seq);
+
+            try
+            {
+                speaker.Goodbye();
+                Assert.Fail("Should have thrown expectation exception");
+            }
+            catch(ExpectationException e)
+            {
+                Assert.That(e.Message.Contains("in sequence s "), string.Format("error message was {0}", e.Message));
+            } 
+
+
+        }
+
+        [Test]
+        public void ExpectationCanBelongToMoreThanOneSequence() {
+            SkipVerificationForThisTest();
+            var seqA = Mockery.Sequence("seqA");
+            var seqB = Mockery.Sequence("seqB");
+
+                Expect.Once.On(speaker).Message("Hello").InSequence(seqA);
+                Expect.Once.On(speaker).Message("Umm").InSequence(seqB);
+                Expect.Once.On(speaker).Message("Err");
+                                                        
+                Expect.Once.On(speaker).Message("Ask").With("name please ?")
+                                                       .InSequence(seqA)
+                                                       .InSequence(seqB);
+               
             speaker.Err();
-            speaker.Goodbye();
-            speaker.Umm();
-        }
+            speaker.Hello();
+            try
+            {
+                speaker.Ask("name please ?");
+                Assert.Fail("Expectation Error should have been thrown");
+            }
+            
+            catch(ExpectationException e)
+            {
+                Assert.That(e.Message.Contains("in sequence seqA "), string.Format("error message was {0}", e.Message));
+                Assert.That(e.Message.Contains("in sequence seqB "), string.Format("error message was {0}", e.Message));
+            }
+          }
 
         [Test, ExpectedException(typeof (ExpectationException))]
         public void UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations() {
             SkipVerificationForThisTest();
 
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
                 Expect.Once.On(speaker).Message("Hello");
-                using (Mocks.Unordered)
+                using (Mockery.Unordered)
                 {
                     Expect.Once.On(speaker).Message("Umm");
                     Expect.Once.On(speaker).Message("Err");

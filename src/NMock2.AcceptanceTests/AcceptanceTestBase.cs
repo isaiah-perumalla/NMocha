@@ -24,25 +24,25 @@ namespace NMock2.AcceptanceTests {
     public abstract class AcceptanceTestBase {
         private bool doVerificationForCurrentTest = true;
         private bool doVerificationForEveryTestInFixture = true;
-        private Mockery mocks;
+        private Mockery mockery;
 
         /// <summary>
         /// A default Mockery instance created for each test.
         /// </summary>
-        protected Mockery Mocks {
-            get { return mocks; }
+        protected Mockery Mockery {
+            get { return mockery; }
         }
 
         [SetUp]
         public virtual void Setup() {
-            mocks = new Mockery();
+            mockery = new Mockery();
         }
 
         [TearDown]
         public virtual void Teardown() {
             if (doVerificationForCurrentTest && doVerificationForEveryTestInFixture)
             {
-                mocks.VerifyAllExpectationsHaveBeenMet();
+                mockery.VerifyAllExpectationsHaveBeenMet();
             }
 
             doVerificationForCurrentTest = true;

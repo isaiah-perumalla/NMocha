@@ -39,5 +39,7 @@ namespace NMock2.Syntax {
         /// </summary>
         /// <returns>Matcher syntax.</returns>
         IMatchSyntax WithAnyArguments();
+
+       
     }
 }

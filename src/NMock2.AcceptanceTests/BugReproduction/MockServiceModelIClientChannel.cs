@@ -26,7 +26,7 @@ namespace NMock2.AcceptanceTests {
     public class MockServiceModelIClientChannelTest : AcceptanceTestBase {
         [Test]
         public void MockServiceModelIClientChannel() {
-            var c = Mocks.NewInstanceOfRole<IClientChannel>();
+            var c = Mockery.NewInstanceOfRole<IClientChannel>();
 
             Expect.On(c).Message("Open");
             c.Open();

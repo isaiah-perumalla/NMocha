@@ -28,9 +28,9 @@ namespace NMock2.AcceptanceTests {
     public class OrderedWithoutExpectations_1912662 : AcceptanceTestBase {
         [Test]
         public void TestEmptyOrdered() {
-            var testMock = Mocks.NewInstanceOfRole<ITest>();
+            var testMock = Mockery.NewInstanceOfRole<ITest>();
 
-            using (Mocks.Ordered)
+            using (Mockery.Ordered)
             {
             }
         }

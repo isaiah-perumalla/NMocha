@@ -44,11 +44,11 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests() {
-            var mockWithUninvokedExpectations = (IMockedType) Mocks.NewInstanceOfRole(typeof (IMockedType));
+            var mockWithUninvokedExpectations = (IMockedType) Mockery.NewInstanceOfRole(typeof (IMockedType));
             Expect.Once.On(mockWithUninvokedExpectations).Message("Method").WithNoArguments();
             try
             {
-                Mocks.VerifyAllExpectationsHaveBeenMet();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
                 Assert.Fail("Expected ExpectationException to be thrown");
             }
             catch (ExpectationException expected)
@@ -56,16 +56,16 @@ namespace NMock2.AcceptanceTests {
                 Assert.IsTrue(expected.Message.IndexOf("not all expected invocations were performed") != -1);
             }
 
-            var mockWithInvokedExpectations = (IMockedType) Mocks.NewInstanceOfRole(typeof (IMockedType));
+            var mockWithInvokedExpectations = (IMockedType) Mockery.NewInstanceOfRole(typeof (IMockedType));
             Expect.Once.On(mockWithInvokedExpectations).Message("Method").WithNoArguments();
             mockWithInvokedExpectations.Method();
-            Mocks.VerifyAllExpectationsHaveBeenMet();
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test, Class]
         public void CanMakeMultipleCallsToImplementingWhenCreatingMock() {
             var mock =
-                Mocks.NewInstanceOfRole<IMockedType>(DefinedAs.Implementing<IEnumerable>().Implementing<IDisposable>());
+                Mockery.NewInstanceOfRole<IMockedType>(DefinedAs.Implementing<IEnumerable>().Implementing<IDisposable>());
 
             Assert.IsInstanceOfType(typeof (IMockedType), mock);
             Assert.IsInstanceOfType(typeof (IEnumerable), mock);
@@ -88,7 +88,7 @@ namespace NMock2.AcceptanceTests {
         [Test]
         public void MockObjectsMayBePlacedIntoServiceContainers() {
             var container = new ServiceContainer();
-            var mockedType = Mocks.NewInstanceOfRole(typeof (IMockedType)) as IMockedType;
+            var mockedType = Mockery.NewInstanceOfRole(typeof (IMockedType)) as IMockedType;
 
             container.AddService(typeof (IMockedType), mockedType);
 
@@ -97,12 +97,12 @@ namespace NMock2.AcceptanceTests {
 
         [Test, ExpectedException(typeof (InvalidOperationException))]
         public void SpecifyingConstructorArgsTwiceWhenCreatingMockThrowsInvalidOperationException() {
-            Mocks.NewInstanceOfRole<SomeBaseClass>(DefinedAs.WithArgs("ABC").WithArgs("DEF"));
+            Mockery.NewInstanceOfRole<SomeBaseClass>(DefinedAs.WithArgs("ABC").WithArgs("DEF"));
         }
 
         [Test, ExpectedException(typeof (InvalidOperationException))]
         public void SpecifyingNameTwiceWhenCreatingMockThrowsInvalidOperationException() {
-            Mocks.NewInstanceOfRole<IMockedType>(DefinedAs.Named("A").Named("B"));
+            Mockery.NewInstanceOfRole<IMockedType>(DefinedAs.Named("A").Named("B"));
         }
     }
 

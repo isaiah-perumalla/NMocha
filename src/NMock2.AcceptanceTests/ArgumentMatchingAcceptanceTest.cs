@@ -30,7 +30,7 @@ namespace NMock2.AcceptanceTests {
 
         [Test]
         public void CanMixMatcherAndNonMatcherExpectedArguments() {
-            var demanding = (IDemanding) Mocks.NewInstanceOfRole(typeof (IDemanding));
+            var demanding = (IDemanding) Mockery.NewInstanceOfRole(typeof (IDemanding));
 
             Expect.Once.On(demanding).Message("Take").With(1, 2, 3);
             Expect.Once.On(demanding).Message("Take").With(Is.EqualTo(10), Is.AtLeast(11), Is.AtMost(12));
@@ -46,7 +46,7 @@ namespace NMock2.AcceptanceTests {
         /// </summary>
         [Test]
         public void GenericMatcher() {
-            var demanding = (IDemanding) Mocks.NewInstanceOfRole(typeof (IDemanding));
+            var demanding = (IDemanding) Mockery.NewInstanceOfRole(typeof (IDemanding));
 
             Expect.Once.On(demanding).Message("Take").With(
                 new GenericMatcher<int>(parameter => parameter == 10),

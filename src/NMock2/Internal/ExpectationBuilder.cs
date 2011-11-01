@@ -437,5 +437,11 @@ namespace NMock2.Internal {
         }
 
         #endregion
+
+        public ISequenceSyntax InSequence(ISequence sequence) {
+            sequence.ConstrainAsNextInSeq(expectation);
+            return this;
         }
+        
+    }
 }

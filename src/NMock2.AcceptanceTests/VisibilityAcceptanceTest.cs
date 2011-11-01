@@ -78,42 +78,42 @@ namespace NMock2.AcceptanceTests {
 
         [Test, Class]
         public void CanMockClassWithInternalMembers() {
-            var mock = Mocks.NewInstanceOfRole<SomeClassWithInternalMembers>();
+            var mock = Mockery.NewInstanceOfRole<SomeClassWithInternalMembers>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
 
         [Test, Class]
         public void CanMockClassWithProtectedInternalMembers() {
-            var mock = Mocks.NewInstanceOfRole<SomeClassWithProtectedInternalMembers>();
+            var mock = Mockery.NewInstanceOfRole<SomeClassWithProtectedInternalMembers>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
 
         [Test, Class]
         public void CanMockInternalClass() {
-            var mock = Mocks.NewInstanceOfRole<SomeInternalClass>();
+            var mock = Mockery.NewInstanceOfRole<SomeInternalClass>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
 
         [Test, CastleOnly]
         public void CanMockInternalInterface() {
-            var mock = Mocks.NewInstanceOfRole<ISomeInternalInterface>();
+            var mock = Mockery.NewInstanceOfRole<ISomeInternalInterface>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
 
         [Test, Class]
         public void CanMockProtectedInternalClass() {
-            var mock = Mocks.NewInstanceOfRole<SomeProtectedInternalClass>();
+            var mock = Mockery.NewInstanceOfRole<SomeProtectedInternalClass>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
 
         [Test, CastleOnly]
         public void CanMockProtectedInternalInterface() {
-            var mock = Mocks.NewInstanceOfRole<ISomeProtectedInternalInterface>();
+            var mock = Mockery.NewInstanceOfRole<ISomeProtectedInternalInterface>();
             Expect.Once.On(mock).Message("DoWork");
             mock.DoWork();
         }
