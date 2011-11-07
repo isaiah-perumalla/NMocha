@@ -45,10 +45,7 @@ namespace NMock2 {
 
         private readonly List<IStates> stateMachines = new List<IStates>();
 
- 
-        private int depth;
 
-       
         private IExpectationOrdering expectations;
 
       
@@ -181,27 +178,11 @@ namespace NMock2 {
 
   
         private void ClearExpectations() {
-            depth = 1;
             expectations = new UnorderedExpectations();
             topOrdering = expectations;
         }
 
-     
-        private Popper Push(IExpectationOrdering newOrdering) {
-            topOrdering.AddExpectation(newOrdering);
-            IExpectationOrdering oldOrdering = topOrdering;
-            topOrdering = newOrdering;
-            depth++;
-            return new Popper(this, oldOrdering);
-        }
 
-
-        private void Pop(IExpectationOrdering oldOrdering) {
-            topOrdering = oldOrdering;
-            depth--;
-        }
-
-     
         private void FailUnmetExpectations() {
             var writer = new StringDescriptionWriter();
             writer.AppendLine("not all expected invocations were performed");
@@ -252,29 +233,6 @@ namespace NMock2 {
         }
 
         #region Nested type: Popper
-
-        private class Popper : IDisposable {
-           
-            private readonly Mockery mockery;
-
-     
-            private readonly IExpectationOrdering previous;
-
-           
-            public Popper(Mockery mockery, IExpectationOrdering previous) {
-                this.previous = previous;
-                this.mockery = mockery;
-            }
-
-            #region IDisposable Members
-
-        
-            public void Dispose() {
-                mockery.Pop(previous);
-            }
-
-            #endregion
-        }
 
         #endregion
 
