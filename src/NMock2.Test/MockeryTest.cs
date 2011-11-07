@@ -20,7 +20,6 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using NMock2.Internal;
@@ -380,9 +379,6 @@ namespace NMock2.Test {
 
         public void DescribeUnmetExpectationsTo(IDescription writer) {
             writer.AppendText(Description);
-        }
-
-        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {
         }
 
         public bool IsActive { get; set; }

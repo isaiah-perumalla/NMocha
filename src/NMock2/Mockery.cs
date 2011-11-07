@@ -46,7 +46,7 @@ namespace NMock2 {
         private readonly List<IStates> stateMachines = new List<IStates>();
 
 
-        private IExpectationOrdering dispatcher;
+        private InvocationDispatcher dispatcher;
 
       
         private ResolveTypeDelegate resolveTypeDelegate;
@@ -130,7 +130,7 @@ namespace NMock2 {
         /// </summary>
         /// <param name="expectation">The expectation.</param>
         private void AddExpectation(IExpectation expectation) {
-            dispatcher.AddExpectation(expectation);
+            dispatcher.Add(expectation);
         }
 
  
@@ -148,23 +148,6 @@ namespace NMock2 {
             {
                 FailUnexpectedInvocation(invocation);
             }
-        }
-
-       
-        private static IMockObject CastToMockObject(object mock) {
-            if (mock == null)
-            {
-                throw new ArgumentNullException("mock", "mock must not be null");
-            }
-
-            var mockObject = mock as IMockObject;
-
-            if (mockObject != null)
-            {
-                return mockObject;
-            }
-
-            throw new ArgumentException("argument must be a mock", "mock");
         }
 
 

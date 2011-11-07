@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using NMock2.Monitoring;
 
 namespace NMock2.Internal {
-    public class InvocationDispatcher : IExpectationOrdering {
+    public class InvocationDispatcher : IExpectationCollector {
         /// <summary>
         /// Stores the calling depth for the document writer output.
         /// </summary>
@@ -149,21 +149,8 @@ namespace NMock2.Internal {
             }
         }
 
-        /// <summary>
-        /// Adds all expectations to <paramref name="result"/> that are associated to <paramref name="mock"/>.
-        /// </summary>
-        /// <param name="mock">The mock for which expectations are queried.</param>
-        /// <param name="result">The result to add matching expectations to.</param>
-        public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {
-            expectations.ForEach(expectation => expectation.QueryExpectationsBelongingTo(mock, result));
-        }
-
-        public void AddExpectation(IExpectation expectation) {
+        public void Add(IExpectation expectation) {
             expectations.Add(expectation);
-        }
-
-        public void RemoveExpectation(IExpectation expectation) {
-            expectations.Remove(expectation);
         }
 
         #endregion

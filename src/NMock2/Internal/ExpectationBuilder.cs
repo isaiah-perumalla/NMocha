@@ -25,7 +25,7 @@ using NMock2.Syntax;
 namespace NMock2.Internal {
     public class ExpectationBuilder :
         IReceiverSyntax, IMethodSyntax, IArgumentSyntax {
-        private readonly BuildableExpectation expectation;
+        private readonly InvocationExpectation expectation;
         private IMockObject mockObject;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace NMock2.Internal {
         /// <param name="requiredCountMatcher">The required count matcher.</param>
         /// <param name="acceptedCountMatcher">The accepted count matcher.</param>
         public ExpectationBuilder(string description, Matcher requiredCountMatcher, Matcher acceptedCountMatcher) {
-            expectation = new BuildableExpectation(description, requiredCountMatcher, acceptedCountMatcher);
+            expectation = new InvocationExpectation(description, requiredCountMatcher, acceptedCountMatcher);
         }
 
         #region IArgumentSyntax Members
@@ -332,14 +332,14 @@ namespace NMock2.Internal {
             /// </summary>
             private readonly ExpectationBuilder builder;
 
-            private readonly BuildableExpectation expectation;
+            private readonly InvocationExpectation expectation;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="IndexGetterBuilder"/> class.
             /// </summary>
             /// <param name="expectation">The expectation.</param>
             /// <param name="builder">The builder.</param>
-            public IndexGetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder) {
+            public IndexGetterBuilder(InvocationExpectation expectation, ExpectationBuilder builder) {
                 this.expectation = expectation;
                 this.builder = builder;
             }
@@ -362,7 +362,7 @@ namespace NMock2.Internal {
 
         private class IndexSetterBuilder : ISetIndexerSyntax, IValueSyntax {
             private readonly ExpectationBuilder builder;
-            private readonly BuildableExpectation expectation;
+            private readonly InvocationExpectation expectation;
             private Matcher[] matchers;
 
             /// <summary>
@@ -370,7 +370,7 @@ namespace NMock2.Internal {
             /// </summary>
             /// <param name="expectation">The expectation.</param>
             /// <param name="builder">The builder.</param>
-            public IndexSetterBuilder(BuildableExpectation expectation, ExpectationBuilder builder) {
+            public IndexSetterBuilder(InvocationExpectation expectation, ExpectationBuilder builder) {
                 this.expectation = expectation;
                 this.builder = builder;
             }

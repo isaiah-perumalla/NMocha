@@ -16,9 +16,7 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using System.Collections.Generic;
 using System.IO;
-using NMock2.Internal;
 using NMock2.Monitoring;
 
 namespace NMock2 {
@@ -71,12 +69,5 @@ namespace NMock2 {
         /// </summary>
         /// <param name="writer">The writer.</param>
         void DescribeUnmetExpectationsTo(IDescription writer);
-
-        /// <summary>
-        /// Adds all expectations to <paramref name="result"/> that are associated to <paramref name="mock"/>.
-        /// </summary>
-        /// <param name="mock">The mock for which expectations are queried.</param>
-        /// <param name="result">The result to add matching expectations to.</param>
-        void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result);
     }
 }

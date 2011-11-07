@@ -41,7 +41,7 @@ namespace NMock2.Internal.Test {
         private Invocation invocation;
         private IMockObject receiver;
 
-        private static BuildableExpectation BuildExpectation(
+        private static InvocationExpectation BuildExpectation(
             bool matchRequiredCallCount,
             bool matchMatchingCallCount,
             IMockObject receiver,
@@ -64,7 +64,7 @@ namespace NMock2.Internal.Test {
                 extraMatchers);
         }
 
-        private static BuildableExpectation BuildExpectation(
+        private static InvocationExpectation BuildExpectation(
             string expectationDescription,
             string matchRequiredCallCountDescription,
             string matchMatchingCallCountDescription,
@@ -90,7 +90,7 @@ namespace NMock2.Internal.Test {
                 extraMatchers);
         }
 
-        private static BuildableExpectation BuildExpectation(
+        private static InvocationExpectation BuildExpectation(
             string description,
             Matcher requiredCallCountMatcher,
             Matcher matchingCallCountMatcher,
@@ -99,7 +99,7 @@ namespace NMock2.Internal.Test {
             Matcher argumentsMatcher,
             params Matcher[] extraMatchers) {
             var e =
-                new BuildableExpectation(description, requiredCallCountMatcher, matchingCallCountMatcher);
+                new InvocationExpectation(description, requiredCallCountMatcher, matchingCallCountMatcher);
             e.ArgumentsMatcher = argumentsMatcher;
             e.MethodMatcher = methodMatcher;
             e.Receiver = receiver;
@@ -123,7 +123,7 @@ namespace NMock2.Internal.Test {
             Assert.IsFalse(expectation.IsActive, message);
         }
 
-        private void AssertDescriptionIsEqual(BuildableExpectation expectation, string expected) {
+        private void AssertDescriptionIsEqual(InvocationExpectation expectation, string expected) {
             var writer = new StringDescriptionWriter();
             expectation.DescribeActiveExpectationsTo(writer);
 
@@ -135,7 +135,7 @@ namespace NMock2.Internal.Test {
             Matcher irrelevant = Is.Anything;
             IMockObject mock = null;
 
-            BuildableExpectation expectation = BuildExpectation(
+            InvocationExpectation expectation = BuildExpectation(
                 "description",
                 Is.AtLeast(2),
                 Is.AtMost(4),
@@ -166,7 +166,7 @@ namespace NMock2.Internal.Test {
 
             for (int i = 1; i < 64; i++)
             {
-                BuildableExpectation e = BuildExpectation(
+                InvocationExpectation e = BuildExpectation(
                     ignoreRequiredCallCount,
                     (i & 1) == 0,
                     (i & 2) == 0 ? receiver : null,
@@ -181,7 +181,7 @@ namespace NMock2.Internal.Test {
 
         [Test]
         public void InvokesAListOfActionsToPerformAnInvocation() {
-            BuildableExpectation e = BuildExpectation(true, true, receiver, true, true, true, true);
+            InvocationExpectation e = BuildExpectation(true, true, receiver, true, true, true, true);
             var action1 = new MockAction();
             var action2 = new MockAction();
 
@@ -198,7 +198,7 @@ namespace NMock2.Internal.Test {
         public void MatchesCallCountWhenMatchingInvocation() {
             Matcher irrelevant = Is.Anything;
 
-            BuildableExpectation expectation = BuildExpectation(
+            InvocationExpectation expectation = BuildExpectation(
                 "description",
                 irrelevant,
                 Is.AtMost(4),
@@ -230,7 +230,7 @@ namespace NMock2.Internal.Test {
 
         [Test]
         public void MatchesIfAllMatchersMatch() {
-            BuildableExpectation e = BuildExpectation(true, true, receiver, true, true, true, true);
+            InvocationExpectation e = BuildExpectation(true, true, receiver, true, true, true, true);
             Assert.IsTrue(e.Matches(invocation), "should match");
         }
     }

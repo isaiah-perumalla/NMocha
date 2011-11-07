@@ -2,6 +2,6 @@
 
 namespace NMock2 {
     public interface ISequence {
-        void ConstrainAsNextInSeq(BuildableExpectation expectation);
+        void ConstrainAsNextInSeq(InvocationExpectation expectation);
     }
 }

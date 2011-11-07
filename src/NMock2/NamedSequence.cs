@@ -13,7 +13,7 @@ namespace NMock2 {
             this.name = name;
         }
 
-        public void ConstrainAsNextInSeq(BuildableExpectation expectation) {
+        public void ConstrainAsNextInSeq(InvocationExpectation expectation) {
             var index = expectationSequence.Count;
             expectationSequence.Add(expectation);
             expectation.AddOrderingConstraint(new InSequenceConstraint(this, index));

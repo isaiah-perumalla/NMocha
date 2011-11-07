@@ -106,11 +106,10 @@
     <Compile Include="Has.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IExpectation.cs" />
-    <Compile Include="Internal\BuildableExpectation.cs" />
+    <Compile Include="Internal\InvocationExpectation.cs" />
     <Compile Include="Internal\StringDescriptionWriter.cs" />
     <Compile Include="Internal\ExpectationBuilder.cs" />
     <Compile Include="Internal\ExpectationException.cs" />
-    <Compile Include="Internal\IExpectationOrdering.cs" />
     <Compile Include="Internal\IMockObject.cs" />
     <Compile Include="Internal\MockObject.cs" />
     <Compile Include="Internal\InvocationDispatcher.cs" />
