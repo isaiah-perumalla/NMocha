@@ -110,12 +110,15 @@ namespace NMock2.Internal {
         public void DescribeActiveExpectationsTo(IDescription writer) {
             if (IsActive)
             {
+                writer.AppendText("expected ");
                 DescribeTo(writer);
             }
         }
 
         public void DescribeUnmetExpectationsTo(IDescription writer) {
-               DescribeTo(writer);
+            
+            writer.AppendText("expected ");   
+            DescribeTo(writer);
             
         }
 

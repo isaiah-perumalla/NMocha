@@ -43,7 +43,7 @@ namespace NMock2.Internal {
         /// </summary>
         public UnorderedExpectations() {
             depth = 0;
-            prompt = "Expected:";
+            prompt = "Expected ";
         }
 
         /// <summary>
@@ -142,20 +142,12 @@ namespace NMock2.Internal {
         }
 
         public void DescribeActiveExpectationsTo(IDescription  writer) {
-            writer.AppendLine(prompt);
-            foreach (IExpectation expectation in expectations)
-            {
-                if (expectation.IsActive)
-                {
-                    Indent(writer, depth + 1);
-                    expectation.DescribeActiveExpectationsTo(writer);
-                    writer.AppendNewLine();
-                }
-            }
+            DescribeUnmetExpectationsTo(writer);
         }
 
         public void DescribeUnmetExpectationsTo(IDescription writer) {
-            writer.AppendLine(prompt);
+
+            writer.AppendLine("expectations:");
             foreach (IExpectation expectation in expectations)
             {
                    Indent(writer, depth + 1);

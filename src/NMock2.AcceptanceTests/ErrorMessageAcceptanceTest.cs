@@ -44,12 +44,41 @@ namespace NMock2.AcceptanceTests {
             }
             catch(ExpectationException e)
             {
+                const string expectedMessage = @"not all expected invocations were performed
+expectations:
+  expected 1 time, never invoked: speaker.Hello(any arguments)
+  expected 1 time, already invoked 1 time: speaker.Umm(any arguments)
+  expected at least 1 time, already invoked 1 time: speaker.Err(any arguments)
+";
                 Console.WriteLine(e.Message);
+
+                Assert.AreEqual(e.Message, (expectedMessage));
             }
-
-
         }
 
-       
+        [Test]
+        public void WhenUnexpectedInvocationShowExpectedAndCurrentNumberOfCallsInErrorMessage() {
+            SkipVerificationForThisTest();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
+            Expect.Once.On(speaker).Message("Hello");
+            Expect.AtLeastOnce.On(speaker).Message("Err");
+            try
+            {
+                speaker.Umm();
+            }
+            catch (ExpectationException e)
+            {
+                const string expectedMessage =
+                    @"unexpected invocation of speaker.Umm()
+expectations:
+  expected 1 time, never invoked: speaker.Hello(any arguments)
+  expected at least 1 time, never invoked: speaker.Err(any arguments)
+";
+                Console.WriteLine(e.Message);
+
+                Assert.AreEqual(e.Message, expectedMessage);
+
+            }
+        }
     }
 }
