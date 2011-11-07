@@ -37,50 +37,6 @@ namespace NMock2.AcceptanceTests {
 
         private ISpeaker speaker;
 
-        [Test]
-        public void AllowsCallsIfCalledInSameOrderAsExpectedWithinAnInOrderBlock() {
-            using (Mockery.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
-
-            speaker.Hello();
-            speaker.Goodbye();
-        }
-
-        [Test]
-        [ExpectedException(typeof (ExpectationException))]
-        public void CallsInOrderedBlocksThatAreNotMatchedFailVerification() {
-            SkipVerificationForThisTest();
-
-            using (Mockery.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
-
-            speaker.Hello();
-
-            Mockery.VerifyAllExpectationsHaveBeenMet();
-        }
-
-        [Test]
-        public void CallsWithinAnInOrderedBlockCanBeExpectedMoreThanOnce() {
-            using (Mockery.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                Expect.AtLeastOnce.On(speaker).Message("Err");
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
-
-            speaker.Hello();
-            speaker.Err();
-            speaker.Err();
-            speaker.Goodbye();
-        }
-
-       
 
         [Test]
         public void DoesNotEnforceTheOrderOfCallsByDefault() {

@@ -67,11 +67,6 @@ namespace NMock2 {
             ClearExpectations();
         }
 
-     
-        public IDisposable Ordered {
-            get { return Push(new OrderedExpectations(depth)); }
-        }
-
         #region IDisposable Members
 
         

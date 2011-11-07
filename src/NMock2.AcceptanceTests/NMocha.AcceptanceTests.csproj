@@ -70,7 +70,6 @@
     <Compile Include="ArgumentMatchingAcceptanceTest.cs" />
     <Compile Include="BugReproduction\InterceptCallOnMockInEmptyOrderedExpectationOrdering.cs" />
     <Compile Include="BugReproduction\MockServiceModelIClientChannel.cs" />
-    <Compile Include="BugReproduction\OrderedWithoutExpectations_1912662.cs" />
     <Compile Include="BugReproduction\SetNamedParameterOnRef_2003169.cs" />
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="ClassMockAcceptanceTest.cs" />

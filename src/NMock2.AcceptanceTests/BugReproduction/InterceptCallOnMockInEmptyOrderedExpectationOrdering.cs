@@ -65,23 +65,5 @@ namespace NMock2.AcceptanceTests {
             /// </summary>
             void DoSomething();
         }
-
-        /// <summary>
-        /// This test is to check behavior with default mocks.
-        /// </summary>
-        [Test]
-        public void StubDeclaredExplicitly() {
-            var dependency = mockery.NewInstanceOfRole<IDependency>();
-            var anotherDependency = mockery.NewInstanceOfRole<IAnotherDependency>();
-
-            Stub.On(dependency).GetProperty("AnotherDependency").Will(Return.Value(anotherDependency));
-
-            using (mockery.Ordered)
-            {
-                Expect.Once.On(dependency.AnotherDependency).Message("DoSomething");
-            }
-
-            dependency.AnotherDependency.DoSomething();
-        }
     }
 }
