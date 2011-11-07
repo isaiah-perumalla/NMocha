@@ -46,7 +46,7 @@ namespace NMock2 {
         private readonly List<IStates> stateMachines = new List<IStates>();
 
 
-        private IExpectationOrdering expectations;
+        private IExpectationOrdering dispatcher;
 
       
         private ResolveTypeDelegate resolveTypeDelegate;
@@ -55,8 +55,7 @@ namespace NMock2 {
         private ExpectationException thrownUnexpectedInvocationException;
 
         
-        private IExpectationOrdering topOrdering;
-
+      
      
         public Mockery() {
             mockObjectFactory = new CastleMockObjectFactory(this, this);
@@ -113,10 +112,11 @@ namespace NMock2 {
                 throw exceptionToBeRethrown;
             }
 
-            if (!expectations.HasBeenMet)
+            if (!dispatcher.HasBeenMet)
             {
                 FailUnmetExpectations();
             }
+           
         }
 
 
@@ -124,22 +124,13 @@ namespace NMock2 {
             resolveTypeDelegate = resolveTypeHandler;
         }
 
-        
-        public void ClearExpectation(object mock) {
-            IMockObject mockObject = CastToMockObject(mock);
-
-            var result = new List<IExpectation>();
-            expectations.QueryExpectationsBelongingTo(mockObject, result);
-
-            result.ForEach(expectation => expectations.RemoveExpectation(expectation));
-        }
 
         /// <summary>
         /// Adds the expectation.
         /// </summary>
         /// <param name="expectation">The expectation.</param>
         private void AddExpectation(IExpectation expectation) {
-            topOrdering.AddExpectation(expectation);
+            dispatcher.AddExpectation(expectation);
         }
 
  
@@ -149,9 +140,9 @@ namespace NMock2 {
 
       
         private void Dispatch(Invocation invocation) {
-            if (expectations.Matches(invocation))
+            if (dispatcher.Matches(invocation))
             {
-                expectations.Perform(invocation);
+                dispatcher.Perform(invocation);
             }
             else
             {
@@ -176,18 +167,17 @@ namespace NMock2 {
             throw new ArgumentException("argument must be a mock", "mock");
         }
 
-  
+
         private void ClearExpectations() {
-            expectations = new UnorderedExpectations();
-            topOrdering = expectations;
+            dispatcher = new InvocationDispatcher();
         }
 
 
         private void FailUnmetExpectations() {
             var writer = new StringDescriptionWriter();
             writer.AppendLine("not all expected invocations were performed");
-            expectations.DescribeUnmetExpectationsTo(writer);
-            ClearExpectations();
+            dispatcher.DescribeUnmetExpectationsTo(writer);
+          
 
             throw new ExpectationException(writer.ToString());
         }
@@ -199,7 +189,7 @@ namespace NMock2 {
             invocation.DescribeOn(writer);
 
             writer.AppendNewLine();
-            expectations.DescribeActiveExpectationsTo(writer);
+            dispatcher.DescribeActiveExpectationsTo(writer);
             DescribeStatesOn(writer);
             // try catch to get exception with stack trace.
             try

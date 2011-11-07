@@ -42,7 +42,7 @@ namespace NMock2.AcceptanceTests {
             SkipVerificationForThisFixture();
         }
 
-        [Test]
+        [Test, Ignore("do we need this behaviour")]
         public void CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests() {
             var mockWithUninvokedExpectations = (IMockedType) Mockery.NewInstanceOfRole(typeof (IMockedType));
             Expect.Once.On(mockWithUninvokedExpectations).Message("Method").WithNoArguments();

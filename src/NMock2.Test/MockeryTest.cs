@@ -173,18 +173,6 @@ namespace NMock2.Test {
         }
 
         [Test]
-        public void ClearExpectation() {
-            var testee = new Mockery();
-            var mock = testee.NewInstanceOfRole<ISelfDescribing>();
-
-            Expect.Once.On(mock).Message("DescribeOn");
-
-            testee.ClearExpectation(mock);
-
-            testee.VerifyAllExpectationsHaveBeenMet();
-        }
-
-        [Test]
         public void CreateMocksWithGenericMethod() {
             object mock = _mockery.NewInstanceOfRole(typeof (IMockObjectWithGenericMethod));
         }

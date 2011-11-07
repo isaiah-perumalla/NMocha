@@ -113,7 +113,7 @@
     <Compile Include="Internal\IExpectationOrdering.cs" />
     <Compile Include="Internal\IMockObject.cs" />
     <Compile Include="Internal\MockObject.cs" />
-    <Compile Include="Internal\UnorderedExpectations.cs" />
+    <Compile Include="Internal\InvocationDispatcher.cs" />
     <Compile Include="Is.cs" />
     <Compile Include="ISelfDescribing.cs" />
     <Compile Include="Matcher.cs" />
