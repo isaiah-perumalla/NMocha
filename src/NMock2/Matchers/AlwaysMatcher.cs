@@ -37,7 +37,7 @@ namespace NMock2.Matchers {
         /// Initializes a new instance of the <see cref="AlwaysMatcher"/> class.
         /// </summary>
         /// <param name="matches">if set to <c>true</c> the matcher will always match, otherwise it will never match.</param>
-        /// <param name="description">The description which will be printed out when calling <see cref="DescribeTo"/>.</param>
+        /// <param name="description">The description which will be printed out when calling <see cref="DescribeOn"/>.</param>
         public AlwaysMatcher(bool matches, string description) {
             this.matches = matches;
             this.description = description;
@@ -55,9 +55,9 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write(description);
+        /// <param name="description1"></param>
+        public override void DescribeOn(IDescription description1) {
+            description1.AppendText(description);
         }
     }
 }

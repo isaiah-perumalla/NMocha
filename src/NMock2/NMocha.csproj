@@ -107,7 +107,7 @@
     <Compile Include="IAction.cs" />
     <Compile Include="IExpectation.cs" />
     <Compile Include="Internal\BuildableExpectation.cs" />
-    <Compile Include="Internal\DescriptionWriter.cs" />
+    <Compile Include="Internal\StringDescriptionWriter.cs" />
     <Compile Include="Internal\ExpectationBuilder.cs" />
     <Compile Include="Internal\ExpectationException.cs" />
     <Compile Include="Internal\IExpectationOrdering.cs" />

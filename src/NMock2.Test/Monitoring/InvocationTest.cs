@@ -129,28 +129,6 @@ namespace NMock2.Test.Monitoring {
         }
 
         [Test]
-        public void DescriptionOfEventAdderDoesNotShowSugaredMethod() {
-            MethodInfo adder = typeof (SugarMethods).GetMethod(
-                "add_Event", new[] {typeof (EventHandler)});
-            Delegate handler = new EventHandler(HandleEvent);
-
-            invocation = new Invocation(receiver, adder, new object[] {handler});
-
-            AssertDescription.IsEqual(invocation, "receiver.Event += <System.EventHandler>");
-        }
-
-        [Test]
-        public void DescriptionOfEventRemoverDoesNotShowSugaredMethod() {
-            MethodInfo adder = typeof (SugarMethods).GetMethod(
-                "remove_Event", new[] {typeof (EventHandler)});
-            Delegate handler = new EventHandler(HandleEvent);
-
-            invocation = new Invocation(receiver, adder, new object[] {handler});
-
-            AssertDescription.IsEqual(invocation, "receiver.Event -= <System.EventHandler>");
-        }
-
-        [Test]
         public void DescriptionOfInvocationOfIndexerGetterDoesNotShowSugaredMethod() {
             MethodInfo getter = typeof (SugarMethods).GetMethod(
                 "get_Item", new[] {typeof (string), typeof (int)});

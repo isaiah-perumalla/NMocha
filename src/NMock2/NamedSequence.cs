@@ -38,9 +38,9 @@ namespace NMock2 {
                 this.index = index;
             }
 
-            public void DescribeTo(TextWriter writer)
+            public void DescribeOn(IDescription description)
             {
-                writer.Write("in sequence {0} ", namedSequence);
+                description.AppendTextFormat("in sequence {0} ", namedSequence);
             }
 
             public bool AllowsInvocationNow()

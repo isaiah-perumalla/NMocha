@@ -55,8 +55,8 @@ namespace NMock2.Test.Actions {
                        && ((ICollection) o).Count == 0;
             }
 
-            public override void DescribeTo(TextWriter writer) {
-                writer.Write("an empty " + collectionType.Name);
+            public override void DescribeOn(IDescription description) {
+                description.AppendText("an empty " + collectionType.Name);
             }
         }
 

@@ -10,10 +10,10 @@ namespace NMock2.Internal {
 
         #region ISideEffect Members
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("\nthen ");
-            state.DescribeTo(writer);
-            writer.Write(";");
+        public void DescribeOn(IDescription description) {
+            description.AppendText("\nthen ");
+            state.DescribeOn(description);
+            description.AppendText(";");
         }
 
         public void Apply() {

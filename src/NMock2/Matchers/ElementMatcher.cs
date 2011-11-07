@@ -54,23 +54,23 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write("element of [");
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText("element of [");
 
             bool separate = false;
             foreach (object element in collection)
             {
                 if (separate)
                 {
-                    writer.Write(", ");
+                    description.AppendText(", ");
                 }
 
-                writer.Write(element);
+                description.AppendValue(element);
                 separate = true;
             }
 
-            writer.Write("]");
+            description.AppendText("]");
         }
     }
 }

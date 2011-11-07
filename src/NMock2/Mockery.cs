@@ -72,11 +72,6 @@ namespace NMock2 {
             get { return Push(new OrderedExpectations(depth)); }
         }
 
-        
-        public IDisposable Unordered {
-            get { return Push(new UnorderedExpectations(depth)); }
-        }
-
         #region IDisposable Members
 
         
@@ -213,8 +208,8 @@ namespace NMock2 {
 
      
         private void FailUnmetExpectations() {
-            var writer = new DescriptionWriter();
-            writer.WriteLine("not all expected invocations were performed");
+            var writer = new StringDescriptionWriter();
+            writer.AppendLine("not all expected invocations were performed");
             expectations.DescribeUnmetExpectationsTo(writer);
             ClearExpectations();
 
@@ -223,11 +218,11 @@ namespace NMock2 {
 
 
         private void FailUnexpectedInvocation(Invocation invocation) {
-            var writer = new DescriptionWriter();
-            writer.Write("unexpected invocation of ");
-            invocation.DescribeTo(writer);
+            var writer = new StringDescriptionWriter();
+            writer.AppendText("unexpected invocation of ");
+            invocation.DescribeOn(writer);
 
-            writer.WriteLine();
+            writer.AppendNewLine();
             expectations.DescribeActiveExpectationsTo(writer);
             DescribeStatesOn(writer);
             // try catch to get exception with stack trace.
@@ -247,11 +242,11 @@ namespace NMock2 {
             }
         }
 
-        private void DescribeStatesOn(DescriptionWriter writer) {
+        private void DescribeStatesOn(IDescription writer) {
             if (stateMachines.Any())
             {
-                writer.Write("\nstates:\n");
-                stateMachines.ForEach(stateMachine => stateMachine.DescribeTo(writer));
+                writer.AppendText("\nstates:\n");
+                stateMachines.ForEach(stateMachine => stateMachine.DescribeOn(writer));
             }
         }
 

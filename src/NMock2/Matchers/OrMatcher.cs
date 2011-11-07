@@ -43,13 +43,13 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write("`");
-            Left.DescribeTo(writer);
-            writer.Write("' or `");
-            Right.DescribeTo(writer);
-            writer.Write("'");
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText("`");
+            Left.DescribeOn(description);
+            description.AppendText("' or `");
+            Right.DescribeOn(description);
+            description.AppendText("'");
         }
     }
 }

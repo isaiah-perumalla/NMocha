@@ -29,16 +29,16 @@ namespace NMock2 {
             return new NotPredicate(name, IsCurrentStateEquals, state);
         }
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write(name);
+        public void DescribeOn(IDescription description) {
+            description.AppendText(name);
             if (string.IsNullOrEmpty(currentState))
             {
-                writer.WriteLine(" has no current state");
+                description.AppendLine(" has no current state");
             }
             else
             {
-                writer.Write(" is ");
-                writer.WriteLine(currentState);
+                description.AppendText(" is ")
+                           .AppendLine(currentState);
             }
         }
 

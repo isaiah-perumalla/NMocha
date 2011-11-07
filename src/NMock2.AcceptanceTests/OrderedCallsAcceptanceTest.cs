@@ -80,24 +80,7 @@ namespace NMock2.AcceptanceTests {
             speaker.Goodbye();
         }
 
-        [Test]
-        public void CanExpectUnorderedCallsWithinAnOrderedSequence() {
-            using (Mockery.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                using (Mockery.Unordered)
-                {
-                    Expect.Once.On(speaker).Message("Umm");
-                    Expect.Once.On(speaker).Message("Err");
-                }
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
-
-            speaker.Hello();
-            speaker.Err();
-            speaker.Umm();
-            speaker.Goodbye();
-        }
+       
 
         [Test]
         public void DoesNotEnforceTheOrderOfCallsByDefault() {
@@ -185,26 +168,7 @@ namespace NMock2.AcceptanceTests {
             }
           }
 
-        [Test, ExpectedException(typeof (ExpectationException))]
-        public void UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations() {
-            SkipVerificationForThisTest();
-
-            using (Mockery.Ordered)
-            {
-                Expect.Once.On(speaker).Message("Hello");
-                using (Mockery.Unordered)
-                {
-                    Expect.Once.On(speaker).Message("Umm");
-                    Expect.Once.On(speaker).Message("Err");
-                }
-                Expect.Once.On(speaker).Message("Goodbye");
-            }
-
-            speaker.Err();
-            speaker.Hello();
-            speaker.Umm();
-            speaker.Goodbye();
-        }
+        
 
         [Test]
         public void UnorderedExpectationsMatchInOrderOfSpecification() {

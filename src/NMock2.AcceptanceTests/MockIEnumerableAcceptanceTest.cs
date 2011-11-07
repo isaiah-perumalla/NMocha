@@ -77,8 +77,8 @@ namespace NMock2.AcceptanceTests {
                 invocation.Result = data.GetEnumerator();
             }
 
-            public void DescribeTo(TextWriter writer) {
-                writer.Write("Test");
+            public void DescribeOn(IDescription description) {
+                description.AppendText("Test");
             }
 
             #endregion

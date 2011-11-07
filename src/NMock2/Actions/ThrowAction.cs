@@ -20,11 +20,13 @@ using System;
 using System.IO;
 using NMock2.Monitoring;
 
-namespace NMock2.Actions {
+namespace NMock2.Actions
+{
     /// <summary>
     /// Action that sets the exception of an invocation.
     /// </summary>
-    public class ThrowAction : IAction {
+    public class ThrowAction : IAction
+    {
         /// <summary>
         /// Stores the exception to be thrown.
         /// </summary>
@@ -34,7 +36,8 @@ namespace NMock2.Actions {
         /// Initializes a new instance of the <see cref="ThrowAction"/> class.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        public ThrowAction(Exception exception) {
+        public ThrowAction(Exception exception)
+        {
             this.exception = exception;
         }
 
@@ -44,17 +47,19 @@ namespace NMock2.Actions {
         /// Invokes this object. Sets the exception the invocation will throw.
         /// </summary>
         /// <param name="invocation">The invocation.</param>
-        public void Invoke(Invocation invocation) {
+        public void Invoke(Invocation invocation)
+        {
             invocation.Exception = exception;
         }
 
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("throw ");
-            writer.Write(exception);
+        /// <param name="description"></param>
+        public void DescribeOn(IDescription description)
+        {
+            description.AppendText("throw ");
+            description.AppendValue(exception);
         }
 
         #endregion

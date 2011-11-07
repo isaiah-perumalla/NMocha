@@ -33,8 +33,8 @@ namespace NMock2.Test.Matchers {
             throw new NotImplementedException();
         }
 
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write(description);
+        public override void DescribeOn(IDescription description1) {
+            description1.AppendText(description);
         }
     }
 }

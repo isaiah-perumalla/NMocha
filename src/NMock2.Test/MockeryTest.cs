@@ -210,7 +210,8 @@ namespace NMock2.Test {
                 Assert.AreEqual(
                     "not all expected invocations were performed" + newLine +
                     "Expected:" + newLine +
-                    "  expectation1" + newLine +
+                    "  expectation1" + newLine + 
+                    "  expectation2" + newLine +
                     "  expectation3" + newLine,
                     e.Message);
             }
@@ -250,7 +251,7 @@ namespace NMock2.Test {
             var testee = new Mockery();
             var mock = testee.NewInstanceOfRole<ISelfDescribing>();
 
-            Expect.Once.On(mock).Message("DescribeTo");
+            Expect.Once.On(mock).Message("DescribeOn");
 
             testee.ClearExpectation(mock);
 
@@ -459,12 +460,12 @@ namespace NMock2.Test {
             Perform_HasBeenCalled = true;
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer) {
-            writer.Write(Description);
+        public void DescribeActiveExpectationsTo(IDescription writer) {
+            writer.AppendText(Description);
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer) {
-            writer.Write(Description);
+        public void DescribeUnmetExpectationsTo(IDescription writer) {
+            writer.AppendText(Description);
         }
 
         public void QueryExpectationsBelongingTo(IMockObject mock, IList<IExpectation> result) {

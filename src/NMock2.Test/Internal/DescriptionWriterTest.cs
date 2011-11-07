@@ -26,23 +26,23 @@ namespace NMock2.Internal.Test {
 
         [SetUp]
         public void InitialiseWriter() {
-            writer = new DescriptionWriter();
+            writer = new StringDescriptionWriter();
         }
 
         #endregion
 
-        private DescriptionWriter writer;
+        private StringDescriptionWriter writer;
 
         [Test]
         public void FormatsNullAsNull() {
-            writer.Write((object) null);
+            writer.AppendValue(null);
             Assert.AreEqual("null", writer.ToString());
         }
 
         [Test]
         public void FormatsStringsInCSharpSyntaxWhenWrittenAsObject() {
             object aString = "hello \"world\"";
-            writer.Write(aString);
+            writer.AppendValue(aString);
 
             Assert.AreEqual("\"hello \\\"world\\\"\"", writer.ToString());
         }
@@ -50,7 +50,7 @@ namespace NMock2.Internal.Test {
         [Test]
         public void HighlightsOtherValuesWhenWrittenAsObject() {
             object anInt = 1;
-            writer.Write(anInt);
+            writer.AppendValue(anInt);
 
             Assert.AreEqual("<1>", writer.ToString());
         }

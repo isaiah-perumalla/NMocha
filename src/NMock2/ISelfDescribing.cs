@@ -26,7 +26,15 @@ namespace NMock2 {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        void DescribeTo(TextWriter writer);
+        /// <param name="description"></param>
+        void DescribeOn(IDescription description);
+    }
+
+    public interface IDescription {
+        IDescription AppendText(string s);
+        IDescription AppendLine(string s);
+        IDescription AppendTextFormat(string format, params object[] args);
+        IDescription AppendValue(object value);
+        IDescription AppendNewLine();
     }
 }

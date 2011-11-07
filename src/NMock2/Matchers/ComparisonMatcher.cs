@@ -77,26 +77,26 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write("? ");
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText("? ");
             if (minComparisonResult == -1)
             {
-                writer.Write("<");
+                description.AppendText("<");
             }
 
             if (maxComparisonResult == 1)
             {
-                writer.Write(">");
+                description.AppendText(">");
             }
 
             if (minComparisonResult == 0 || maxComparisonResult == 0)
             {
-                writer.Write("=");
+                description.AppendText("=");
             }
 
-            writer.Write(" ");
-            writer.Write(value);
+            description.AppendText(" ")
+                       .AppendValue(value);
         }
     }
 }

@@ -64,13 +64,13 @@ namespace NMock2 {
         /// Describes the active expectations to.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        void DescribeActiveExpectationsTo(TextWriter writer);
+        void DescribeActiveExpectationsTo(IDescription writer);
 
         /// <summary>
         /// Describes the unmet expectations to.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        void DescribeUnmetExpectationsTo(TextWriter writer);
+        void DescribeUnmetExpectationsTo(IDescription writer);
 
         /// <summary>
         /// Adds all expectations to <paramref name="result"/> that are associated to <paramref name="mock"/>.

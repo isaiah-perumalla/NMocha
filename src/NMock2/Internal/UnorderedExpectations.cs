@@ -141,29 +141,27 @@ namespace NMock2.Internal {
             throw new InvalidOperationException("No matching expectation");
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer) {
-            writer.WriteLine(prompt);
+        public void DescribeActiveExpectationsTo(IDescription  writer) {
+            writer.AppendLine(prompt);
             foreach (IExpectation expectation in expectations)
             {
                 if (expectation.IsActive)
                 {
                     Indent(writer, depth + 1);
                     expectation.DescribeActiveExpectationsTo(writer);
-                    writer.WriteLine();
+                    writer.AppendNewLine();
                 }
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer) {
-            writer.WriteLine(prompt);
+        public void DescribeUnmetExpectationsTo(IDescription writer) {
+            writer.AppendLine(prompt);
             foreach (IExpectation expectation in expectations)
             {
-                if (!expectation.HasBeenMet)
-                {
-                    Indent(writer, depth + 1);
+                   Indent(writer, depth + 1);
                     expectation.DescribeUnmetExpectationsTo(writer);
-                    writer.WriteLine();
-                }
+                    writer.AppendNewLine();
+                
             }
         }
 
@@ -186,10 +184,10 @@ namespace NMock2.Internal {
 
         #endregion
 
-        private void Indent(TextWriter writer, int n) {
+        private void Indent(IDescription writer, int n) {
             for (int i = 0; i < n; i++)
             {
-                writer.Write("  ");
+                writer.AppendText("  ");
             }
         }
     }

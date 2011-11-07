@@ -20,7 +20,6 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Text.RegularExpressions;
-using NMock2.Internal;
 using NUnit.Framework;
 
 namespace NMock2.AcceptanceTests {
@@ -126,25 +125,6 @@ namespace NMock2.AcceptanceTests {
             string s = speaker.Ask("What?");
 
             Assert.IsNull(s);
-        }
-
-        [Test]
-        [ExpectedException(typeof (ExpectationException),
-            "unexpected invocation of eventProvider.AnEvent += <System.EventHandler>\r\nExpected:\r\n")]
-        public void UnexpectedEventRegistrationHasUnderstandableMessage() {
-            var eventProvider = Mockery.NewInstanceOfRole<IEventProvider>();
-
-            eventProvider.AnEvent += delegate { };
-        }
-
-        [Test]
-        [ExpectedException(typeof (ExpectationException),
-            "unexpected invocation of eventProvider.CustomEvent += <System.EventHandler`1[NMock2.CustomEventArgs]>\r\nExpected:\r\n"
-            )]
-        public void UnexpectedEventRegistrationHasUnderstandableMessageWithCustomEventArgs() {
-            var eventProvider = Mockery.NewInstanceOfRole<IEventProvider>();
-
-            eventProvider.CustomEvent += delegate { };
         }
 
         [Test]

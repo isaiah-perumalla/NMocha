@@ -49,9 +49,9 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write(methodName);
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText(methodName);
         }
     }
 }

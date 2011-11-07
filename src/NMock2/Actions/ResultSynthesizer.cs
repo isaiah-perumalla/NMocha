@@ -89,9 +89,9 @@ namespace NMock2.Actions {
         /// <summary>
         /// Describes this object to the specified <paramref name="writer"/>.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("a synthesized result");
+        /// <param name="description"></param>
+        public void DescribeOn(IDescription description) {
+            description.AppendText("a synthesized result");
         }
 
         #endregion

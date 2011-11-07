@@ -44,13 +44,13 @@ namespace NMock2.Test.Matchers {
             Assert.AreEqual(times, MatchesCallCount, messageFormat, formatArgs);
         }
 
-        public override void DescribeTo(TextWriter writer) {
+        public override void DescribeOn(IDescription description) {
             DescribeToCallCount++;
             if (ExpectedDescribeToWriter != null)
             {
-                Assert.AreSame(ExpectedDescribeToWriter, writer, "DescribeTo writer");
+                Assert.AreSame(ExpectedDescribeToWriter, description, "DescribeTo writer");
             }
-            writer.Write(DescribeToOutput);
+            description.AppendText(DescribeToOutput);
         }
     }
 }

@@ -121,8 +121,8 @@ namespace NMock2.Internal {
             CurrentExpectation.Perform(invocation);
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer) {
-            writer.WriteLine("Ordered:");
+        public void DescribeActiveExpectationsTo(IDescription writer) {
+            writer.AppendText("Ordered:");
             for (int i = 0; i < expectations.Count; i++)
             {
                 IExpectation expectation = expectations[i];
@@ -131,13 +131,13 @@ namespace NMock2.Internal {
                 {
                     Indent(writer, depth + 1);
                     expectation.DescribeActiveExpectationsTo(writer);
-                    writer.WriteLine();
+                    writer.AppendNewLine();
                 }
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer) {
-            writer.WriteLine("Ordered:");
+        public void DescribeUnmetExpectationsTo(IDescription writer) {
+            writer.AppendLine("Ordered:");
             for (int i = 0; i < expectations.Count; i++)
             {
                 IExpectation expectation = expectations[i];
@@ -146,7 +146,7 @@ namespace NMock2.Internal {
                 {
                     Indent(writer, depth + 1);
                     expectation.DescribeUnmetExpectationsTo(writer);
-                    writer.WriteLine();
+                    writer.AppendNewLine();
                 }
             }
         }
@@ -174,10 +174,10 @@ namespace NMock2.Internal {
             return HasNextExpectation && NextExpectation.MatchesIgnoringIsActive(invocation);
         }
 
-        private void Indent(TextWriter writer, int n) {
+        private void Indent(IDescription writer, int n) {
             for (int i = 0; i < n; i++)
             {
-                writer.Write("  ");
+                writer.AppendText("  ");
             }
         }
     }

@@ -55,11 +55,11 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write("(");
-            WriteListOfMatchers(MatcherCount(), writer);
-            writer.Write(")");
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText("(");
+            WriteListOfMatchers(MatcherCount(), description);
+            description.AppendText(")");
         }
 
         /// <summary>
@@ -83,15 +83,15 @@ namespace NMock2.Matchers {
         /// </summary>
         /// <param name="listLength">Length of the list.</param>
         /// <param name="writer">The writer.</param>
-        protected void WriteListOfMatchers(int listLength, TextWriter writer) {
+        protected void WriteListOfMatchers(int listLength, IDescription writer) {
             for (int i = 0; i < listLength; i++)
             {
                 if (i > 0)
                 {
-                    writer.Write(", ");
+                    writer.AppendText(", ");
                 }
 
-                valueMatchers[i].DescribeTo(writer);
+                valueMatchers[i].DescribeOn(writer);
             }
         }
 
@@ -134,9 +134,9 @@ namespace NMock2.Matchers {
             /// <summary>
             /// Describes this object.
             /// </summary>
-            /// <param name="writer">The text writer the description is added to.</param>
-            public override void DescribeTo(TextWriter writer) {
-                writer.Write("out");
+            /// <param name="description"></param>
+            public override void DescribeOn(IDescription description) {
+                description.AppendText("out");
             }
         }
 

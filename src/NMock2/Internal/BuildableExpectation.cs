@@ -25,8 +25,6 @@ using NMock2.Monitoring;
 
 namespace NMock2.Internal {
     public class BuildableExpectation : IExpectation {
-        private const string AddEventHandlerPrefix = "add_";
-        private const string RemoveEventHandlerPrefix = "remove_";
         private readonly ArrayList actions = new ArrayList();
 
         private readonly string expectationDescription;
@@ -43,12 +41,7 @@ namespace NMock2.Internal {
         private string methodSeparator = ".";
         private IMockObject receiver;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BuildableExpectation"/> class.
-        /// </summary>
-        /// <param name="expectationDescription">The expectation description.</param>
-        /// <param name="requiredCountMatcher">The required count matcher.</param>
-        /// <param name="matchingCountMatcher">The matching count matcher.</param>
+        
         public BuildableExpectation(string expectationDescription, Matcher requiredCountMatcher,
                                     Matcher matchingCountMatcher) {
             this.expectationDescription = expectationDescription;
@@ -86,11 +79,7 @@ namespace NMock2.Internal {
             get { return requiredCountMatcher.Matches(callCount); }
         }
 
-        /// <summary>
-        /// Checks whether stored expectations matches the specified invocation.
-        /// </summary>
-        /// <param name="invocation">The invocation to check.</param>
-        /// <returns>Returns whether one of the stored expectations has met the specified invocation.</returns>
+       
         public bool Matches(Invocation invocation) {
             return IsActive
                    && receiver == invocation.Receiver
@@ -118,18 +107,16 @@ namespace NMock2.Internal {
             sideEffects.ForEach(sideEffect => sideEffect.Apply());
         }
 
-        public void DescribeActiveExpectationsTo(TextWriter writer) {
+        public void DescribeActiveExpectationsTo(IDescription writer) {
             if (IsActive)
             {
                 DescribeTo(writer);
             }
         }
 
-        public void DescribeUnmetExpectationsTo(TextWriter writer) {
-            if (!HasBeenMet)
-            {
-                DescribeTo(writer);
-            }
+        public void DescribeUnmetExpectationsTo(IDescription writer) {
+               DescribeTo(writer);
+            
         }
 
         /// <summary>
@@ -179,55 +166,66 @@ namespace NMock2.Internal {
             return true;
         }
 
-        private void DescribeTo(TextWriter writer) {
-            writer.Write(expectationDescription);
-            writer.Write(": ");
-            writer.Write(receiver.MockName);
-            writer.Write(methodSeparator);
-            methodMatcher.DescribeTo(writer);
-            genericMethodTypeMatcher.DescribeTo(writer);
-            argumentsMatcher.DescribeTo(writer);
+        private void DescribeTo(IDescription writer) {
+            DescribeMethod(writer);
+            argumentsMatcher.DescribeOn(writer);
             foreach (Matcher extraMatcher in extraMatchers)
             {
-                writer.Write(", ");
-                extraMatcher.DescribeTo(writer);
+                writer.AppendText(", ");
+                extraMatcher.DescribeOn(writer);
             }
 
             if (actions.Count > 0)
             {
-                writer.Write(", will ");
-                ((IAction) actions[0]).DescribeTo(writer);
+                writer.AppendText(", will ");
+                ((IAction) actions[0]).DescribeOn(writer);
                 for (int i = 1; i < actions.Count; i++)
                 {
-                    writer.Write(", ");
-                    ((IAction) actions[i]).DescribeTo(writer);
+                    writer.AppendText(", ");
+                    ((IAction) actions[i]).DescribeOn(writer);
                 }
             }
             DescribeOrderingConstraintsOn(writer);
-            sideEffects.ForEach(sideEffect => sideEffect.DescribeTo(writer));
+            sideEffects.ForEach(sideEffect => sideEffect.DescribeOn(writer));
 
 
-            writer.Write(" [called ");
-            writer.Write(callCount);
-            writer.Write(" time");
-            if (callCount != 1)
-            {
-                writer.Write("s");
-            }
-
-            writer.Write("]");
-
+            
             if (!string.IsNullOrEmpty(expectationComment))
             {
-                writer.Write(" Comment: ");
-                writer.Write(expectationComment);
+                writer.AppendText(" Comment: ")
+                      .AppendText(expectationComment);
             }
         }
 
-        private void DescribeOrderingConstraintsOn(TextWriter writer) {
+        private void DescribeMethod(IDescription description) {
+            description.AppendText(expectationDescription)
+                .AppendText(", ");
+            if (callCount == 0)
+            {
+                description.AppendText("never invoked");
+            }
+            else
+            {
+                description.AppendText("already invoked ");
+                description.AppendText(callCount.ToString());
+                description.AppendText(" time");
+                if (callCount != 1)
+                {
+                    description.AppendText("s");
+                }
+            }
+
+            description.AppendText(": ")
+                  .AppendText(receiver.MockName)
+                  .AppendText(methodSeparator);
+            methodMatcher.DescribeOn(description);
+            genericMethodTypeMatcher.DescribeOn(description);
+        }
+
+        private void DescribeOrderingConstraintsOn(IDescription writer) {
             if (!orderingConstraints.Any()) return;
-            writer.Write(" ");
-            orderingConstraints.ForEach(constraint => constraint.DescribeTo(writer));
+            writer.AppendText(" ");
+            orderingConstraints.ForEach(constraint => constraint.DescribeOn(writer));
         }
 
         public void AddOrderingConstraint(IOrderingConstraint orderingConstraint) {

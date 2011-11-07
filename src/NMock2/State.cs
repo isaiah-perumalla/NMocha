@@ -16,10 +16,10 @@ namespace NMock2 {
             return stateMachine.IsCurrentStateEquals(state);
         }
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write(stateMachine.Name);
-            writer.Write(" is ");
-            writer.Write(state);
+        public void DescribeOn(IDescription description) {
+            description.AppendText(stateMachine.Name);
+            description.AppendText(" is ");
+            description.AppendText(state);
         }
 
         #endregion

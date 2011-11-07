@@ -33,13 +33,13 @@ namespace NMock2.Matchers {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public override void DescribeTo(TextWriter writer) {
-            writer.Write("[");
-            WriteListOfMatchers(MatcherCount() - 1, writer);
-            writer.Write("] = (");
-            LastMatcher().DescribeTo(writer);
-            writer.Write(")");
+        /// <param name="description"></param>
+        public override void DescribeOn(IDescription description) {
+            description.AppendText("[");
+            WriteListOfMatchers(MatcherCount() - 1, description);
+            description.AppendText("] = (");
+            LastMatcher().DescribeOn(description);
+            description.AppendText(")");
         }
     }
 }

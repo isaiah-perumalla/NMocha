@@ -15,10 +15,10 @@ namespace NMock2.Internal {
 
         #region IStatePredicate Members
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write(name);
-            writer.Write(" is not ");
-            writer.Write(state);
+        public void DescribeOn(IDescription description) {
+            description.AppendText(name);
+            description.AppendText(" is not ");
+            description.AppendText(state);
         }
 
         public bool IsActive() {

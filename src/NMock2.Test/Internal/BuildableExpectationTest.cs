@@ -124,7 +124,7 @@ namespace NMock2.Internal.Test {
         }
 
         private void AssertDescriptionIsEqual(BuildableExpectation expectation, string expected) {
-            var writer = new DescriptionWriter();
+            var writer = new StringDescriptionWriter();
             expectation.DescribeActiveExpectationsTo(writer);
 
             Assert.AreEqual(expected, writer.ToString());
@@ -177,25 +177,6 @@ namespace NMock2.Internal.Test {
 
                 Assert.IsFalse(e.Matches(invocation), "should not match (iteration " + i + ")");
             }
-        }
-
-        [Test]
-        public void HasReadableDescription() {
-            BuildableExpectation expectation = BuildExpectation(
-                "expectation",
-                "required call count description is ignored",
-                "matching call count description is ignored",
-                receiver,
-                "method",
-                "(arguments)",
-                "extra matcher 1", "extra matcher 2"
-                );
-
-            expectation.AddAction(new MockAction("action 1"));
-            expectation.AddAction(new MockAction("action 2"));
-
-            AssertDescriptionIsEqual(expectation,
-                                     "expectation: receiver.method(arguments), extra matcher 1, extra matcher 2, will action 1, action 2 [called 0 times]");
         }
 
         [Test]
@@ -252,26 +233,6 @@ namespace NMock2.Internal.Test {
             BuildableExpectation e = BuildExpectation(true, true, receiver, true, true, true, true);
             Assert.IsTrue(e.Matches(invocation), "should match");
         }
-
-        [Test]
-        public void WillNotPrintAPeriodBetweenReceiverAndMethodIfToldToDescribeItselfAsAnIndexer() {
-            BuildableExpectation expectation = BuildExpectation(
-                "expectation",
-                "required call count description is ignored",
-                "matching call count description is ignored",
-                receiver,
-                "",
-                "[arguments]",
-                "extra matcher 1", "extra matcher 2"
-                );
-
-            expectation.AddAction(new MockAction("action 1"));
-            expectation.AddAction(new MockAction("action 2"));
-            expectation.DescribeAsIndexer();
-
-            AssertDescriptionIsEqual(expectation,
-                                     "expectation: receiver[arguments], extra matcher 1, extra matcher 2, will action 1, action 2 [called 0 times]");
-        }
     }
 
     internal class MockAction : IAction {
@@ -293,8 +254,8 @@ namespace NMock2.Internal.Test {
             Received = invocation;
         }
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write(Description);
+        public void DescribeOn(IDescription description) {
+            description.AppendText(Description);
         }
 
         #endregion

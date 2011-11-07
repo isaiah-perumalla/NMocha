@@ -119,44 +119,38 @@ namespace NMock2.Monitoring {
         /// <summary>
         /// Describes this object to the specified <paramref name="writer"/>.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer) {
+        /// <param name="description"></param>
+        public void DescribeOn(IDescription description) {
             // This should really be a mock object in most cases, but a few testcases
             // seem to supply strings etc as a Receiver.
             var mock = Receiver as IMockObject;
 
             if (mock != null)
             {
-                writer.Write(mock.MockName);
+                description.AppendText(mock.MockName);
             }
             else
             {
-                writer.Write(Receiver.ToString());
+                description.AppendText(Receiver.ToString());
             }
 
             if (MethodIsIndexerGetter())
             {
-                DescribeAsIndexerGetter(writer);
+                DescribeAsIndexerGetter(description);
             }
             else if (MethodIsIndexerSetter())
             {
-                DescribeAsIndexerSetter(writer);
+                DescribeAsIndexerSetter(description);
             }
-            else if (MethodIsEventAdder())
-            {
-                DescribeAsEventAdder(writer);
-            }
-            else if (MethodIsEventRemover())
-            {
-                DescribeAsEventRemover(writer);
-            }
+            
+           
             else if (MethodIsProperty())
             {
-                DescribeAsProperty(writer);
+                DescribeAsProperty(description);
             }
             else
             {
-                DescribeNormalMethod(writer);
+                DescribeNormalMethod(description);
             }
         }
 
@@ -274,13 +268,13 @@ namespace NMock2.Monitoring {
         /// Describes the property with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsProperty(TextWriter writer) {
-            writer.Write(".");
-            writer.Write(Method.Name.Substring(4));
+        private void DescribeAsProperty(IDescription writer) {
+            writer.AppendText(".")
+                  .AppendText(Method.Name.Substring(4));
             if (Parameters.Count > 0)
             {
-                writer.Write(" = ");
-                writer.Write(Parameters[0]);
+                writer.AppendText(" = ")
+                    .AppendValue(Parameters[0]);
             }
         }
 
@@ -288,59 +282,59 @@ namespace NMock2.Monitoring {
         /// Describes the index setter with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsIndexerGetter(TextWriter writer) {
-            writer.Write("[");
+        private void DescribeAsIndexerGetter(IDescription writer) {
+            writer.AppendText("[");
             WriteParameterList(writer, Parameters.Count);
-            writer.Write("]");
+            writer.AppendText("]");
         }
 
         /// <summary>
         /// Describes the index setter with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsIndexerSetter(TextWriter writer) {
-            writer.Write("[");
+        private void DescribeAsIndexerSetter(IDescription writer) {
+            writer.AppendText("[");
             WriteParameterList(writer, Parameters.Count - 1);
-            writer.Write("] = ");
-            writer.Write(Parameters[Parameters.Count - 1]);
+            writer.AppendText("] = ")
+                  .AppendValue(Parameters[Parameters.Count - 1]);
         }
 
         /// <summary>
         /// Describes the method with parameters to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeNormalMethod(TextWriter writer) {
-            writer.Write(".");
-            writer.Write(Method.Name);
+        private void DescribeNormalMethod(IDescription writer) {
+            writer.AppendText(".")
+            .AppendText(Method.Name);
 
             WriteTypeParams(writer);
 
-            writer.Write("(");
+            writer.AppendText("(");
             WriteParameterList(writer, Parameters.Count);
-            writer.Write(")");
+            writer.AppendText(")");
         }
 
         /// <summary>
         /// Writes the generic parameters of the method to the specified <paramref name="writer"/>.
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
-        private void WriteTypeParams(TextWriter writer) {
+        private void WriteTypeParams(IDescription writer) {
             Type[] types = Method.GetGenericArguments();
             if (types.Length > 0)
             {
-                writer.Write("<");
+                writer.AppendText("<");
 
                 for (int i = 0; i < types.Length; i++)
                 {
                     if (i > 0)
                     {
-                        writer.Write(", ");
+                        writer.AppendText(", ");
                     }
 
-                    writer.Write(types[i].FullName);
+                    writer.AppendText(types[i].FullName);
                 }
 
-                writer.Write(">");
+                writer.AppendText(">");
             }
         }
 
@@ -349,21 +343,21 @@ namespace NMock2.Monitoring {
         /// </summary>
         /// <param name="writer">The writer where the description is written to.</param>
         /// <param name="count">The count of parameters to describe.</param>
-        private void WriteParameterList(TextWriter writer, int count) {
+        private void WriteParameterList(IDescription writer, int count) {
             for (int i = 0; i < count; i++)
             {
                 if (i > 0)
                 {
-                    writer.Write(", ");
+                    writer.AppendText(", ");
                 }
 
                 if (Method.GetParameters()[i].IsOut)
                 {
-                    writer.Write("out");
+                    writer.AppendText("out");
                 }
                 else
                 {
-                    writer.Write(Parameters[i]);
+                    writer.AppendValue(Parameters[i]);
                 }
             }
         }
@@ -391,7 +385,7 @@ namespace NMock2.Monitoring {
         }
 
         /// <summary>
-        /// Describes the interfaces used for <see cref="DescribeTo"/>.
+        /// Describes the interfaces used for <see cref="DescribeOn"/>.
         /// </summary>
         /// <param name="obj">The object which interfaces to describe.</param>
         /// <returns>

@@ -97,7 +97,7 @@ namespace NMock2.AcceptanceTests {
             catch (ExpectationException ex)
             {
                 Assert.AreEqual(
-                    "not all expected invocations were performed\r\nExpected:\r\n  1 time: genericSpeaker.Find<System.Int32>(any arguments), will return <3> [called 0 times]\r\n",
+                    "not all expected invocations were performed\r\nExpected:\r\n  1 time, never invoked: genericSpeaker.Find<System.Int32>(any arguments), will return <3>\r\n",
                     ex.Message);
             }
         }

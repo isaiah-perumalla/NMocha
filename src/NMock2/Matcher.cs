@@ -30,8 +30,8 @@ namespace NMock2 {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public abstract void DescribeTo(TextWriter writer);
+        /// <param name="description"></param>
+        public abstract void DescribeOn(IDescription description);
 
         #endregion
 
@@ -78,8 +78,8 @@ namespace NMock2 {
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
         public override string ToString() {
-            var writer = new DescriptionWriter();
-            DescribeTo(writer);
+            var writer = new StringDescriptionWriter();
+            DescribeOn(writer);
             return writer.ToString();
         }
     }

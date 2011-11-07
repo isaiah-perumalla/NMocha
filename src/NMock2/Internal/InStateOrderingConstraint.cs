@@ -14,9 +14,9 @@ namespace NMock2.Internal {
             return predicate.IsActive();
         }
 
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("when ");
-            predicate.DescribeTo(writer);
+        public void DescribeOn(IDescription description) {
+            description.AppendText("when ");
+            predicate.DescribeOn(description);
         }
 
         #endregion

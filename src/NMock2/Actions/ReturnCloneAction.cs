@@ -51,10 +51,10 @@ namespace NMock2.Actions {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("a clone of ");
-            writer.Write(prototype);
+        /// <param name="description"></param>
+        public void DescribeOn(IDescription description) {
+            description.AppendText("a clone of ");
+            description.AppendValue(prototype);
         }
 
         #endregion

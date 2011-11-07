@@ -70,12 +70,12 @@ namespace NMock2.Actions {
         /// <summary>
         /// Describes this object.
         /// </summary>
-        /// <param name="writer">The text writer the description is added to.</param>
-        public void DescribeTo(TextWriter writer) {
-            writer.Write("set ");
-            writer.Write(name);
-            writer.Write("=");
-            writer.Write(value);
+        /// <param name="description"></param>
+        public void DescribeOn(IDescription description) {
+            description.AppendText("set ");
+            description.AppendText(name);
+            description.AppendText("=");
+            description.AppendValue(value);
         }
 
         #endregion

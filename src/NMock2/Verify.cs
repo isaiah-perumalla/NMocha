@@ -35,8 +35,8 @@ namespace NMock2 {
         public static void That(object actualValue, Matcher matcher, string message, params object[] formatArgs) {
             if (!matcher.Matches(actualValue))
             {
-                var writer = new DescriptionWriter();
-                writer.Write(message, formatArgs);
+                var writer = new StringDescriptionWriter();
+                writer.AppendTextFormat(message, formatArgs);
                 WriteDescriptionOfFailedMatch(writer, actualValue, matcher);
 
                 throw new ExpectationException(writer.ToString());
@@ -52,7 +52,7 @@ namespace NMock2 {
         public static void That(object actualValue, Matcher matcher) {
             if (!matcher.Matches(actualValue))
             {
-                var writer = new DescriptionWriter();
+                var writer = new StringDescriptionWriter();
                 WriteDescriptionOfFailedMatch(writer, actualValue, matcher);
 
                 throw new ExpectationException(writer.ToString());
@@ -60,18 +60,18 @@ namespace NMock2 {
         }
 
         /// <summary>
-        /// Writes the description of a failed match to the specified <paramref name="writer"/>.
+        /// Writes the description of a failed match to the specified <paramref name="description"/>.
         /// </summary>
-        /// <param name="writer">The <see cref="TextWriter"/> where the description is written to.</param>
+        /// <param name="description">The <see cref="TextWriter"/> where the description is written to.</param>
         /// <param name="actualValue">The actual value to be written.</param>
         /// <param name="matcher">The matcher which is used for the expected value to be written.</param>
-        private static void WriteDescriptionOfFailedMatch(TextWriter writer, object actualValue, Matcher matcher) {
-            writer.WriteLine();
-            writer.Write("Expected: ");
-            matcher.DescribeTo(writer);
-            writer.WriteLine();
-            writer.Write("Actual:   ");
-            writer.Write(actualValue);
+        private static void WriteDescriptionOfFailedMatch(IDescription description, object actualValue, Matcher matcher) {
+            description.AppendNewLine()
+                       .AppendText("Expected: ");
+            matcher.DescribeOn(description);
+            description.AppendNewLine()
+                       .AppendText("Actual:   ")
+                       .AppendValue(actualValue);
         }
     }
 }
