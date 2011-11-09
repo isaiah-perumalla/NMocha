@@ -18,122 +18,53 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using NMock2;
+using NMock2.Internal;
 using NMock2.Monitoring;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class InvocationDispatcher : IExpectationCollector {
-        /// <summary>
-        /// Stores the calling depth for the document writer output.
-        /// </summary>
+      
         private readonly int depth;
-
-        /// <summary>
-        /// Stores the expectations that could be added.
-        /// </summary>
         private readonly List<IExpectation> expectations = new List<IExpectation>();
+        private readonly List<IStates> stateMachines = new List<IStates>();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InvocationDispatcher"/> class.
-        /// </summary>
         public InvocationDispatcher() {
             depth = 0;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InvocationDispatcher"/> class.
-        /// </summary>
-        /// <param name="depth">The calling depth.</param>
         public InvocationDispatcher(int depth) {
             this.depth = depth;
         }
 
         #region IExpectationOrdering Members
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is active.
-        /// </summary>
-        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
         public bool IsActive {
-            get {
-                foreach (IExpectation e in expectations)
-                {
-                    if (e.IsActive)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
+            get { return expectations.Any(e => e.IsActive); }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance has been met.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance has been met; otherwise, <c>false</c>.
-        /// </value>
         public bool HasBeenMet {
-            get {
-                foreach (IExpectation e in expectations)
-                {
-                    if (!e.HasBeenMet)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
+            get { return expectations.All(e => e.HasBeenMet); }
         }
 
-        /// <summary>
-        /// Checks whether stored expectations matches the specified invocation.
-        /// </summary>
-        /// <param name="invocation">The invocation to check.</param>
-        /// <returns>Returns whether one of the stored expectations has met the specified invocation.</returns>
-        public bool Matches(Invocation invocation) {
-            foreach (IExpectation e in expectations)
-            {
-                if (e.Matches(invocation))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+        
+        bool Matches(Invocation invocation) {
+            return expectations.Any(e => e.Matches(invocation));
         }
 
-        public bool MatchesIgnoringIsActive(Invocation invocation) {
-            foreach (IExpectation e in expectations)
-            {
-                if (e.MatchesIgnoringIsActive(invocation))
-                {
-                    return true;
-                }
-            }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Performs the specified invocation on the corresponding expectation if a match was found.
-        /// </summary>
-        /// <param name="invocation">The invocation to match.</param>
-        public void Perform(Invocation invocation) {
-            foreach (IExpectation e in expectations)
+        void Perform(Invocation invocation) {
+            foreach (IExpectation e in expectations.Where(e => e.Matches(invocation)))
             {
-                if (e.Matches(invocation))
-                {
-                    e.Perform(invocation);
-                    return;
-                }
+                e.Perform(invocation);
+                return;
             }
 
             throw new InvalidOperationException("No matching expectation");
         }
 
-        public void DescribeActiveExpectationsTo(IDescription  writer) {
+        void DescribeActiveExpectationsTo(IDescription  writer) {
             DescribeUnmetExpectationsTo(writer);
         }
 
@@ -155,11 +86,45 @@ namespace NMock2.Internal {
 
         #endregion
 
-        private void Indent(IDescription writer, int n) {
-            for (int i = 0; i < n; i++)
+        private static void Indent(IDescription writer, int n) {
+            for (var i = 0; i < n; i++)
             {
                 writer.AppendText("  ");
             }
+        }
+
+        public void Dispatch(Invocation invocation) {
+            if (Matches(invocation))
+            {
+                Perform(invocation);
+            }
+            else
+            {
+                FailUnexpectedInvocation(invocation);
+            }
+        }
+
+        private void FailUnexpectedInvocation(Invocation invocation)
+        {
+            var description = new StringDescriptionWriter();
+            description.AppendText("unexpected invocation of ");
+            invocation.DescribeOn(description);
+
+            description.AppendNewLine();
+            DescribeActiveExpectationsTo(description);
+            
+            description.AppendList("\nstates:\n" , Environment.NewLine, string.Empty, stateMachines);
+                
+            // try catch to get exception with stack trace.
+            throw new ExpectationException(description.ToString());
+            
+            
+        }
+
+        public StateMachine NewStateMachine(string name) {
+            var stateMachine = new StateMachine(name);
+            stateMachines.Add(stateMachine);
+            return stateMachine;
         }
     }
 }

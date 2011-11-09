@@ -109,6 +109,7 @@ namespace NMock2 {
         private readonly int required;
         private readonly int maximum;
         public static readonly Cardinality AllowAny = AtLeast(0);
+        private static readonly Cardinality NeverCardinality = new Cardinality(0,0);
 
         private Cardinality(int required, int maximum) {
             this.required = required;
@@ -146,6 +147,7 @@ namespace NMock2 {
             else if (maximum == int.MaxValue && required > 1) DescribeExpected(description, "atleast {0} times", required);
             else if (maximum == required && required > 1) DescribeExpected(description, "exactly {0} times", required);
             else if (0 == required && maximum > 0) DescribeExpected(description,"at most {0} times", maximum);
+            else if (Equals( NeverCardinality)) DescribeExpected(description,"never");
            
             
         }
@@ -153,6 +155,10 @@ namespace NMock2 {
         private void DescribeExpected(IDescription description, string atleastTimes, params object[] args) {
             description.AppendText("expected ")
                 .AppendTextFormat(atleastTimes, args);
+        }
+
+        public static Cardinality Never() {
+            return NeverCardinality;
         }
     }
 }

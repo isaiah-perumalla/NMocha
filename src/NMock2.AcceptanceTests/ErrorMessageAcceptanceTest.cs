@@ -55,6 +55,55 @@ expectations:
                 Assert.AreEqual(e.Message, (expectedMessage));
             }
         }
+        
+        
+        [Test]
+        public void ErrorMessageHasExpectedNeverWhenInvocation() {
+            SkipVerificationForThisTest();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
+            Expect.Never.On(speaker).Message("Hello");
+            try
+            {
+                speaker.Hello();
+            }
+            catch(ExpectationException e)
+            {
+                const string expectedMessage = @"unexpected invocation of speaker.Hello()
+expectations:
+  expected never: speaker.Hello(any arguments)
+";
+                Console.WriteLine(e.Message);
+
+                Assert.AreEqual(e.Message, (expectedMessage));
+            }
+        }
+
+        [Test]
+        public void ShowsInformationOfStubbedCalls() {
+            SkipVerificationForThisTest();
+            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
+            Stub.On(speaker).Message("Hello");
+            Expect.AtLeastOnce.On(speaker).Message("Err");
+            try
+            {
+                speaker.Hello();
+                Mockery.VerifyAllExpectationsHaveBeenMet();
+            }
+            catch (ExpectationException e)
+            {
+                const string expectedMessage =
+                    @"not all expected invocations were performed
+expectations:
+  allowed, already invoked 1 time: speaker.Hello(any arguments)
+  expected atleast once, never invoked: speaker.Err(any arguments)
+";
+                Console.WriteLine(e.Message);
+
+                Assert.AreEqual(e.Message, expectedMessage);
+
+            }
+
+        }
 
         [Test]
         public void WhenUnexpectedInvocationShowExpectedAndCurrentNumberOfCallsInErrorMessage() {

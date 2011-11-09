@@ -17,7 +17,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace NMock2.Internal {
     /// <summary>
@@ -83,6 +85,18 @@ namespace NMock2.Internal {
         public IDescription AppendNewLine() {
             stringWriter.WriteLine();
             return this;
+        }
+
+        public void AppendList<T>(string start, string seperator, string end, IEnumerable<T> selfDescribing) where T : ISelfDescribing {
+            if(!selfDescribing.Any()) return;
+            stringWriter.Write(start);
+            foreach (var item in selfDescribing)
+            {
+                item.DescribeOn(this);
+                stringWriter.Write(seperator);
+
+            }
+            stringWriter.Write(end);
         }
 
         public override string ToString() {

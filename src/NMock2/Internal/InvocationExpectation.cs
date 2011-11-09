@@ -140,15 +140,7 @@ namespace NMock2.Internal {
         }
 
         private bool ExtraMatchersMatch(Invocation invocation) {
-            foreach (Matcher matcher in extraMatchers)
-            {
-                if (!matcher.Matches(invocation))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return extraMatchers.Cast<Matcher>().All(matcher => matcher.Matches(invocation));
         }
 
         private void DescribeTo(IDescription writer) {
@@ -184,27 +176,31 @@ namespace NMock2.Internal {
 
         private void DescribeMethod(IDescription description) {
             cardinality.DescribeOn(description);
+            DescribeInvocationCount(description, callCount);
+            description.AppendText(": ")
+                  .AppendText(receiver.MockName)
+                  .AppendText(methodSeparator);
+            methodMatcher.DescribeOn(description);
+            genericMethodTypeMatcher.DescribeOn(description);
+        }
+
+        private void DescribeInvocationCount(IDescription description, int count) {
+            if(cardinality.Equals(Cardinality.Never())) return;
             description.AppendText(", ");
-            if (callCount == 0)
+            if (count == 0 )
             {
                 description.AppendText("never invoked");
             }
             else
             {
                 description.AppendText("already invoked ");
-                description.AppendText(callCount.ToString());
+                description.AppendText(count.ToString());
                 description.AppendText(" time");
-                if (callCount != 1)
+                if (count != 1)
                 {
                     description.AppendText("s");
                 }
             }
-
-            description.AppendText(": ")
-                  .AppendText(receiver.MockName)
-                  .AppendText(methodSeparator);
-            methodMatcher.DescribeOn(description);
-            genericMethodTypeMatcher.DescribeOn(description);
         }
 
         private void DescribeOrderingConstraintsOn(IDescription writer) {

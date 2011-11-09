@@ -121,15 +121,7 @@ namespace NMock2.AcceptanceTests {
             speaker.Hello();
         }
 
-        [Test]
-        [Ignore("Feature for future release: mock hashcode.")]
-        public void MockHash() {
-            var speaker = Mockery.NewInstanceOfRole<ISpeaker>();
-
-            int i = speaker.GetHashCode();
-
-            Assert.AreEqual(33650554, i);
-        }
+        
 
         [Test]
         public void MockToString() {
@@ -138,6 +130,15 @@ namespace NMock2.AcceptanceTests {
             string s = speaker.ToString();
 
             Assert.AreEqual("text", s);
+        }
+
+        [Test]
+        public void ReturnSpecifiedResult()
+        {
+            var o = Mockery.NewInstanceOfRole<ISpeaker>();
+            Expect.Once.On(o).Message("Ask").With("Hello").Will(Return.Value("Hi"));
+            var response = o.Ask("Hello");
+            Assert.AreEqual(response, "Hi");
         }
 
         [Test]

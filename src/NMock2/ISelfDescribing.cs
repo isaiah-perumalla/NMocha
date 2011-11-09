@@ -16,6 +16,7 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using System.Collections.Generic;
 using System.IO;
 
 namespace NMock2 {
@@ -36,5 +37,6 @@ namespace NMock2 {
         IDescription AppendTextFormat(string format, params object[] args);
         IDescription AppendValue(object value);
         IDescription AppendNewLine();
+        void AppendList<T>(string start, string seperator, string end, IEnumerable<T> selfDescribing) where  T: ISelfDescribing;
     }
 }

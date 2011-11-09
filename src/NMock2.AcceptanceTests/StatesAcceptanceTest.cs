@@ -78,6 +78,7 @@ namespace NMock2 {
             }
             catch (ExpectationException e)
             {
+                Console.WriteLine(e.Message);
                 Assert.That(e.Message.Contains("veginess is Carrot"),
                             "should contain veggieness is Carrot but  msg was '{0}'", e.Message);
                 Assert.That(e.Message.Contains("fruitness is not apple"),

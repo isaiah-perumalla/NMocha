@@ -34,6 +34,14 @@ namespace NMocha.Test.Internal {
             Assert.AreEqual("expected atleast 2 times", StringDescription.Describe(Cardinality.AtLeast(2)));
         }
         
+        
+        [Test]
+        public void DescribesNever()
+        {
+            Assert.AreEqual("expected never", StringDescription.Describe(Cardinality.Never()));
+            Assert.AreEqual("expected never", StringDescription.Describe(Cardinality.Exactly(0)));
+        }
+        
         [Test]
         public void DescribesAtAllowingAnyCardinality()
         {

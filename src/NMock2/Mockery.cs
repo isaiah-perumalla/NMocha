@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NMocha.Internal;
 using NMock2.Internal;
 using NMock2.Monitoring;
 
@@ -37,30 +38,17 @@ namespace NMock2 {
     /// The mockery is used to create dynamic mocks and check that all expectations were met during a unit test.
     /// </summary>
     /// <remarks>Name inspired by Ivan Moore.</remarks>
-    public class Mockery :  IDisposable, IExpectationCollector, IInvocationListener {
-        /// <summary>
-        /// The mock object factory that is being used by this Mockery instance.
-        /// </summary>
-        private IMockObjectFactory mockObjectFactory;
+    public class Mockery :  IDisposable, IInvocationListener {
+        IMockObjectFactory mockObjectFactory;
+        InvocationDispatcher dispatcher;
+        ResolveTypeDelegate resolveTypeDelegate;
+        ExpectationException thrownUnexpectedInvocationException;
 
-        private readonly List<IStates> stateMachines = new List<IStates>();
-
-
-        private InvocationDispatcher dispatcher;
-
-      
-        private ResolveTypeDelegate resolveTypeDelegate;
-
-  
-        private ExpectationException thrownUnexpectedInvocationException;
-
-        
-      
-     
         public Mockery() {
-            mockObjectFactory = new CastleMockObjectFactory(this, this);
+           
 
-            ClearExpectations();
+            dispatcher = new InvocationDispatcher();
+            mockObjectFactory = new CastleMockObjectFactory(dispatcher, this);
         }
 
         #region IDisposable Members
@@ -125,59 +113,15 @@ namespace NMock2 {
         }
 
 
-        /// <summary>
-        /// Adds the expectation.
-        /// </summary>
-        /// <param name="expectation">The expectation.</param>
-        private void AddExpectation(IExpectation expectation) {
-            dispatcher.Add(expectation);
-        }
-
- 
         internal object ResolveType(object mock, Type requestedType) {
             return resolveTypeDelegate != null ? resolveTypeDelegate(mock, requestedType) : Missing.Value;
         }
 
       
         private void Dispatch(Invocation invocation) {
-            if (dispatcher.Matches(invocation))
-            {
-                dispatcher.Perform(invocation);
-            }
-            else
-            {
-                FailUnexpectedInvocation(invocation);
-            }
-        }
-
-
-        private void ClearExpectations() {
-            dispatcher = new InvocationDispatcher();
-        }
-
-
-        private void FailUnmetExpectations() {
-            var writer = new StringDescriptionWriter();
-            writer.AppendLine("not all expected invocations were performed");
-            dispatcher.DescribeUnmetExpectationsTo(writer);
-          
-
-            throw new ExpectationException(writer.ToString());
-        }
-
-
-        private void FailUnexpectedInvocation(Invocation invocation) {
-            var writer = new StringDescriptionWriter();
-            writer.AppendText("unexpected invocation of ");
-            invocation.DescribeOn(writer);
-
-            writer.AppendNewLine();
-            dispatcher.DescribeActiveExpectationsTo(writer);
-            DescribeStatesOn(writer);
-            // try catch to get exception with stack trace.
             try
             {
-                throw new ExpectationException(writer.ToString());
+                dispatcher.Dispatch(invocation);
             }
             catch (ExpectationException e)
             {
@@ -191,27 +135,29 @@ namespace NMock2 {
             }
         }
 
-        private void DescribeStatesOn(IDescription writer) {
-            if (stateMachines.Any())
-            {
-                writer.AppendText("\nstates:\n");
-                stateMachines.ForEach(stateMachine => stateMachine.DescribeOn(writer));
-            }
+
+        private void FailUnmetExpectations() {
+            var writer = new StringDescriptionWriter();
+            writer.AppendLine("not all expected invocations were performed");
+            dispatcher.DescribeUnmetExpectationsTo(writer);
+            throw new ExpectationException(writer.ToString());
         }
 
+
+       
+
+       
+
         public IStates States(string name) {
-            var stateMachine = new StateMachine(name);
-            stateMachines.Add(stateMachine);
-            return stateMachine;
+            
+            return dispatcher.NewStateMachine(name);
         }
 
         #region Nested type: Popper
 
         #endregion
 
-        void IExpectationCollector.Add(IExpectation expectation) {
-            this.AddExpectation(expectation);
-        }
+       
 
         void IInvocationListener.NotifyInvocation(Invocation invocation) {
             Dispatch(invocation);

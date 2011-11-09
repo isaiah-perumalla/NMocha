@@ -31,13 +31,11 @@ namespace NMock2.Internal {
             var stateMachine = new StateMachine("fruitness");
 
             Assert.That(StringDescription.Describe(stateMachine),
-                        NUnit.Framework.SyntaxHelpers.Is.EqualTo(string.Format("fruitness has no current state{0}",
-                                                                               Environment.NewLine)));
+                        NUnit.Framework.SyntaxHelpers.Is.EqualTo(string.Format("fruitness has no current state")));
             stateMachine.Is("apple").Activate();
 
             Assert.That(StringDescription.Describe(stateMachine),
-                        NUnit.Framework.SyntaxHelpers.Is.EqualTo(string.Format("fruitness is apple{0}",
-                                                                               Environment.NewLine)));
+                        NUnit.Framework.SyntaxHelpers.Is.EqualTo(string.Format("fruitness is apple")));
         }
 
         [Test]

@@ -33,12 +33,12 @@ namespace NMock2 {
             description.AppendText(name);
             if (string.IsNullOrEmpty(currentState))
             {
-                description.AppendLine(" has no current state");
+                description.AppendText(" has no current state");
             }
             else
             {
                 description.AppendText(" is ")
-                           .AppendLine(currentState);
+                           .AppendText(currentState);
             }
         }
 

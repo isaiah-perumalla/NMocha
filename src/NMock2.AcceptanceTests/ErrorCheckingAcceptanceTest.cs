@@ -137,6 +137,8 @@ namespace NMock2.AcceptanceTests {
             speaker.Hello();
         }
 
+       
+
         [Test]
         public void WrongReturnType() {
             var o = Mockery.NewInstanceOfRole<IOperator>();
