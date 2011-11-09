@@ -32,7 +32,7 @@ namespace NMock2 {
         /// <param name="mock">The mock to stub.</param>
         /// <returns>Method syntax defining the method, property or event to stub.</returns>
         public static IMethodSyntax On(object mock) {
-            var builder = new ExpectationBuilder("Stub", Is.Anything, Is.Anything);
+            var builder = new ExpectationBuilder(Cardinality.AllowAny);
             return builder.On(mock);
         }
     }

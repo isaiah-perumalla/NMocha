@@ -21,7 +21,7 @@ using NUnit.Framework;
 
 namespace NMock2.Internal.Test {
     [TestFixture]
-    public class DescriptionWriterTest {
+    public class StringDescriptionTest {
         #region Setup/Teardown
 
         [SetUp]

@@ -16,6 +16,7 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using System;
 using NMock2.Internal;
 using NMock2.Syntax;
 
@@ -30,7 +31,7 @@ namespace NMock2 {
         /// Gets a receiver of a method, property, etc. that must never be called.
         /// </summary>
         public static IReceiverSyntax Never {
-            get { return new ExpectationBuilder("never", Is.EqualTo(0), Is.EqualTo(0)); }
+            get { return new ExpectationBuilder(Cardinality.Exactly(0)); }
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace NMock2 {
         /// <param name="count">Expected number of invocations.</param>
         /// <returns>Returns a receiver of a method, property, etc. that has to be called exactly <paramref name="count"/> times.</returns>
         public static IReceiverSyntax Exactly(int count) {
-            return new ExpectationBuilder(Times(count), Is.AtLeast(count), Is.AtMost(count));
+            return new ExpectationBuilder(Cardinality.Exactly(count));
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace NMock2 {
         /// <param name="count">Minimal allowed number of invocations.</param>
         /// <returns>Returns a receiver of a method, property, etc. that has to be called at least <paramref name="count"/> times.</returns>
         public static IReceiverSyntax AtLeast(int count) {
-            return new ExpectationBuilder("at least " + Times(count), Is.AtLeast(count), Is.Anything);
+            return new ExpectationBuilder(Cardinality.AtLeast(count));
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace NMock2 {
         /// <param name="count">Maximal allowed number of invocations.</param>
         /// <returns>Returns a receiver of a method, property, etc. that has to be called at most <paramref name="count"/> times.</returns>
         public static IReceiverSyntax AtMost(int count) {
-            return new ExpectationBuilder("at most " + Times(count), Is.Anything, Is.AtMost(count));
+            return new ExpectationBuilder(Cardinality.AtMost(count));
         }
 
         /// <summary>
@@ -82,8 +83,7 @@ namespace NMock2 {
         /// <param name="maxCount">Maximaal allowed number of invocations.</param>
         /// <returns>Returns a receiver of a method, property, etc. that has to be called between <paramref name="count"/> times.</returns>
         public static IReceiverSyntax Between(int minCount, int maxCount) {
-            return new ExpectationBuilder(minCount + " to " + maxCount + " times", Is.AtLeast(minCount),
-                                          Is.AtMost(maxCount));
+            return new ExpectationBuilder(Cardinality.Between(minCount, maxCount));
         }
 
         /// <summary>
@@ -102,6 +102,57 @@ namespace NMock2 {
         /// <returns>String representation of n times.</returns>
         private static string Times(int n) {
             return n + ((n == 1) ? " time" : " times");
+        }
+    }
+
+    public  struct Cardinality : ISelfDescribing{
+        private readonly int required;
+        private readonly int maximum;
+        public static readonly Cardinality AllowAny = AtLeast(0);
+
+        private Cardinality(int required, int maximum) {
+            this.required = required;
+            this.maximum = maximum;
+        }
+
+        public static Cardinality AtMost(int count) {
+            return Between(0, count);
+        }
+
+        public static Cardinality Between(int required, int count) {
+            return new Cardinality(required, count);
+        }
+
+        public static Cardinality AtLeast(int count) {
+            return Between(count, int.MaxValue);
+        }
+
+        public static Cardinality Exactly(int count) {
+            return Between(count, count);
+        }
+
+        public bool AllowsMoreInvocations(int callCount) {
+            return callCount < maximum;
+        }
+
+        public bool IsSatisfied(int callCount) {
+            return callCount >= required && callCount <= maximum;
+        }
+
+        public void DescribeOn(IDescription description) {
+            if (Equals(AllowAny)) description.AppendText("allowed");
+            else if (maximum == 1 && required == 1) DescribeExpected(description, "once");
+            else if (maximum == int.MaxValue && required == 1) DescribeExpected(description, "atleast once", required);
+            else if (maximum == int.MaxValue && required > 1) DescribeExpected(description, "atleast {0} times", required);
+            else if (maximum == required && required > 1) DescribeExpected(description, "exactly {0} times", required);
+            else if (0 == required && maximum > 0) DescribeExpected(description,"at most {0} times", maximum);
+           
+            
+        }
+
+        private void DescribeExpected(IDescription description, string atleastTimes, params object[] args) {
+            description.AppendText("expected ")
+                .AppendTextFormat(atleastTimes, args);
         }
     }
 }

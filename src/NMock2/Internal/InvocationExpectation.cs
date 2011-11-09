@@ -25,13 +25,14 @@ using NMock2.Monitoring;
 
 namespace NMock2.Internal {
     public class InvocationExpectation : IExpectation {
+        private readonly Cardinality cardinality;
         private readonly ArrayList actions = new ArrayList();
 
-        private readonly string expectationDescription;
+
         private readonly ArrayList extraMatchers = new ArrayList();
-        private readonly Matcher matchingCountMatcher;
+   
         private readonly List<IOrderingConstraint> orderingConstraints = new List<IOrderingConstraint>();
-        private readonly Matcher requiredCountMatcher;
+   
         private readonly List<ISideEffect> sideEffects = new List<ISideEffect>();
         private Matcher argumentsMatcher = new AlwaysMatcher(true, "(any arguments)");
         private int callCount;
@@ -42,11 +43,8 @@ namespace NMock2.Internal {
         private IMockObject receiver;
 
         
-        public InvocationExpectation(string expectationDescription, Matcher requiredCountMatcher,
-                                    Matcher matchingCountMatcher) {
-            this.expectationDescription = expectationDescription;
-            this.requiredCountMatcher = requiredCountMatcher;
-            this.matchingCountMatcher = matchingCountMatcher;
+        public InvocationExpectation(Cardinality cardinality) {
+            this.cardinality = cardinality;
         }
 
         public IMockObject Receiver {
@@ -72,11 +70,11 @@ namespace NMock2.Internal {
         #region IExpectation Members
 
         public bool IsActive {
-            get { return matchingCountMatcher.Matches(callCount + 1); }
+            get { return cardinality.AllowsMoreInvocations(callCount); }
         }
 
         public bool HasBeenMet {
-            get { return requiredCountMatcher.Matches(callCount); }
+            get { return cardinality.IsSatisfied(callCount); }
         }
 
        
@@ -110,16 +108,13 @@ namespace NMock2.Internal {
         public void DescribeActiveExpectationsTo(IDescription writer) {
             if (IsActive)
             {
-                writer.AppendText("expected ");
                 DescribeTo(writer);
             }
         }
 
         public void DescribeUnmetExpectationsTo(IDescription writer) {
-            
-            writer.AppendText("expected ");   
+             
             DescribeTo(writer);
-            
         }
 
         #endregion
@@ -188,8 +183,8 @@ namespace NMock2.Internal {
         }
 
         private void DescribeMethod(IDescription description) {
-            description.AppendText(expectationDescription)
-                .AppendText(", ");
+            cardinality.DescribeOn(description);
+            description.AppendText(", ");
             if (callCount == 0)
             {
                 description.AppendText("never invoked");

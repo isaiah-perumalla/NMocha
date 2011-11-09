@@ -46,9 +46,9 @@ namespace NMock2.AcceptanceTests {
             {
                 const string expectedMessage = @"not all expected invocations were performed
 expectations:
-  expected 1 time, never invoked: speaker.Hello(any arguments)
-  expected 1 time, already invoked 1 time: speaker.Umm(any arguments)
-  expected at least 1 time, already invoked 1 time: speaker.Err(any arguments)
+  expected once, never invoked: speaker.Hello(any arguments)
+  expected once, already invoked 1 time: speaker.Umm(any arguments)
+  expected atleast once, already invoked 1 time: speaker.Err(any arguments)
 ";
                 Console.WriteLine(e.Message);
 
@@ -71,8 +71,8 @@ expectations:
                 const string expectedMessage =
                     @"unexpected invocation of speaker.Umm()
 expectations:
-  expected 1 time, never invoked: speaker.Hello(any arguments)
-  expected at least 1 time, never invoked: speaker.Err(any arguments)
+  expected once, never invoked: speaker.Hello(any arguments)
+  expected atleast once, never invoked: speaker.Err(any arguments)
 ";
                 Console.WriteLine(e.Message);
 

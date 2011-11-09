@@ -70,9 +70,10 @@
     <Compile Include="Actions\SetNamedParameterActionTest.cs" />
     <Compile Include="Actions\ThrowActionTest.cs" />
     <Compile Include="AssertDescription.cs" />
-    <Compile Include="Internal\BuildableExpectationTest.cs" />
+    <Compile Include="Internal\CardinalityTest.cs" />
+    <Compile Include="Internal\InvocationExpectationTest.cs" />
     <Compile Include="Internal\CompositeTypeTest.cs" />
-    <Compile Include="Internal\DescriptionWriterTest.cs" />
+    <Compile Include="Internal\StringDescriptionTest.cs" />
     <Compile Include="Internal\InStateOrderingConstraintTest.cs" />
     <Compile Include="Internal\StateMachineTest.cs" />
     <Compile Include="IsTest.cs" />

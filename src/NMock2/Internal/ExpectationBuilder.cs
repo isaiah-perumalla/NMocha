@@ -28,14 +28,10 @@ namespace NMock2.Internal {
         private readonly InvocationExpectation expectation;
         private IMockObject mockObject;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpectationBuilder"/> class.
-        /// </summary>
-        /// <param name="description">The description.</param>
-        /// <param name="requiredCountMatcher">The required count matcher.</param>
-        /// <param name="acceptedCountMatcher">The accepted count matcher.</param>
-        public ExpectationBuilder(string description, Matcher requiredCountMatcher, Matcher acceptedCountMatcher) {
-            expectation = new InvocationExpectation(description, requiredCountMatcher, acceptedCountMatcher);
+        
+
+        public ExpectationBuilder(Cardinality cardinality) {
+            expectation = new InvocationExpectation(cardinality);
         }
 
         #region IArgumentSyntax Members
