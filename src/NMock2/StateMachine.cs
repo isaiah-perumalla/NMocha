@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using NMock2.Internal;
+using NMocha.Internal;
 
 namespace NMock2 {
     public class StateMachine : IStates {

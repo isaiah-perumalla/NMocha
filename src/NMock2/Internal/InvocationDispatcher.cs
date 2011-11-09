@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NMock2;
-using NMock2.Internal;
 using NMock2.Monitoring;
 
 namespace NMocha.Internal {

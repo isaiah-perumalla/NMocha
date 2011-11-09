@@ -21,7 +21,7 @@
 using System;
 using System.Collections;
 using System.ComponentModel.Design;
-using NMock2.Internal;
+using NMocha.Internal;
 using NMock2.Monitoring;
 using NUnit.Framework;
 

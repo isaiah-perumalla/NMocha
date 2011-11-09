@@ -21,7 +21,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using NMock2.Internal;
+using NMocha.Internal;
+using NMocha.Monitoring;
 
 namespace NMock2.Monitoring {
     /// <summary>

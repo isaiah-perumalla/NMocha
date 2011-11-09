@@ -22,6 +22,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Reflection;
+using NMocha.Internal;
 using NMock2.Internal;
 using NMock2.Monitoring;
 using NUnit.Framework;

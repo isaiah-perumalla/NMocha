@@ -1,6 +1,6 @@
 ﻿using NMock2.Monitoring;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public interface IInvocationListener {
         void NotifyInvocation(Invocation invocation);
     }

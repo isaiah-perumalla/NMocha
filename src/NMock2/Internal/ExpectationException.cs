@@ -19,7 +19,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     /// <summary>
     /// Exception representing an expectation exception.
     /// </summary>

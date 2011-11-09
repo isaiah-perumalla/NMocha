@@ -20,8 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NMock2;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     /// <summary>
     /// Used to describe Matchers and other classes for exception handling.
     /// </summary>

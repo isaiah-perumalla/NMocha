@@ -1,4 +1,4 @@
-﻿using NMock2.Internal;
+﻿using NMocha.Internal;
 
 namespace NMock2 {
     public interface ISequence {

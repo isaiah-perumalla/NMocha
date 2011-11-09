@@ -16,6 +16,7 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using NMocha.Monitoring;
 using NMock2.Monitoring;
 
 namespace NMock2 {

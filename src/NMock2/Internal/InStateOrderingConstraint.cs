@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using NMock2;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class InStateOrderingConstraint : IOrderingConstraint {
         private readonly IStatePredicate predicate;
 

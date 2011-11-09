@@ -18,9 +18,11 @@
 //-----------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Reflection;
+using NMocha.Monitoring;
+using NMock2;
 using NMock2.Monitoring;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class MockObject : IInvokable, IMockObject {
       
         private readonly CompositeType mockedTypes;

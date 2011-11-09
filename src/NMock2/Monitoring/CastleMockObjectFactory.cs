@@ -20,7 +20,8 @@ using System;
 using System.Collections.Generic;
 using Castle.Core.Interceptor;
 using Castle.DynamicProxy;
-using NMock2.Internal;
+using NMocha.Internal;
+using NMocha.Monitoring;
 
 namespace NMock2.Monitoring {
     /// <summary>

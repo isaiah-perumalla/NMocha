@@ -19,11 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NMock2;
 using NMock2.Matchers;
 using NMock2.Monitoring;
 using NMock2.Syntax;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     /// <summary>
     /// Allows a mock object to be incrementally defined, and then finally created.
     /// </summary>

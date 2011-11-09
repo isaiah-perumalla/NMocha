@@ -16,7 +16,9 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace NMock2.Monitoring {
+using NMock2.Monitoring;
+
+namespace NMocha.Monitoring {
     /// <summary>
     /// IInvokable objects can be invoked.
     /// </summary>

@@ -17,8 +17,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
+using NMock2.Monitoring;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     /// <summary>
     /// An invoker invokes an <see cref="Invocation"/> on a target if
     /// it is responsible for the target type, otherwise the invocation is passed

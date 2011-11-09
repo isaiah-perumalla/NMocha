@@ -21,8 +21,9 @@ using System.Collections;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
+using NMock2.Monitoring;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     public class ProxyInvokableAdapter : RealProxy {
         private readonly IInvokable invokable;
 

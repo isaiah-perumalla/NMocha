@@ -17,10 +17,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Reflection;
 using System.Text;
-using NMock2.Internal;
+using NMocha.Internal;
 
 namespace NMock2.Monitoring {
     /// <summary>
@@ -360,28 +359,6 @@ namespace NMock2.Monitoring {
                     writer.AppendValue(Parameters[i]);
                 }
             }
-        }
-
-        /// <summary>
-        /// Describes the event adder to the specified <paramref name="writer"/>.
-        /// </summary>
-        /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsEventAdder(TextWriter writer) {
-            writer.Write(".");
-            writer.Write(Method.Name.Substring(4));
-            writer.Write(" += ");
-            writer.Write(Parameters[0]);
-        }
-
-        /// <summary>
-        /// Describes the event remover to the specified <paramref name="writer"/>.
-        /// </summary>
-        /// <param name="writer">The writer where the description is written to.</param>
-        private void DescribeAsEventRemover(TextWriter writer) {
-            writer.Write(".");
-            writer.Write(Method.Name.Substring(7));
-            writer.Write(" -= ");
-            writer.Write(Parameters[0]);
         }
 
         /// <summary>

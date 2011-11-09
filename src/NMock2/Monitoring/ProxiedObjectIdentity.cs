@@ -16,10 +16,10 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
 using System.Reflection;
+using NMock2.Monitoring;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     public class ProxiedObjectIdentity : IInvokable {
         private static readonly MethodInfo EqualsMethod =
             typeof (object).GetMethod("Equals", new[] {typeof (object)});

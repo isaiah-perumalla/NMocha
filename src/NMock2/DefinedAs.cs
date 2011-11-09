@@ -17,7 +17,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using NMock2.Internal;
+using NMocha.Internal;
 using NMock2.Syntax;
 
 namespace NMock2 {

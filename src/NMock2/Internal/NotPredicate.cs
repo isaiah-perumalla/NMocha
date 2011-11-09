@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO;
+using NMock2;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class NotPredicate : IStatePredicate {
         private readonly string name;
         private readonly Predicate<string> predicate;

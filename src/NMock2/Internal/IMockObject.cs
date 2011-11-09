@@ -18,8 +18,9 @@
 //-----------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Reflection;
+using NMock2;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     /// <summary>
     /// Interface for mocks.
     /// </summary>

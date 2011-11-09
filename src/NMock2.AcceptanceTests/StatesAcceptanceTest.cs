@@ -1,6 +1,6 @@
 using System;
+using NMocha.Internal;
 using NMock2.AcceptanceTests;
-using NMock2.Internal;
 using NUnit.Framework;
 
 namespace NMock2 {

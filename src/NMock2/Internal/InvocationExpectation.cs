@@ -18,12 +18,12 @@
 //-----------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using NMock2;
 using NMock2.Matchers;
 using NMock2.Monitoring;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class InvocationExpectation : IExpectation {
         private readonly Cardinality cardinality;
         private readonly ArrayList actions = new ArrayList();

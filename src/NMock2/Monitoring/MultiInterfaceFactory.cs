@@ -21,7 +21,7 @@ using System.Collections;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     public class MultiInterfaceFactory {
         private static readonly Hashtable createdTypes = new Hashtable();
         private readonly ModuleBuilder moduleBuilder;

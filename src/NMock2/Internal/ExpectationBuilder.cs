@@ -19,10 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NMock2;
 using NMock2.Matchers;
 using NMock2.Syntax;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     public class ExpectationBuilder :
         IReceiverSyntax, IMethodSyntax, IArgumentSyntax {
         private readonly InvocationExpectation expectation;

@@ -21,8 +21,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using NMock2;
 
-namespace NMock2.Internal {
+namespace NMocha.Internal {
     /// <summary>
     /// Represents one or more types that are to be mocked. Provides operations
     /// that work over top of all the contained types, as well as a means of

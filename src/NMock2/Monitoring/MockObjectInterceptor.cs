@@ -20,9 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Castle.Core.Interceptor;
-using NMock2.Internal;
+using NMocha.Internal;
+using NMock2.Monitoring;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     internal class MockObjectInterceptor : MockObject, IInterceptor {
         private static readonly Dictionary<MethodInfo, object> mockObjectMethods = new Dictionary<MethodInfo, object>();
 

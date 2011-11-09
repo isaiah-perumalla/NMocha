@@ -17,7 +17,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System.IO;
-using NMock2.Internal;
+using NMocha.Internal;
 using NMock2.Matchers;
 
 namespace NMock2 {

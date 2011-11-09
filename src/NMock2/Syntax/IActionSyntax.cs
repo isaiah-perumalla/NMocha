@@ -16,7 +16,7 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using NMock2.Internal;
+using NMocha.Internal;
 
 namespace NMock2.Syntax {
     /// <summary>

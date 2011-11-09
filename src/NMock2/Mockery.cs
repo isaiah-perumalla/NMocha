@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NMocha.Internal;
-using NMock2.Internal;
 using NMock2.Monitoring;
 
 namespace NMock2 {

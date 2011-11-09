@@ -1,4 +1,5 @@
 using System.IO;
+using NMocha.Internal;
 using NUnit.Framework;
 
 namespace NMock2.Internal {
