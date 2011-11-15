@@ -17,6 +17,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
+using NMocha;
 using NMocha.Internal;
 using NMock2.Syntax;
 

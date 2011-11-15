@@ -83,6 +83,7 @@
     <Compile Include="Actions\SetNamedParameterAction.cs" />
     <Compile Include="Actions\SignalAction.cs" />
     <Compile Include="Actions\ThrowAction.cs" />
+    <Compile Include="Cardinality.cs" />
     <Compile Include="Collect.cs" />
     <Compile Include="DefinedAs.cs" />
     <Compile Include="IMockDefinition.cs" />

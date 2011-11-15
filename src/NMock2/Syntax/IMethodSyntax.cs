@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Reflection;
+using NMocha;
 
 namespace NMock2.Syntax {
     /// <summary>

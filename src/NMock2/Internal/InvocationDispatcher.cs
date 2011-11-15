@@ -19,8 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NMock2;
-using NMock2.Monitoring;
+using NMocha.Monitoring;
 
 namespace NMocha.Internal {
     public class InvocationDispatcher : IExpectationCollector {

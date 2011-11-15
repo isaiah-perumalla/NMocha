@@ -18,13 +18,14 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Threading;
 using NMocha.Internal;
+using NMocha.Monitoring;
+using NMock2;
 using NMock2.Monitoring;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Delegate used to override default type returned in stub behavior.
     /// </summary>
@@ -39,13 +40,14 @@ namespace NMock2 {
     /// <remarks>Name inspired by Ivan Moore.</remarks>
     public class Mockery :  IDisposable, IInvocationListener {
         IMockObjectFactory mockObjectFactory;
-        InvocationDispatcher dispatcher;
+        readonly InvocationDispatcher dispatcher;
         ResolveTypeDelegate resolveTypeDelegate;
         ExpectationException thrownUnexpectedInvocationException;
+        private IThreadingPolicy threadingPolicy;
 
         public Mockery() {
-           
 
+            threadingPolicy = new SingleThreadPolicy();
             dispatcher = new InvocationDispatcher();
             mockObjectFactory = new CastleMockObjectFactory(dispatcher, this);
         }
@@ -60,7 +62,7 @@ namespace NMock2 {
         #endregion
 
  
-        public object NewInstanceOfRole(Type mockedType, IMockDefinition definition) {
+        object NewInstanceOfRole(Type mockedType, IMockDefinition definition) {
             return definition.Create(mockedType, this, mockObjectFactory);
         }
 
@@ -74,7 +76,7 @@ namespace NMock2 {
             return (TMockedType) definition.Create(typeof (TMockedType), this, mockObjectFactory);
         }
 
-        
+
         public TMockedType NewInstanceOfRole<TMockedType>(params object[] constructorArgs) {
             return NewInstanceOfRole<TMockedType>(DefinedAs.WithArgs(constructorArgs));
         }
@@ -152,14 +154,10 @@ namespace NMock2 {
             return dispatcher.NewStateMachine(name);
         }
 
-        #region Nested type: Popper
-
-        #endregion
-
        
-
         void IInvocationListener.NotifyInvocation(Invocation invocation) {
-            Dispatch(invocation);
+            threadingPolicy.SynchronizeAction(() => Dispatch(invocation));
+           
         }
 
         public void SetMockFactoryAs(IMockObjectFactory factory) {
@@ -169,5 +167,40 @@ namespace NMock2 {
         public ISequence Sequence(string name) {
             return new NamedSequence(name);
         }
+
+        public void SetThreadingPolicy(IThreadingPolicy policy) {
+            this.threadingPolicy = policy;
+
+        }
     }
+
+    public class SingleThreadPolicy : IThreadingPolicy {
+        private Thread testThread;
+
+        public SingleThreadPolicy() {
+            testThread = Thread.CurrentThread;
+        }
+
+        public void SynchronizeAction(Action action) {
+            if(testThread != Thread.CurrentThread)
+                throw new ConcurrentModificationException();
+            action();
+        }
+    }
+
+    public interface IThreadingPolicy {
+        void SynchronizeAction(Action action);
+    }
+
+    public class Synchronizer : IThreadingPolicy
+    {
+        public void SynchronizeAction(Action action) {
+            
+        }
+    }
+
+    public class ConcurrentModificationException : Exception
+    {
+    }
+
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NMocha.Internal;
+using NMock2;
 
-namespace NMock2 {
+namespace NMocha {
     public class NamedSequence : ISequence {
         private readonly string name;
         private readonly List<IExpectation> expectationSequence = new List<IExpectation>();

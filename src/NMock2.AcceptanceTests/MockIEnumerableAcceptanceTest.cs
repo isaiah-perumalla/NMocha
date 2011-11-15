@@ -20,6 +20,9 @@
 //-----------------------------------------------------------------------
 using System.Collections;
 using System.IO;
+using NMocha;
+using NMocha.AcceptanceTests;
+using NMocha.Monitoring;
 using NMock2.Monitoring;
 using NUnit.Framework;
 

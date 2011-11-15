@@ -17,9 +17,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
+using NMock2;
 using NMock2.Actions;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Defines action for throwing actions.
     /// </summary>

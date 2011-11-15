@@ -21,7 +21,7 @@
 using NMock2.Matchers;
 using NUnit.Framework;
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     [TestFixture]
     public class ArgumentMatchingAcceptanceTest : AcceptanceTestBase {
         public interface IDemanding {

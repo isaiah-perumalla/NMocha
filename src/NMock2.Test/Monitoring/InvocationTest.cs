@@ -20,6 +20,7 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Reflection;
+using NMocha.Monitoring;
 using NMock2.Monitoring;
 using NUnit.Framework;
 

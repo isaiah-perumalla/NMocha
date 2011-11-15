@@ -20,7 +20,7 @@ using System;
 using System.Collections;
 using NMock2.Matchers;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Provides shortcuts to <see cref="Matcher"/>s.
     /// </summary>

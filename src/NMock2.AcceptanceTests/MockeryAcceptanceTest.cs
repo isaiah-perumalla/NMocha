@@ -21,6 +21,8 @@
 using System;
 using System.Collections;
 using System.ComponentModel.Design;
+using NMocha;
+using NMocha.AcceptanceTests;
 using NMocha.Internal;
 using NMock2.Monitoring;
 using NUnit.Framework;

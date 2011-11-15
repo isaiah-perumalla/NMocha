@@ -21,15 +21,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using Castle.Core.Interceptor;
 using NMocha.Internal;
-using NMock2.Monitoring;
 
 namespace NMocha.Monitoring {
     internal class MockObjectInterceptor : MockObject, IInterceptor {
         private static readonly Dictionary<MethodInfo, object> mockObjectMethods = new Dictionary<MethodInfo, object>();
 
-        /// <summary>
-        /// Initializes static members of the <see cref="MockObjectInterceptor"/> class.
-        /// </summary>
         static MockObjectInterceptor() {
             // We want to be able to quickly recognize any later invocations
             // on methods that belong to IMockObject or IInvokable, so we cache
@@ -45,13 +41,8 @@ namespace NMocha.Monitoring {
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MockObjectInterceptor"/> class.
-        /// </summary>
-        /// <param name="mockedType">Type of the mocked.</param>
-        /// <param name="name">The name.</param>
-        public MockObjectInterceptor(CompositeType mockedType,
-            string name, IExpectationCollector expectationCollector, IInvocationListener invocationListener) : base(mockedType, name, expectationCollector, invocationListener) {
+        
+        public MockObjectInterceptor(CompositeType mockedType, string name, IExpectationCollector expectationCollector, IInvocationListener invocationListener) : base(mockedType, name, expectationCollector, invocationListener) {
         }
 
         #region IInterceptor Members

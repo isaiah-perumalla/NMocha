@@ -20,8 +20,10 @@ using System;
 using System.Reflection;
 using System.Text;
 using NMocha.Internal;
+using NMock2;
+using NMock2.Monitoring;
 
-namespace NMock2.Monitoring {
+namespace NMocha.Monitoring {
     /// <summary>
     /// Represents the invocation of a method on an object (receiver).
     /// </summary>

@@ -68,13 +68,11 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ArgumentMatchingAcceptanceTest.cs" />
-    <Compile Include="BugReproduction\InterceptCallOnMockInEmptyOrderedExpectationOrdering.cs" />
-    <Compile Include="BugReproduction\MockServiceModelIClientChannel.cs" />
-    <Compile Include="BugReproduction\SetNamedParameterOnRef_2003169.cs" />
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="ClassMockAcceptanceTest.cs" />
     <Compile Include="AcceptanceTestBase.cs" />
     <Compile Include="CastleOnlyAttribute.cs" />
+    <Compile Include="ConcurrencyAcceptanceTests.cs" />
     <Compile Include="MockMultipleInterfacesAcceptanceTest.cs" />
     <Compile Include="ErrorCheckingAcceptanceTest.cs" />
     <Compile Include="ErrorMessageAcceptanceTest.cs" />
@@ -97,7 +95,6 @@
     <Compile Include="StatesAcceptanceTest.cs" />
     <Compile Include="StubAcceptanceTest.cs" />
     <Compile Include="Syntax\SyntaxAcceptanceTest.cs" />
-    <Compile Include="ThreadSynchronizationAcceptanceTest.cs" />
     <Compile Include="UsingBlockAcceptanceTest.cs" />
     <Compile Include="VisibilityAcceptanceTest.cs" />
   </ItemGroup>

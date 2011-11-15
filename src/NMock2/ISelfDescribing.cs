@@ -17,9 +17,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System.Collections.Generic;
-using System.IO;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// This interface is used to get a description of the implementator.
     /// </summary>

@@ -1,4 +1,6 @@
 using System;
+using NMocha;
+using NMocha.AcceptanceTests;
 using NMocha.Internal;
 using NMock2.AcceptanceTests;
 using NUnit.Framework;

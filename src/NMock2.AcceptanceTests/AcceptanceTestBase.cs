@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------
 using NUnit.Framework;
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     public abstract class AcceptanceTestBase {
         private bool doVerificationForCurrentTest = true;
         private bool doVerificationForEveryTestInFixture = true;

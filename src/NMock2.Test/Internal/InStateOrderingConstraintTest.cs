@@ -1,4 +1,5 @@
 using System.IO;
+using NMocha;
 using NMocha.Internal;
 using NUnit.Framework;
 

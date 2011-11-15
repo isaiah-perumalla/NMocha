@@ -17,9 +17,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using NMocha.Internal;
+using NMock2;
 using NMock2.Syntax;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Defines stubs for interfaces. Stubs are used when it does not matter how many times (even 0) something is called.
     /// A stub is the same as an "at least once" expecation.

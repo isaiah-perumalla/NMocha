@@ -17,9 +17,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using NMocha.Monitoring;
-using NMock2.Monitoring;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// An action defines something that has to be done.
     /// For example the action to return a result value.

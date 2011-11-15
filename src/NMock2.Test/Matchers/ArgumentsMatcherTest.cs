@@ -20,6 +20,8 @@
 //-----------------------------------------------------------------------
 
 using System.Reflection;
+using NMocha;
+using NMocha.Monitoring;
 using NMock2.Matchers;
 using NMock2.Monitoring;
 using NMock2.Test.Monitoring;

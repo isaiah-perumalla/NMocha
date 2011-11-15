@@ -16,6 +16,8 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using NMocha;
+
 namespace NMock2.Syntax {
     /// <summary>
     /// Syntax defining a value.

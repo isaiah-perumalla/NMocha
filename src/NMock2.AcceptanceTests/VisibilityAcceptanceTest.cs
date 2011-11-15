@@ -26,6 +26,8 @@
 
 // For CastleMockObjectFactory:
 using System.Runtime.CompilerServices;
+using NMocha;
+using NMocha.AcceptanceTests;
 using NUnit.Framework;
 
 [assembly:

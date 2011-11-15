@@ -20,6 +20,8 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Text.RegularExpressions;
+using NMocha;
+using NMocha.AcceptanceTests;
 using NUnit.Framework;
 
 namespace NMock2.AcceptanceTests {

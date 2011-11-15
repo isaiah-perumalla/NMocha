@@ -19,6 +19,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using NMocha;
 
 namespace NMock2.Matchers {
     /// <summary>

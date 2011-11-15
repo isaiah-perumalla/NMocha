@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using NMock2;
 
-namespace NMock2 {
+namespace NMocha {
     public class State : IStatePredicate {
         private readonly string state;
         private readonly StateMachine stateMachine;

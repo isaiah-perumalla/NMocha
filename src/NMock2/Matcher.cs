@@ -16,11 +16,11 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using System.IO;
 using NMocha.Internal;
+using NMock2;
 using NMock2.Matchers;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// A matcher is used to match objects against it.
     /// </summary>

@@ -18,7 +18,7 @@
 //-----------------------------------------------------------------------
 using NMock2.Matchers;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Provides shortcuts to matchers.
     /// </summary>

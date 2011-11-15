@@ -18,8 +18,9 @@
 //-----------------------------------------------------------------------
 using System.IO;
 using NMocha.Internal;
+using NMock2;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Verify that a condition is met.
     /// </summary>

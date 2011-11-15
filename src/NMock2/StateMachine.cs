@@ -1,7 +1,7 @@
-﻿using System.IO;
-using NMocha.Internal;
+﻿using NMocha.Internal;
+using NMock2;
 
-namespace NMock2 {
+namespace NMocha {
     public class StateMachine : IStates {
         private readonly string name;
         private string currentState;

@@ -16,10 +16,9 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
-using System.IO;
-using NMock2.Monitoring;
+using NMocha.Monitoring;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// Represents an expectation.
     /// </summary>

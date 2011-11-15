@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------
 using System.Collections;
 using System.IO;
+using NMocha;
 
 namespace NMock2.Matchers {
     /// <summary>

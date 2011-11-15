@@ -20,7 +20,7 @@ using System;
 using System.ComponentModel;
 using NMock2.Monitoring;
 
-namespace NMock2 {
+namespace NMocha {
     /// <summary>
     /// The definition of a mock object.
     /// </summary>

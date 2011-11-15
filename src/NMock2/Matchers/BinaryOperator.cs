@@ -16,6 +16,8 @@
 //   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
+using NMocha;
+
 namespace NMock2.Matchers {
     /// <summary>
     /// BinaryOperator is an abstract base class for matchers that combine two matchers into a single matcher. 

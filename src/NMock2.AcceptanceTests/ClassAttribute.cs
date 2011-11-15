@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------
 using NUnit.Framework;
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     /// <summary>
     /// Tests in this category perform mocking of classes.
     /// </summary>

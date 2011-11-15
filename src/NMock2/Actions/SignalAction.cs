@@ -18,6 +18,8 @@
 //-----------------------------------------------------------------------
 using System.IO;
 using System.Threading;
+using NMocha;
+using NMocha.Monitoring;
 using NMock2.Monitoring;
 
 namespace NMock2.Actions {

@@ -1,6 +1,6 @@
 ﻿using NMocha.Internal;
 
-namespace NMock2 {
+namespace NMocha {
     public interface ISequence {
         void ConstrainAsNextInSeq(InvocationExpectation expectation);
     }

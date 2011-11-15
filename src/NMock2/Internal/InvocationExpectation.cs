@@ -19,6 +19,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NMocha.Monitoring;
 using NMock2;
 using NMock2.Matchers;
 using NMock2.Monitoring;
