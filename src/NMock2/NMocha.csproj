@@ -85,6 +85,10 @@
     <Compile Include="Actions\ThrowAction.cs" />
     <Compile Include="Cardinality.cs" />
     <Compile Include="Collect.cs" />
+    <Compile Include="Concurrency\ConcurrentModificationException.cs" />
+    <Compile Include="Concurrency\IThreadingPolicy.cs" />
+    <Compile Include="Concurrency\SingleThreadPolicy.cs" />
+    <Compile Include="Concurrency\Synchronizer.cs" />
     <Compile Include="DefinedAs.cs" />
     <Compile Include="IMockDefinition.cs" />
     <Compile Include="Internal\ChangeStateEffect.cs" />

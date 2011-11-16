@@ -19,7 +19,7 @@
 
 using System;
 using System.Reflection;
-using System.Threading;
+using NMocha.Concurrency;
 using NMocha.Internal;
 using NMocha.Monitoring;
 using NMock2;
@@ -170,37 +170,6 @@ namespace NMocha {
 
         public void SetThreadingPolicy(IThreadingPolicy policy) {
             this.threadingPolicy = policy;
-
         }
     }
-
-    public class SingleThreadPolicy : IThreadingPolicy {
-        private Thread testThread;
-
-        public SingleThreadPolicy() {
-            testThread = Thread.CurrentThread;
-        }
-
-        public void SynchronizeAction(Action action) {
-            if(testThread != Thread.CurrentThread)
-                throw new ConcurrentModificationException();
-            action();
-        }
-    }
-
-    public interface IThreadingPolicy {
-        void SynchronizeAction(Action action);
-    }
-
-    public class Synchronizer : IThreadingPolicy
-    {
-        public void SynchronizeAction(Action action) {
-            
-        }
-    }
-
-    public class ConcurrentModificationException : Exception
-    {
-    }
-
 }

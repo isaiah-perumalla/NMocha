@@ -1,31 +1,31 @@
 using System;
 using System.Threading;
+using NMocha.Concurrency;
 using NMock2.AcceptanceTests;
 using NUnit.Framework;
 
 namespace NMocha.AcceptanceTests {
-    
     [TestFixture]
     public class ConcurrencyAcceptanceTests {
-    
-
         [Test]
         public void ByDefaultShouldNotAllowInvocationsFromMultipleThreads() {
             var mockery = new Mockery();
             var blitzer = new Blitzer(16);
-
+            var numberOfconcurrentExceptions = new AtomicInt(0);
             var mock = mockery.NewInstanceOfRole<ISpeaker>();
             Expect.Exactly(blitzer.TotalActionCount()).On(mock).Message("Hello");
-            try
-            {
-                blitzer.Blitz(mock.Hello);
-                Assert.Fail("should not allow invocation from multiple threads by default");
-            }
-            catch(ConcurrentModificationException e)
-            {
-                
-            }
+            blitzer.Blitz(() => {
+                              try
+                              {
+                                  mock.Hello();
+                              }
+                              catch (ConcurrentModificationException)
+                              {
+                                  numberOfconcurrentExceptions.Increment();
+                              }
+                          });
 
+            Assert.AreEqual(numberOfconcurrentExceptions.Value, 16, "should intercept invocation from non test thread");
         }
 
         [Test]
@@ -41,8 +41,22 @@ namespace NMocha.AcceptanceTests {
             blitzer.Blitz(mock.Hello);
 
             mockery.VerifyAllExpectationsHaveBeenMet();
+        }
+    }
 
+    public class AtomicInt {
+        private int i;
 
+        public AtomicInt(int initialValue) {
+            i = initialValue;
+        }
+
+        public int Value {
+            get { return i; }
+        }
+
+        public void Increment() {
+            Interlocked.Increment(ref i);
         }
     }
 
@@ -52,7 +66,6 @@ namespace NMocha.AcceptanceTests {
 
         public Blitzer(int numberOfaction) {
             this.numberOfaction = numberOfaction;
-            
         }
 
         public int TotalActionCount() {
@@ -61,18 +74,17 @@ namespace NMocha.AcceptanceTests {
 
         public void Blitz(Action action) {
             var countdownLatch = new CountdownEvent(numberOfaction);
-            Action runInNewThread = DecorateAction(action, countdownLatch);
-        
-            for (int i = 0; i < numberOfaction; i++)
+            var runInNewThread = DecorateAction(action, countdownLatch);
+
+            for (var i = 0; i < numberOfaction; i++)
             {
                 var thread = new Thread(new ThreadStart(runInNewThread));
                 thread.Start();
             }
             countdownLatch.Wait();
-
         }
 
-        private Action DecorateAction(Action action, CountdownEvent countdownLatch) {
+        private static Action DecorateAction(Action action, CountdownEvent countdownLatch) {
             return () => {
                        try
                        {
