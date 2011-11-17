@@ -27,13 +27,6 @@ namespace NMock2.Internal {
         }
     }
 
-    public class StringDescription {
-        public static string Describe(ISelfDescribing inStateOrdering) {
-            var stringWriter = new StringDescriptionWriter();
-            inStateOrdering.DescribeOn(stringWriter);
-            return stringWriter.ToString();
-        }
-    }
 
     public class FakeStatePredicate : IStatePredicate {
         public string description;

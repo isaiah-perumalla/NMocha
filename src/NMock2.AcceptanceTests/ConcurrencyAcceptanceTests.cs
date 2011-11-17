@@ -42,6 +42,32 @@ namespace NMocha.AcceptanceTests {
 
             mockery.VerifyAllExpectationsHaveBeenMet();
         }
+
+        [Test]
+        public void CanWaitUntilStateMachineIsInAGivenState()
+        {
+            var mockery = new Mockery();
+            var synchronizer = new Synchronizer();
+            mockery.SetThreadingPolicy(synchronizer);
+            var threads = mockery.States("threads");
+
+            var blitzer = new Blitzer(5);
+            var count = new AtomicInt(5);
+            var mock = mockery.NewInstanceOfRole<ISpeaker>();
+            Expect.Exactly(blitzer.TotalActionCount()).On(mock).Message("Hello");
+            Expect.Once.On(mock).Message("Goodbye").Then(threads.Is("finished"));
+            OnNewThread(() => blitzer.Blitz(() => {
+                                                mock.Hello();
+                                                if (count.Decrement() == 0) mock.Goodbye();
+                                            }));
+
+            synchronizer.WaitUntil(threads.Is("finished"));
+            mockery.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        private void OnNewThread(Action action) {
+            ThreadPool.QueueUserWorkItem(x => action());
+        }
     }
 
     public class AtomicInt {
@@ -55,8 +81,12 @@ namespace NMocha.AcceptanceTests {
             get { return i; }
         }
 
-        public void Increment() {
-            Interlocked.Increment(ref i);
+        public int Increment() {
+            return Interlocked.Increment(ref i);
+        }
+
+        public int Decrement() {
+            return Interlocked.Decrement(ref i);
         }
     }
 

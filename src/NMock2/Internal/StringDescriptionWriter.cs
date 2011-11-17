@@ -104,4 +104,15 @@ namespace NMocha.Internal {
           return stringWriter.ToString();
         }
     }
+
+    public class StringDescription
+    {
+        public static string Describe(ISelfDescribing inStateOrdering)
+        {
+            var stringWriter = new StringDescriptionWriter();
+            inStateOrdering.DescribeOn(stringWriter);
+            return stringWriter.ToString();
+        }
+    }
+
 }

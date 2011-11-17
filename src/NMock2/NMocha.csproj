@@ -171,6 +171,7 @@
     <Compile Include="Syntax\ISetIndexerSyntax.cs" />
     <Compile Include="Syntax\IValueSyntax.cs" />
     <Compile Include="Throw.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Verify.cs" />
   </ItemGroup>
   <ItemGroup>

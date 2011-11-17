@@ -1,3 +1,4 @@
+using NMocha.Internal;
 using NMock2;
 using NMock2.Internal;
 using NUnit.Framework;

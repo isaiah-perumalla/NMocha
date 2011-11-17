@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NMocha;
+using NMocha.Internal;
 using NUnit.Framework;
 
 namespace NMock2.Internal {
