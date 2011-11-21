@@ -2,8 +2,10 @@ using System;
 using System.Threading;
 using NMocha.Concurrency;
 using NMocha.Internal;
+using NMocha.Utils;
 using NMock2.AcceptanceTests;
 using NUnit.Framework;
+using Timeout = NMocha.Concurrency.Timeout;
 
 namespace NMocha.AcceptanceTests {
     [TestFixture]
@@ -74,7 +76,7 @@ namespace NMocha.AcceptanceTests {
         }
 
 
-         [Test]
+        [Test]
         public void ThrowsExpectationExceptionIfExpecatationViolationInBackgroundWhileWaitingForAGivenState() {
             var threads = mockery.States("threads");
 
@@ -104,6 +106,19 @@ namespace NMocha.AcceptanceTests {
        
         private static void OnNewThread(Action action) {
             ThreadPool.QueueUserWorkItem(x => action());
+        }
+
+        [Test, ExpectedException(typeof(TimeoutException))]
+        public void TimeoutIfStateMachineDoesNotEnterSpecifiedStateWithinTimeout() {
+
+            var threads = mockery.States("threads");
+            var count = new AtomicInt(5);
+            var mock = mockery.NewInstanceOfRole<ISpeaker>();
+
+            Expect.Once.On(mock).Message("Goodbye").Then(threads.Is("finished"));
+            
+            synchronizer.WaitUntil(threads.Is("finished"), Timeout.After(2.Seconds()));
+            
         }
     }
 

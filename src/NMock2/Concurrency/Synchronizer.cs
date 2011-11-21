@@ -33,7 +33,7 @@ namespace NMocha.Concurrency {
             WaitUntil(predicate, Timeout.Infinite);
         }
 
-        private void WaitUntil(IStatePredicate predicate, Timeout timeout) {
+        public void WaitUntil(IStatePredicate predicate, Timeout timeout) {
            
             lock (sync)
             {
@@ -49,6 +49,8 @@ namespace NMocha.Concurrency {
                 }
             }
         }
+
+        
     }
 
     public struct Timeout {
@@ -69,6 +71,11 @@ namespace NMocha.Concurrency {
         public TimeSpan TimeRemaining
         {
             get { return timeRemaining(); }
+        }
+
+        public static Timeout After(TimeSpan timeout) {
+            var start = DateTime.Now;
+            return new Timeout(() => timeout - (DateTime.Now - start));
         }
     }
 }
