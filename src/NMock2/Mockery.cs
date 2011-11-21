@@ -120,6 +120,7 @@ namespace NMocha {
 
       
         private void Dispatch(Invocation invocation) {
+            if (thrownUnexpectedInvocationException != null) throw thrownUnexpectedInvocationException;
             try
             {
                 dispatcher.Dispatch(invocation);

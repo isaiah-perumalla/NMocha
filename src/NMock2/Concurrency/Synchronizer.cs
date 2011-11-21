@@ -7,6 +7,7 @@ namespace NMocha.Concurrency {
     public class Synchronizer : IThreadingPolicy
     {
         private readonly object sync = new object();
+        private Exception firstException;
 
         public void SynchronizeAction(Action action) {
             lock(sync)
@@ -14,6 +15,12 @@ namespace NMocha.Concurrency {
                 try
                 {
                     action();
+                }
+                catch(Exception e)
+                {
+                    if (firstException == null) firstException = e;
+                    throw;
+
                 }
                 finally
                 {
@@ -27,10 +34,13 @@ namespace NMocha.Concurrency {
         }
 
         private void WaitUntil(IStatePredicate predicate, Timeout timeout) {
+           
             lock (sync)
             {
-                while (!predicate.IsActive())
+                for (; ; )
                 {
+                    if (firstException != null) throw firstException;
+                    if (predicate.IsActive()) break;
                     if (timeout.HasTimedOut)
                     {
                         throw new TimeoutException(string.Format("timed out waiting for {0}", StringDescription.Describe(predicate)));
