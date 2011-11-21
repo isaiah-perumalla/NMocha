@@ -68,11 +68,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ArgumentMatchingAcceptanceTest.cs" />
+    <Compile Include="Concurrency\Blitzer.cs" />
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="ClassMockAcceptanceTest.cs" />
     <Compile Include="AcceptanceTestBase.cs" />
     <Compile Include="CastleOnlyAttribute.cs" />
-    <Compile Include="ConcurrencyAcceptanceTests.cs" />
+    <Compile Include="Concurrency\ConcurrencyAcceptanceTests.cs" />
     <Compile Include="MockMultipleInterfacesAcceptanceTest.cs" />
     <Compile Include="ErrorCheckingAcceptanceTest.cs" />
     <Compile Include="ErrorMessageAcceptanceTest.cs" />
