@@ -4,6 +4,7 @@
 *.DS_Store
 *.swp
 *.out
+output
 build/output/
 [Oo]bj
 [Bb]in

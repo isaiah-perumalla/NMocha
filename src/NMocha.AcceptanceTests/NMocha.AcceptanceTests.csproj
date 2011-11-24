@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NMocha.AcceptanceTests</RootNamespace>
+    <AssemblyName>NMocha.AcceptanceTests</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>NMock2.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit-2.5\bin\net-2.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ArgumentMatchingAcceptanceTest.cs" />
+    <Compile Include="Concurrency\Blitzer.cs" />
+    <Compile Include="ClassAttribute.cs" />
+    <Compile Include="ClassMockAcceptanceTest.cs" />
+    <Compile Include="AcceptanceTestBase.cs" />
+    <Compile Include="CastleOnlyAttribute.cs" />
+    <Compile Include="Concurrency\ConcurrencyAcceptanceTests.cs" />
+    <Compile Include="MockMultipleInterfacesAcceptanceTest.cs" />
+    <Compile Include="ErrorCheckingAcceptanceTest.cs" />
+    <Compile Include="ErrorMessageAcceptanceTest.cs" />
+    <Compile Include="Example.cs" />
+    <Compile Include="ExceptionsAreNotSwallowedTest.cs" />
+    <Compile Include="ExpectationsAcceptanceTest.cs" />
+    <Compile Include="CommentAcceptanceTest.cs" />
+    <Compile Include="GenericMethodParameterAcceptanceTest.cs" />
+    <Compile Include="GenericMethodTypeParamAcceptanceTest.cs" />
+    <Compile Include="GenericOutParamAcceptanceTest.cs" />
+    <Compile Include="IEventProvider.cs" />
+    <Compile Include="IGenerics.cs" />
+    <Compile Include="ISpeaker.cs" />
+    <Compile Include="IndexersAcceptanceTest.cs" />
+    <Compile Include="MockeryAcceptanceTest.cs" />
+    <Compile Include="MockIEnumerableAcceptanceTest.cs" />
+    <Compile Include="OrderedCallsAcceptanceTest.cs" />
+    <Compile Include="OutParamAcceptanceTest.cs" />
+    <Compile Include="PropertiesAcceptanceTest.cs" />
+    <Compile Include="StatesAcceptanceTest.cs" />
+    <Compile Include="StubAcceptanceTest.cs" />
+    <Compile Include="Syntax\SyntaxAcceptanceTest.cs" />
+    <Compile Include="UsingBlockAcceptanceTest.cs" />
+    <Compile Include="VisibilityAcceptanceTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NMock2.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMocha\NMocha.csproj">
+      <Project>{79C78732-B34C-4429-B678-C8ADE5FB5BE1}</Project>
+      <Name>NMocha</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

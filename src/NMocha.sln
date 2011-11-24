@@ -8,20 +8,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		AssemblyInfo.cs = AssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D32A2782-1F9D-4E04-A681-291C3EA09F5C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D32A2782-1F9D-4E04-A681-291C3EA09F5C}"
 	ProjectSection(SolutionItems) = preProject
-		..\build.cmd = ..\build.cmd
-		..\build.release.cmd = ..\build.release.cmd
-		..\integrate.cmd = ..\integrate.cmd
-		..\NMock2.build = ..\NMock2.build
-		..\publish.cmd = ..\publish.cmd
+		rakefile.rb = rakefile.rb
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha", "NMock2\NMocha.csproj", "{79C78732-B34C-4429-B678-C8ADE5FB5BE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.AcceptanceTests", "NMocha.AcceptanceTests\NMocha.AcceptanceTests.csproj", "{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.Test", "NMock2.Test\NMocha.Test.csproj", "{EDBAD353-CCD6-41FE-BB87-B0995078631A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.Test", "NMocha.Test\NMocha.Test.csproj", "{EDBAD353-CCD6-41FE-BB87-B0995078631A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha.AcceptanceTests", "NMock2.AcceptanceTests\NMocha.AcceptanceTests.csproj", "{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMocha", "NMocha\NMocha.csproj", "{79C78732-B34C-4429-B678-C8ADE5FB5BE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,24 +25,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBAD353-CCD6-41FE-BB87-B0995078631A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C78732-B34C-4429-B678-C8ADE5FB5BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EDBAD353-CCD6-41FE-BB87-B0995078631A} = {6F1EC322-600B-441D-A047-C3B9BA5C0E35}
 		{675F0BAB-83BF-43DB-9B2E-E8DFF84D3538} = {6F1EC322-600B-441D-A047-C3B9BA5C0E35}
+		{EDBAD353-CCD6-41FE-BB87-B0995078631A} = {6F1EC322-600B-441D-A047-C3B9BA5C0E35}
 	EndGlobalSection
 EndGlobal
