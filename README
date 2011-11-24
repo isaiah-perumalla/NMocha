@@ -1,2 +1,3 @@
-Fork of NMock2
-ported various features from Jmock2 to better support desing of inter-object protocols.
+Simple mock framework where the goal is to better support the  desing of inter-object protocols, when writing object oriented (#GOOS style) code. The emphasis is on designing message protocols between objects, it has very limited set of features if the main aim is to simple isolate objects from its dependecies.
+
+It is mostly a rewrite of NMock2 and is heavily influenced by JMock-2, a number of features such as state machines and sequence were directly ported from JMock2  
