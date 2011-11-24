@@ -1,3 +1,4 @@
-Simple mock framework where the goal is to better support the  desing of inter-object protocols, when writing object oriented (#GOOS style) code. The emphasis is on designing message protocols between objects, it has very limited set of features if the main aim is to simple isolate objects from its dependecies.
+Simple mock framework heavily influenced by JMock, JMock-2 and Mocha, where the goal is to better support the discovery of object Roles and  desing of inter-object protocols, when writing object oriented (#GOOS style) code. The emphasis is on designing message protocols between objects, it has very limited set of features if the main aim is to simple isolate objects from its dependecies (there is no support for mocking static method and concrete classes with non virtual methods)
 
-It is mostly a rewrite of NMock2 and is heavily influenced by JMock-2, a number of features such as state machines and sequence were directly ported from JMock2  
+It is mostly a rewrite of NMock2 to support a number of features from JMock2 such as state machines, sequences, concurrency and detailed error reporting. 
+
