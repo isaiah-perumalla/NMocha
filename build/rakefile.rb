@@ -5,7 +5,7 @@ PRODUCT = "NMocha"
 CLR_VERSION = 'v4.0.30319'
 MSBUILD_DIR = File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', CLR_VERSION)
 
-NUNIT_DIR = '../lib/nunit-2.5/bin/net-2.0/'
+NUNIT_DIR = '../lib/nunit-2.5/net-2.0/'
 
 @nunitRunner = NUnitRunner.new :compilemode => COMPILE_TARGET, :nunit_dir => NUNIT_DIR, :source => '../src'
 
