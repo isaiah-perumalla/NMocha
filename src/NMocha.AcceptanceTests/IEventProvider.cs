@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------
 using System;
 
-namespace NMock2 {
+namespace NMocha.AcceptanceTests {
     public interface IEventProvider {
         event EventHandler AnEvent;
 

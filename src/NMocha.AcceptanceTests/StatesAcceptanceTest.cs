@@ -1,11 +1,8 @@
 using System;
-using NMocha;
-using NMocha.AcceptanceTests;
 using NMocha.Internal;
-using NMock2.AcceptanceTests;
 using NUnit.Framework;
 
-namespace NMock2 {
+namespace NMocha.AcceptanceTests {
     [TestFixture]
     public class StatesAcceptanceTest : AcceptanceTestBase {
         #region Setup/Teardown

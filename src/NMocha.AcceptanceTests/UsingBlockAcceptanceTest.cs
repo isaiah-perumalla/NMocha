@@ -35,7 +35,6 @@ namespace NMocha.AcceptanceTests {
         }
 
 
-        
         [Test, ExpectedException(typeof (InvalidOperationException))]
         public void ReturnValueForgottenWithVerify() {
             var usingBlock = Mockery.NewInstanceOfRole<IUsingBlock>();

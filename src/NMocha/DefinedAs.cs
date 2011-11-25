@@ -17,15 +17,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
-using NMocha;
 using NMocha.Internal;
 using NMock2.Syntax;
 
-namespace NMock2 {
-    /// <summary>
-    /// Defines the initial characteristics of a new mock object.
-    /// This is normally used in conjunction with <see cref="Mockery.InstanceWithRole{TMockedType}"/>
-    /// </summary>
+namespace NMocha {
+   
     public static class DefinedAs {
         /// <summary>
         /// Specifies a type that this mock should implement. This may be a class or interface,

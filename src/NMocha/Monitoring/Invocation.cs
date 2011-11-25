@@ -117,10 +117,7 @@ namespace NMocha.Monitoring {
 
         #region ISelfDescribing Members
 
-        /// <summary>
-        /// Describes this object to the specified <paramref name="writer"/>.
-        /// </summary>
-        /// <param name="description"></param>
+      
         public void DescribeOn(IDescription description) {
             // This should really be a mock object in most cases, but a few testcases
             // seem to supply strings etc as a Receiver.

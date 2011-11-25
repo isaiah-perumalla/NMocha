@@ -20,12 +20,10 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Text.RegularExpressions;
-using NMocha;
-using NMocha.AcceptanceTests;
+using NMock2;
 using NUnit.Framework;
-using Is = NMocha.Is;
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     [TestFixture]
     public class ErrorCheckingAcceptanceTest : AcceptanceTestBase {
         [TestFixtureSetUp]
@@ -105,7 +103,7 @@ namespace NMock2.AcceptanceTests {
             var myHelloWorld = (IMyHelloWorld) Mockery.NewInstanceOfRole(typeof (IMyHelloWorld));
 
             Expect.Once.On(myHelloWorld).Message("IsPrime");
-                //.Will(Return.Value(true));//, new SetNamedParameterAction("number", 3)); //.With();
+            //.Will(Return.Value(true));//, new SetNamedParameterAction("number", 3)); //.With();
 
             int i = 3;
             bool result = myHelloWorld.IsPrime(i);
@@ -138,10 +136,9 @@ namespace NMock2.AcceptanceTests {
             speaker.Hello();
         }
 
-       
 
         [Test]
-        public void WrongReturnType() {
+        public void ReportsErrorWhenWrongReturnTypeSpecified() {
             var o = Mockery.NewInstanceOfRole<IOperator>();
             var b = Mockery.NewInstanceOfRole<IBase>();
 
@@ -155,11 +152,10 @@ namespace NMock2.AcceptanceTests {
             {
                 // Make sure that exception message identifies type that was returned, and what was expected
                 // (other interfaces will be present in type description, but we don't care too much about them here).
-                Assert.IsTrue(Regex.IsMatch(e.Message,
-                                            @".*NMock2\.AcceptanceTests\.ErrorCheckingAcceptanceTest\+IBase.*from a method returning NMock2\.AcceptanceTests\.ErrorCheckingAcceptanceTest\+IChild",
-                                            RegexOptions.IgnoreCase),
-                              "Exception message wrong: should contain text 'NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest+IBase' as well as text 'from a method returning NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest+IChild' but is: " +
-                              e.Message);
+
+                Assert.That(e.Message, NUnit.Framework.Is.StringContaining("NMocha.AcceptanceTests.ErrorCheckingAcceptanceTest+IBase"));
+                Assert.That(e.Message , NUnit.Framework.Is.StringContaining("from a method returning NMocha.AcceptanceTests.ErrorCheckingAcceptanceTest+IChild"));
+                
             }
         }
     }

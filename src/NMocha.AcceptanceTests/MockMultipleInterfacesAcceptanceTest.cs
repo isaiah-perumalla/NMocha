@@ -20,12 +20,10 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections;
-using NMocha;
-using NMocha.AcceptanceTests;
+using NMock2;
 using NUnit.Framework;
-using Is = NMocha.Is;
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     [TestFixture, CastleOnly]
     public class MockMultipleInterfacesAcceptanceTest : AcceptanceTestBase {
         public interface IHaveAllMemberTypes {
@@ -94,7 +92,7 @@ namespace NMock2.AcceptanceTests {
         public void CanMockASingleClassTypeAsAnAdditionalType() {
             var mock =
                 Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
-                                                                            typeof (SomeBase)));
+                                                                              typeof (SomeBase)));
 
             AssertExpectationsCanBeSet(mock);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -108,7 +106,7 @@ namespace NMock2.AcceptanceTests {
         public void CanMockClassAndInterfaces() {
             var mock =
                 Mockery.NewInstanceOfRole<SomeBase>(DefinedAs.Implementing(typeof (IEnumerable),
-                                                                         typeof (IHaveAllMemberTypes)));
+                                                                           typeof (IHaveAllMemberTypes)));
 
             AssertExpectationsCanBeSet(mock as IEnumerable);
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
@@ -142,13 +140,12 @@ namespace NMock2.AcceptanceTests {
             AssertExpectationsCanBeSet(mock as IHaveAllMemberTypes);
         }
 
-        
 
         [Test]
         public void DuplicateInterfacesAreIgnored() {
             var mock =
                 Mockery.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
-                                                                                    typeof (IHaveAllMemberTypes)));
+                                                                                      typeof (IHaveAllMemberTypes)));
             var otherMock = Mockery.NewInstanceOfRole<IHaveAllMemberTypes>(DefinedAs.Implementing<IHaveAllMemberTypes>());
 
             AssertExpectationsCanBeSet(mock);
@@ -171,10 +168,10 @@ namespace NMock2.AcceptanceTests {
         public void OrderOfInterfacesIsIgnored() {
             var mock =
                 Mockery.NewInstanceOfRole<IEnumerable>(DefinedAs.Implementing(typeof (IDisposable),
-                                                                            typeof (IHaveAllMemberTypes)));
+                                                                              typeof (IHaveAllMemberTypes)));
             var otherMock =
                 Mockery.NewInstanceOfRole<IDisposable>(DefinedAs.Implementing(typeof (IHaveAllMemberTypes),
-                                                                            typeof (IEnumerable)));
+                                                                              typeof (IEnumerable)));
 
             Assert.AreEqual(mock.GetType(), otherMock.GetType());
         }

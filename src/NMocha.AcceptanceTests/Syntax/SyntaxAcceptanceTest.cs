@@ -1,6 +1,7 @@
+using NMock2.Syntax;
 using NUnit.Framework;
 
-namespace NMock2.Syntax {
+namespace NMocha.AcceptanceTests.Syntax {
     [TestFixture]
     public class SyntaxAcceptanceTest {
         /*  

@@ -26,8 +26,6 @@
 
 // For CastleMockObjectFactory:
 using System.Runtime.CompilerServices;
-using NMocha;
-using NMocha.AcceptanceTests;
 using NUnit.Framework;
 
 [assembly:
@@ -37,7 +35,7 @@ using NUnit.Framework;
 
 #endregion
 
-namespace NMock2.AcceptanceTests {
+namespace NMocha.AcceptanceTests {
     [TestFixture, Explicit("require type to be strong named")]
     public class VisibilityAcceptanceTest : AcceptanceTestBase {
         // Note: For the internal visibility tests, the assembly containing the internal

@@ -38,7 +38,7 @@ namespace NMocha.Test {
             Matcher matcher = Is.TypeOf<Matcher>();
 
             Assert.IsNotNull(matcher);
-            Assert.IsInstanceOfType(typeof (TypeMatcher), matcher);
+            Assert.That(matcher, NUnit.Framework.Is.InstanceOf(typeof (TypeMatcher)));
             Assert.IsTrue(matcher.Matches(matcher));
         }
     }

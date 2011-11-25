@@ -33,7 +33,6 @@ namespace NMocha.AcceptanceTests {
 
         [TearDown]
         public void TearDown() {
-         
         }
 
         #endregion
@@ -69,7 +68,7 @@ namespace NMocha.AcceptanceTests {
                 Mockery.NewInstanceOfRole<IMockedType>(DefinedAs.Implementing<IEnumerable>().Implementing<IDisposable>());
 
             Assert.That(mock, NUnit.Framework.Is.InstanceOf(typeof (IMockedType)));
-            Assert.That(mock, NUnit.Framework.Is.InstanceOf( typeof(IEnumerable)));
+            Assert.That(mock, NUnit.Framework.Is.InstanceOf(typeof (IEnumerable)));
             Assert.That(mock, NUnit.Framework.Is.InstanceOf(typeof (IDisposable)));
         }
 
@@ -79,12 +78,11 @@ namespace NMocha.AcceptanceTests {
             mocksA.SetMockFactoryAs(new TestingMockObjectFactoryA());
             Assert.AreEqual("TestingMockObjectFactoryA", mocksA.NewInstanceOfRole<INamed>().GetName());
 
-            
+
             mocksA.SetMockFactoryAs(new TestingMockObjectFactoryB());
             Assert.AreEqual("TestingMockObjectFactoryB", mocksA.NewInstanceOfRole<INamed>().GetName());
         }
 
-       
 
         [Test]
         public void MockObjectsMayBePlacedIntoServiceContainers() {

@@ -15,9 +15,9 @@ namespace NMocha.AcceptanceTests.Concurrency {
 
         public void Blitz(Action action) {
             var countdownLatch = new CountdownEvent(numberOfaction);
-            var runInNewThread = DecorateAction(action, countdownLatch);
+            Action runInNewThread = DecorateAction(action, countdownLatch);
 
-            for (var i = 0; i < numberOfaction; i++)
+            for (int i = 0; i < numberOfaction; i++)
             {
                 var thread = new Thread(new ThreadStart(runInNewThread));
                 thread.Start();
